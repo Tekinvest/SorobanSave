@@ -260,7 +260,10 @@ const addressParam = z.object({
  * Used for: PATCH /admin/users/:id
  */
 const adminUserUpdate = z.object({
-  updates: z.record(z.unknown()).min(1, 'updates must contain at least one field'),
+  updates: z.record(z.unknown()).refine(
+    (val) => Object.keys(val).length >= 1,
+    { message: 'updates must contain at least one field' }
+  ),
   adminId: z.string().trim().min(1, 'adminId is required'),
 });
 
