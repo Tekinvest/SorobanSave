@@ -14,6 +14,7 @@ import { createSseRouter } from './sse';
 import { AppError } from '../lib/errors';
 import { parseOffsetParams, paginate, paginateArray } from '../lib/pagination';
 import { validateBody, validateQuery, validateParams, schemas } from '../lib/validation';
+import { readinessCheckCache } from '../redis';
 import { logger } from '../logger';
 
 import type { AnalyticsService } from '../analytics_service';
@@ -225,16 +226,14 @@ export function createV1Router(services: V1Services): Router {
   router.get('/backup', (req, res) => {
     const pageParams = parseOffsetParams(req.query, { limit: 20 });
     const allJobs = backupService.listJobs();
-    const jobs = paginateArray(allJobs, pageParams);
-    res.json(paginate(jobs, allJobs.length, pageParams));
+    res.json(paginateArray(allJobs, pageParams));
   });
 
   router.get('/backup/alerts', (req, res) => {
     const unacknowledgedOnly = req.query.unacknowledgedOnly === 'true';
     const pageParams = parseOffsetParams(req.query, { limit: 20 });
     const allAlerts = backupMonitor.getAlerts(unacknowledgedOnly);
-    const alerts = paginateArray(allAlerts, pageParams);
-    res.json(paginate(alerts, allAlerts.length, pageParams));
+    res.json(paginateArray(allAlerts, pageParams));
   });
 
   router.post('/backup/alerts/:alertId/acknowledge', (req, res, next) => {
@@ -635,8 +634,7 @@ export function createV1Router(services: V1Services): Router {
     try {
       const pageParams = parseOffsetParams(req.query, { limit: 20 });
       const allUsers = adminService.getUsers();
-      const users = paginateArray(allUsers, pageParams);
-      res.json(paginate({ users }, allUsers.length, pageParams));
+      res.json(paginateArray(allUsers, pageParams));
     } catch (error) {
       logger.error('Failed to fetch users', { error: String(error) });
       next(new AppError('ADMIN_FETCH_FAILED', 'Failed to fetch users', 500));
@@ -673,8 +671,7 @@ export function createV1Router(services: V1Services): Router {
     try {
       const pageParams = parseOffsetParams(req.query, { limit: 20 });
       const { mockGroups } = await import('../mock_data');
-      const groups = paginateArray(mockGroups, pageParams);
-      res.json(paginate({ groups }, mockGroups.length, pageParams));
+      res.json(paginateArray(mockGroups, pageParams));
     } catch (error) {
       logger.error('Failed to fetch groups', { error: String(error) });
       next(new AppError('ADMIN_FETCH_FAILED', 'Failed to fetch groups', 500));
@@ -700,8 +697,7 @@ export function createV1Router(services: V1Services): Router {
     try {
       const pageParams = parseOffsetParams(req.query, { limit: 20 });
       const allLogs = adminService.getAuditLogs();
-      const logs = paginateArray(allLogs, pageParams);
-      res.json(paginate({ logs }, allLogs.length, pageParams));
+      res.json(paginateArray(allLogs, pageParams));
     } catch (error) {
       logger.error('Failed to fetch audit logs', { error: String(error) });
       next(new AppError('ADMIN_FETCH_FAILED', 'Failed to fetch audit logs', 500));
