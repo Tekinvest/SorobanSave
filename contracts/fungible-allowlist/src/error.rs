@@ -2,10 +2,10 @@
 //!
 //! This contract previously signalled failures with `panic!` string literals,
 //! which carry no stable code for a client to branch on. It now traps with the
-//! canonical enum from `stellar-save-common`, so an allowlist rejection here
+//! canonical enum from `soroban-save-common`, so an allowlist rejection here
 //! decodes identically to one raised by any other contract in the workspace.
 
-pub use stellar_save_common::{CommonResult as Result, Error};
+pub use soroban_save_common::{CommonResult as Result, Error};
 
 // === Tests
 

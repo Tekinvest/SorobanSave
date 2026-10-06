@@ -1,12 +1,12 @@
 //! Property-based fuzz tests for Fungible AllowList contract.
 //!
-//! Uses the shared `FuzzRunner` and `FuzzRng` from `stellar_save_common::fuzz`.
+//! Uses the shared `FuzzRunner` and `FuzzRng` from `soroban_save_common::fuzz`.
 
 #![cfg(test)]
 extern crate std;
 
 use crate::test_utils::{create_client, create_env, setup_accounts};
-use stellar_save_common::fuzz::FuzzRunner;
+use soroban_save_common::fuzz::FuzzRunner;
 
 /// Fuzz Target 1: Fuzz transfer amounts across boundary values (0, negative, > supply, i128::MAX).
 ///

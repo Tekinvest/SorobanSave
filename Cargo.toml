@@ -2,7 +2,7 @@
 resolver = "2"
 members = [
     "contracts/common",
-    "contracts/stellar-save",
+    "contracts/soroban-save",
     "contracts/guess-the-number",
     "contracts/nft-enumerable",
     "contracts/fungible-allowlist",
@@ -12,11 +12,11 @@ members = [
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-repository = "https://github.com/Xoulomon/Stellar-Save"
+repository = "https://github.com/Tekinvest/SorobanSave"
 
 [workspace.dependencies]
 soroban-sdk = "23.0.3"
-stellar-save-common = { path = "contracts/common" }
+soroban-save-common = { path = "contracts/common" }
 stellar-access = "0.6.0"
 stellar-macros = "0.6.0"
 stellar-tokens = "0.6.0"

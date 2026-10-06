@@ -1,6 +1,6 @@
 [package]
-name = "stellar-save-common"
-description = "Shared types reused across the Stellar-Save Soroban contracts"
+name = "soroban-save-common"
+description = "Shared types reused across the SorobanSave Soroban contracts"
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
