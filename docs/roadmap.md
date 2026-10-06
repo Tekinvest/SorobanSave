@@ -1,6 +1,6 @@
-# Stellar-Save Roadmap
+# SorobanSave Roadmap
 
-This document outlines the planned development milestones for Stellar-Save. Timelines are estimates and subject to change based on community feedback and contributor availability.
+This document outlines the planned development milestones for SorobanSave. Timelines are estimates and subject to change based on community feedback and contributor availability.
 
 ---
 
@@ -49,7 +49,7 @@ This document outlines the planned development milestones for Stellar-Save. Time
 - Validate token balances before allowing contributions
 
 ### Goals
-- Open Stellar-Save to stablecoin-based savings groups (e.g. USDC on Stellar)
+- Open SorobanSave to stablecoin-based savings groups (e.g. USDC on Stellar)
 - Reduce volatility risk for members who prefer stable assets
 
 ---
@@ -127,4 +127,4 @@ This document outlines the planned development milestones for Stellar-Save. Time
 
 ## Contributing to the Roadmap
 
-Have a feature idea or want to reprioritise something? Open a [GitHub Discussion](https://github.com/Xoulomon/Stellar-Save/discussions) or comment on an existing [issue](https://github.com/Xoulomon/Stellar-Save/issues). Community input directly shapes what gets built next.
+Have a feature idea or want to reprioritise something? Open a [GitHub Discussion](https://github.com/Tekinvest/SorobanSave/discussions) or comment on an existing [issue](https://github.com/Tekinvest/SorobanSave/issues). Community input directly shapes what gets built next.

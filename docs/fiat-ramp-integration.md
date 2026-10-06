@@ -1,6 +1,6 @@
 # Fiat On/Off-Ramp Integration & Compliance Flow
 
-Stellar-Save's fiat on/off-ramp (buy XLM/stablecoins with fiat, withdraw payouts to a bank
+SorobanSave's fiat on/off-ramp (buy XLM/stablecoins with fiat, withdraw payouts to a bank
 account) is planned for [v4.0 on the roadmap](roadmap.md#v40--mobile-app--fiat-onoff-ramps).
 This document specifies how the integration uses the Stellar Ecosystem Proposals (SEPs) for
 anchor interoperability, where KYC data lives, and what to do when a ramp incident occurs.
@@ -15,12 +15,12 @@ technical flow and operational responsibilities, not legal interpretation.
 
 | Party | Role | Trust assumption |
 |---|---|---|
-| **Stellar-Save backend** | Initiates ramp sessions, stores only the anchor-issued transaction reference (no PII) | Trusted by the user to route them to a legitimate anchor; never sees raw KYC documents |
+| **SorobanSave backend** | Initiates ramp sessions, stores only the anchor-issued transaction reference (no PII) | Trusted by the user to route them to a legitimate anchor; never sees raw KYC documents |
 | **Anchor (SEP-24/31 provider)** | Hosts the deposit/withdraw UI, performs custody of fiat, settles on-chain via Stellar | Partially trusted third party — selected from `stellar.toml` `TRANSFER_SERVER` / `TRANSFER_SERVER_SEP0031` entries; must be a vetted, licensed money transmitter |
-| **KYC provider** | Collects and verifies identity documents on the anchor's behalf (often the anchor itself, or a sub-processor) | Holds all PII; Stellar-Save has no direct integration with this provider |
+| **KYC provider** | Collects and verifies identity documents on the anchor's behalf (often the anchor itself, or a sub-processor) | Holds all PII; SorobanSave has no direct integration with this provider |
 | **User's wallet** | Signs the Stellar transaction that moves funds to/from the anchor's escrow account | Standard non-custodial trust model, same as in-app contributions |
 
-Stellar-Save **never holds fiat or KYC documents**. Its only responsibility is to discover
+SorobanSave **never holds fiat or KYC documents**. Its only responsibility is to discover
 the anchor via SEP-1, hand off to the anchor's hosted flow, and reconcile the resulting
 on-chain transaction with the user's account.
 
@@ -34,7 +34,7 @@ Before any ramp interaction, the wallet authenticates to the anchor using SEP-10
 ```mermaid
 sequenceDiagram
     participant Wallet
-    participant Backend as Stellar-Save Backend
+    participant Backend as SorobanSave Backend
     participant Anchor
 
     Wallet->>Backend: Request ramp session (deposit or withdraw)
@@ -56,12 +56,12 @@ does not persist the JWT beyond the active session.
 ## 3. SEP-24 — Interactive On/Off-Ramp (deposit & withdraw)
 
 SEP-24 is used for the consumer-facing flow: the anchor hosts its own KYC + payment UI in a
-webview/popup, so Stellar-Save never touches payment details.
+webview/popup, so SorobanSave never touches payment details.
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant App as Stellar-Save App
+    participant App as SorobanSave App
     participant Anchor
     participant KYC as Anchor's KYC Provider
     participant Stellar as Stellar Network
@@ -80,23 +80,23 @@ sequenceDiagram
     App-->>User: Show final status (completed / pending_external / error)
 ```
 
-Stellar-Save polls `GET /transaction?id=<id>` (or subscribes to the anchor's webhook, if
+SorobanSave polls `GET /transaction?id=<id>` (or subscribes to the anchor's webhook, if
 offered) purely to reflect status in the UI. The anchor's `kyc_status`, document data, and
-payment instrument details are never returned to or stored by Stellar-Save — only the
+payment instrument details are never returned to or stored by SorobanSave — only the
 `status`, `amount_in`/`amount_out`, and `stellar_transaction_id` fields are read.
 
 ---
 
 ## 4. SEP-31 — Direct Cross-Border Payout (optional, sending-side use)
 
-SEP-31 is relevant if Stellar-Save ever needs to push a payout directly to a receiving
+SEP-31 is relevant if SorobanSave ever needs to push a payout directly to a receiving
 anchor on behalf of a user (e.g. cross-border payout without the user holding a wallet). It
 differs from SEP-24 in that the *sending* anchor collects compliance data about the
 beneficiary up front, via a `/customer` (SEP-12) call, before funds move.
 
 ```mermaid
 sequenceDiagram
-    participant App as Stellar-Save App
+    participant App as SorobanSave App
     participant SendingAnchor as Sending Anchor
     participant ReceivingAnchor as Receiving Anchor
     participant Beneficiary
@@ -112,7 +112,7 @@ sequenceDiagram
 ```
 
 As with SEP-24, all SEP-12 KYC fields are submitted directly from the client to the anchor;
-Stellar-Save's backend only relays the anchor's published schema, it does not store the
+SorobanSave's backend only relays the anchor's published schema, it does not store the
 submitted field values.
 
 ---
@@ -120,9 +120,9 @@ submitted field values.
 ## 5. KYC Data Handling
 
 - **Where KYC data lives**: exclusively with the anchor and its KYC provider (per §1–4
-  above). Stellar-Save's backend and database have no table, column, or log line containing
+  above). SorobanSave's backend and database have no table, column, or log line containing
   identity documents, selfies, SSNs, or bank account numbers.
-- **What Stellar-Save does store**: the anchor's transaction `id`, `status`, `amount_in`,
+- **What SorobanSave does store**: the anchor's transaction `id`, `status`, `amount_in`,
   `amount_out`, `asset_code`, and the resulting Stellar `transaction_id` — needed to
   reconcile the ramp with the user's in-app balance. None of these fields are PII.
 - **Logging**: application logs must never include SEP-12 field values or JWTs. If a
@@ -131,7 +131,7 @@ submitted field values.
 - **Retention**: ramp transaction metadata (the non-PII fields above) follows the same
   retention policy as other transaction records — see
   [legal-compliance.md §4 Data Retention](legal-compliance.md#4-data-retention). Since no
-  PII is stored, there is no separate PII retention/deletion obligation on Stellar-Save's
+  PII is stored, there is no separate PII retention/deletion obligation on SorobanSave's
   side; deletion requests for identity data must be directed to the anchor/KYC provider.
 
 ---

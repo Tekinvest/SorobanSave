@@ -249,7 +249,7 @@ Successfully cleaned up the admin dashboard API by removing unused scaffold endp
 
 ### Unit Tests
 ```bash
-cd /workspaces/Stellar-Save/backend
+cd /workspaces/SorobanSave/backend
 npm run test:admin  # Runs admin authorization tests
 ```
 

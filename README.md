@@ -17,9 +17,9 @@ The external API reference for the backend REST and GraphQL endpoints is publish
 
 ## 🏗️ Architecture
 
-The Stellar-Save system consists of four main layers that work together to provide a decentralized ROSCA experience:
+The SorobanSave system consists of four main layers that work together to provide a decentralized ROSCA experience:
 
-![Stellar-Save Architecture](docs/architecture-diagram.svg)
+![SorobanSave Architecture](docs/architecture-diagram.svg)
 
 ### Architecture Components
 
@@ -47,9 +47,9 @@ For detailed architecture documentation, see [docs/architecture.md](docs/archite
 
 ## 🛠️ Quick Start & Workspace Guides
 
-To get started quickly, follow the dedicated setup guides for each component of the Stellar-Save monorepo:
+To get started quickly, follow the dedicated setup guides for each component of the SorobanSave monorepo:
 
-- 🚀 **Smart Contracts**: See [contracts/stellar-save/src/lib.rs](contracts/stellar-save/src/lib.rs) and the [QUICK_REFERENCE.md](QUICK_REFERENCE.md) for smart contract API documentation.
+- 🚀 **Smart Contracts**: See [contracts/soroban-save/src/lib.rs](contracts/soroban-save/src/lib.rs) and the [QUICK_REFERENCE.md](QUICK_REFERENCE.md) for smart contract API documentation.
 - 💻 **Frontend Web App**: See [frontend/README.md](frontend/README.md) for React/TypeScript setup, environment configuration (`VITE_*`), MUI theme tokens, and local development commands.
 - 📱 **Mobile Application**: See [mobile/README.md](mobile/README.md) for Expo React Native setup, iOS/Android emulator instructions, and mobile architecture.
 - 🛠️ **Scripts & Tooling**: See [scripts/README.md](scripts/README.md) for build (`build.sh`), test (`test.sh`), and deployment (`deploy_testnet.sh`, `deploy_mainnet.sh`) scripts.
@@ -59,8 +59,8 @@ To get started quickly, follow the dedicated setup guides for each component of 
 
 ```bash
 # Clone the repository
-git clone https://github.com/Xoulomon/Stellar-Save.git
-cd Stellar-Save
+git clone https://github.com/Tekinvest/SorobanSave.git
+cd SorobanSave
 
 # Install root dependencies & git hooks
 npm install
@@ -82,7 +82,7 @@ Follow the step-by-step guide in [demo/demo-script.md](demo/demo-script.md).
 - [User Guide](docs/user-guide.md)
 - [Architecture Overview](docs/architecture.md)
 - [Public API Reference](docs/api/interactive-api-reference.md) — REST API with code examples
-- [Interactive API Docs](https://api.stellar-save.app/docs) — Try API calls in your browser
+- [Interactive API Docs](https://api.soroban-save.app/docs) — Try API calls in your browser
 - [Governance Process](docs/governance.md) — How protocol decisions are made on-chain
 - [Storage Layout](docs/storage-layout.md)
 - [Threat Model & Security](docs/threat-model.md)
@@ -151,7 +151,7 @@ cargo test
 ### Test Coverage
 
 Coverage is tracked and enforced per workspace and published to
-[Codecov](https://codecov.io/gh/Xoulomon/Stellar-Save), which provides public
+[Codecov](https://codecov.io/gh/Tekinvest/SorobanSave), which provides public
 reports and historical trends.
 
 | Workspace  | Tool             | Minimum coverage gate |
@@ -241,8 +241,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-- **Issues**: [GitHub Issues](https://github.com/Xoulomon/Stellar-Save/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Xoulomon/Stellar-Save/discussions)
+- **Issues**: [GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Tekinvest/SorobanSave/discussions)
 - **Telegram**: [@Xoulomon]
 
 ---

@@ -1,12 +1,12 @@
-# Runbook: Stellar-Save Contract Upgrade & Migration Procedure
+# Runbook: SorobanSave Contract Upgrade & Migration Procedure
 
-This runbook outlines the operational steps, verification procedures, safety protocols, and rollback strategies for executing smart contract upgrades on the `stellar-save` contract deployed to the Stellar network (Soroban).
+This runbook outlines the operational steps, verification procedures, safety protocols, and rollback strategies for executing smart contract upgrades on the `soroban-save` contract deployed to the Stellar network (Soroban).
 
 ---
 
 ## 1. Overview & Architecture
 
-The `stellar-save` smart contract utilizes Soroban WASM contract code updates alongside schema versioning (`SchemaVersion`). 
+The `soroban-save` smart contract utilizes Soroban WASM contract code updates alongside schema versioning (`SchemaVersion`). 
 Key upgrade principles:
 - **State Preservation**: Existing storage entries (Group data, Member profiles, Contribution records, Config) must be preserved across upgrades.
 - **Schema Idempotency**: Migration functions check the current `SchemaVersion` and operate as safe no-ops if the contract is already at the target version.
@@ -18,8 +18,8 @@ Key upgrade principles:
 
 Before deploying any WASM bytecode update or triggering schema migration:
 
-- [ ] **WASM Verification**: Build release WASM using reproducible build flags and verify SHA-256 digest against `stellar_save.wasm.sha256`.
-- [ ] **Automated Test Suite**: Ensure all 42+ upgrade tests in `contracts/stellar-save/UPGRADE_TESTING.md` pass locally and in CI.
+- [ ] **WASM Verification**: Build release WASM using reproducible build flags and verify SHA-256 digest against `soroban_save.wasm.sha256`.
+- [ ] **Automated Test Suite**: Ensure all 42+ upgrade tests in `contracts/soroban-save/UPGRADE_TESTING.md` pass locally and in CI.
 - [ ] **State Snapshot**: Record the state hash or export key storage entries from Testnet/Mainnet state before execution.
 - [ ] **Admin Authentication**: Confirm the deploying keys have valid Admin privileges on the target contract instance.
 - [ ] **Schema Compatibility**: Ensure new enum discriminants or data field additions are backward compatible with pre-upgrade client calls.
@@ -31,7 +31,7 @@ Before deploying any WASM bytecode update or triggering schema migration:
 ### Step 3.1: Upload & Upgrade WASM Code
 1. Upload the newly built WASM hash to the network:
    ```bash
-   soroban contract install --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm --source admin_key
+   soroban contract install --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm --source admin_key
    ```
 2. Upgrade the installed contract code hash:
    ```bash

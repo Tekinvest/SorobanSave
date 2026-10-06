@@ -224,7 +224,7 @@ The additional flags in `tsconfig.app.json` beyond `strict` add:
 ## Incremental Fix Strategy (if errors surface)
 
 The issue mentions a "file-by-file allowlist if needed". The recommended
-approach for the Stellar-Save frontend:
+approach for the SorobanSave frontend:
 
 ### Step 1 — Run the aligned typecheck and capture the error list
 

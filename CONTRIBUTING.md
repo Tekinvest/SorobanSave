@@ -1,6 +1,6 @@
-# Contributing to Stellar-Save
+# Contributing to SorobanSave
 
-Thank you for your interest in contributing to Stellar-Save — a decentralized ROSCA (Rotating Savings and Credit Association) built on Stellar Soroban smart contracts.
+Thank you for your interest in contributing to SorobanSave — a decentralized ROSCA (Rotating Savings and Credit Association) built on Stellar Soroban smart contracts.
 
 This guide covers everything you need to get started: environment setup, coding standards, testing requirements, and the PR process.
 
@@ -32,7 +32,7 @@ By participating in this project you agree to abide by our [Code of Conduct](COD
 
 ## Architecture Overview
 
-Stellar-Save has four main layers:
+SorobanSave has four main layers:
 
 ```
 User (Stellar wallet)
@@ -47,7 +47,7 @@ Soroban Smart Contracts (Rust)
 Stellar Network (on-chain storage + Horizon API)
 ```
 
-**Smart contract modules** (`contracts/stellar-save/src/`):
+**Smart contract modules** (`contracts/soroban-save/src/`):
 
 | Module                             | Responsibility                       |
 | ---------------------------------- | ------------------------------------ |
@@ -82,8 +82,8 @@ The Rust toolchain version is pinned in `rust-toolchain.toml`. Running any `carg
 ### Clone and install
 
 ```bash
-git clone https://github.com/Xoulomon/Stellar-Save.git
-cd Stellar-Save
+git clone https://github.com/Tekinvest/SorobanSave.git
+cd SorobanSave
 
 # Install root-level tooling (commitlint, husky)
 npm install
@@ -135,9 +135,9 @@ stellar keys generate deployer --network testnet
 ## Project Structure
 
 ```
-Stellar-Save/
+SorobanSave/
 ├── contracts/
-│   └── stellar-save/        # Main ROSCA smart contract (Rust)
+│   └── soroban-save/        # Main ROSCA smart contract (Rust)
 │       └── src/             # Contract modules
 ├── frontend/                # React + TypeScript SPA
 │   └── src/
@@ -498,8 +498,8 @@ All new public functions must have tests covering:
 # All contracts
 cargo test --workspace
 
-# Stellar-save contract only
-cargo test -p stellar-save
+# SorobanSave contract only
+cargo test -p soroban-save
 
 # With stdout output (see println! output)
 cargo test -- --nocapture
@@ -511,7 +511,7 @@ cargo test test_contribute_success
 RUST_BACKTRACE=1 cargo test
 
 # With coverage (requires cargo-tarpaulin)
-cargo tarpaulin --config contracts/stellar-save/tarpaulin.toml
+cargo tarpaulin --config contracts/soroban-save/tarpaulin.toml
 ```
 
 **Test structure:**
@@ -552,7 +552,7 @@ fn test_contribute_insufficient_balance() {
 
 **Test snapshots:**
 
-Test snapshots live in `contracts/stellar-save/test_snapshots/`. Update them if your change intentionally affects output:
+Test snapshots live in `contracts/soroban-save/test_snapshots/`. Update them if your change intentionally affects output:
 
 ```bash
 # Update snapshots
@@ -806,7 +806,7 @@ Step-by-step instructions to verify the changes
 
 ## Drips Wave Contributions
 
-Stellar-Save participates in **Drips Wave** — a contributor funding program. Funded issues are labelled `wave-ready` on GitHub and categorised by effort:
+SorobanSave participates in **Drips Wave** — a contributor funding program. Funded issues are labelled `wave-ready` on GitHub and categorised by effort:
 
 | Label     | Points | Examples                                                   |
 | --------- | ------ | ---------------------------------------------------------- |
@@ -816,7 +816,7 @@ Stellar-Save participates in **Drips Wave** — a contributor funding program. F
 
 ### How to Claim a Wave-Ready Issue
 
-1. **Find an issue** labeled `wave-ready` on [GitHub Issues](https://github.com/Xoulomon/Stellar-Save/issues?q=label%3Awave-ready)
+1. **Find an issue** labeled `wave-ready` on [GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues?q=label%3Awave-ready)
 2. **Comment on the issue** to claim it:
    ```
    I'd like to work on this issue. I'll submit a PR by [date].

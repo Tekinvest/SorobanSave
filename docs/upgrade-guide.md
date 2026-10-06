@@ -1,6 +1,6 @@
 # Upgrade Guide
 
-This document describes how to safely upgrade the Stellar-Save Soroban contract, verify backward compatibility, and run the automated upgrade test suite.
+This document describes how to safely upgrade the SorobanSave Soroban contract, verify backward compatibility, and run the automated upgrade test suite.
 
 ## Overview
 
@@ -54,7 +54,7 @@ if current_version < 3 {
 
 ```bash
 cargo test \
-  --manifest-path contracts/stellar-save/Cargo.toml \
+  --manifest-path contracts/soroban-save/Cargo.toml \
   upgrade_tests \
   -- --test-threads=1
 ```
@@ -63,15 +63,15 @@ cargo test \
 
 ```bash
 # Data migration
-cargo test --manifest-path contracts/stellar-save/Cargo.toml \
+cargo test --manifest-path contracts/soroban-save/Cargo.toml \
   upgrade_tests::upgrade_tests::test_migration -- --test-threads=1
 
 # API compatibility
-cargo test --manifest-path contracts/stellar-save/Cargo.toml \
+cargo test --manifest-path contracts/soroban-save/Cargo.toml \
   upgrade_tests::upgrade_tests::test_api -- --test-threads=1
 
 # Performance regression
-cargo test --manifest-path contracts/stellar-save/Cargo.toml \
+cargo test --manifest-path contracts/soroban-save/Cargo.toml \
   upgrade_tests::upgrade_tests::test_perf -- --test-threads=1
 ```
 
@@ -120,7 +120,7 @@ Covered operations:
 ```bash
 # 1. Build the new WASM
 cargo build \
-  --manifest-path contracts/stellar-save/Cargo.toml \
+  --manifest-path contracts/soroban-save/Cargo.toml \
   --target wasm32-unknown-unknown \
   --release
 
@@ -128,7 +128,7 @@ cargo build \
 stellar contract upload \
   --network testnet \
   --source deployer \
-  --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm
+  --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm
 
 # 3. Upgrade the deployed contract
 stellar contract invoke \

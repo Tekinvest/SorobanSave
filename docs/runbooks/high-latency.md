@@ -29,7 +29,7 @@
 
 4. Restart if GC pressure is confirmed:
    ```bash
-   docker restart stellar-save-backend
+   docker restart soroban-save-backend
    ```
 
 ## Escalation

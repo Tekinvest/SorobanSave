@@ -59,8 +59,8 @@ Expected combined saving over defaults: **20–40%**.
 
 ```bash
 wasm-opt -Oz \
-  target/wasm32-unknown-unknown/release/stellar_save.wasm \
-  -o target/wasm32-unknown-unknown/release/stellar_save.wasm
+  target/wasm32-unknown-unknown/release/soroban_save.wasm \
+  -o target/wasm32-unknown-unknown/release/soroban_save.wasm
 ```
 
 Expected saving: **10–20%** on top of compiler flags.

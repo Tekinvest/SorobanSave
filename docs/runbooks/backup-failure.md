@@ -13,7 +13,7 @@
 
 2. Check logs for failure reason:
    ```bash
-   docker logs stellar-save-backend 2>&1 | grep -i backup | grep error
+   docker logs soroban-save-backend 2>&1 | grep -i backup | grep error
    ```
 
 3. Common causes:

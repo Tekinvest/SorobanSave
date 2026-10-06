@@ -259,7 +259,7 @@ bash scripts/smoke_test_post_deploy.sh
 2. **Assess Data Loss (5-15 minutes)**
    ```bash
    # Check PostgreSQL integrity
-   psql -h localhost -U stellarsave -c "SELECT * FROM pg_stat_activity;"
+   psql -h localhost -U sorobansave -c "SELECT * FROM pg_stat_activity;"
    
    # Check for missing rows
    bash scripts/check_data_integrity.sh > integrity_report.txt
@@ -458,7 +458,7 @@ bash scripts/smoke_test_post_deploy.sh
    bash scripts/update_rpc_endpoint.sh --endpoint $STELLAR_RPC_URL
    
    # Restart services
-   systemctl restart stellar-save-backend
+   systemctl restart soroban-save-backend
    ```
 
 3. **Implement Degraded Mode (10-30 minutes)**
@@ -544,11 +544,11 @@ Impact: <User impact>
 Status: <Current status>
 
 We are aware of the issue and actively working on a resolution.
-Updates will be posted to https://status.stellar-save.app
+Updates will be posted to https://status.soroban-save.app
 
 ETA for resolution: <Best estimate>
 
-Contact: incident-response@stellar-save.app
+Contact: incident-response@soroban-save.app
 ```
 
 ### Resolution Notice

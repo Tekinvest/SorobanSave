@@ -1,10 +1,10 @@
 # Performance Tuning and Scaling Guide
 
-This guide documents the scaling characteristics of Stellar-Save and the practical tuning levers that operators and contributors can use to keep the system responsive.
+This guide documents the scaling characteristics of SorobanSave and the practical tuning levers that operators and contributors can use to keep the system responsive.
 
 ## Architecture overview
 
-Stellar-Save uses three main layers that affect throughput and latency:
+SorobanSave uses three main layers that affect throughput and latency:
 
 1. The Stellar Soroban contract, which stores group state and executes core financial operations.
 2. The backend services, which expose APIs and process analytics, notifications, and indexing work.

@@ -1,7 +1,7 @@
 # Dependency Injection Architectural Pattern
 
 ## Overview
-This document outlines the standard Dependency Injection (DI) pattern adopted across core backend services in Stellar-Save (Issue #1701).
+This document outlines the standard Dependency Injection (DI) pattern adopted across core backend services in SorobanSave (Issue #1701).
 
 Historically, services directly instantiated database clients (`new PrismaClient()`), external SDKs (Elasticsearch `Client`, AWS `SecretsManagerClient`), and global config / loggers. This made unit testing difficult, necessitating extensive module-level mocking (`jest.mock(...)`) that obscured tests and leaked global state between suites.
 

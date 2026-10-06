@@ -207,7 +207,7 @@ Value: [password you entered in step 6]
 ```bash
 keytool -genkey -v \
   -keystore release.keystore \
-  -alias stellarsave \
+  -alias sorobansave \
   -keyalg RSA \
   -keysize 2048 \
   -validity 10000
@@ -222,7 +222,7 @@ keytool -genkey -v \
 
 ```
 Keystore password: _______________
-Key alias: stellarsave
+Key alias: sorobansave
 Key password: _______________
 ```
 
@@ -241,7 +241,7 @@ Secret: ANDROID_KEYSTORE_PASSWORD
 Value: [keystore password from Step 1]
 
 Secret: ANDROID_KEY_ALIAS
-Value: stellarsave
+Value: sorobansave
 
 Secret: ANDROID_KEY_PASSWORD
 Value: [key password from Step 1]
@@ -250,7 +250,7 @@ Value: [key password from Step 1]
 **⚠️ BACKUP YOUR KEYSTORE:**
 ```bash
 # Store in secure location (NOT in repo)
-cp release.keystore ~/secure-backup/stellar-save-release.keystore
+cp release.keystore ~/secure-backup/soroban-save-release.keystore
 ```
 
 ### Step 3: Create Play Console Service Account
@@ -264,8 +264,8 @@ cp release.keystore ~/secure-backup/stellar-save-release.keystore
 **In Google Cloud Console:**
 
 6. Create Service Account:
-   - Name: `stellar-save-ci-cd`
-   - ID: `stellar-save-ci-cd`
+   - Name: `soroban-save-ci-cd`
+   - ID: `soroban-save-ci-cd`
    - Description: "GitHub Actions CI/CD"
 7. Click "Create and Continue"
 8. Grant Role: "Service Account User"
@@ -292,7 +292,7 @@ cp release.keystore ~/secure-backup/stellar-save-release.keystore
 
 ```bash
 # Copy contents of JSON file
-cat ~/Downloads/stellar-save-ci-cd-*.json
+cat ~/Downloads/soroban-save-ci-cd-*.json
 ```
 
 ```

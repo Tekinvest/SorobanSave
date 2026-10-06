@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the automated performance benchmarking pipeline for Stellar-Save, which tracks:
+This document describes the automated performance benchmarking pipeline for SorobanSave, which tracks:
 - **Contract Gas Costs**: Monitor Soroban contract function gas usage to detect regressions
 - **Frontend Performance**: Track web vital metrics and Lighthouse scores
 - **Performance Trends**: Analyze trends over time to identify performance degradation
@@ -30,13 +30,13 @@ This document describes the automated performance benchmarking pipeline for Stel
 
 ```bash
 # Run all benchmarks
-cargo test --manifest-path contracts/stellar-save/Cargo.toml benchmark -- --nocapture
+cargo test --manifest-path contracts/soroban-save/Cargo.toml benchmark -- --nocapture
 
 # Run specific benchmark
-cargo test --manifest-path contracts/stellar-save/Cargo.toml benchmark_create_group_gas -- --nocapture
+cargo test --manifest-path contracts/soroban-save/Cargo.toml benchmark_create_group_gas -- --nocapture
 
 # With detailed output
-RUST_BACKTRACE=1 cargo test --manifest-path contracts/stellar-save/Cargo.toml benchmark -- --nocapture --test-threads=1
+RUST_BACKTRACE=1 cargo test --manifest-path contracts/soroban-save/Cargo.toml benchmark -- --nocapture --test-threads=1
 ```
 
 ## Frontend Performance Metrics

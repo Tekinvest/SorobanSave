@@ -1,4 +1,4 @@
-# Stellar-Save Security Best Practices
+# SorobanSave Security Best Practices
 
 ## For Users
 
@@ -72,7 +72,7 @@
 ### Audit Checklist
 ```
 ✅ [ ] Review `StorageKeyBuilder` patterns
-✅ [ ] Test all `StellarSaveError` paths
+✅ [ ] Test all `SorobanSaveError` paths
 ✅ [ ] Verify pause/unpause works
 ✅ [ ] Gas limits for large groups (`get_group_members(offset, limit)`)
 ✅ [ ] Pagination bounds checking

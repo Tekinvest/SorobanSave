@@ -25,8 +25,8 @@ All outbound calls to external anchor servers (TOML discovery, SEP-10 authentica
 
 1. Identify the affected anchor and flow (deposit vs. withdraw, SEP-24 vs. SEP-31):
    ```bash
-   grep "ramp" /var/log/stellar-save-backend/*.log | tail -50
-   # or Kibana: index=stellar-save-backend-* path=/ramp/* level=error
+   grep "ramp" /var/log/soroban-save-backend/*.log | tail -50
+   # or Kibana: index=soroban-save-backend-* path=/ramp/* level=error
    ```
 
 2. Check the circuit breaker state and anchor health:

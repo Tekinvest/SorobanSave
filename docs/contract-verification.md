@@ -1,6 +1,6 @@
 # Contract Verification
 
-Stellar-Save uses automated post-deployment verification to confirm that the on-chain contract matches the expected build artifact and is callable.
+SorobanSave uses automated post-deployment verification to confirm that the on-chain contract matches the expected build artifact and is callable.
 
 ## How It Works
 
@@ -57,7 +57,7 @@ Run locally:
 export CONTRACT_ID=<your-contract-id>
 export STELLAR_NETWORK=testnet
 export STELLAR_RPC_URL=https://soroban-testnet.stellar.org
-export EXPECTED_WASM_HASH=$(sha256sum target/wasm32-unknown-unknown/release/stellar_save.wasm | awk '{print $1}')
+export EXPECTED_WASM_HASH=$(sha256sum target/wasm32-unknown-unknown/release/soroban_save.wasm | awk '{print $1}')
 
 bash scripts/verify_contract.sh
 ```

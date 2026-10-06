@@ -1,12 +1,12 @@
-# Stellar-Save Tokenomics
+# SorobanSave Tokenomics
 
-This document describes the economic model of Stellar-Save: how value flows through the system, how contributions and payouts work, what fees and penalties apply, and what incentives keep the protocol healthy.
+This document describes the economic model of SorobanSave: how value flows through the system, how contributions and payouts work, what fees and penalties apply, and what incentives keep the protocol healthy.
 
 ---
 
 ## Overview
 
-Stellar-Save is a **zero-yield, zero-fee rotational savings protocol**. It does not issue a native token, does not charge platform fees, and does not generate yield. Its economic purpose is purely redistributive: every stroop contributed by members is paid out to members, in full, on a rotating schedule.
+SorobanSave is a **zero-yield, zero-fee rotational savings protocol**. It does not issue a native token, does not charge platform fees, and does not generate yield. Its economic purpose is purely redistributive: every stroop contributed by members is paid out to members, in full, on a rotating schedule.
 
 The protocol currently supports **XLM (Stellar Lumens)** as the contribution asset. Support for SEP-41 tokens (USDC, EURC, etc.) is planned for v1.1.
 
@@ -97,7 +97,7 @@ execute_payout(group_id)
 
 ## Fee Structure
 
-**Stellar-Save charges no platform fees.** The protocol is designed for financial inclusion and does not extract value from participants.
+**SorobanSave charges no platform fees.** The protocol is designed for financial inclusion and does not extract value from participants.
 
 The only costs a user incurs are:
 
@@ -106,7 +106,7 @@ The only costs a user incurs are:
 | Stellar network transaction fee | The transaction submitter | ~0.00001 XLM per operation (standard Stellar base fee) |
 | Soroban resource fee | The transaction submitter | Variable; typically < 0.01 XLM per contract invocation |
 
-These are Stellar network costs, not Stellar-Save fees. They are paid to the Stellar network validators, not to any protocol treasury.
+These are Stellar network costs, not SorobanSave fees. They are paid to the Stellar network validators, not to any protocol treasury.
 
 > For current Stellar fee estimates, see the [Stellar Developers documentation](https://developers.stellar.org/docs/learn/fundamentals/fees-resource-limits-metering).
 
@@ -172,7 +172,7 @@ Penalty history is stored on-chain per `(group_id, member)` for full auditabilit
 
 ### Protocol-Level Incentives
 
-- **No yield, no speculation**: Stellar-Save does not promise returns. This keeps the system simple, auditable, and resistant to the failure modes of yield-bearing protocols.
+- **No yield, no speculation**: SorobanSave does not promise returns. This keeps the system simple, auditable, and resistant to the failure modes of yield-bearing protocols.
 - **Trustless escrow**: Funds are held by the smart contract, not by any individual. No coordinator can abscond with the pool.
 - **Transparent rotation**: The payout schedule is deterministic and verifiable on-chain. Members can independently verify when they will receive their payout.
 

@@ -1,6 +1,6 @@
-# Stellar-Save User Guide
+# SorobanSave User Guide
 
-Welcome to Stellar-Save — a decentralized rotational savings platform built on the Stellar blockchain. This guide walks you through everything you need to start saving with your community.
+Welcome to SorobanSave — a decentralized rotational savings platform built on the Stellar blockchain. This guide walks you through everything you need to start saving with your community.
 
 ---
 
@@ -17,13 +17,13 @@ Welcome to Stellar-Save — a decentralized rotational savings platform built on
 
 ## Getting Started
 
-### What is Stellar-Save?
+### What is SorobanSave?
 
-Stellar-Save is a digital version of the traditional community savings system known as Ajo or Esusu in West Africa. A group of people pool a fixed amount of money each cycle, and one member receives the full pool. This rotates until every member has received a payout.
+SorobanSave is a digital version of the traditional community savings system known as Ajo or Esusu in West Africa. A group of people pool a fixed amount of money each cycle, and one member receives the full pool. This rotates until every member has received a payout.
 
 ### What You Need
 
-Before using Stellar-Save, make sure you have:
+Before using SorobanSave, make sure you have:
 
 1. **A Stellar wallet** — We recommend [Freighter](https://www.freighter.app/), a free browser extension wallet
 2. **XLM (Stellar Lumens)** — The native currency used for contributions. You can get XLM from any major exchange
@@ -34,7 +34,7 @@ Before using Stellar-Save, make sure you have:
 1. Install the [Freighter wallet extension](https://www.freighter.app/)
 2. Create a new wallet and securely save your recovery phrase — **never share this with anyone**
 3. Fund your wallet with enough XLM to cover your group's contribution amount plus a small amount for transaction fees (~0.1 XLM per transaction)
-4. Visit the Stellar-Save app and click **Connect Wallet**
+4. Visit the SorobanSave app and click **Connect Wallet**
 5. Approve the connection request in Freighter
 
 ### Choosing a Network
@@ -223,7 +223,7 @@ Use **Testnet** to practice with no real money. Switch to **Mainnet** when you'r
 ---
 
 **Q: I approved a transaction but nothing happened. What do I do?**
-Wait a few seconds for the Stellar network to confirm the transaction. If it still doesn't appear, check your transaction history in Freighter. If the transaction failed, you'll see an error — try again or contact support via [GitHub Issues](https://github.com/Xoulomon/Stellar-Save/issues).
+Wait a few seconds for the Stellar network to confirm the transaction. If it still doesn't appear, check your transaction history in Freighter. If the transaction failed, you'll see an error — try again or contact support via [GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues).
 
 ---
 
@@ -234,8 +234,8 @@ Your payout position is shown on your group dashboard. You can calculate your ex
 
 ## Need More Help?
 
-- Browse [GitHub Issues](https://github.com/Xoulomon/Stellar-Save/issues) for known problems and solutions
-- Start a [GitHub Discussion](https://github.com/Xoulomon/Stellar-Save/discussions) for questions
+- Browse [GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues) for known problems and solutions
+- Start a [GitHub Discussion](https://github.com/Tekinvest/SorobanSave/discussions) for questions
 - Contact the team via Telegram: [@Xoulomon]
 
 ---

@@ -2,13 +2,13 @@
 
 ## Overview
 
-This guide details how Stellar-Save manages asset and metadata image storage. Group creators and administrators can upload group metadata images (avatars, banners, proof documents) which are processed through the `ImageStorageService` abstraction.
+This guide details how SorobanSave manages asset and metadata image storage. Group creators and administrators can upload group metadata images (avatars, banners, proof documents) which are processed through the `ImageStorageService` abstraction.
 
 ---
 
 ## Storage Architecture
 
-Stellar-Save decouples controllers from underlying storage implementations using the `ImageStorageService` interface.
+SorobanSave decouples controllers from underlying storage implementations using the `ImageStorageService` interface.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -100,7 +100,7 @@ Configuration environment variables:
 - `AWS_REGION`
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
-- `BACKUP_S3_BUCKET` (or default `stellar-save-assets`)
+- `BACKUP_S3_BUCKET` (or default `soroban-save-assets`)
 
 ```typescript
 import { S3ImageStorageService } from './services/image_storage_service';

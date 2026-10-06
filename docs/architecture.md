@@ -1,8 +1,8 @@
-# Stellar-Save Architecture Documentation
+# SorobanSave Architecture Documentation
 
 ## Overview
 
-**Stellar-Save** is a decentralized Rotating Savings and Credit Association (ROSCA) platform built on the **Stellar blockchain** using **Soroban smart contracts**.
+**SorobanSave** is a decentralized Rotating Savings and Credit Association (ROSCA) platform built on the **Stellar blockchain** using **Soroban smart contracts**.
 
 The system enables groups of people to save together transparently and securely without relying on a central authority. Contributions are made via Stellar payments, and payouts are automated through smart contract logic when a member's turn arrives.
 
@@ -24,9 +24,9 @@ The system enables groups of people to save together transparently and securely 
 
 ## ROSCA Mechanics on Stellar
 
-### Traditional ROSCA vs Stellar-Save
+### Traditional ROSCA vs SorobanSave
 
-| Aspect               | Traditional ROSCA          | Stellar-Save (On-Chain)                  |
+| Aspect               | Traditional ROSCA          | SorobanSave (On-Chain)                  |
 |----------------------|----------------------------|------------------------------------------|
 | Trust Model          | High (based on relationships) | Low (enforced by smart contract)       |
 | Contribution         | Cash / Bank transfer       | Stellar assets (XLM, USDC, etc.)        |
@@ -95,7 +95,7 @@ Key on-chain operations:
 Authorization checks (`admin-only`, `member-only`, `creator-only`) were previously duplicated inline across contract entry points. This created inconsistency and maintenance risks.
 
 ### Decision
-Consolidate all authorization logic into `contracts/stellar-save/src/auth.rs`:
+Consolidate all authorization logic into `contracts/soroban-save/src/auth.rs`:
 - `require_admin`: Validates caller authentication and checks against global `ContractConfig.admin`.
 - `require_creator`: Validates caller authentication and checks caller equality with `Group.creator`.
 - `require_member`: Validates caller authentication and checks caller membership via `GroupRepository::is_member`.

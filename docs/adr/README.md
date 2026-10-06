@@ -1,6 +1,6 @@
 # Architecture Decision Records (ADRs)
 
-This directory contains Architecture Decision Records (ADRs) that document key architectural decisions made during Stellar-Save development. ADRs preserve institutional knowledge and provide context for future maintainers.
+This directory contains Architecture Decision Records (ADRs) that document key architectural decisions made during SorobanSave development. ADRs preserve institutional knowledge and provide context for future maintainers.
 
 ## Format
 

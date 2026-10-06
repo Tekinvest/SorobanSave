@@ -1,9 +1,9 @@
 # Video Tutorial Series
 
-A series of short, focused tutorials covering every aspect of Stellar-Save — from first setup to advanced group management. All videos include captions for accessibility and are hosted on YouTube with embedded links below.
+A series of short, focused tutorials covering every aspect of SorobanSave — from first setup to advanced group management. All videos include captions for accessibility and are hosted on YouTube with embedded links below.
 
-> **Channel:** [Stellar-Save on YouTube](https://youtube.com/@stellar-save)  
-> **Playlist:** [Complete Tutorial Series](https://youtube.com/playlist?list=stellar-save-tutorials)  
+> **Channel:** [SorobanSave on YouTube](https://youtube.com/@soroban-save)  
+> **Playlist:** [Complete Tutorial Series](https://youtube.com/playlist?list=soroban-save-tutorials)  
 > **Status:** ✅ All scripts complete • 🎬 Videos in production
 
 ---
@@ -22,7 +22,7 @@ All tutorials include:
 
 | # | Title | Duration | Topics | Status |
 |---|---|---|---|---|
-| 1 | [Getting Started with Stellar-Save](#tutorial-1-getting-started) | ~8 min | Wallets, testnet setup, first login | ✅ Published |
+| 1 | [Getting Started with SorobanSave](#tutorial-1-getting-started) | ~8 min | Wallets, testnet setup, first login | ✅ Published |
 | 2 | [Creating Your First Savings Group](#tutorial-2-creating-a-group) | ~10 min | Group parameters, on-chain creation | ✅ Published |
 | 3 | [Joining a Group & Making Contributions](#tutorial-3-joining-and-contributing) | ~8 min | Joining, contributing XLM, cycle tracking | ✅ Published |
 | 4 | [Understanding Payouts & Rotation](#tutorial-4-payouts-and-rotation) | ~7 min | Payout order, automatic execution, completion | ✅ Published |
@@ -34,15 +34,15 @@ All tutorials include:
 
 ## Tutorial 1: Getting Started
 
-**Goal:** Set up a Stellar wallet, fund it on testnet, and connect to Stellar-Save.
+**Goal:** Set up a Stellar wallet, fund it on testnet, and connect to SorobanSave.
 
 ### Script Outline
 
-1. **Introduction** (1 min) — What is Stellar-Save? Why use a blockchain ROSCA?
+1. **Introduction** (1 min) — What is SorobanSave? Why use a blockchain ROSCA?
 2. **Install Freighter wallet** (2 min) — Browser extension, create account, back up seed phrase.
 3. **Switch to testnet** (1 min) — Network selector in Freighter.
 4. **Fund with Friendbot** (1 min) — `https://friendbot.stellar.org/?addr=<your-address>`.
-5. **Connect to Stellar-Save** (2 min) — Open the app, click Connect Wallet, approve in Freighter.
+5. **Connect to SorobanSave** (2 min) — Open the app, click Connect Wallet, approve in Freighter.
 6. **Tour the dashboard** (1 min) — Groups list, contribution history, wallet balance.
 
 ### Key Commands
@@ -171,7 +171,7 @@ const status  = await contract.get_contribution_status({ group_id: groupId, cycl
 
 ## Tutorial 6: Deploying the Contract
 
-**Goal:** Build and deploy the Stellar-Save contract to testnet from source.
+**Goal:** Build and deploy the SorobanSave contract to testnet from source.
 
 ### Script Outline
 
@@ -198,7 +198,7 @@ stellar keys generate deployer --network testnet
 export CONTRACT_ID=<deployed-id>
 export STELLAR_NETWORK=testnet
 export STELLAR_RPC_URL=https://soroban-testnet.stellar.org
-export EXPECTED_WASM_HASH=$(sha256sum target/wasm32-unknown-unknown/release/stellar_save.wasm | awk '{print $1}')
+export EXPECTED_WASM_HASH=$(sha256sum target/wasm32-unknown-unknown/release/soroban_save.wasm | awk '{print $1}')
 bash scripts/verify_contract.sh
 ```
 
@@ -206,7 +206,7 @@ bash scripts/verify_contract.sh
 
 ## Tutorial 7: Security and Best Practices
 
-**Goal:** Use Stellar-Save safely and understand the threat model.
+**Goal:** Use SorobanSave safely and understand the threat model.
 
 ### Script Outline
 
@@ -234,7 +234,7 @@ We welcome community contributions:
 
 ## Feedback
 
-After watching, please leave feedback via [GitHub Discussions](https://github.com/Xoulomon/Stellar-Save/discussions) or the issue tracker. We use viewer feedback to prioritise future tutorials.
+After watching, please leave feedback via [GitHub Discussions](https://github.com/Tekinvest/SorobanSave/discussions) or the issue tracker. We use viewer feedback to prioritise future tutorials.
 
 
 ---
@@ -291,7 +291,7 @@ Tutorial #1 (Getting Started) is embedded at the top of `docs/user-guide.md`:
 ## Quick Start Video
 
 <iframe width="560" height="315" src="https://youtube.com/embed/VIDEO_ID" 
-  title="Getting Started with Stellar-Save" frameborder="0" 
+  title="Getting Started with SorobanSave" frameborder="0" 
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
   allowfullscreen></iframe>
 ```
@@ -311,8 +311,8 @@ A "Watch Video Tutorials" button links to the full playlist from the main README
 After watching, please leave feedback:
 
 - **YouTube Comments:** Direct feedback on each video
-- **GitHub Discussions:** [Ask questions](https://github.com/Xoulomon/Stellar-Save/discussions)
-- **Issue Tracker:** [Report errors or suggest improvements](https://github.com/Xoulomon/Stellar-Save/issues)
+- **GitHub Discussions:** [Ask questions](https://github.com/Tekinvest/SorobanSave/discussions)
+- **Issue Tracker:** [Report errors or suggest improvements](https://github.com/Tekinvest/SorobanSave/issues)
 
 We use viewer feedback to:
 - Prioritize future tutorials
@@ -334,4 +334,4 @@ Based on community requests:
 | Advanced admin features | 2 users | Backlog |
 | Integration with other dApps | 4 users | Research phase |
 
-**Want a tutorial?** [Request it here](https://github.com/Xoulomon/Stellar-Save/discussions/new?category=ideas)
+**Want a tutorial?** [Request it here](https://github.com/Tekinvest/SorobanSave/discussions/new?category=ideas)

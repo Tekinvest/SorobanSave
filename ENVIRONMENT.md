@@ -1,6 +1,6 @@
 # Environment Configuration
 
-This document describes all environment variables required by the Stellar-Save project. Configuration is validated on application startup using a Zod schema — misconfiguration fails fast with clear error messages.
+This document describes all environment variables required by the SorobanSave project. Configuration is validated on application startup using a Zod schema — misconfiguration fails fast with clear error messages.
 
 ## Quick Setup
 
@@ -100,7 +100,7 @@ JWT_REFRESH_TOKEN_TTL_DAYS=30
 
 - **Option A (Recommended for local)**: Set `DATABASE_URL`
   ```bash
-  DATABASE_URL=postgresql://user:password@localhost:5432/stellar_save
+  DATABASE_URL=postgresql://user:password@localhost:5432/soroban_save
   ```
 - **Option B (ECS with Secrets Manager)**: Set all `DB_*` variables
   ```bash
@@ -108,9 +108,9 @@ JWT_REFRESH_TOKEN_TTL_DAYS=30
   DB_PASSWORD=dbpass123
   DB_HOST=rds.amazonaws.com
   DB_PORT=5432
-  DB_NAME=stellar_save
+  DB_NAME=soroban_save
   ```
-- **Fallback**: If neither is provided, uses local default: `postgresql://user:pass@localhost:5432/stellar_save`
+- **Fallback**: If neither is provided, uses local default: `postgresql://user:pass@localhost:5432/soroban_save`
 
 *Conditional: Either set `DATABASE_URL` OR all five `DB_*` variables. If neither is complete, local fallback is used.
 
@@ -164,7 +164,7 @@ STELLAR_RPC_FALLBACK_URLS=https://rpc1.example.com, https://rpc2.example.com, ht
 | Variable                       | Type                   | Default                | Required | Description                            |
 | ------------------------------ | ---------------------- | ---------------------- | -------- | -------------------------------------- |
 | `BACKUP_ENABLED`               | `true`, `false`        | `false`                | No       | Enable automated backups to S3         |
-| `BACKUP_S3_BUCKET`             | String                 | `stellar-save-backups` | No       | S3 bucket for backups                  |
+| `BACKUP_S3_BUCKET`             | String                 | `soroban-save-backups` | No       | S3 bucket for backups                  |
 | `BACKUP_RETENTION_DAYS`        | Integer                | `30`                   | No       | How long to retain backups (days)      |
 | `BACKUP_ALERT_WEBHOOK_URL`     | URL (optional)         | —                      | No       | Webhook URL for backup failure alerts  |
 | `BACKUP_DRILL_ENABLED`         | `true`, `false`        | `false`                | No       | Enable backup restore drills (testing) |
@@ -273,8 +273,8 @@ RATE_LIMIT_PRO_REQ_PER_HOUR=5000
 | Variable              | Type          | Default                    | Required | Description                        |
 | --------------------- | ------------- | -------------------------- | -------- | ---------------------------------- |
 | `SENDGRID_API_KEY`    | String        | `""`                       | No       | SendGrid API key for sending email |
-| `SENDGRID_FROM_EMAIL` | Email address | `noreply@stellar-save.com` | No       | Sender email address               |
-| `SENDGRID_REPLY_TO`   | Email address | `support@stellar-save.com` | No       | Reply-to email address             |
+| `SENDGRID_FROM_EMAIL` | Email address | `noreply@soroban-save.com` | No       | Sender email address               |
+| `SENDGRID_REPLY_TO`   | Email address | `support@soroban-save.com` | No       | Reply-to email address             |
 
 **Example**:
 
@@ -322,7 +322,7 @@ ONESIGNAL_API_KEY=ZjcxZjI0OWQtYjcwMi00ZTYwLWI1ZWQtMDAwMDAwMDAwMDAw
 | ------------------- | ------------- | --------------------------------- | -------- | ------------------------------ |
 | `VAPID_PUBLIC_KEY`  | String        | `""`                              | No       | VAPID public key for web push  |
 | `VAPID_PRIVATE_KEY` | String        | `""`                              | No       | VAPID private key for web push |
-| `VAPID_SUBJECT`     | Email address | `mailto:noreply@stellar-save.com` | No       | VAPID subject (contact email)  |
+| `VAPID_SUBJECT`     | Email address | `mailto:noreply@soroban-save.com` | No       | VAPID subject (contact email)  |
 
 **Generate VAPID Keys**:
 
@@ -341,7 +341,7 @@ web-push generate-vapid-keys
 | Variable                      | Type            | Default                 | Required | Description                         |
 | ----------------------------- | --------------- | ----------------------- | -------- | ----------------------------------- |
 | `OTEL_TRACES_ENABLED`         | `true`, `false` | `false`                 | No       | Enable distributed tracing          |
-| `OTEL_SERVICE_NAME`           | String          | `stellar-save-backend`  | No       | Service name in traces              |
+| `OTEL_SERVICE_NAME`           | String          | `soroban-save-backend`  | No       | Service name in traces              |
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | URL             | `http://localhost:4318` | No       | OpenTelemetry collector endpoint    |
 | `OTEL_TRACES_SAMPLER_ARG`     | Float (0-1)     | `0.1`                   | No       | Trace sampling rate (0=none, 1=all) |
 
@@ -349,7 +349,7 @@ web-push generate-vapid-keys
 
 ```bash
 OTEL_TRACES_ENABLED=true
-OTEL_SERVICE_NAME=stellar-save-api
+OTEL_SERVICE_NAME=soroban-save-api
 OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger-collector:4318
 OTEL_TRACES_SAMPLER_ARG=0.1
 ```
@@ -442,8 +442,8 @@ OTEL_TRACES_SAMPLER_ARG=0.1
 | Variable               | Type                 | Default                    | Required | Description                            |
 | ---------------------- | -------------------- | -------------------------- | -------- | -------------------------------------- |
 | `CORS_ALLOWED_ORIGINS` | Comma-separated URLs | `""`                       | No       | Allowed CORS origins (comma-separated) |
-| `FRONTEND_URL`         | URL                  | `https://stellar-save.com` | No       | Frontend application URL               |
-| `APP_URL`              | URL                  | `https://stellar-save.com` | No       | App download/landing page URL          |
+| `FRONTEND_URL`         | URL                  | `https://soroban-save.com` | No       | Frontend application URL               |
+| `APP_URL`              | URL                  | `https://soroban-save.com` | No       | App download/landing page URL          |
 
 **Example**:
 

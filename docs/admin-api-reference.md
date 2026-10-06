@@ -33,7 +33,7 @@ The Admin API provides platform administrators with tools to monitor platform he
 ### Base URL
 
 ```
-https://api.stellar-save.app/api/v1/admin/
+https://api.soroban-save.app/api/v1/admin/
 http://localhost:3001/api/v1/admin/  (development)
 ```
 
@@ -596,7 +596,7 @@ Authorization: Bearer <token>
 
 ```bash
 # Flag a user for review
-curl -X PATCH https://api.stellar-save.app/api/v1/admin/users/user_123 \
+curl -X PATCH https://api.soroban-save.app/api/v1/admin/users/user_123 \
   -H "Authorization: Bearer $ADMIN_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -619,7 +619,7 @@ curl -X PATCH https://api.stellar-save.app/api/v1/admin/users/user_123 \
 
 ```bash
 # Delete a user permanently
-curl -X DELETE https://api.stellar-save.app/api/v1/admin/users/user_456 \
+curl -X DELETE https://api.soroban-save.app/api/v1/admin/users/user_456 \
   -H "Authorization: Bearer $ADMIN_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -636,7 +636,7 @@ curl -X DELETE https://api.stellar-save.app/api/v1/admin/users/user_456 \
 
 ```bash
 # Flag a group with suspicious activity
-curl -X POST https://api.stellar-save.app/api/v1/admin/groups/group_789/flag \
+curl -X POST https://api.soroban-save.app/api/v1/admin/groups/group_789/flag \
   -H "Authorization: Bearer $ADMIN_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -656,7 +656,7 @@ curl -X POST https://api.stellar-save.app/api/v1/admin/groups/group_789/flag \
 
 ```bash
 # Get all admin actions for compliance review
-curl https://api.stellar-save.app/api/v1/admin/audit-logs \
+curl https://api.soroban-save.app/api/v1/admin/audit-logs \
   -H "Authorization: Bearer $ADMIN_TOKEN"
 
 # Response shows chronological record of all admin actions
@@ -748,8 +748,8 @@ This immutable audit trail enables:
 
 ## Support
 
-- **Issues**: [https://github.com/Xoulomon/Stellar-Save/issues](https://github.com/Xoulomon/Stellar-Save/issues)
-- **Discussions**: [https://github.com/Xoulomon/Stellar-Save/discussions](https://github.com/Xoulomon/Stellar-Save/discussions)
+- **Issues**: [https://github.com/Tekinvest/SorobanSave/issues](https://github.com/Tekinvest/SorobanSave/issues)
+- **Discussions**: [https://github.com/Tekinvest/SorobanSave/discussions](https://github.com/Tekinvest/SorobanSave/discussions)
 - **API Status**: Contact dev team for current API status
 
 ---

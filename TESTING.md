@@ -404,7 +404,7 @@ cargo install cargo-mutants --locked
 
 **Running locally:**
 ```bash
-cd contracts/stellar-save
+cd contracts/soroban-save
 
 # Run all mutations (can take 30-60 minutes)
 cargo mutants

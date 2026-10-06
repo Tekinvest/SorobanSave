@@ -1,40 +1,40 @@
-# Stellar-Save Build Guide
+# SorobanSave Build Guide
 
 ## Quick Start
 
-### Build the stellar-save contract
+### Build the soroban-save contract
 ```bash
-cargo build --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo build --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
 ### Run all tests
 ```bash
-cargo test --lib --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo test --lib --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
 ### Run pool module tests only
 ```bash
-cargo test --lib pool --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo test --lib pool --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
 ### Build for WASM (Soroban)
 ```bash
-cargo build --target wasm32-unknown-unknown --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo build --target wasm32-unknown-unknown --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
-**Note:** Use the full path to `contracts/stellar-save/Cargo.toml` to avoid dependency resolution issues with other contracts in the workspace.
+**Note:** Use the full path to `contracts/soroban-save/Cargo.toml` to avoid dependency resolution issues with other contracts in the workspace.
 
 ---
 
 ## Workspace Structure
 
-The workspace has been configured to focus on the stellar-save contract:
+The workspace has been configured to focus on the soroban-save contract:
 
 ```
-Stellar-Save/
-├── Cargo.toml                    # Workspace config (stellar-save only)
+SorobanSave/
+├── Cargo.toml                    # Workspace config (soroban-save only)
 ├── contracts/
-│   ├── stellar-save/             # Main contract (ACTIVE)
+│   ├── soroban-save/             # Main contract (ACTIVE)
 │   ├── guess-the-number/         # Other contracts (excluded)
 │   ├── fungible-allowlist/       # Other contracts (excluded)
 │   └── nft-enumerable/           # Other contracts (excluded)
@@ -49,7 +49,7 @@ Stellar-Save/
 
 ### Development Build
 ```bash
-cargo build --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo build --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 - Unoptimized, includes debug info
 - Faster compilation
@@ -57,7 +57,7 @@ cargo build --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
 
 ### Release Build
 ```bash
-cargo build --release --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo build --release --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 - Optimized for size and performance
 - Slower compilation
@@ -65,11 +65,11 @@ cargo build --release --manifest-path Stellar-Save/contracts/stellar-save/Cargo.
 
 ### WASM Build (for Soroban deployment)
 ```bash
-cargo build --target wasm32-unknown-unknown --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo build --target wasm32-unknown-unknown --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 - Compiles to WebAssembly
 - Required for Soroban deployment
-- Output: `target/wasm32-unknown-unknown/debug/stellar_save.wasm`
+- Output: `target/wasm32-unknown-unknown/debug/soroban_save.wasm`
 
 ---
 
@@ -77,22 +77,22 @@ cargo build --target wasm32-unknown-unknown --manifest-path Stellar-Save/contrac
 
 ### Run all tests
 ```bash
-cargo test --lib --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo test --lib --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
 ### Run pool module tests
 ```bash
-cargo test --lib pool --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo test --lib pool --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
 ### Run specific test
 ```bash
-cargo test --lib pool::tests::test_calculate_total_pool_valid --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo test --lib pool::tests::test_calculate_total_pool_valid --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
 ### Run tests with output
 ```bash
-cargo test --lib -- --nocapture --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo test --lib -- --nocapture --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
 ---
@@ -100,9 +100,9 @@ cargo test --lib -- --nocapture --manifest-path Stellar-Save/contracts/stellar-s
 ## Troubleshooting
 
 ### Issue: "feature `edition2024` is required"
-**Solution:** Use the manifest path to build only stellar-save:
+**Solution:** Use the manifest path to build only soroban-save:
 ```bash
-cargo build --manifest-path Stellar-Save/Cargo.toml
+cargo build --manifest-path SorobanSave/Cargo.toml
 ```
 
 ### Issue: "cannot find module"
@@ -111,7 +111,7 @@ cargo build --manifest-path Stellar-Save/Cargo.toml
 ### Issue: Tests not running
 **Solution:** Use the `--lib` flag to run library tests:
 ```bash
-cargo test --lib --manifest-path Stellar-Save/Cargo.toml
+cargo test --lib --manifest-path SorobanSave/Cargo.toml
 ```
 
 ---
@@ -119,7 +119,7 @@ cargo test --lib --manifest-path Stellar-Save/Cargo.toml
 ## Project Structure
 
 ```
-Stellar-Save/contracts/stellar-save/src/
+SorobanSave/contracts/soroban-save/src/
 ├── lib.rs                 # Main contract entry point
 ├── pool.rs               # Pool calculation module (NEW)
 ├── storage.rs            # Storage key management
@@ -146,22 +146,22 @@ Stellar-Save/contracts/stellar-save/src/
 
 ### Check for compilation errors
 ```bash
-cargo check --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo check --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
 ### Format code
 ```bash
-cargo fmt --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo fmt --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
 ### Lint code
 ```bash
-cargo clippy --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo clippy --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
 ### Generate documentation
 ```bash
-cargo doc --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml --open
+cargo doc --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml --open
 ```
 
 ---
@@ -183,8 +183,8 @@ rustup target add wasm32-unknown-unknown
 
 For continuous integration, use:
 ```bash
-cargo build --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
-cargo test --lib --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+cargo build --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
+cargo test --lib --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
 ```
 
 ---
@@ -193,25 +193,25 @@ cargo test --lib --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
 
 1. **Use release builds for deployment:**
    ```bash
-   cargo build --release --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+   cargo build --release --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
    ```
 
 2. **Use incremental compilation:**
    ```bash
-   CARGO_INCREMENTAL=1 cargo build --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+   CARGO_INCREMENTAL=1 cargo build --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
    ```
 
 3. **Parallel compilation:**
    ```bash
-   cargo build -j 4 --manifest-path Stellar-Save/contracts/stellar-save/Cargo.toml
+   cargo build -j 4 --manifest-path SorobanSave/contracts/soroban-save/Cargo.toml
    ```
 
 ---
 
 ## Next Steps
 
-1. Build the contract: `cargo build --manifest-path Stellar-Save/Cargo.toml`
-2. Run tests: `cargo test --lib --manifest-path Stellar-Save/Cargo.toml`
+1. Build the contract: `cargo build --manifest-path SorobanSave/Cargo.toml`
+2. Run tests: `cargo test --lib --manifest-path SorobanSave/Cargo.toml`
 3. Review documentation: See `POOL_CALCULATION.md`
 4. Deploy to Soroban: Use WASM build output
 

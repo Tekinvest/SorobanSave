@@ -1,6 +1,6 @@
 # Multi-Region Failover & Geo-Routing
 
-This document describes how Stellar-Save runs across multiple AWS regions, how
+This document describes how SorobanSave runs across multiple AWS regions, how
 users are routed to the nearest healthy region, how a regional failure triggers
 automatic failover, and how to **test** failover regularly.
 
@@ -75,7 +75,7 @@ The secondary region uses the `aws.secondary` provider alias declared in
 
 ## How routing works
 
-1. A client resolves `api.stellar-save.app`.
+1. A client resolves `api.soroban-save.app`.
 2. Route53 evaluates the **latency** (or **geolocation**) records and the
    per-region **health check** state.
 3. It answers with the lowest-latency region **whose health check is currently
@@ -83,7 +83,7 @@ The secondary region uses the `aws.secondary` provider alias declared in
 4. The TTL (default `60s`) bounds how long a stale answer can be cached.
 
 An optional explicit `PRIMARY`/`SECONDARY` failover record set
-(`failover.api.stellar-save.app`) is also created for clients/tooling that want
+(`failover.api.soroban-save.app`) is also created for clients/tooling that want
 strict active-passive behavior rather than latency routing.
 
 ## How failover works
@@ -111,7 +111,7 @@ the secondary region:
 1. Promote the replica to a standalone primary:
    ```bash
    aws rds promote-read-replica \
-     --db-instance-identifier stellar-save-production-replica \
+     --db-instance-identifier soroban-save-production-replica \
      --region <secondary_aws_region>
    ```
 2. Point the secondary region's backend at the promoted instance (update its DB
@@ -153,7 +153,7 @@ checks, or the replica. This complements the weekly DR checks in
 
 ```bash
 cd infra/envs/production
-terraform output multi_region_routing_record         # e.g. api.stellar-save.app
+terraform output multi_region_routing_record         # e.g. api.soroban-save.app
 terraform output multi_region_health_check_ids
 
 # Confirm both regions are healthy
@@ -163,8 +163,8 @@ for id in $(terraform output -json multi_region_health_check_ids | jq -r '.[]');
 done
 
 # Confirm current resolution
-dig +short api.stellar-save.app
-curl -fsS https://api.stellar-save.app/health
+dig +short api.soroban-save.app
+curl -fsS https://api.soroban-save.app/health
 ```
 
 ### 2. Induce a primary-region failure
@@ -178,7 +178,7 @@ aws route53 update-health-check --health-check-id "$PRIMARY_HC" --disabled
 
 ```bash
 # Within ~(90s health + 60s TTL), resolution should move to the secondary region
-watch -n 10 'dig +short api.stellar-save.app; curl -fsS https://api.stellar-save.app/health'
+watch -n 10 'dig +short api.soroban-save.app; curl -fsS https://api.soroban-save.app/health'
 ```
 
 Expected: `/health` keeps returning `200` throughout; resolved endpoint changes
@@ -195,7 +195,7 @@ replica during a routine test unless performing a real fail-over.
 ```bash
 aws route53 update-health-check --health-check-id "$PRIMARY_HC" --no-disabled
 # After ~90s confirm the primary is healthy and latency routing returns to it
-dig +short api.stellar-save.app
+dig +short api.soroban-save.app
 ```
 
 ### Test checklist
@@ -246,7 +246,7 @@ test that automates the manual runbook above. It works in two modes:
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `PRIMARY_HEALTH_CHECK_ID` | *(required in live mode)* | Route53 health check ID for the primary region |
-| `API_ENDPOINT` | `http://localhost:3001` | Base URL of the API (e.g. `https://api.stellar-save.app`) |
+| `API_ENDPOINT` | `http://localhost:3001` | Base URL of the API (e.g. `https://api.soroban-save.app`) |
 | `PRIMARY_REGION` | `us-east-1` | AWS region of the primary |
 | `SECONDARY_REGION` | `eu-west-1` | AWS region of the secondary |
 | `RTO_SECONDS` | `150` | Maximum allowed failover time in seconds |
@@ -297,7 +297,7 @@ PRIMARY_HC_ID=$(terraform output -json multi_region_health_check_ids | jq -r '.[
 
 DRY_RUN=0 \
   PRIMARY_HEALTH_CHECK_ID="$PRIMARY_HC_ID" \
-  API_ENDPOINT="https://api.stellar-save.app" \
+  API_ENDPOINT="https://api.soroban-save.app" \
   PRIMARY_REGION="us-east-1" \
   SECONDARY_REGION="eu-west-1" \
   bash tests/multi_region_failover_test.sh

@@ -1,10 +1,10 @@
-# Stellar-Save User Guide
+# SorobanSave User Guide
 
-Welcome to Stellar-Save, a decentralized rotational savings and credit association (ROSCA) built on the Stellar blockchain. This guide will walk you through everything you need to know to participate in community-based savings groups.
+Welcome to SorobanSave, a decentralized rotational savings and credit association (ROSCA) built on the Stellar blockchain. This guide will walk you through everything you need to know to participate in community-based savings groups.
 
-## What is Stellar-Save?
+## What is SorobanSave?
 
-Stellar-Save brings traditional ROSCA systems to blockchain technology. Members contribute a fixed amount regularly, and each member receives the total pool on a rotating basis. This creates:
+SorobanSave brings traditional ROSCA systems to blockchain technology. Members contribute a fixed amount regularly, and each member receives the total pool on a rotating basis. This creates:
 
 - **Trustless savings**: No central coordinator needed
 - **Transparent transactions**: All activity is verifiable on-chain
@@ -24,11 +24,11 @@ Stellar-Save brings traditional ROSCA systems to blockchain technology. Members 
 1. Install your preferred Stellar wallet
 2. Create or import a Stellar account
 3. Fund your account with XLM (available from exchanges or faucets)
-4. Connect your wallet to the Stellar-Save dApp
+4. Connect your wallet to the SorobanSave dApp
 
 ### Network Selection
 
-Stellar-Save operates on:
+SorobanSave operates on:
 - **Testnet**: For testing and learning (recommended for beginners)
 - **Mainnet**: For real savings groups with actual value
 
@@ -40,7 +40,7 @@ As a group creator, you set the terms for your savings circle.
 
 ### Step-by-Step Guide
 
-1. **Access the dApp**: Navigate to the Stellar-Save interface
+1. **Access the dApp**: Navigate to the SorobanSave interface
 2. **Connect Wallet**: Click "Connect Wallet" and approve the connection
 3. **Select "Create Group"**: Find this option in the main menu
 4. **Configure Group Settings**:
@@ -244,7 +244,7 @@ A: Contributions must match the group's exact amount. Check the group settings.
 
 ## Penalty System
 
-To encourage timely contributions and protect active members, Stellar-Save supports an optional penalty mechanism for missed contributions.
+To encourage timely contributions and protect active members, SorobanSave supports an optional penalty mechanism for missed contributions.
 
 ### How Penalties Work
 
@@ -317,5 +317,5 @@ A: Yes. `PenaltyApplied` events are emitted on-chain and include the group ID, m
 4. **Communicate**: Keep open lines with group members
 5. **Learn Continuously**: Stay updated with platform changes
 
-Remember, Stellar-Save is about building financial discipline and community trust. Participate responsibly and help others do the same!</content>
-<parameter name="filePath">c:\Users\USER\Desktop\solo\Stellar-Save\docs\user-guide.md
+Remember, SorobanSave is about building financial discipline and community trust. Participate responsibly and help others do the same!</content>
+<parameter name="filePath">c:\Users\USER\Desktop\solo\SorobanSave\docs\user-guide.md

@@ -1,6 +1,6 @@
-# Stellar-Save Deployment Guide
+# SorobanSave Deployment Guide
 
-Complete guide for deploying the Stellar-Save smart contract to Stellar testnet and mainnet.
+Complete guide for deploying the SorobanSave smart contract to Stellar testnet and mainnet.
 
 **Version**: 2.0.0  
 **Last Updated**: 2026-04-25
@@ -44,7 +44,7 @@ push / workflow_dispatch
 ┌─────────────────────┐
 │  pre-deploy         │  clippy · cargo audit · WASM size · secrets scan · unit tests
 └────────┬────────────┘
-         │ artifact: stellar_save.wasm + sha256 hash
+         │ artifact: soroban_save.wasm + sha256 hash
          ▼
 ┌─────────────────────┐        ┌─────────────────────┐
 │  deploy-testnet     │  OR    │  deploy-mainnet      │
@@ -152,7 +152,7 @@ bash scripts/smoke_test_post_deploy.sh
 
 ## Promotion Process: Testnet → Staging → Mainnet
 
-Stellar-Save follows a three-stage promotion model. Code only reaches mainnet after passing every gate below.
+SorobanSave follows a three-stage promotion model. Code only reaches mainnet after passing every gate below.
 
 ```
 feature branch
@@ -314,8 +314,8 @@ Complete every item before approving a mainnet deployment in the GitHub environm
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/Xoulomon/Stellar-Save.git
-cd Stellar-Save
+git clone https://github.com/Tekinvest/SorobanSave.git
+cd SorobanSave
 ```
 
 ### 2. Configure Environment Variables
@@ -332,7 +332,7 @@ STELLAR_NETWORK=testnet
 STELLAR_RPC_URL=https://soroban-testnet.stellar.org
 
 # Contract IDs (will be filled after deployment)
-CONTRACT_STELLAR_SAVE=
+CONTRACT_SOROBAN_SAVE=
 
 # Frontend Configuration
 VITE_STELLAR_NETWORK=testnet
@@ -396,13 +396,13 @@ test result: ok. 50 passed; 0 failed; 0 ignored
 
 Or manually:
 ```bash
-cargo build --target wasm32-unknown-unknown --release --package stellar-save
+cargo build --target wasm32-unknown-unknown --release --package soroban-save
 ```
 
 ### 3. Verify Build Output
 
 ```bash
-ls -lh target/wasm32-unknown-unknown/release/stellar_save.wasm
+ls -lh target/wasm32-unknown-unknown/release/soroban_save.wasm
 ```
 
 Expected size: ~100-200 KB
@@ -413,7 +413,7 @@ For production, optimize the WASM file:
 
 ```bash
 stellar contract optimize \
-  --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm
+  --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm
 ```
 
 ---
@@ -441,7 +441,7 @@ export STELLAR_RPC_URL=https://soroban-testnet.stellar.org
 
 ```bash
 stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm \
+  --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm \
   --source deployer \
   --network testnet
 ```
@@ -456,7 +456,7 @@ Contract ID: CBQHNAXSI55GX2GN6D67GK7BHKQKJNYBNZW7M5QWSXMEEJ6RVAHTYU7
 
 ```bash
 export CONTRACT_ID=CBQHNAXSI55GX2GN6D67GK7BHKQKJNYBNZW7M5QWSXMEEJ6RVAHTYU7
-echo "CONTRACT_STELLAR_SAVE=$CONTRACT_ID" >> .env
+echo "CONTRACT_SOROBAN_SAVE=$CONTRACT_ID" >> .env
 ```
 
 #### Step 4: Initialize Contract (Optional)
@@ -512,7 +512,7 @@ Ensure you have at least 10 XLM.
 
 ```bash
 stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm \
+  --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm \
   --source deployer \
   --network mainnet
 ```
@@ -523,7 +523,7 @@ stellar contract deploy \
 
 ```bash
 export MAINNET_CONTRACT_ID=<your_mainnet_contract_id>
-echo "CONTRACT_STELLAR_SAVE_MAINNET=$MAINNET_CONTRACT_ID" >> .env
+echo "CONTRACT_SOROBAN_SAVE_MAINNET=$MAINNET_CONTRACT_ID" >> .env
 ```
 
 #### Step 5: Initialize Mainnet Contract
@@ -584,7 +584,7 @@ cat > DEPLOYMENT_RECORD.md << EOF
 **Network**: $STELLAR_NETWORK
 **Contract ID**: $CONTRACT_ID
 **Deployer**: $(stellar keys address deployer)
-**WASM Hash**: $(sha256sum target/wasm32-unknown-unknown/release/stellar_save.wasm | cut -d' ' -f1)
+**WASM Hash**: $(sha256sum target/wasm32-unknown-unknown/release/soroban_save.wasm | cut -d' ' -f1)
 
 ## Configuration
 - Min Contribution: 1 XLM
@@ -711,7 +711,7 @@ Enable verbose logging:
 ```bash
 export RUST_LOG=debug
 stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm \
+  --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm \
   --source deployer \
   --network testnet \
   --verbose
@@ -758,7 +758,7 @@ Builds the contract for deployment:
 
 ```bash
 #!/bin/bash
-cargo build --target wasm32-unknown-unknown --release --package stellar-save
+cargo build --target wasm32-unknown-unknown --release --package soroban-save
 ```
 
 ### deploy_testnet.sh
@@ -774,12 +774,12 @@ echo "Building contract..."
 
 echo "Deploying to testnet..."
 CONTRACT_ID=$(stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm \
+  --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm \
   --source deployer \
   --network testnet)
 
 echo "Contract deployed: $CONTRACT_ID"
-echo "CONTRACT_STELLAR_SAVE=$CONTRACT_ID" >> .env
+echo "CONTRACT_SOROBAN_SAVE=$CONTRACT_ID" >> .env
 ```
 
 ### deploy_mainnet.sh
@@ -803,12 +803,12 @@ echo "Building contract..."
 
 echo "Deploying to mainnet..."
 CONTRACT_ID=$(stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm \
+  --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm \
   --source deployer \
   --network mainnet)
 
 echo "Contract deployed: $CONTRACT_ID"
-echo "CONTRACT_STELLAR_SAVE_MAINNET=$CONTRACT_ID" >> .env
+echo "CONTRACT_SOROBAN_SAVE_MAINNET=$CONTRACT_ID" >> .env
 ```
 
 ---
@@ -862,8 +862,8 @@ echo "CONTRACT_STELLAR_SAVE_MAINNET=$CONTRACT_ID" >> .env
 
 ## Support
 
-- **Documentation**: [GitHub Docs](https://github.com/Xoulomon/Stellar-Save/tree/main/docs)
-- **Issues**: [GitHub Issues](https://github.com/Xoulomon/Stellar-Save/issues)
+- **Documentation**: [GitHub Docs](https://github.com/Tekinvest/SorobanSave/tree/main/docs)
+- **Issues**: [GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues)
 - **Stellar Discord**: [discord.gg/stellar](https://discord.gg/stellar)
 - **Stellar Developers**: [developers.stellar.org](https://developers.stellar.org)
 
@@ -956,7 +956,7 @@ After deployment, verify your contracts on the network:
 1. **Run Integration Tests**
    ```bash
    # Update test environment to point to deployed contracts
-   export CONTRACT_STELLAR_SAVE=<deployed_id>
+   export CONTRACT_SOROBAN_SAVE=<deployed_id>
    cargo test --workspace -- --nocapture
    ```
 
@@ -1013,4 +1013,4 @@ If issues are discovered post-deployment:
 3. **Deploy Fix**: If needed, deploy updated contract
 4. **Migrate State**: If required, implement state migration
 5. **Resume Operations**: Re-enable frontend after verification</content>
-<parameter name="filePath">c:\Users\USER\Desktop\solo\Stellar-Save\docs\deployment.md
+<parameter name="filePath">c:\Users\USER\Desktop\solo\SorobanSave\docs\deployment.md

@@ -1,7 +1,7 @@
 # Mobile App Developer & Contributor Guide
 
 This guide covers local setup, project structure, build/release, and troubleshooting for
-the Stellar-Save **React Native** mobile app (planned for
+the SorobanSave **React Native** mobile app (planned for
 [v4.0 on the roadmap](roadmap.md#v40--mobile-app--fiat-onoff-ramps)). It uses
 [Expo](https://expo.dev/) to keep iOS/Android builds reproducible without requiring native
 Xcode/Android Studio setup for day-to-day contribution.

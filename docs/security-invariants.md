@@ -2,12 +2,12 @@
 
 ## Arithmetic & Overflow Safety
 
-All mathematical operations within the Stellar-Save smart contract suite are protected against overflow, underflow, and unexpected arithmetic wrap-around.
+All mathematical operations within the SorobanSave smart contract suite are protected against overflow, underflow, and unexpected arithmetic wrap-around.
 
 ### Guaranteed Invariants
 1. **Pool Calculation**:
    - `total_pool = contribution_amount.checked_mul(member_count as i128)`
-   - Guarantees `total_pool` calculation fails gracefully with `StellarSaveError::Overflow` rather than overflowing.
+   - Guarantees `total_pool` calculation fails gracefully with `SorobanSaveError::Overflow` rather than overflowing.
 
 2. **Cycle Counter Advancement**:
    - Cycle advancement uses `checked_add` and `saturating_add`.

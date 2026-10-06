@@ -4,7 +4,7 @@
 
 The Analytics API provides aggregated statistics and insights about platform usage, user behavior, and group metrics. It includes endpoints for retrieving analytics data, recording events, generating reports, and managing cache.
 
-**Issue:** [#558 - Backend Create analytics API](https://github.com/Xoulomon/Stellar-Save/issues/558)
+**Issue:** [#558 - Backend Create analytics API](https://github.com/Tekinvest/SorobanSave/issues/558)
 
 ## Architecture
 

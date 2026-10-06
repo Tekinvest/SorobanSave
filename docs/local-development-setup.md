@@ -1,4 +1,4 @@
-# Local Development Setup for Stellar-Save
+# Local Development Setup for SorobanSave
 
 ## One-Command Setup (Docker — recommended)
 
@@ -6,8 +6,8 @@ The fastest way to get a fully working local stack (Postgres, Redis, backend, fr
 
 ```bash
 # 1. Clone
-git clone https://github.com/Xoulomon/Stellar-Save.git
-cd Stellar-Save
+git clone https://github.com/Tekinvest/SorobanSave.git
+cd SorobanSave
 
 # 2. Start everything (first run builds images and seeds test data)
 docker compose up --build
@@ -48,8 +48,8 @@ The compose setup is idempotent — `docker compose up` after `down` produces th
 
 ```bash
 # Clone the repository
-git clone https://github.com/Xoulomon/Stellar-Save.git
-cd Stellar-Save
+git clone https://github.com/Tekinvest/SorobanSave.git
+cd SorobanSave
 
 # Install Rust toolchain
 rustup toolchain install 1.81.0
@@ -78,7 +78,7 @@ cd ../frontend
 npm ci
 
 # Build the smart contract
-cd ../contracts/stellar-save
+cd ../contracts/soroban-save
 cargo build --target wasm32-unknown-unknown --release
 ```
 
@@ -94,7 +94,7 @@ cd ../frontend
 npm run test:coverage
 
 # Contract tests
-cd ../contracts/stellar-save
+cd ../contracts/soroban-save
 cargo test
 ```
 
@@ -115,10 +115,10 @@ cat testnet-deployer.json | stellar keys add deployer --secret-key --stdin
 3. Build the contract and deploy.
 
 ```bash
-cd contracts/stellar-save
+cd contracts/soroban-save
 cargo build --target wasm32-unknown-unknown --release
 stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm \
+  --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm \
   --network testnet \
   --source-account deployer
 ```
@@ -142,7 +142,7 @@ npm run android
 npm run ios
 ```
 
-The mobile app talks to the same backend (`http://localhost:3001` by default) and consumes the shared `@stellar-save/sdk` workspace package, so start the backend (Docker or manual setup above) before running the app. Use the Expo Go app or a simulator/emulator to open the project once `npm start` prints a QR code.
+The mobile app talks to the same backend (`http://localhost:3001` by default) and consumes the shared `@soroban-save/sdk` workspace package, so start the backend (Docker or manual setup above) before running the app. Use the Expo Go app or a simulator/emulator to open the project once `npm start` prints a QR code.
 
 Useful checks:
 

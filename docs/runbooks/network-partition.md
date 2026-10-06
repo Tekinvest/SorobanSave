@@ -40,7 +40,7 @@ export STELLAR_RPC_URL=https://soroban-rpc.mainnet.stellar.gateway.fm   # Gatewa
 # or
 export STELLAR_RPC_URL=https://mainnet.stellar.validationcloud.io/v1/$API_KEY
 
-docker restart stellar-save-backend
+docker restart soroban-save-backend
 ```
 
 ### 3. Verify recovery

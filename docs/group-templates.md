@@ -1,6 +1,6 @@
 # Group Templates
 
-Stellar-Save ships with five predefined group templates that cover the most common ROSCA savings patterns. Instead of manually specifying cycle duration and member count, you pick a template and only supply the contribution amount.
+SorobanSave ships with five predefined group templates that cover the most common ROSCA savings patterns. Instead of manually specifying cycle duration and member count, you pick a template and only supply the contribution amount.
 
 ## Available Templates
 
@@ -27,7 +27,7 @@ for t in templates.iter() {
 
 ### `get_template(env, template_id) -> ContractResult<GroupTemplate>`
 
-Fetches a single template by ID. Returns `StellarSaveError::TemplateNotFound` (code 5001) if the ID is invalid.
+Fetches a single template by ID. Returns `SorobanSaveError::TemplateNotFound` (code 5001) if the ID is invalid.
 
 ```rust
 let template = get_template(&env, 3)?; // Quarterly Circle
@@ -59,8 +59,8 @@ let group = create_group_from_template(
 
 | Error                          | Code | Cause                                      |
 |-------------------------------|------|--------------------------------------------|
-| `StellarSaveError::TemplateNotFound` | 5001 | `template_id` does not match any template |
-| `StellarSaveError::InvalidAmount`    | 3001 | `contribution_amount` is zero or negative  |
+| `SorobanSaveError::TemplateNotFound` | 5001 | `template_id` does not match any template |
+| `SorobanSaveError::InvalidAmount`    | 3001 | `contribution_amount` is zero or negative  |
 
 ## Choosing a Template
 

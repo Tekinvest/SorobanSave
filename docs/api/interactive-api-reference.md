@@ -2,7 +2,7 @@
 
 **Version:** 1.0.0  
 **Base URLs:**
-- **Production:** `https://api.stellar-save.app`
+- **Production:** `https://api.soroban-save.app`
 - **Local Development:** `http://localhost:3001`
 
 > This interactive API reference is generated from the OpenAPI specification. For contract-level API documentation, see [Contract API Reference](../contract-api-reference.md) or the [Smart Contract API Reference](../api-reference.md).
@@ -15,12 +15,12 @@ For testing, use the sandbox environment:
 
 ```bash
 # Request a challenge
-curl -X POST https://api.stellar-save.app/api/auth/challenge \
+curl -X POST https://api.soroban-save.app/api/auth/challenge \
   -H "Content-Type: application/json" \
   -d '{"walletAddress": "YOUR_TESTNET_ADDRESS"}'
 
 # Sign the challenge with your Stellar wallet and verify
-curl -X POST https://api.stellar-save.app/api/auth/verify \
+curl -X POST https://api.soroban-save.app/api/auth/verify \
   -H "Content-Type: application/json" \
   -d '{
     "walletAddress": "YOUR_TESTNET_ADDRESS",
@@ -39,7 +39,7 @@ Response:
 ### 2. Make Your First API Call
 
 ```bash
-curl https://api.stellar-save.app/api/user/me \
+curl https://api.soroban-save.app/api/user/me \
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 
@@ -56,7 +56,7 @@ Response:
 
 Visit the interactive Swagger UI:
 
-**Production:** [https://api.stellar-save.app/docs](https://api.stellar-save.app/docs)  
+**Production:** [https://api.soroban-save.app/docs](https://api.soroban-save.app/docs)  
 **Local:** [http://localhost:3001/docs](http://localhost:3001/docs)
 
 Features:
@@ -69,7 +69,7 @@ Features:
 
 Visit the clean, readable Redoc interface:
 
-**Production:** [https://api.stellar-save.app/redoc](https://api.stellar-save.app/redoc)  
+**Production:** [https://api.soroban-save.app/redoc](https://api.soroban-save.app/redoc)  
 **Local:** [http://localhost:3001/redoc](http://localhost:3001/redoc)
 
 Features:
@@ -83,7 +83,7 @@ Features:
 Download the raw OpenAPI specification:
 
 ```bash
-curl https://api.stellar-save.app/openapi.yaml > stellar-save-api.yaml
+curl https://api.soroban-save.app/openapi.yaml > soroban-save-api.yaml
 ```
 
 Use with your preferred tools:
@@ -278,7 +278,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ```typescript
 // 1. Request challenge
-const challengeRes = await fetch('https://api.stellar-save.app/api/auth/challenge', {
+const challengeRes = await fetch('https://api.soroban-save.app/api/auth/challenge', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ walletAddress: 'YOUR_ADDRESS' })
@@ -291,7 +291,7 @@ const keypair = Keypair.fromSecret('YOUR_SECRET');
 const signature = keypair.sign(Buffer.from(challenge)).toString('base64');
 
 // 3. Verify and get token
-const verifyRes = await fetch('https://api.stellar-save.app/api/auth/verify', {
+const verifyRes = await fetch('https://api.soroban-save.app/api/auth/verify', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -303,7 +303,7 @@ const verifyRes = await fetch('https://api.stellar-save.app/api/auth/verify', {
 const { token } = await verifyRes.json();
 
 // 4. Use authenticated endpoint
-const userRes = await fetch('https://api.stellar-save.app/api/user/me', {
+const userRes = await fetch('https://api.soroban-save.app/api/user/me', {
   headers: { 'Authorization': `Bearer ${token}` }
 });
 const user = await userRes.json();
@@ -316,7 +316,7 @@ console.log('Authenticated as:', user.walletAddress);
 import requests
 from stellar_sdk import Keypair
 
-BASE_URL = 'https://api.stellar-save.app'
+BASE_URL = 'https://api.soroban-save.app'
 
 # 1. Request challenge
 response = requests.post(f'{BASE_URL}/api/auth/challenge', json={
@@ -349,7 +349,7 @@ print(f"Authenticated as: {user['walletAddress']}")
 #!/bin/bash
 set -e
 
-BASE_URL="https://api.stellar-save.app"
+BASE_URL="https://api.soroban-save.app"
 WALLET_ADDRESS="YOUR_ADDRESS"
 
 # 1. Request challenge
@@ -392,7 +392,7 @@ import (
     "github.com/stellar/go/keypair"
 )
 
-const baseURL = "https://api.stellar-save.app"
+const baseURL = "https://api.soroban-save.app"
 
 func main() {
     walletAddress := "YOUR_ADDRESS"
@@ -446,7 +446,7 @@ func main() {
 ### Get Platform Statistics
 
 ```bash
-curl https://api.stellar-save.app/api/v1/stats/groups
+curl https://api.soroban-save.app/api/v1/stats/groups
 ```
 
 Response:
@@ -464,7 +464,7 @@ Response:
 ### Search for Groups
 
 ```bash
-curl "https://api.stellar-save.app/api/v1/search?q=weekly+savings"
+curl "https://api.soroban-save.app/api/v1/search?q=weekly+savings"
 ```
 
 Response:
@@ -487,7 +487,7 @@ Response:
 ### Get Group Analytics
 
 ```bash
-curl "https://api.stellar-save.app/api/v1/analytics/groups/42?date=2026-06-28" \
+curl "https://api.soroban-save.app/api/v1/analytics/groups/42?date=2026-06-28" \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
@@ -507,7 +507,7 @@ Response:
 ### Export Member History
 
 ```bash
-curl "https://api.stellar-save.app/api/v1/members/YOUR_ADDRESS/export.csv" \
+curl "https://api.soroban-save.app/api/v1/members/YOUR_ADDRESS/export.csv" \
   -H "Authorization: Bearer YOUR_TOKEN" > history.csv
 ```
 
@@ -535,12 +535,12 @@ When migrating from v1 to v2:
 
 ## Support & Resources
 
-- **OpenAPI Spec:** [Download YAML](https://api.stellar-save.app/openapi.yaml)
-- **Swagger UI:** [https://api.stellar-save.app/docs](https://api.stellar-save.app/docs)
-- **Redoc:** [https://api.stellar-save.app/redoc](https://api.stellar-save.app/redoc)
-- **Status Page:** [https://status.stellar-save.app](https://status.stellar-save.app)
-- **GitHub Issues:** [Report bugs](https://github.com/Xoulomon/Stellar-Save/issues)
-- **Discussions:** [Ask questions](https://github.com/Xoulomon/Stellar-Save/discussions)
+- **OpenAPI Spec:** [Download YAML](https://api.soroban-save.app/openapi.yaml)
+- **Swagger UI:** [https://api.soroban-save.app/docs](https://api.soroban-save.app/docs)
+- **Redoc:** [https://api.soroban-save.app/redoc](https://api.soroban-save.app/redoc)
+- **Status Page:** [https://status.soroban-save.app](https://status.soroban-save.app)
+- **GitHub Issues:** [Report bugs](https://github.com/Tekinvest/SorobanSave/issues)
+- **Discussions:** [Ask questions](https://github.com/Tekinvest/SorobanSave/discussions)
 
 ## Testing Checklist
 

@@ -1,6 +1,6 @@
-# Changelog — Stellar-Save (monorepo)
+# Changelog — SorobanSave (monorepo)
 
-All notable changes to the Stellar-Save project are documented here.
+All notable changes to the SorobanSave project are documented here.
 
 This is the **root changelog**. Each package maintains its own detailed
 changelog; this file provides a high-level cross-package summary and links
@@ -18,7 +18,7 @@ to the per-package files.
 
 | Package | Location | Current version |
 |---------|----------|----------------|
-| Smart contracts (`stellar-save`) | [`contracts/stellar-save/CHANGELOG.md`](contracts/stellar-save/CHANGELOG.md) | 0.1.0 |
+| Smart contracts (`soroban-save`) | [`contracts/soroban-save/CHANGELOG.md`](contracts/soroban-save/CHANGELOG.md) | 0.1.0 |
 | Backend service | [`backend/CHANGELOG.md`](backend/CHANGELOG.md) | 1.0.0 |
 | Frontend SPA | [`frontend/CHANGELOG.md`](frontend/CHANGELOG.md) | 0.1.0 |
 
@@ -38,15 +38,15 @@ to the per-package files.
 
 ## [0.1.0] — 2026-08-28
 
-Initial release of the full Stellar-Save monorepo.
+Initial release of the full SorobanSave monorepo.
 
 ### Highlights
 
-- **Smart contract** (`contracts/stellar-save` v0.1.0): Core ROSCA logic
+- **Smart contract** (`contracts/soroban-save` v0.1.0): Core ROSCA logic
   deployed on Stellar Soroban — group creation, member join, XLM
   contributions, automatic payout rotation, emergency pause, and storage
   schema v2 migration (reentrancy guard + XLM token-config backfill). See
-  [`contracts/stellar-save/CHANGELOG.md`](contracts/stellar-save/CHANGELOG.md).
+  [`contracts/soroban-save/CHANGELOG.md`](contracts/soroban-save/CHANGELOG.md).
 
 - **Backend** (`backend` v1.0.0): Node.js/Express REST + GraphQL API with
   dual-version routing (v1 deprecated, v2 current), contract event indexer,
