@@ -1,6 +1,6 @@
 {
-  "name": "Stellar Save",
-  "short_name": "StellarSave",
+  "name": "SorobanSave",
+  "short_name": "SorobanSave",
   "description": "Decentralized rotational savings on Stellar",
   "start_url": "/",
   "display": "standalone",

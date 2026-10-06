@@ -145,7 +145,7 @@ export default function MemberDirectoryPage() {
     <AppLayout
       title="Member Directory"
       subtitle={`Group ${groupId}`}
-      footerText="Stellar Save - Built for transparent, on-chain savings"
+      footerText="SorobanSave - Built for transparent, on-chain savings"
     >
       <Stack spacing={3}>
         {error && <Alert severity="error">{error}</Alert>}

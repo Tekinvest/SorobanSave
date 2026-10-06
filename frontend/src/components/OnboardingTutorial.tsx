@@ -4,7 +4,7 @@ import { useFocusTrap } from '../hooks/useFocusTrap';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import './OnboardingTutorial.css';
 
-const STORAGE_KEY = 'stellar-save-onboarding-complete';
+const STORAGE_KEY = 'soroban-save-onboarding-complete';
 
 interface TutorialStep {
   title: string;
@@ -14,9 +14,9 @@ interface TutorialStep {
 
 const STEPS: TutorialStep[] = [
   {
-    title: 'Welcome to Stellar-Save',
+    title: 'Welcome to SorobanSave',
     description:
-      'Stellar-Save is a decentralized rotating savings group (ROSCA) built on Stellar. Members contribute regularly and take turns receiving the full pool.',
+      'SorobanSave is a decentralized rotating savings group (ROSCA) built on Stellar. Members contribute regularly and take turns receiving the full pool.',
     icon: '🌟',
   },
   {

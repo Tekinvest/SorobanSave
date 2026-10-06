@@ -14,7 +14,7 @@ export interface ScheduledContribution {
 
 export type ScheduledContributionInput = Omit<ScheduledContribution, 'id' | 'createdAt'>;
 
-const STORAGE_KEY = 'stellar_save_scheduled_contributions';
+const STORAGE_KEY = 'soroban_save_scheduled_contributions';
 
 export function useScheduledContributions() {
   const [items, setItems] = useLocalStorage<ScheduledContribution[]>(STORAGE_KEY, []);

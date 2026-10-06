@@ -1,4 +1,4 @@
-//! Stellar Horizon API client for Stellar-Save project.
+//! Stellar Horizon API client for SorobanSave project.
 //!
 //! Provides `HorizonService` for querying accounts, balances, and transactions.
 
@@ -116,7 +116,7 @@ impl HorizonService {
         };
 
         let client = Client::builder()
-            .user_agent("stellar-save-client/0.1")
+            .user_agent("soroban-save-client/0.1")
             .build()?;
 
         Ok(Self { client, base_url })

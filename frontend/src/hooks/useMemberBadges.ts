@@ -41,7 +41,7 @@ export interface UseMemberBadgesReturn {
 const BADGE_META: Record<BadgeType, { name: string; description: string; artwork: string }> = {
   founder: {
     name: 'Founder',
-    description: 'Created one of the first savings groups on Stellar Save.',
+    description: 'Created one of the first savings groups on SorobanSave.',
     artwork: '🏛️',
   },
   consistent_contributor: {
@@ -76,7 +76,7 @@ const BADGE_META: Record<BadgeType, { name: string; description: string; artwork
   },
   early_adopter: {
     name: 'Early Adopter',
-    description: 'Joined Stellar Save during the founding period.',
+    description: 'Joined SorobanSave during the founding period.',
     artwork: '🚀',
   },
 };

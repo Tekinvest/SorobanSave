@@ -48,7 +48,7 @@ export function CtaSection() {
                 variant="outlined"
                 size="large"
                 href="#features"
-                aria-label="Learn more about Stellar Save features"
+                aria-label="Learn more about SorobanSave features"
                 sx={{
                   borderColor: 'white',
                   color: 'white',

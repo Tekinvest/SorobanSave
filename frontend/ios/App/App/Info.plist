@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>Stellar Save</string>
+        <string>SorobanSave</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -51,10 +51,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.stellarsave.app</string>
+			<string>com.sorobansave.app</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>stellarsave</string>
+				<string>sorobansave</string>
 			</array>
 		</dict>
 	</array>

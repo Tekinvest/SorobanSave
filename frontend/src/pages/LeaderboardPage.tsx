@@ -14,7 +14,7 @@ export default function LeaderboardPage() {
     <AppLayout
       title="Leaderboard"
       subtitle="Top-performing groups and contributors"
-      footerText="Stellar Save - Built for transparent, on-chain savings"
+      footerText="SorobanSave - Built for transparent, on-chain savings"
     >
       <Stack spacing={3}>
         <Box

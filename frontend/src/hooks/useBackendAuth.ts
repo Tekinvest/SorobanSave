@@ -24,7 +24,7 @@ export function useBackendAuth(): BackendAuthState {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const jwtRef = useRef<string | null>(
-    typeof window !== 'undefined' ? localStorage.getItem('stellar_save_jwt') : null
+    typeof window !== 'undefined' ? localStorage.getItem('soroban_save_jwt') : null
   );
 
   const authenticate = useCallback(async () => {
@@ -63,7 +63,7 @@ export function useBackendAuth(): BackendAuthState {
 
   useEffect(() => {
     if (activeAddress) {
-      const saved = typeof window !== 'undefined' ? localStorage.getItem('stellar_save_jwt') : null;
+      const saved = typeof window !== 'undefined' ? localStorage.getItem('soroban_save_jwt') : null;
       jwtRef.current = saved;
     }
   }, [activeAddress]);

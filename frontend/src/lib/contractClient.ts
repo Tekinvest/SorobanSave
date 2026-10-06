@@ -1,7 +1,7 @@
 /**
  * contractClient.ts
  *
- * Low-level Soroban contract client for StellarSave.
+ * Low-level Soroban contract client for SorobanSave.
  * Handles XDR encoding/decoding, transaction building, signing via Freighter,
  * and submission to the RPC node.
  */
@@ -27,7 +27,7 @@ import { rpcServer } from './rpcClient';
 const NETWORK_PASSPHRASE: string =
   env.VITE_STELLAR_NETWORK === 'mainnet' ? Networks.PUBLIC : Networks.TESTNET;
 
-export const CONTRACT_ID: string = env.VITE_STELLAR_SAVE_CONTRACT_ID;
+export const CONTRACT_ID: string = env.VITE_SOROBAN_SAVE_CONTRACT_ID;
 
 // Soroban RPC server instance (singleton)
 export const server = rpcServer;
@@ -36,7 +36,7 @@ export const server = rpcServer;
 
 /**
  * Maps Soroban contract error codes to human-readable messages.
- * Mirrors the StellarSaveError enum in error.rs.
+ * Mirrors the SorobanSaveError enum in error.rs.
  */
 export const CONTRACT_ERROR_MESSAGES: Record<number, string> = {
   1002: 'Group is full.',
@@ -111,7 +111,7 @@ async function signAndSubmit(sourceAddress: string, operation: xdr.Operation): P
   if (!CONTRACT_ID) {
     throw new ContractError(
       null,
-      'Contract ID is not configured. Set VITE_STELLAR_SAVE_CONTRACT_ID in your .env file.'
+      'Contract ID is not configured. Set VITE_SOROBAN_SAVE_CONTRACT_ID in your .env file.'
     );
   }
 
@@ -210,7 +210,7 @@ async function simulateRead<T>(operation: xdr.Operation): Promise<T> {
   if (!CONTRACT_ID) {
     throw new ContractError(
       null,
-      'Contract ID is not configured. Set VITE_STELLAR_SAVE_CONTRACT_ID in your .env file.'
+      'Contract ID is not configured. Set VITE_SOROBAN_SAVE_CONTRACT_ID in your .env file.'
     );
   }
 

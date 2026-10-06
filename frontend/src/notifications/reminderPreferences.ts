@@ -22,7 +22,7 @@ export interface ReminderPreferences {
   quietHours: QuietHours;
 }
 
-const STORAGE_KEY = 'stellar_save_reminder_preferences';
+const STORAGE_KEY = 'soroban_save_reminder_preferences';
 
 const DEFAULT_PREFERENCES: ReminderPreferences = {
   enabled: true,

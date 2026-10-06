@@ -40,7 +40,7 @@ const ROSCAExplanation: React.FC = () => {
             </div>
             <h3 className="text-2xl font-semibold mb-3">Trust-Based</h3>
             <p className="text-gray-400">
-              Traditionally based on trust. Stellar-Save makes it trustless using blockchain
+              Traditionally based on trust. SorobanSave makes it trustless using blockchain
               technology.
             </p>
           </div>

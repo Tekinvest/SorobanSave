@@ -6,7 +6,7 @@
  * All errors are normalised to ContractError instances.
  */
 
-import { stellarSaveClient, ContractError, parseContractError } from '../lib/client';
+import { sorobanSaveClient, ContractError, parseContractError } from '../lib/client';
 
 import type { PayoutScheduleEntry } from '../lib/client';
 import type { PayoutEntry, PayoutQueueData, PayoutStatus } from '../types/contribution';
@@ -25,10 +25,10 @@ function toDate(unixSeconds: bigint): Date {
 export async function getNextRecipient(groupId: string): Promise<string | null> {
   try {
     const gid = BigInt(groupId);
-    const schedule = await stellarSaveClient.getPayoutSchedule(gid);
+    const schedule = await sorobanSaveClient.getPayoutSchedule(gid);
     if (schedule.length === 0) return null;
     for (const entry of schedule) {
-      const paid = await stellarSaveClient.hasReceivedPayout(gid, entry.recipient);
+      const paid = await sorobanSaveClient.hasReceivedPayout(gid, entry.recipient);
       if (!paid) return entry.recipient;
     }
     return null;
@@ -48,7 +48,7 @@ export async function executePayout(groupId: string, callerAddress: string): Pro
     if (recipient === null) {
       throw new ContractError(null, 'No eligible recipient found for payout.');
     }
-    return await stellarSaveClient.executePayout({ groupId: BigInt(groupId), recipient });
+    return await sorobanSaveClient.executePayout({ groupId: BigInt(groupId), recipient });
   } catch (err) {
     throw parseContractError(err);
   }
@@ -59,13 +59,13 @@ export async function executePayout(groupId: string, callerAddress: string): Pro
 export async function getPayoutHistory(groupId: string): Promise<PayoutEntry[]> {
   try {
     const gid = BigInt(groupId);
-    const schedule = await stellarSaveClient.getPayoutSchedule(gid);
+    const schedule = await sorobanSaveClient.getPayoutSchedule(gid);
     if (schedule.length === 0) return [];
 
     const results: PayoutEntry[] = [];
     for (let i = 0; i < schedule.length; i++) {
       const entry = schedule[i];
-      const paid = await stellarSaveClient.hasReceivedPayout(gid, entry.recipient);
+      const paid = await sorobanSaveClient.hasReceivedPayout(gid, entry.recipient);
       if (paid) {
         const payoutDate = toDate(entry.payout_date);
         results.push({
@@ -94,8 +94,8 @@ export async function getPayoutQueue(
   try {
     const gid = BigInt(groupId);
     const [schedule, totalMembers] = await Promise.all([
-      stellarSaveClient.getPayoutSchedule(gid),
-      stellarSaveClient.getMemberCount(gid),
+      sorobanSaveClient.getPayoutSchedule(gid),
+      sorobanSaveClient.getMemberCount(gid),
     ]);
 
     if (schedule.length === 0) {
@@ -103,10 +103,10 @@ export async function getPayoutQueue(
     }
 
     const paidFlags = await Promise.all(
-      schedule.map((entry) => stellarSaveClient.hasReceivedPayout(gid, entry.recipient))
+      schedule.map((entry) => sorobanSaveClient.hasReceivedPayout(gid, entry.recipient))
     );
 
-    const balance = await stellarSaveClient.getGroupBalance(gid);
+    const balance = await sorobanSaveClient.getGroupBalance(gid);
     const amountXlm = totalMembers > 0 ? Number(balance) / totalMembers / 10_000_000 : 0;
 
     let foundNext = false;

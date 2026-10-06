@@ -42,7 +42,7 @@ export default function GovernancePage() {
     <AppLayout
       title="Governance"
       subtitle="Protocol-level proposals — view, vote, and track"
-      footerText="Stellar Save"
+      footerText="SorobanSave"
     >
       <Stack spacing={3}>
         {!activeAddress && (

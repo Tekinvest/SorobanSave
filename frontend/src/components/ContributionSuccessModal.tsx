@@ -95,7 +95,7 @@ function playSuccessSound() {
 // ── Social share ─────────────────────────────────────────────────────────────
 
 function buildShareText(amount: number, cycleId: number, milestone?: string) {
-  const base = `Just contributed ${amount} XLM to my savings circle (Cycle #${cycleId}) on @StellarSave! 🚀`;
+  const base = `Just contributed ${amount} XLM to my savings circle (Cycle #${cycleId}) on @SorobanSave! 🚀`;
   return milestone ? `${base} ${milestone} 🎉` : base;
 }
 

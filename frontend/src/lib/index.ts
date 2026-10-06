@@ -21,17 +21,17 @@ export type {
   OptimizationRecommendation,
   PaginationMeta,
   PaginatedResponse,
-} from '@stellar-save/sdk';
+} from '@soroban-save/sdk';
 export {
   ContractError,
   parseContractError,
   CONTRACT_ERROR_MESSAGES,
   CONTRACT_FUNCTIONS,
-  StellarSaveApiClient,
-} from '@stellar-save/sdk';
+  SorobanSaveApiClient,
+} from '@soroban-save/sdk';
 
 // ── Typed SDK client (preferred import point for all contract calls) ──────────
-export { StellarSaveClient, stellarSaveClient } from './client';
+export { SorobanSaveClient, sorobanSaveClient } from './client';
 export type {
   CreateGroupParams,
   JoinGroupParams,

@@ -76,7 +76,7 @@ export function buildFilename(format: 'csv' | 'pdf', dateFrom?: Date, dateTo?: D
         : dateTo
           ? `_to_${fmt(dateTo)}`
           : `_${fmt(new Date())}`;
-  return `stellar-save-transactions${suffix}.${format}`;
+  return `soroban-save-transactions${suffix}.${format}`;
 }
 
 function triggerDownload(content: string, filename: string, mimeType: string): void {
@@ -110,7 +110,7 @@ function buildPDFHtml(transactions: Transaction[]): string {
 <html>
 <head>
 <meta charset="utf-8">
-<title>Stellar Save — Transaction History</title>
+<title>SorobanSave — Transaction History</title>
 <style>
   body { font-family: sans-serif; font-size: 11px; margin: 20px; }
   h1 { font-size: 16px; margin-bottom: 8px; }
@@ -121,7 +121,7 @@ function buildPDFHtml(transactions: Transaction[]): string {
 </style>
 </head>
 <body>
-<h1>Stellar Save — Transaction History (${transactions.length} records)</h1>
+<h1>SorobanSave — Transaction History (${transactions.length} records)</h1>
 <table>
   <thead>
     <tr><th>Date</th><th>Type</th><th>Amount</th><th>From</th><th>To</th><th>Memo</th><th>Status</th><th>Fee</th></tr>

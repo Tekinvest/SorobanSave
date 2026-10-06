@@ -40,7 +40,7 @@ describe('reminderPreferences utilities', () => {
         },
       };
 
-      localStorage.setItem('stellar_save_reminder_preferences', JSON.stringify(customPrefs));
+      localStorage.setItem('soroban_save_reminder_preferences', JSON.stringify(customPrefs));
 
       const retrieved = getReminderPreferences();
 
@@ -52,7 +52,7 @@ describe('reminderPreferences utilities', () => {
         enabled: false,
       };
 
-      localStorage.setItem('stellar_save_reminder_preferences', JSON.stringify(partialPrefs));
+      localStorage.setItem('soroban_save_reminder_preferences', JSON.stringify(partialPrefs));
 
       const retrieved = getReminderPreferences();
 
@@ -62,7 +62,7 @@ describe('reminderPreferences utilities', () => {
     });
 
     it('should handle corrupted localStorage data gracefully', () => {
-      localStorage.setItem('stellar_save_reminder_preferences', 'invalid json');
+      localStorage.setItem('soroban_save_reminder_preferences', 'invalid json');
 
       const prefs = getReminderPreferences();
 
@@ -86,7 +86,7 @@ describe('reminderPreferences utilities', () => {
 
       setReminderPreferences(prefs);
 
-      const stored = localStorage.getItem('stellar_save_reminder_preferences');
+      const stored = localStorage.getItem('soroban_save_reminder_preferences');
       expect(stored).toBeDefined();
       expect(JSON.parse(stored!)).toEqual(prefs);
     });

@@ -401,7 +401,7 @@ export default function ProfilePage() {
   const { profile, isLoading: profileLoading } = useUserProfile(activeAddress ?? undefined);
   const { transactions } = useTransactions();
   const [activeTab, setActiveTab] = useState<TabId>('overview');
-  const [displayName, setDisplayName] = useState('Stellar Saver');
+  const [displayName, setDisplayName] = useState('SorobanSaver');
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState(displayName);
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -433,7 +433,7 @@ export default function ProfilePage() {
     <AppLayout
       title="Profile"
       subtitle="Review savings history, total contributions, and group participation."
-      footerText="Stellar Save - Built for transparent, on-chain savings"
+      footerText="SorobanSave - Built for transparent, on-chain savings"
     >
       <Stack spacing={3}>
         {feedback && <Alert severity="success">{feedback}</Alert>}

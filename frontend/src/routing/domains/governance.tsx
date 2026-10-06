@@ -11,7 +11,7 @@ export const governanceRoutes: RouteConfig[] = [
     path: ROUTES.GOVERNANCE,
     component: GovernancePage,
     protected: false,
-    title: 'Governance - Stellar Save',
+    title: 'Governance - SorobanSave',
     description: 'Protocol-level proposals: view, vote, and track timelock status',
   },
 ];

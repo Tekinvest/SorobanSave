@@ -20,20 +20,20 @@ describe('OnboardingTutorial', () => {
   });
 
   it('does not render when already completed', () => {
-    localStorage.setItem('stellar-save-onboarding-complete', 'true');
+    localStorage.setItem('soroban-save-onboarding-complete', 'true');
     render(<OnboardingTutorial />);
     expect(screen.queryByTestId('onboarding-tutorial')).not.toBeInTheDocument();
   });
 
   it('shows forceShow even when completed', () => {
-    localStorage.setItem('stellar-save-onboarding-complete', 'true');
+    localStorage.setItem('soroban-save-onboarding-complete', 'true');
     render(<OnboardingTutorial forceShow />);
     expect(screen.getByTestId('onboarding-tutorial')).toBeInTheDocument();
   });
 
   it('shows step 1 content initially', () => {
     render(<OnboardingTutorial />);
-    expect(screen.getByText('Welcome to Stellar-Save')).toBeInTheDocument();
+    expect(screen.getByText('Welcome to SorobanSave')).toBeInTheDocument();
     expect(screen.getByText('Step 1 of 5')).toBeInTheDocument();
   });
 
@@ -48,7 +48,7 @@ describe('OnboardingTutorial', () => {
     render(<OnboardingTutorial />);
     fireEvent.click(screen.getByLabelText('Next step'));
     fireEvent.click(screen.getByLabelText('Previous step'));
-    expect(screen.getByText('Welcome to Stellar-Save')).toBeInTheDocument();
+    expect(screen.getByText('Welcome to SorobanSave')).toBeInTheDocument();
   });
 
   it('Back button is disabled on first step', () => {
@@ -73,7 +73,7 @@ describe('OnboardingTutorial', () => {
     }
     fireEvent.click(screen.getByLabelText('Finish tutorial'));
     expect(screen.queryByTestId('onboarding-tutorial')).not.toBeInTheDocument();
-    expect(localStorage.getItem('stellar-save-onboarding-complete')).toBe('true');
+    expect(localStorage.getItem('soroban-save-onboarding-complete')).toBe('true');
   });
 
   it('calls onComplete callback when finished', () => {
@@ -90,7 +90,7 @@ describe('OnboardingTutorial', () => {
     render(<OnboardingTutorial />);
     fireEvent.click(screen.getByLabelText('Skip tutorial'));
     expect(screen.queryByTestId('onboarding-tutorial')).not.toBeInTheDocument();
-    expect(localStorage.getItem('stellar-save-onboarding-complete')).toBe('true');
+    expect(localStorage.getItem('soroban-save-onboarding-complete')).toBe('true');
   });
 
   it('navigates to a specific step via dot buttons', () => {
@@ -122,7 +122,7 @@ describe('OnboardingTutorial', () => {
     expect(dialog).toHaveAttribute('aria-labelledby', 'onboarding-title');
     expect(dialog).toHaveAttribute('aria-describedby', 'onboarding-description');
     expect(document.getElementById('onboarding-title')).toHaveTextContent(
-      'Welcome to Stellar-Save'
+      'Welcome to SorobanSave'
     );
   });
 
@@ -157,11 +157,11 @@ describe('OnboardingTutorial', () => {
     render(<OnboardingTutorial />);
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(screen.queryByTestId('onboarding-tutorial')).not.toBeInTheDocument();
-    expect(localStorage.getItem('stellar-save-onboarding-complete')).toBe('true');
+    expect(localStorage.getItem('soroban-save-onboarding-complete')).toBe('true');
   });
 
   it('restores focus to the triggering element when dismissed via Skip', () => {
-    localStorage.setItem('stellar-save-onboarding-complete', 'true');
+    localStorage.setItem('soroban-save-onboarding-complete', 'true');
 
     function Harness() {
       const [show, setShow] = useState(false);
@@ -187,9 +187,9 @@ describe('OnboardingTutorial', () => {
 
 describe('useOnboardingTutorial', () => {
   it('replay clears the completed flag', () => {
-    localStorage.setItem('stellar-save-onboarding-complete', 'true');
+    localStorage.setItem('soroban-save-onboarding-complete', 'true');
     const { result } = renderHook(() => useOnboardingTutorial());
     act(() => result.current.replay());
-    expect(localStorage.getItem('stellar-save-onboarding-complete')).toBe('false');
+    expect(localStorage.getItem('soroban-save-onboarding-complete')).toBe('false');
   });
 });

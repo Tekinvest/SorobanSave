@@ -1,9 +1,9 @@
 /**
- * Re-exports from the shared @stellar-save/sdk package.
+ * Re-exports from the shared @soroban-save/sdk package.
  * Existing imports of this module continue to work unchanged.
  */
-export { validateAddress, isValidStellarAddress } from '@stellar-save/sdk';
-export type { ValidateAddressResult } from '@stellar-save/sdk';
+export { validateAddress, isValidStellarAddress } from '@soroban-save/sdk';
+export type { ValidateAddressResult } from '@soroban-save/sdk';
 
 // Predefined test addresses (kept here for test convenience)
 export const VALID_STELLAR_ADDRESS = 'GAAZI4TCR3TY5OJHCTJC2A4QSY5MGZTPVAJFO3T55V3L7RPLM3U6VJ6Q';

@@ -84,7 +84,7 @@ describe('SettingsPage Integration - Reminder Preferences', () => {
     await user.click(oneHourOption);
 
     // Check localStorage
-    const stored = localStorage.getItem('stellar_save_reminder_preferences');
+    const stored = localStorage.getItem('soroban_save_reminder_preferences');
     expect(stored).toBeTruthy();
 
     const prefs = JSON.parse(stored!);
@@ -134,7 +134,7 @@ describe('SettingsPage Integration - Reminder Preferences', () => {
     await user.type(startTimeInput, '23:00');
 
     // Verify localStorage
-    const stored = localStorage.getItem('stellar_save_reminder_preferences');
+    const stored = localStorage.getItem('soroban_save_reminder_preferences');
     const prefs = JSON.parse(stored!);
     expect(prefs.timing).toBe('1h');
     expect(prefs.quietHours.enabled).toBe(true);
@@ -156,7 +156,7 @@ describe('SettingsPage Integration - Reminder Preferences', () => {
     await user.click(resetButton);
 
     // Verify localStorage is reset
-    const stored = localStorage.getItem('stellar_save_reminder_preferences');
+    const stored = localStorage.getItem('soroban_save_reminder_preferences');
     const prefs = JSON.parse(stored!);
     expect(prefs.timing).toBe('24h');
     expect(prefs.channels).toEqual(['browser']);

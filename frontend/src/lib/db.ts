@@ -9,7 +9,7 @@ import { openDB, type IDBPDatabase } from 'idb';
 import type { PublicGroup } from '../types/group';
 import type { DetailedGroup, GroupContribution, GroupMember } from '../utils/groupApi';
 
-const DB_NAME = 'stellar-save-offline';
+const DB_NAME = 'soroban-save-offline';
 const DB_VERSION = 1;
 
 export interface SyncQueueItem {

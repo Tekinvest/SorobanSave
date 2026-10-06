@@ -56,7 +56,7 @@ export function GroupDetailContent() {
 
   if (isLoading) {
     return (
-      <AppLayout title="Group Details" subtitle="Loading..." footerText="Stellar Save">
+      <AppLayout title="Group Details" subtitle="Loading..." footerText="SorobanSave">
         <AppCard><LinearProgress /></AppCard>
       </AppLayout>
     );
@@ -64,7 +64,7 @@ export function GroupDetailContent() {
 
   if (error || !group) {
     return (
-      <AppLayout title="Group Details" subtitle="Error" footerText="Stellar Save">
+      <AppLayout title="Group Details" subtitle="Error" footerText="SorobanSave">
         <AppCard>
           <Stack spacing={2}>
             <Typography variant="h2" color="error">{error ?? 'Group not found'}</Typography>
@@ -86,7 +86,7 @@ export function GroupDetailContent() {
     <AppLayout
       title={group.name}
       subtitle={`Group ID: ${group.id}`}
-      footerText="Stellar Save - Built for transparent, on-chain savings"
+      footerText="SorobanSave - Built for transparent, on-chain savings"
     >
       <Stack spacing={3}>
         {successMessage && <Alert severity="success">{successMessage}</Alert>}

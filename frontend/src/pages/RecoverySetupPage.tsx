@@ -1,5 +1,5 @@
 /**
- * RecoverySetupPage — Social recovery for Stellar Save accounts.
+ * RecoverySetupPage — Social recovery for SorobanSave accounts.
  *
  * Two panels in a single page:
  *  1. Guardian Setup  — add/remove guardians, set threshold, persist to contract.
@@ -20,7 +20,7 @@ import { AppLayout } from '../ui';
 const LAYOUT_PROPS = {
   title: 'Social Recovery',
   subtitle: 'Configure guardians and approve recovery requests',
-  footerText: 'Stellar Save',
+  footerText: 'SorobanSave',
 };
 
 export default function RecoverySetupPage() {

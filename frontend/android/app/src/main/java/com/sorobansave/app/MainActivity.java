@@ -1,4 +1,4 @@
-package com.stellarsave.app;
+package com.sorobansave.app;
 
 import com.getcapacitor.BridgeActivity;
 

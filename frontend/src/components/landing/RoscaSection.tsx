@@ -54,7 +54,7 @@ export function RoscaSection() {
             {
               icon: '🔗',
               title: 'Now On-Chain',
-              desc: 'Stellar Save brings this proven model on-chain — transparent, automated, and trustless.',
+              desc: 'SorobanSave brings this proven model on-chain — transparent, automated, and trustless.',
             },
           ].map((item) => (
             <Grid size={{ xs: 12, sm: 4 }} key={item.title}>

@@ -1,7 +1,7 @@
 /**
  * api.ts
  *
- * Backend REST API client for Stellar Save.
+ * Backend REST API client for SorobanSave.
  * Handles authentication, base URL, and common error handling.
  */
 
@@ -17,13 +17,13 @@ interface RequestOptions {
 
 function getToken(): string | null {
   if (typeof window === 'undefined') return null;
-  return localStorage.getItem('stellar_save_jwt');
+  return localStorage.getItem('soroban_save_jwt');
 }
 
 function setToken(token: string | null): void {
   if (typeof window === 'undefined') return;
-  if (token) localStorage.setItem('stellar_save_jwt', token);
-  else localStorage.removeItem('stellar_save_jwt');
+  if (token) localStorage.setItem('soroban_save_jwt', token);
+  else localStorage.removeItem('soroban_save_jwt');
 }
 
 async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {

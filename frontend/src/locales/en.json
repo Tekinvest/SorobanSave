@@ -2,9 +2,9 @@
   "settings": {
     "title": "Settings",
     "subtitle": "Configure your preferences",
-    "footerText": "Stellar Save - Built for transparent, on-chain savings",
+    "footerText": "SorobanSave - Built for transparent, on-chain savings",
     "appearance": "Appearance",
-    "appearanceDesc": "Choose how Stellar Save looks to you.",
+    "appearanceDesc": "Choose how SorobanSave looks to you.",
     "language": "Language",
     "languageDesc": "Choose your preferred language."
   }

@@ -1,5 +1,5 @@
 /**
- * MSW handlers for the Stellar Save GraphQL API.
+ * MSW handlers for the SorobanSave GraphQL API.
  *
  * These intercept requests to the GraphQL endpoint
  * (`http://localhost:4000/graphql` by default, or VITE_GRAPHQL_URL in env).
