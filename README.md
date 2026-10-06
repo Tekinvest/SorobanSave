@@ -1,264 +1,379 @@
-# Project
+# StellarCircle
 
-A full-stack application with a backend API (REST + GraphQL) and a frontend client.
+> A decentralized community finance platform built on the Stellar blockchain — combining rotating savings, goal-based pooling, social accountability, micro-lending, milestone-unlocked vaults, and on-chain governance into one unified protocol.
 
-## Documentation
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Stellar Network](https://img.shields.io/badge/Network-Stellar-blue)](https://stellar.org)
+[![Soroban](https://img.shields.io/badge/Contracts-Soroban-blueviolet)](https://soroban.stellar.org)
+[![Coverage](https://codecov.io/gh/Tekinvest/StellarCircle/branch/main/graph/badge.svg)](https://codecov.io/gh/Tekinvest/StellarCircle)
+[![CI](https://github.com/Tekinvest/StellarCircle/actions/workflows/ci.yml/badge.svg)](https://github.com/Tekinvest/StellarCircle/actions)
 
-- [Getting Started](docs/guides/getting-started.md)
-- [Backend Service Map](backend/docs/service-map.md)
-- [API Reference](docs/api/README.md) — external REST/GraphQL reference, versioning and deprecation policy
-- [Contracts](contracts/README.md)
+---
 
-## API Reference
+## What Is StellarCircle?
 
-The external API reference for the backend REST and GraphQL endpoints is published under [`docs/api/`](docs/api/README.md). It is generated from the existing backend route and schema definitions and includes the versioning and deprecation policy for external consumers.
+StellarCircle is a full-stack, open-source community finance protocol on Stellar. It brings together five complementary savings and lending models under a single smart-contract system, making cooperative financial tools accessible to anyone with a Stellar wallet — no bank required.
+
+The five pillars:
+
+| Pillar | Model | Description |
+|--------|-------|-------------|
+| **A** | Rotating Savings (ROSCA) | Members pool funds; payout rotates through the group each cycle |
+| **B** | Goal-Based Group Savings | Members save collectively toward a shared target; contract releases funds when the goal is met |
+| **C** | Social Accountability Vault | Personal savings locked on-chain; community witnesses track commitments publicly |
+| **D** | Lending Circle | Members pool to lend to one member per cycle at zero or low interest; repaid over the cycle |
+| **E** | Milestone-Unlocked Savings | Funds released only when verifiable milestones are submitted and confirmed on-chain |
+
+All five models share a common group-management layer, a unified contribution engine, and an on-chain governance module — so members can mix and match rules when creating a circle.
+
+---
+
+## Why Stellar?
+
+- **Low fees**: Transactions cost fractions of a cent, making micro-contributions viable
+- **Fast finality**: 3–5 second settlement; no waiting for block confirmations
+- **Soroban smart contracts**: Rust-based, auditable, deterministic contract execution
+- **Native asset support**: XLM out of the box; USDC, EURC, and custom tokens via SEP-41
+- **Stellar ecosystem**: Freighter, Lobstr, Albedo wallet support; Horizon API; Stellar Quest community
+
+---
 
 ## Repository Layout
 
-## 🏗️ Architecture
-
-The SorobanSave system consists of four main layers that work together to provide a decentralized ROSCA experience:
-
-![SorobanSave Architecture](docs/architecture-diagram.svg)
-
-### Architecture Components
-
-- **User Layer**: Users interact with the system through Stellar wallets (Freighter, Lobstr, Albedo)
-- **Frontend Layer**: React + TypeScript SPA with Vite, Material-UI components, and React Query for state management
-- **Blockchain Layer**: Stellar network with Soroban smart contracts managing groups, contributions, and payouts
-- **Data Layer**: On-chain storage, Stellar Horizon API for transaction history, and Soroban events for real-time updates
-
-### Key Data Flows
-
-1. **Group Creation**: User → Frontend → Contract → On-chain Storage → Events → UI Update
-2. **Contribution**: User → Frontend → Contract → Escrow → Storage → Events → UI Update
-3. **Payout**: User → Frontend → Contract → Escrow → Recipient → Storage → Events → UI Update
-
-For detailed architecture documentation, see [docs/architecture.md](docs/architecture.md).
-
-## 🚀 Features
-
-- **Create Groups**: Set contribution amount, cycle duration, and max members
-- **Join & Participate**: Members join and contribute each cycle
-- **Automatic Payouts**: When all members contribute, payout executes automatically to the next recipient
-- **Native XLM Support**: Built-in support for Stellar Lumens (XLM)
-- **Token Ready**: Architecture supports custom Stellar tokens (roadmap item)
-- **Transparent**: All contributions and payouts are verifiable on-chain
-
-## 🛠️ Quick Start & Workspace Guides
-
-To get started quickly, follow the dedicated setup guides for each component of the SorobanSave monorepo:
-
-- 🚀 **Smart Contracts**: See [contracts/soroban-save/src/lib.rs](contracts/soroban-save/src/lib.rs) and the [QUICK_REFERENCE.md](QUICK_REFERENCE.md) for smart contract API documentation.
-- 💻 **Frontend Web App**: See [frontend/README.md](frontend/README.md) for React/TypeScript setup, environment configuration (`VITE_*`), MUI theme tokens, and local development commands.
-- 📱 **Mobile Application**: See [mobile/README.md](mobile/README.md) for Expo React Native setup, iOS/Android emulator instructions, and mobile architecture.
-- 🛠️ **Scripts & Tooling**: See [scripts/README.md](scripts/README.md) for build (`build.sh`), test (`test.sh`), and deployment (`deploy_testnet.sh`, `deploy_mainnet.sh`) scripts.
-- ⚙️ **Backend Service**: See [backend/README.md](backend/README.md) for server setup, environment variables schema, and indexer configuration.
-
-### Common Development Commands
-
-```bash
-# Clone the repository
-git clone https://github.com/Tekinvest/SorobanSave.git
-cd SorobanSave
-
-# Install root dependencies & git hooks
-npm install
-
-# Build Soroban smart contracts
-./scripts/build.sh
-
-# Run all test suites across smart contracts and web frontend
-./scripts/test.sh
+```
+StellarCircle/
+├── contracts/                 # Soroban smart contracts (Rust)
+│   └── stellar-circle/
+│       ├── src/
+│       │   ├── lib.rs         # Contract entry point
+│       │   ├── group.rs       # Group lifecycle
+│       │   ├── contribution.rs
+│       │   ├── payout.rs
+│       │   ├── lending.rs
+│       │   ├── milestone.rs
+│       │   ├── governance.rs
+│       │   └── vault.rs
+│       └── Cargo.toml
+├── frontend/                  # React + TypeScript SPA (Vite)
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── hooks/
+│   │   └── stellar/           # Stellar SDK + Soroban client wrappers
+│   └── package.json
+├── mobile/                    # Expo React Native app
+├── backend/                   # Node.js indexer + REST + GraphQL API
+│   ├── src/
+│   │   ├── indexer/           # Soroban event listener
+│   │   ├── api/               # REST routes
+│   │   ├── graphql/           # GraphQL schema + resolvers
+│   │   └── db/                # PostgreSQL migrations
+│   └── package.json
+├── scripts/                   # Build, deploy, test scripts
+├── docs/                      # Full documentation
+└── package.json               # Monorepo root (pnpm + Turborepo)
 ```
 
-### Run Demo
+---
 
-Follow the step-by-step guide in [demo/demo-script.md](demo/demo-script.md).
+## Architecture
 
-## 📖 Documentation
+StellarCircle follows a layered architecture:
 
-- [Local Development Setup](docs/local-development-setup.md) — clone-to-running-app guide for backend, frontend, contracts, and mobile
-- [User Guide](docs/user-guide.md)
-- [Architecture Overview](docs/architecture.md)
-- [Public API Reference](docs/api/interactive-api-reference.md) — REST API with code examples
-- [Interactive API Docs](https://api.soroban-save.app/docs) — Try API calls in your browser
-- [Governance Process](docs/governance.md) — How protocol decisions are made on-chain
-- [Storage Layout](docs/storage-layout.md)
-- [Threat Model & Security](docs/threat-model.md)
-- [Performance Optimization Guide](docs/performance-optimization.md)
-- [Roadmap](docs/roadmap.md)
-- [Frequently Asked Questions (FAQ)](docs/faq.md)
-- [Mobile App User Guide](docs/mobile-app-guide.md)
-- [Mobile App Developer & Contributor Guide](docs/mobile-app-developer-guide.md)
-- [Troubleshooting Guide](docs/troubleshooting.md)
-- [Synthetic Monitoring / Uptime Canaries](docs/synthetic-monitoring.md)
-- [Observability Guide](docs/observability.md)
-- [Funnel & Cohort Analytics](docs/funnel-analytics.md)
-- [Design Token System](docs/design-tokens.md)
-- [ZK Verification](docs/zk-verification.md)
-- [Security Guide](docs/security-guide.md)
+```
+┌─────────────────────────────────────────────────────┐
+│                     User Layer                      │
+│        Stellar Wallets (Freighter / Lobstr)         │
+└────────────────────┬────────────────────────────────┘
+                     │
+┌────────────────────▼────────────────────────────────┐
+│                  Frontend Layer                     │
+│   React SPA  ·  Expo Mobile  ·  Stellar SDK         │
+└────────────────────┬────────────────────────────────┘
+                     │
+┌────────────────────▼────────────────────────────────┐
+│                 Backend Layer                       │
+│   REST API  ·  GraphQL  ·  Soroban Event Indexer    │
+└──────────┬─────────────────────────┬────────────────┘
+           │                         │
+┌──────────▼──────────┐   ┌──────────▼──────────────┐
+│  Blockchain Layer   │   │      Data Layer          │
+│  Stellar Network    │   │  PostgreSQL · Redis       │
+│  Soroban Contracts  │   │  Horizon API             │
+└─────────────────────┘   └──────────────────────────┘
+```
 
-## 🎓 Smart Contract API
+For the full architecture breakdown see [docs/architecture.md](docs/architecture.md).
+
+---
+
+## The Five Pillars — Feature Detail
+
+### A · Rotating Savings (ROSCA)
+Classic Ajo/Esusu/Tanda model, reimagined on-chain:
+- Creator sets contribution amount, cycle duration, and max member count
+- Each cycle, all members contribute; the full pool goes to the next recipient in rotation
+- Order is set at group creation (or optionally randomised via Stellar's VRF)
+- Contract enforces payment deadlines; late contributions incur configurable penalties
+- Cycle ends when all members have received exactly once
+
+### B · Goal-Based Group Savings
+Collective saving toward a shared objective:
+- Creator defines a target amount, a deadline, and a spending category
+- Members contribute freely or on a schedule
+- Funds are locked in escrow until the target is hit OR the deadline passes
+- On success: funds release to a designated multi-sig or contract-controlled treasury
+- On failure: full refunds issued on-chain automatically
+
+### C · Social Accountability Vault
+Personal savings enforced by community witnesses:
+- Each member sets a personal goal, amount, and timeline
+- Up to 5 community witnesses are nominated per vault
+- Contribution activity is publicly visible on-chain (no amounts, only pass/fail signals)
+- Missed contributions emit on-chain events that witnesses can acknowledge
+- Funds remain locked until the commitment period ends; early withdrawal triggers a penalty split among witnesses as a reward
+
+### D · Lending Circle
+Zero-interest cooperative lending:
+- Pool members contribute a fixed amount each cycle
+- One member per cycle receives the full pool as a loan at 0% interest
+- Repayment is tracked on-chain across the following cycle(s)
+- Credit history is stored on-chain, portable across circles
+- Missed repayments pause future lending eligibility until resolved via governance vote
+
+### E · Milestone-Unlocked Savings
+Purpose-locked funds with verifiable release conditions:
+- Creator (individual or group) locks funds with a set of defined milestones
+- Each milestone specifies a description, a deadline, and a verifier address
+- Verifiers submit on-chain attestations when milestones are met
+- Funds release proportionally as milestones are cleared
+- Supports external oracle integration for automated verification
+
+---
+
+## Smart Contract API
 
 ### Group Management
 ```rust
-create_group(contribution_amount, cycle_duration, max_members) -> u64
-get_group(group_id) -> Group
-list_members(group_id) -> Vec<Address>
+create_group(config: GroupConfig) -> u64
+get_group(group_id: u64) -> Group
+list_members(group_id: u64) -> Vec<Address>
+update_group_config(group_id: u64, config: GroupConfig)
+dissolve_group(group_id: u64)
 ```
 
 ### Membership
 ```rust
-join_group(group_id)
-is_member(group_id, address) -> bool
+join_group(group_id: u64)
+leave_group(group_id: u64)
+is_member(group_id: u64, address: Address) -> bool
 ```
 
 ### Contributions
 ```rust
-contribute(group_id, member, amount)
-get_contribution_status(group_id, cycle_number) -> Vec<(Address, bool)>
+contribute(group_id: u64, amount: i128)
+get_contribution_status(group_id: u64, cycle: u32) -> Vec<(Address, bool)>
+get_missed_contributions(group_id: u64, member: Address) -> u32
 ```
 
-### Payouts
+### Payouts (ROSCA & Goal-Based)
 ```rust
-execute_payout(group_id)
-is_complete(group_id) -> bool
+execute_payout(group_id: u64)
+get_payout_recipient(group_id: u64) -> Address
+is_complete(group_id: u64) -> bool
 ```
 
-### Emergency Pause
+### Lending Circle
 ```rust
-pause_group(group_id, caller)    // Creator-only: halt contributions & payouts
-unpause_group(group_id, caller)  // Creator-only: resume contributions & payouts
+request_loan(group_id: u64, amount: i128)
+repay_loan(group_id: u64, amount: i128)
+get_credit_score(address: Address) -> u32
 ```
 
-## 🧪 Testing
-
-Comprehensive test suite covering:
-- ✅ Group creation and configuration
-- ✅ Member joining and validation
-- ✅ Contribution flow and tracking
-- ✅ Payout rotation and distribution
-- ✅ Group completion lifecycle
-- ✅ Emergency pause/unpause scenarios
-- ✅ Error handling and edge cases
-
-Run tests:
-```bash
-cargo test
+### Milestones
+```rust
+add_milestone(group_id: u64, milestone: Milestone)
+attest_milestone(group_id: u64, milestone_id: u32, verifier: Address)
+release_milestone_funds(group_id: u64, milestone_id: u32)
 ```
 
-### Test Coverage
-
-Coverage is tracked and enforced per workspace and published to
-[Codecov](https://codecov.io/gh/Tekinvest/SorobanSave), which provides public
-reports and historical trends.
-
-| Workspace  | Tool             | Minimum coverage gate |
-|------------|------------------|-----------------------|
-| frontend   | vitest (v8)      | 80% lines / 70% branches |
-| contracts  | cargo-tarpaulin  | 85% lines |
-| backend    | jest (ts-jest)   | 60% lines |
-
-PRs **cannot merge** if coverage falls below these targets or drops versus the
-base commit: the `coverage.yml` workflow uploads results to Codecov on every
-push and pull request, and the Codecov project/patch status checks (configured
-in [`codecov.yml`](./codecov.yml)) act as required PR merge gates. The same
-thresholds also fail CI locally via per-tool gates (tarpaulin `fail-under`,
-vitest `coverage.thresholds`, jest `coverageThreshold`).
-
-Run coverage locally:
-```bash
-# contracts
-cargo tarpaulin --config tarpaulin.toml
-# frontend
-cd frontend && npm run test:coverage
-# backend
-cd backend && npm run test:coverage
+### Governance
+```rust
+propose(group_id: u64, proposal: Proposal) -> u64
+vote(group_id: u64, proposal_id: u64, vote: Vote)
+execute_proposal(group_id: u64, proposal_id: u64)
 ```
 
-See [docs/test-coverage.md](docs/test-coverage.md) for full details.
-
-## 🌍 Why This Matters
-
-**Financial Inclusion**: Over 1.7 billion adults globally are unbanked. Ajo/Esusu has served African communities for generations as a trusted savings mechanism.
-
-**Blockchain Benefits**:
-- No need for a trusted coordinator
-- Transparent contribution and payout history
-- Programmable rules enforced by smart contracts
-- Accessible to anyone with a Stellar wallet
-
-**Target Users**:
-- African diaspora communities
-- Unbanked/underbanked populations
-- Small business owners needing working capital
-- Communities building financial discipline
-
-
-## 🗺️ Roadmap
-
-- **v1.0** (Current): XLM-only groups, basic functionality
-- **v1.1**: Custom token support (USDC, EURC, etc.)
-- **v2.0**: Flexible payout schedules, penalty mechanisms
-- **v3.0**: Frontend UI with wallet integration
-- **v4.0**: Mobile app, fiat on/off-ramps
-
-See [docs/roadmap.md](docs/roadmap.md) for details.
-
-## 🤝 Contributing
-
-We welcome contributions! Please:
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-See our [Code of Conduct](CODE_OF_CONDUCT.md) and [Contributing Guidelines](CONTRIBUTING.md).
-
-### 🌊 Drips Wave Contributors
-
-This project participates in **Drips Wave** - a contributor funding program! Check out:
-- **[Wave Contributor Guide](docs/wave-guide.md)** - How to earn funding for contributions
-- **[Wave-Ready Issues](docs/wave-ready-issues.md)** - 12 funded issues ready to tackle
-- **GitHub Issues** labeled with `wave-ready` - Earn 100-200 points per issue
-
-Issues are categorized as:
-- `trivial` (100 points) - Documentation, simple tests, minor fixes
-- `medium` (150 points) - Helper functions, validation logic, moderate features  
-- `high` (200 points) - Core features, complex integrations, security enhancements
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Stellar Development Foundation for Soroban
-- African communities that have practiced Ajo/Esusu for centuries
-- Drips Wave for supporting public goods funding
-
-## 📞 Contact
-
-- **Issues**: [GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Tekinvest/SorobanSave/discussions)
-- **Telegram**: [@Xoulomon]
+### Emergency Controls
+```rust
+pause_group(group_id: u64, caller: Address)
+unpause_group(group_id: u64, caller: Address)
+emergency_withdraw(group_id: u64, caller: Address)
+```
 
 ---
 
-**Built with ❤️ for financial inclusion on Stellar**
+## Quick Start
 
-## Handsoff notes
+```bash
+# Clone the repository
+git clone https://github.com/Tekinvest/StellarCircle.git
+cd StellarCircle
 
-<!-- handsoff-issue-1684 -->
-- #1684: [Backend] Remove deprecated/legacy authentication code paths
+# Install dependencies (requires pnpm)
+pnpm install
 
-<!-- handsoff-issue-1685 -->
-- #1685: [Backend] Extract rate limiting logic into a single reusable middleware
+# Build Soroban contracts
+./scripts/build.sh
 
-<!-- handsoff-issue-1704 -->
-- #1704: [Backend] Remove duplicate RPC failover logic now redundant with issue #1559 fix
+# Run all tests
+./scripts/test.sh
 
-<!-- handsoff-issue-1706 -->
-- #1706: [Smart Contracts] Split contract.rs entrypoint into focused modules
+# Start local development (frontend + backend)
+pnpm dev
+```
+
+See [docs/local-development-setup.md](docs/local-development-setup.md) for the full environment setup.
+
+---
+
+## Supported Wallets
+
+| Wallet | Web | Mobile | Notes |
+|--------|-----|--------|-------|
+| Freighter | ✅ | ✅ | Recommended; browser extension + mobile |
+| Lobstr | ✅ | ✅ | Full SEP support |
+| Albedo | ✅ | ❌ | Web-only signing |
+| XBULL | ✅ | ✅ | Advanced users |
+| WalletConnect | ✅ | ✅ | Via Stellar WalletConnect bridge |
+
+---
+
+## Supported Assets
+
+| Asset | Type | Status |
+|-------|------|--------|
+| XLM | Native | ✅ Live |
+| USDC (Circle) | SEP-41 Token | ✅ Live |
+| EURC | SEP-41 Token | ✅ Live |
+| Custom tokens | SEP-41 Token | ✅ Live (creator-defined) |
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Smart Contracts | Rust · Soroban SDK |
+| Frontend | React 18 · TypeScript · Vite · MUI · React Query · Stellar SDK |
+| Mobile | Expo · React Native · TypeScript |
+| Backend | Node.js · Express · GraphQL · PostgreSQL · Redis |
+| Indexer | Soroban event streaming via Horizon |
+| Build | Turborepo · pnpm |
+| Testing | Cargo test · Vitest · Jest · Playwright |
+| CI/CD | GitHub Actions |
+| Infrastructure | Docker · Terraform |
+
+---
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [Architecture](docs/architecture.md) | System design, component interactions, data flow |
+| [Design Flows](docs/design-flows.md) | End-to-end user flows for all five pillars |
+| [User Guide](docs/user-guide.md) | Step-by-step guide for end users |
+| [Roadmap](docs/roadmap.md) | Versioned feature roadmap |
+| [Contributing](CONTRIBUTING.md) | How to contribute to StellarCircle |
+| [Contract API Reference](docs/contract-api-reference.md) | Full Soroban contract API |
+| [Local Development](docs/local-development-setup.md) | Clone-to-running-app guide |
+| [Security Guide](docs/security-guide.md) | Threat model, audit status, responsible disclosure |
+| [Governance](docs/governance.md) | On-chain governance process |
+| [FAQ](docs/faq.md) | Frequently asked questions |
+
+---
+
+## Testing
+
+```bash
+# Smart contracts
+cargo test
+cargo tarpaulin --config tarpaulin.toml   # coverage
+
+# Frontend
+cd frontend && pnpm test
+pnpm test:coverage
+
+# Backend
+cd backend && pnpm test
+pnpm test:coverage
+
+# End-to-end
+pnpm e2e
+```
+
+Coverage gates enforced in CI:
+
+| Workspace | Tool | Minimum |
+|-----------|------|---------|
+| contracts | cargo-tarpaulin | 85% lines |
+| frontend | vitest (v8) | 80% lines / 70% branches |
+| backend | jest (ts-jest) | 60% lines |
+
+---
+
+## Why This Matters
+
+Over 1.7 billion adults globally are unbanked. Community savings circles — known as Ajo, Esusu, Tanda, Chit Fund, Paluwagan, and dozens of other names — have served these communities for centuries. StellarCircle moves this tradition on-chain:
+
+- **No trusted coordinator** — rules are enforced by smart contracts
+- **No minimum balance** — contribute as little as 1 XLM
+- **Transparent history** — every contribution, payout, and attestation is verifiable on Stellar
+- **Portable credit** — on-chain lending history follows the member across circles
+- **Programmable rules** — groups customise contribution amounts, cycles, penalties, and governance
+
+---
+
+## Roadmap Summary
+
+- **v1.0** — ROSCA (Pillar A) on Testnet
+- **v1.1** — Goal-Based Savings (Pillar B) + USDC/EURC support
+- **v2.0** — Social Accountability Vault (Pillar C) + Lending Circle (Pillar D)
+- **v2.1** — Milestone-Unlocked Savings (Pillar E) + oracle integration
+- **v3.0** — On-chain governance + mobile app GA
+- **v4.0** — Fiat on/off-ramps + cross-group credit scoring
+
+See [docs/roadmap.md](docs/roadmap.md) for full detail.
+
+---
+
+## Contributing
+
+We welcome contributions of all kinds — code, documentation, translations, design, and community outreach. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
+
+Issues labelled `good-first-issue` are a great entry point. Funded issues are labelled `wave-ready`.
+
+---
+
+## Security
+
+Found a vulnerability? Please do **not** open a public issue. Follow the responsible disclosure process in [docs/SECURITY.md](docs/SECURITY.md).
+
+---
+
+## License
+
+MIT © [Tekinvest](https://github.com/Tekinvest)
+
+---
+
+## Acknowledgements
+
+- Stellar Development Foundation for Soroban
+- African, Latin American, and Asian communities that have practiced rotating savings for generations
+- Drips Wave for supporting public goods funding
+- Every contributor, tester, and community member who has helped shape this protocol
+
+---
+
+*Built for financial inclusion — on Stellar, for everyone.*

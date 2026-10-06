@@ -1,321 +1,387 @@
-# SorobanSave User Guide
+# StellarCircle — User Guide
 
-Welcome to SorobanSave, a decentralized rotational savings and credit association (ROSCA) built on the Stellar blockchain. This guide will walk you through everything you need to know to participate in community-based savings groups.
+Welcome to StellarCircle. This guide walks you through everything you need to start saving, lending, and building financial discipline with your community — entirely on the Stellar blockchain.
 
-## What is SorobanSave?
+## Table of Contents
 
-SorobanSave brings traditional ROSCA systems to blockchain technology. Members contribute a fixed amount regularly, and each member receives the total pool on a rotating basis. This creates:
+1. [Before You Start](#1-before-you-start)
+2. [Connecting Your Wallet](#2-connecting-your-wallet)
+3. [Your Dashboard](#3-your-dashboard)
+4. [Creating a Circle](#4-creating-a-circle)
+5. [Joining a Circle](#5-joining-a-circle)
+6. [Pillar A — Rotating Savings (ROSCA)](#6-pillar-a--rotating-savings-rosca)
+7. [Pillar B — Goal-Based Group Savings](#7-pillar-b--goal-based-group-savings)
+8. [Pillar C — Social Accountability Vault](#8-pillar-c--social-accountability-vault)
+9. [Pillar D — Lending Circle](#9-pillar-d--lending-circle)
+10. [Pillar E — Milestone-Unlocked Savings](#10-pillar-e--milestone-unlocked-savings)
+11. [Governance — Voting on Proposals](#11-governance--voting-on-proposals)
+12. [Notifications](#12-notifications)
+13. [Your Profile & Credit Score](#13-your-profile--credit-score)
+14. [Troubleshooting](#14-troubleshooting)
+15. [Glossary](#15-glossary)
 
-- **Trustless savings**: No central coordinator needed
-- **Transparent transactions**: All activity is verifiable on-chain
-- **Global accessibility**: Anyone with a Stellar wallet can join
-- **Automated payouts**: Smart contracts handle distributions
+---
 
-## Getting Started
+## 1. Before You Start
 
-### Prerequisites
+### What You Need
 
-1. **Stellar Wallet**: Install a compatible wallet like [Freighter](https://www.freighter.app/) or [Lobstr](https://lobstr.co/)
-2. **XLM Funds**: You'll need Stellar Lumens (XLM) for contributions and transaction fees
-3. **Internet Connection**: Access to the Stellar network
+- A **Stellar wallet** with a public key (G...). We recommend [Freighter](https://freighter.app) for web or [Lobstr](https://lobstr.co) for mobile.
+- Some **XLM** to cover transaction fees (~0.01 XLM per transaction) and your contributions.
+- A **modern browser** (Chrome, Firefox, Brave, Edge) for the web app, or iOS/Android for the mobile app.
 
-### Setting Up Your Wallet
+### What StellarCircle Is
 
-1. Install your preferred Stellar wallet
-2. Create or import a Stellar account
-3. Fund your account with XLM (available from exchanges or faucets)
-4. Connect your wallet to the SorobanSave dApp
+StellarCircle is a community finance platform. You can:
 
-### Network Selection
+- **Save together** with a group that pools and rotates payouts (ROSCA)
+- **Save toward a shared goal** with your community (Goal-Based)
+- **Hold yourself accountable** with a personal savings vault witnessed by friends (Accountability Vault)
+- **Lend and borrow** within a trusted circle at zero interest (Lending Circle)
+- **Unlock funds** as you achieve milestones in your business or personal goals (Milestone Vault)
 
-SorobanSave operates on:
-- **Testnet**: For testing and learning (recommended for beginners)
-- **Mainnet**: For real savings groups with actual value
+All funds are held by smart contracts on Stellar — not by StellarCircle. You remain in control at all times.
 
-Start with testnet to familiarize yourself with the platform.
+---
 
-## Creating a Group
+## 2. Connecting Your Wallet
 
-As a group creator, you set the terms for your savings circle.
+### Web App
 
-### Step-by-Step Guide
+1. Visit [stellarcircle.app](https://stellarcircle.app)
+2. Click **Connect Wallet** in the top-right corner
+3. Choose your wallet from the list:
+   - **Freighter** — requires the browser extension installed
+   - **Lobstr** — scan QR code or use mobile deep-link
+   - **Albedo** — web-based, no extension needed
+   - **WalletConnect** — for any WalletConnect-compatible wallet
+4. Approve the connection in your wallet
+5. Sign the authentication challenge (this proves ownership of your address — no funds move)
+6. You are now logged in and your dashboard loads
 
-1. **Access the dApp**: Navigate to the SorobanSave interface
-2. **Connect Wallet**: Click "Connect Wallet" and approve the connection
-3. **Select "Create Group"**: Find this option in the main menu
-4. **Configure Group Settings**:
-   - **Contribution Amount**: How much each member contributes per cycle (in XLM)
-   - **Cycle Duration**: How often contributions are due (e.g., weekly, monthly)
-   - **Maximum Members**: Total number of participants (2-50 recommended)
-   - **Minimum Members**: Minimum required to start the group
-5. **Review Terms**: Double-check all settings
-6. **Create Group**: Sign the transaction with your wallet
-7. **Share Group ID**: Distribute the group identifier to potential members
+### Mobile App
 
-### Best Practices for Group Creation
+1. Download StellarCircle from the App Store or Google Play
+2. Open the app and tap **Get Started**
+3. Choose your wallet (Freighter mobile, Lobstr, or WalletConnect)
+4. Approve the deep-link connection
+5. Optionally enable Face ID / fingerprint for faster access
 
-- **Realistic Amounts**: Set contribution amounts members can afford
-- **Familiar Cycles**: Choose durations that work for your community's schedule
-- **Trusted Members**: Start with people you know for your first group
-- **Clear Communication**: Discuss expectations with potential members beforehand
+> **Note**: StellarCircle never has access to your private key. Signing happens inside your wallet app.
 
-## Using Group Templates
+---
 
-Instead of configuring every setting manually, you can start from a predefined template. Templates set the cycle duration and maximum members for you — you only choose the contribution amount.
+## 3. Your Dashboard
 
-### Available Templates
+The dashboard is your home base. It shows:
 
-| ID | Name             | Cycle     | Max Members | Total Duration |
-|----|------------------|-----------|-------------|----------------|
-| 1  | Weekly Saver     | 7 days    | 10          | ~10 weeks      |
-| 2  | Biweekly Saver   | 14 days   | 8           | ~16 weeks      |
-| 3  | Monthly Pool     | 30 days   | 12          | ~12 months     |
-| 4  | Quarterly Circle | 90 days   | 4           | ~12 months     |
-| 5  | Annual Pool      | 365 days  | 5           | ~5 years       |
+- **My Circles** — all circles you have created or joined, with status indicators
+- **Upcoming Actions** — contributions due, votes open, milestones to review
+- **Recent Activity** — a feed of on-chain events across your circles
+- **Wallet Balance** — your current XLM and token balances
+- **Credit Score** — your on-chain lending reputation (visible once you participate in a Lending Circle)
 
-### Creating a Group from a Template
+---
 
-1. **Browse Templates**: Call `list_templates()` or select from the UI template picker
-2. **Pick a Template**: Choose the one that fits your community's rhythm
-3. **Set Contribution Amount**: Enter how much each member pays per cycle (in XLM)
-4. **Create**: Sign the transaction — the contract fills in cycle duration and member cap automatically
+## 4. Creating a Circle
 
-### Choosing the Right Template
+1. Click **Create Circle** on your dashboard
+2. **Choose a pillar** — the type of circle you want to run:
 
-- **Weekly Saver** — tight-knit groups wanting frequent payouts and short commitment windows
-- **Biweekly Saver** — a middle ground with slightly larger pools and a manageable cadence
-- **Monthly Pool** — the classic Ajo/Esusu pattern; 12 members each receive one month's pool per year
-- **Quarterly Circle** — larger contribution amounts where members prefer less frequent cycles
-- **Annual Pool** — long-term capital accumulation over multiple years
+   | Pillar | Best For |
+   |--------|---------|
+   | A · Rotating Savings | Groups who want everyone to receive a lump sum in turns |
+   | B · Goal-Based Savings | Groups saving toward a specific shared purchase or project |
+   | C · Accountability Vault | Individuals who want community-enforced personal savings |
+   | D · Lending Circle | Groups who want to lend to each other at zero interest |
+   | E · Milestone Vault | Individuals or businesses unlocking funds as they hit milestones |
 
-> Need something custom? Use **Create Group** instead and specify any cycle duration and member count.
+3. **Fill in the settings** for your chosen pillar (contribution amount, cycle length, members, etc.)
+4. **Review the summary** — check the total commitment and estimated fees
+5. **Sign the transaction** in your wallet
+6. Your circle is created. Share the invite link with your group.
 
-For full API details see [docs/group-templates.md](group-templates.md).
+---
 
-## Joining a Group
+## 6. Pillar A — Rotating Savings (ROSCA)
 
-Participate in existing savings groups created by others.
+### How It Works
 
-### Finding Groups
+Everyone contributes the same amount each cycle. The full pool goes to one member. In the next cycle it goes to the next member. This repeats until every member has received exactly once.
 
-1. **Browse Groups**: Use the "Browse Groups" or "Join Group" section
-2. **Search by ID**: If you have a specific group ID, enter it directly
-3. **Filter Options**: Look for groups by:
-   - Contribution amount
-   - Cycle duration
-   - Current member count
-   - Group status
+**Example**: 5 members, 100 XLM each, monthly cycles.
+- Month 1: 500 XLM → Member 1
+- Month 2: 500 XLM → Member 2
+- ... and so on until Month 5
 
-### Joining Process
+### As a Creator
 
-1. **Select Group**: Click on a group that interests you
-2. **Review Terms**: Carefully read the group rules and requirements
-3. **Check Compatibility**: Ensure you can meet the contribution schedule
-4. **Join Group**: Click "Join" and approve the wallet transaction
-5. **Confirm Position**: Note your payout position in the rotation
+When creating a ROSCA circle you set:
+- **Contribution amount** (e.g. 100 XLM)
+- **Cycle duration** (e.g. 30 days)
+- **Maximum members** (e.g. 5)
+- **Payout order** — fixed (first-come-first-served) or random (shuffled at the start)
+- **Late penalty** — percentage deducted for late contributions (0–20%)
+- **Grace period** — hours after the deadline before a missed contribution is penalised
 
-### What to Consider Before Joining
+### As a Member
 
-- **Trust Level**: How well do you know the group creator and other members?
-- **Financial Commitment**: Can you reliably make contributions on schedule?
-- **Group Size**: Larger groups mean longer waits for your payout but potentially more stability
-- **Duration**: Consider how long you're willing to wait for your turn
+- You will see your **position in the rotation** and when you are due to receive
+- A **contribution button** appears on your circle page when the cycle is active
+- You receive a **reminder notification** 3 days and 1 day before the deadline
+- When it is your turn to receive, funds arrive in your wallet automatically — no action needed
 
-## Contribution Process
+### Key Rules
 
-Regular contributions are the heart of the ROSCA system.
+- You cannot contribute more or less than the set amount
+- Missed contributions trigger the penalty after the grace period expires
+- The circle completes when all members have received once
 
-### How Contributions Work
+---
 
-- **Fixed Amount**: Everyone contributes the same amount each cycle
-- **Set Schedule**: Contributions are due at regular intervals
-- **All or Nothing**: The full pool is distributed only when all members contribute
-- **Automatic Tracking**: The smart contract records all contributions
+## 7. Pillar B — Goal-Based Group Savings
 
-### Making a Contribution
+### How It Works
 
-1. **Check Due Date**: Monitor your group's contribution deadline
-2. **Access Group**: Go to "My Groups" and select your active group
-3. **View Status**: See current cycle progress and who's contributed
-4. **Contribute**: Click "Contribute" and approve the XLM transfer
-5. **Confirm**: Wait for transaction confirmation on the blockchain
+The group sets a target amount and deadline. Everyone contributes what they can (or on a schedule). When the goal is reached, the funds are released to the designated recipient or shared treasury.
 
-### Contribution Deadlines
+**Example**: 10 friends saving 5,000 USDC to buy equipment for a community space. Anyone can contribute any amount; the goal must be met before the deadline or funds are refunded.
 
-- **Cycle Start**: Timer begins when the group becomes active
-- **Extension Period**: Groups may have grace periods for late contributions
-- **Consequences**: Missing contributions may affect your standing or payout eligibility
+### As a Creator
 
-### Tracking Your Contributions
+- Set a **target amount**, **asset**, and **deadline**
+- Choose **contribution style**: open (any amount, any time) or scheduled (fixed amounts on a schedule)
+- Choose **release method**: auto-release to a wallet address, or require a multi-sig approval vote from members
+- Add a **spending category** for transparency
 
-- **Contribution History**: View all your past payments
-- **Cycle Progress**: See how many members have contributed this cycle
-- **Total Saved**: Track your cumulative contributions
-- **Payout Eligibility**: Monitor when you'll receive funds
+### As a Member / Contributor
 
-## Payout Mechanics
+- Visit the circle page to see the **progress bar** and current total
+- Click **Contribute** and enter your amount
+- Watch the progress bar update in real time as others contribute
+- If the goal is met before the deadline, funds are released and you are notified
+- If the deadline passes without reaching the goal, your full contribution is returned automatically
 
-Understanding how payouts work ensures you know what to expect.
+---
 
-### How Payouts Work
+## 8. Pillar C — Social Accountability Vault
 
-1. **Pool Formation**: All members' contributions create the cycle pool
-2. **Rotation Order**: Members receive payouts in the order they joined
-3. **Automatic Distribution**: Smart contract triggers payout when all contribute
-4. **Full Amount**: Each member receives the total pool amount
+### How It Works
 
-### Payout Process
+You lock funds in a personal vault and commit to contributing regularly. Friends or family act as on-chain witnesses. If you miss a contribution, a penalty is deducted from your locked funds and shared among your witnesses as a reward for their attention.
 
-1. **Cycle Completion**: All members must contribute for the cycle to complete
-2. **Automatic Trigger**: Smart contract detects completion and initiates payout
-3. **Recipient Selection**: Next member in rotation receives the funds
-4. **Instant Transfer**: Funds are transferred directly to the recipient's wallet
+**Example**: You want to save 1,200 USDC over 12 months. You nominate 3 friends as witnesses. Each month you contribute 100 USDC. If you miss a month, you lose a 10% penalty from your locked balance, split among your witnesses.
 
-### Payout Schedule
+### Setting Up Your Vault
 
-- **Position-Based**: Your payout position is determined by join order
-- **Sequential**: Payouts happen one at a time as cycles complete
-- **Predictable**: You know exactly when your turn will come
+1. Go to **Create Circle → Pillar C**
+2. Set your **savings goal**, **target amount**, **contribution schedule**, and **duration**
+3. Set the **early withdrawal penalty** (e.g. 10%)
+4. **Nominate witnesses** — enter up to 5 Stellar addresses of people you trust
+5. Optionally add an **invite message** to your witnesses (sent via on-chain event)
+6. Lock an initial deposit to activate the vault
 
-### Receiving Your Payout
+### Witnesses
 
-1. **Monitor Progress**: Watch as cycles complete
-2. **Automatic Transfer**: Funds appear in your wallet automatically
-3. **Transaction Record**: All payouts are recorded on the blockchain
-4. **Continue Contributing**: Keep contributing even after receiving your payout
+- Witnesses do not contribute money; they are accountability partners
+- They see whether you are meeting your contribution schedule (pass/fail signal, no amounts)
+- If you miss a contribution and the penalty fires, witnesses receive a share of the penalty as a reward
+- Witnesses can be removed or replaced via a governance vote
 
-## FAQ
+### Completing Your Vault
 
-### General Questions
+When you complete all contributions on time:
+- Your full locked balance is released to your wallet
+- An **on-chain completion badge** is recorded to your profile
+- Your streak count is displayed on your public profile
 
-**Q: Is my money safe?**
-A: Your contributions are held by smart contracts on the Stellar blockchain. While smart contracts reduce counterparty risk, always research and understand the platform before participating.
+---
 
-**Q: What happens if someone doesn't contribute?**
-A: If a member misses their contribution, the cycle cannot complete and no one receives a payout. Groups should establish clear expectations and consequences.
+## 9. Pillar D — Lending Circle
 
-**Q: Can I leave a group early?**
-A: This depends on the group's rules. Some groups may allow withdrawal, but you typically forfeit future payouts.
+### How It Works
 
-**Q: Are there fees?**
-A: Transaction fees are minimal (Stellar network fees), but the platform itself is free to use.
+Members pool contributions each cycle. One member per cycle receives the pool as a loan at zero interest. They repay it over the following cycle(s). Everyone in the circle benefits from access to a lump sum; repayment builds an on-chain credit record.
 
-### Technical Questions
+**Example**: 6 members each contribute 100 USDC per month. One member receives 600 USDC as a loan. They repay 200 USDC/month over the next 3 months while the next loan cycle begins.
 
-**Q: What wallet should I use?**
-A: We recommend Freighter for its good Soroban support. Other compatible wallets include Lobstr and StellarX.
+### Loan Selection
 
-**Q: How do I get test XLM?**
-A: Use the Stellar testnet faucet at https://laboratory.stellar.org/ to get free test XLM.
+Two methods are available (set at circle creation):
 
-**Q: What if I lose my wallet?**
-A: Your funds are tied to your Stellar account. Recover your wallet using your backup seed phrase.
+- **Rotation**: Loans go to members in a fixed rotation. Simple and predictable.
+- **Governance vote**: Any eligible member can request the loan; members vote to approve. More flexible, but requires active participation.
 
-**Q: Can I use this on mobile?**
-A: Yes, through compatible mobile wallets that support Stellar and Soroban contracts.
+### Requesting a Loan (Governance method)
 
-### Group Management
+1. Open your Lending Circle page
+2. Click **Request Loan** during an open cycle
+3. Add a brief purpose note (optional but encouraged)
+4. Wait for members to vote — voting window is set by the creator (e.g. 48 hours)
+5. If approved, the loan is issued automatically when the vote passes
 
-**Q: How do I change group settings?**
-A: Only the group creator can modify settings, and only before the group becomes active.
+### Repaying a Loan
 
-**Q: What if my group doesn't fill up?**
-A: Groups can start with minimum members, but work best with full participation.
+1. Open your Lending Circle page
+2. Your active loan shows the **amount owed** and **due date**
+3. Click **Repay** and enter an amount (partial repayments are accepted)
+4. Sign and submit
+5. On full repayment, your **credit score increases**
 
-**Q: Can I be in multiple groups?**
-A: Yes, but ensure you can meet all contribution schedules.
+### Credit Score
 
-**Q: How do I know if a group is legitimate?**
-A: Check the contract address, read reviews, and verify with other participants.
+Your credit score is an on-chain number that increases with on-time repayments and decreases with missed ones. It is:
+- Visible on your public profile
+- Portable across all StellarCircle lending circles
+- Stored permanently on Stellar as part of your financial history
 
-### Troubleshooting
+---
 
-**Q: My transaction is stuck**
-A: Check Stellar Explorer for transaction status. Network congestion can cause delays.
+## 10. Pillar E — Milestone-Unlocked Savings
 
-**Q: I can't connect my wallet**
-A: Ensure your wallet is unlocked and supports the current network (testnet/mainnet).
+### How It Works
 
-**Q: Contribution failed**
-A: Verify you have sufficient XLM for both the contribution and transaction fees.
+You lock funds in a vault that can only be released when verifiable milestones are met. Each milestone has a verifier — someone you trust to confirm completion. Funds release proportionally as milestones are cleared.
 
-**Q: Wrong contribution amount**
-A: Contributions must match the group's exact amount. Check the group settings.
+**Example**: You lock 3,000 USDC for business growth. Milestone 1 (register business, 20% of funds) is verified by your accountant. Milestone 2 (hire first employee, 30%) verified by your co-founder. Milestone 3 (reach 1,000 customers, 50%) verified by a business mentor.
 
-## Penalty System
+### Creating a Milestone Vault
 
-To encourage timely contributions and protect active members, SorobanSave supports an optional penalty mechanism for missed contributions.
+1. Go to **Create Circle → Pillar E**
+2. Set the **total amount to lock** and **asset**
+3. Add milestones one by one:
+   - Milestone description
+   - Percentage of total funds unlocked on completion
+   - Verifier address (Stellar G... address)
+   - Deadline (optional)
+4. Lock the funds by signing the transaction
+5. Verifiers are notified automatically
 
-### How Penalties Work
+### Completing a Milestone
 
-When a group creator enables penalties, any member who fails to contribute during a cycle is automatically charged a fixed penalty fee at payout time. The penalty amount is added directly to the cycle pool, so the payout recipient receives the full pool **plus** any penalties collected from non-contributors.
+1. Complete the real-world action (e.g. register your business)
+2. Notify your verifier (off-chain, via WhatsApp, email, etc.)
+3. Verifier opens StellarCircle and sees the pending attestation
+4. Verifier clicks **Attest** and signs the transaction
+5. You call **Release Funds** for that milestone
+6. The unlocked percentage arrives in your wallet
 
-**Key points:**
-- Penalties are **optional** — the group creator decides whether to enable them at group creation.
-- The penalty amount is fixed in stroops (1 XLM = 10,000,000 stroops) and set when the group is created.
-- Penalties are applied automatically by the smart contract when `execute_payout` is called; no manual action is required.
-- A `PenaltyApplied` event is emitted on-chain for each penalty, providing a transparent audit trail.
+### What If a Verifier Is Unresponsive?
 
-### Penalty Configuration
+If a verifier does not attest before the milestone deadline, a governance proposal is created automatically. Circle members (or just you and the verifier, in a 2-person setup) can vote to:
+- Extend the deadline
+- Reassign the verifier
+- Refund the locked portion
 
-When creating a group, the creator can set:
+---
 
-| Field | Description |
-|---|---|
-| `penalty_enabled` | `true` to activate the penalty system, `false` to disable it |
-| `penalty_amount` | Fixed penalty in stroops charged per missed cycle (must be > 0 when enabled) |
+## 11. Governance — Voting on Proposals
 
-Example: a group with `contribution_amount = 10,000,000` (1 XLM) and `penalty_amount = 500,000` (0.05 XLM) means a member who misses a cycle pays an extra 0.05 XLM that goes to the current cycle's recipient.
+Any member of a circle can create a proposal to change how the circle operates. Proposals require a quorum and a majority vote to pass.
 
-### Penalty Flow
+### Common Proposal Types
 
-1. All members contribute (or the cycle deadline passes).
-2. `execute_payout` is called.
-3. The contract identifies members who did not contribute this cycle.
-4. For each non-contributor, `penalty_amount` is:
-   - Added to their cumulative penalty total (queryable via `get_member_penalties`).
-   - Added to the cycle pool total so the payout recipient receives it.
-5. A `PenaltyApplied` event is emitted for each penalised member.
-6. The payout is distributed to the eligible recipient (base pool + penalties).
+| Type | What It Does |
+|------|-------------|
+| Config Change | Update contribution amount, cycle length, penalty % |
+| Add / Remove Member | Add a member to the circle or remove an inactive one |
+| Fund Release | Approve release of goal-based or milestone funds |
+| Pause / Unpause | Halt or resume circle activity |
+| Emergency Withdraw | Return all funds pro-rata (requires supermajority) |
 
-### Querying Penalties
+### How to Vote
 
-Use the `get_member_penalties(group_id, member)` contract function to check how much a member has been penalised in total across all cycles of a group.
+1. Go to the **Governance** tab of any circle
+2. Active proposals are listed with their deadline and current vote tally
+3. Click **Vote For**, **Vote Against**, or **Abstain**
+4. Sign the transaction in your wallet
+5. When the voting period ends and quorum is met, anyone can click **Execute** to carry out the result
 
-```
-get_member_penalties(group_id: u64, member: Address) -> i128
-```
+---
 
-Returns the cumulative penalty amount in stroops. Returns `0` if no penalties have been applied.
+## 12. Notifications
 
-### FAQ
+StellarCircle sends reminders so you never miss a contribution or vote.
 
-**Q: Can penalties be changed after the group is created?**
-A: No. Penalty settings are fixed at group creation to ensure all members agree to the same terms.
+### Notification Types
 
-**Q: What if I miss a contribution — will I be removed from the group?**
-A: No. You remain a member and will still receive your payout when your turn comes. The penalty is a financial charge, not an exclusion.
+| Notification | When |
+|-------------|------|
+| Contribution Due | 3 days and 24 hours before your deadline |
+| Payout Received | Immediately when funds arrive in your wallet |
+| New Member Joined | When someone joins your circle |
+| Governance Vote Open | When a proposal is created in your circle |
+| Vote Ending Soon | 12 hours before a proposal vote closes |
+| Loan Approved | When your loan request is approved |
+| Loan Repayment Due | 7 days and 1 day before repayment deadline |
+| Milestone Attested | When a verifier confirms your milestone |
+| Vault Breach | When a missed contribution penalty fires |
 
-**Q: Does the penalty affect the payout I receive when it's my turn?**
-A: No. Your payout is based on the pool at the time of your cycle. If other members missed contributions in your cycle, their penalties are added to your payout.
+### Managing Notifications
 
-**Q: Can I see who was penalised?**
-A: Yes. `PenaltyApplied` events are emitted on-chain and include the group ID, member address, penalty amount, and cycle number.
+- Web: Settings → Notifications
+- Mobile: Settings → Push Notifications
+- You can enable/disable each type independently
 
-## Getting Help
+---
 
-- **Documentation**: Check this guide and the technical docs
-- **Community**: Join Stellar communities for support
-- **Support**: Contact the development team through GitHub issues
-- **Stellar Resources**: Visit developers.stellar.org for technical help
+## 13. Your Profile & Credit Score
 
-## Best Practices
+Your profile page shows:
 
-1. **Start Small**: Begin with testnet and small amounts
-2. **Build Trust**: Start groups with people you know
-3. **Stay Committed**: Reliable contributions build group trust
-4. **Communicate**: Keep open lines with group members
-5. **Learn Continuously**: Stay updated with platform changes
+- **Active Circles** — circles you currently participate in
+- **Completed Circles** — your history of completed ROSCAs, goals, and vaults
+- **Completion Badges** — on-chain records of successfully completed commitments
+- **Credit Score** — your lending reputation score (0–1000 scale)
+- **Contribution Streak** — longest streak of on-time contributions
+- **On-Chain Address** — your Stellar public key
 
-Remember, SorobanSave is about building financial discipline and community trust. Participate responsibly and help others do the same!</content>
-<parameter name="filePath">c:\Users\USER\Desktop\solo\SorobanSave\docs\user-guide.md
+Your profile is public by default. The credit score and completion badges are designed to be shared with future circles as proof of financial reliability.
+
+---
+
+## 14. Troubleshooting
+
+### "Transaction rejected" in my wallet
+You declined the transaction in your wallet app. Nothing was sent. Try again and approve the transaction when prompted.
+
+### My contribution is stuck as "Pending"
+The Stellar network may be congested. Wait 30 seconds and refresh. If it stays pending after 2 minutes, the transaction likely failed — try again. Funds are never deducted without a confirmed transaction.
+
+### I can't see my circle after creating it
+The backend indexer processes on-chain events in near real-time (usually under 10 seconds). Refresh your dashboard. If the circle still doesn't appear after 1 minute, check the transaction on [Stellar Expert](https://stellar.expert) using your wallet address.
+
+### My payout didn't arrive
+Payouts execute automatically when all members of a ROSCA cycle have contributed. Check the circle page to see if all contributions are confirmed. If they are and the payout still hasn't executed, contact support via GitHub Issues.
+
+### I nominated a witness but they didn't receive a notification
+Witnesses receive an on-chain event. If your witness uses StellarCircle, they will see a notification in their dashboard. For external wallets, share the circle link with them directly.
+
+### I want to leave a circle
+You can leave a circle that has not yet started (status: OPEN). Once a circle is ACTIVE, leaving requires a governance vote. This protects other members from disruption.
+
+---
+
+## 15. Glossary
+
+| Term | Definition |
+|------|-----------|
+| **Circle** | Any group created on StellarCircle (ROSCA, Goal, Lending, etc.) |
+| **Pillar** | One of the five savings/lending models (A–E) |
+| **Cycle** | A time period within a ROSCA or Lending Circle (e.g. 30 days) |
+| **Payout** | Funds distributed to a recipient at the end of a cycle |
+| **Contribution** | A payment made by a member into the circle pool |
+| **Witness** | An accountability partner in a Pillar C vault |
+| **Verifier** | A trusted person who confirms milestone completion (Pillar E) |
+| **Attestation** | An on-chain confirmation signed by a verifier |
+| **Credit Score** | On-chain reputation built through lending circle participation |
+| **SEP-10** | Stellar Web Authentication standard — how you log in with your wallet |
+| **SEP-41** | Stellar token interface standard — how custom tokens are supported |
+| **Soroban** | Stellar's smart contract platform (Rust-based) |
+| **XLM** | Stellar Lumens — Stellar's native currency |
+| **Horizon** | Stellar's public API for querying blockchain data |
+| **Quorum** | Minimum number of votes needed for a governance proposal to be valid |
+| **Supermajority** | A 2/3 majority, required for emergency withdrawal proposals |
+| **Grace Period** | Extra time allowed after a contribution deadline before penalties apply |
+| **Penalty** | A deduction from locked funds for missed contributions or repayments |
+| **Streak** | Consecutive on-time contributions in a vault or circle |
