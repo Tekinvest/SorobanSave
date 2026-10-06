@@ -2,7 +2,7 @@ name: Mutation Testing
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
     paths:
       - 'contracts/**'
@@ -23,30 +23,42 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Install cargo-mutants
-        run: cargo install cargo-mutants
+        run: cargo install cargo-mutants --locked
 
       - name: Run mutation testing
-        working-directory: ./contracts
+        working-directory: ./contracts/soroban-save
         run: |
           cargo mutants \
-            --file-pattern '**/*.rs' \
-            --output-json mutants-report.json \
-            --minimum-score 75
+            --file soroban_save \
+            --output ../mutants-out \
+            --jobs 2
 
-      - name: Check mutation score & report survivors
+      - name: Check mutation score
         working-directory: ./contracts
         run: |
-          SCORE=$(jq -r '.score' mutants-report.json)
-          echo "Mutation Score: $SCORE%"
+          SURVIVED=$(find mutants-out -name "*.log" -path "*/missed/*" 2>/dev/null | wc -l)
+          TOTAL=$(find mutants-out -name "*.log" 2>/dev/null | wc -l)
 
-          if (( $(echo "$SCORE < 75" | bc -l) )); then
-            echo "❌ Mutation score below threshold: $SCORE% (minimum 75%)"
-            echo ""
-            echo "Surviving mutants:"
-            jq -r '.survivors[] | "  • \(.file):\(.line) → \(.function)"' mutants-report.json
-            echo ""
-            echo "Please address these mutants or raise the score in mutants.toml"
-            exit 1
-          else
-            echo "✅ Mutation score passed: $SCORE%"
+          if [ "$TOTAL" -eq 0 ]; then
+            echo "No mutants generated — skipping score check"
+            exit 0
           fi
+
+          CAUGHT=$((TOTAL - SURVIVED))
+          SCORE=$(awk "BEGIN {printf \"%.1f\", ($CAUGHT/$TOTAL)*100}")
+          echo "Mutation score: ${SCORE}% (${CAUGHT}/${TOTAL} caught)"
+
+          if awk "BEGIN {exit ($SCORE >= 75) ? 0 : 1}"; then
+            echo "✅ Mutation score passed: ${SCORE}%"
+          else
+            echo "❌ Mutation score below 75% threshold: ${SCORE}%"
+            exit 1
+          fi
+
+      - name: Upload mutants report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mutants-report
+          path: contracts/mutants-out/
+          retention-days: 14

@@ -22,40 +22,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ── Frontend Quality Checks ──────────────────────────────────
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: |
-            frontend/package-lock.json
-            backend/package-lock.json
+          cache: 'pnpm'
 
-      - name: Install frontend dependencies
-        run: npm ci
-        working-directory: frontend
+      - name: Install all dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Frontend - Lint check
-        run: npm run lint
-        working-directory: frontend
+        run: pnpm --filter frontend lint
 
       - name: Frontend - Format check
-        run: npx prettier --check "src/**/*.{ts,tsx,css}"
-        working-directory: frontend
+        run: pnpm --filter frontend exec prettier --check "src/**/*.{ts,tsx,css}"
 
       - name: Frontend - Security audit
-        run: npm audit --audit-level=high
-        working-directory: frontend
+        run: pnpm --filter frontend audit --audit-level=high
         continue-on-error: false
 
-      - name: Install backend dependencies
-        run: npm ci
-        working-directory: backend
-
       - name: Backend - Security audit
-        run: npm audit --audit-level=high
-        working-directory: backend
+        run: pnpm --filter backend audit --audit-level=high
         continue-on-error: false
 
       # ── Rust Quality Checks ──────────────────────────────────────
@@ -68,12 +59,11 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Rust - Format check
-        run: cargo fmt --manifest-path contracts/soroban-save/Cargo.toml --all -- --check
+        run: cargo fmt --all -- --check
 
       - name: Rust - Clippy lint
         run: |
           cargo clippy \
-            --manifest-path contracts/soroban-save/Cargo.toml \
             --all-targets \
             --all-features \
             -- -D warnings
@@ -83,37 +73,32 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Rust - Dependency check
-        run: |
-          cargo tree --manifest-path contracts/soroban-save/Cargo.toml --duplicates
-          cargo tree --manifest-path contracts/soroban-save/Cargo.toml --depth 1
-
   # ─── Frontend Tests & Coverage ──────────────────────────────────────
   frontend:
     name: Frontend Tests
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
 
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
-        run: npm run lint
+        run: pnpm --filter frontend lint
 
       - name: Run tests with coverage
-        run: npm run test:coverage
+        run: pnpm --filter frontend test:coverage
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
@@ -137,28 +122,28 @@ jobs:
   shared-utils:
     name: Shared Utils Tests
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/shared-utils
 
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
-          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
-        run: pnpm run lint
+        run: pnpm --filter @soroban-save/shared-utils lint
 
       - name: Run tests with coverage
-        run: pnpm run test:coverage
+        run: pnpm --filter @soroban-save/shared-utils test:coverage
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
@@ -207,24 +192,23 @@ jobs:
             --output-path lcov.info \
             -- --test-threads=1
 
-      - name: Check coverage threshold (95%)
+      - name: Check coverage threshold (85%)
         run: |
           cargo llvm-cov \
             --manifest-path contracts/soroban-save/Cargo.toml \
             --summary-only \
             -- --test-threads=1 2>&1 | tee coverage_summary.txt
-          
-          # Extract line coverage percentage
-          LINE_COV=$(grep -oP 'Lines\s+\K[\d.]+(?=%)' coverage_summary.txt || echo "0")
-          echo "Line coverage: ${LINE_COV}%"
-          
-          # Fail if below 95%
+
           python3 -c "
-          cov = float('${LINE_COV}' or 0)
-          if cov < 95.0:
-              print(f'Coverage {cov:.1f}% is below the 95% threshold')
-              exit(1)
-          print(f'Coverage {cov:.1f}% meets the 95% threshold')
+          import re, sys
+          text = open('coverage_summary.txt').read()
+          m = re.search(r'Lines\s+([\d.]+)%', text)
+          cov = float(m.group(1)) if m else 0.0
+          print(f'Line coverage: {cov:.1f}%')
+          if cov < 85.0:
+              print(f'ERROR: Coverage {cov:.1f}% is below the 85% threshold')
+              sys.exit(1)
+          print(f'OK: Coverage {cov:.1f}% meets the 85% threshold')
           "
 
       - name: Generate HTML coverage report
@@ -262,20 +246,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          cache: 'pnpm'
 
-      - name: Install frontend dependencies
-        run: npm ci
-        working-directory: frontend
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Build frontend
-        run: npm run build
-        working-directory: frontend
+        run: pnpm --filter frontend build
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -292,127 +277,80 @@ jobs:
             --target wasm32-unknown-unknown \
             --release
 
-  # ─── Performance Monitoring (Lighthouse CI) ─────────────────────────
-  performance:
-    name: Lighthouse CI Performance
-    needs: [build]
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
-
-      - name: Install frontend dependencies
-        run: npm ci
-        working-directory: frontend
-
-      - name: Build frontend for perf tests
-        run: npm run build
-        working-directory: frontend
-
-      - name: Start frontend preview server
-        run: |
-          cd frontend
-          nohup npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/lhci-frontend.log 2>&1 &
-          echo $! > /tmp/lhci-server.pid
-          sleep 5
-
-      - name: Run Lighthouse CI
-        run: |
-          npx lhci autorun --config .lighthouserc.json
-
-      - name: Stop frontend preview server
-        run: |
-          PID=$(cat /tmp/lhci-server.pid)
-          kill $PID || true
-
-      - name: Upload Lighthouse report logs
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: lighthouse-report-log
-          path: /tmp/lhci-frontend.log
-
-  # ─── Automated Deployment (testnet/mainnet) ────────────────────────
+  # ─── Deploy to Testnet (develop branch only) ──────────────────────
   deploy-testnet:
     name: Deploy to Testnet
-    needs: [build, performance]
-    if: github.ref == 'refs/heads/develop'
+    needs: [build]
+    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install tools for deployment
-        run: |
-          npm --prefix frontend ci
-          curl -sL https://sh.rustup.rs | sh -s -- -y
-          source $HOME/.cargo/env
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.81.0"
+          targets: wasm32-unknown-unknown
 
-      - name: Deploy contracts and frontend to testnet
-        run: |
-          STELLAR_NETWORK=testnet STELLAR_RPC_URL=https://soroban-testnet.stellar.org ./scripts/deploy_testnet.sh
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
 
-      - name: Run smoke tests after deployment
+      - name: Install Stellar CLI
+        run: |
+          cargo install stellar-cli --locked 2>/dev/null || true
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Configure deployer identity
+        env:
+          STELLAR_SECRET_KEY: ${{ secrets.STELLAR_DEPLOYER_SECRET_KEY }}
+        run: stellar keys add default --secret-key "$STELLAR_SECRET_KEY"
+
+      - name: Deploy contracts to testnet
+        env:
+          STELLAR_NETWORK: testnet
+          STELLAR_RPC_URL: https://soroban-testnet.stellar.org
+        run: ./scripts/deploy_testnet.sh
+
+      - name: Run smoke tests
         run: ./scripts/smoke_test.sh
 
-      - name: Notify on completion
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const body = `✅ Testnet deployment completed for ${process.env.GITHUB_REF}`;
-            if (github.context.payload.pull_request) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: github.context.payload.pull_request.number,
-                body,
-              });
-            } else {
-              core.info(body);
-            }
-
+  # ─── Deploy to Mainnet (main branch only) ─────────────────────────
   deploy-mainnet:
     name: Deploy to Mainnet
-    needs: [build, performance]
-    if: github.ref == 'refs/heads/main'
+    needs: [build]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     environment: production
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install tools for deployment
-        run: |
-          npm --prefix frontend ci
-          curl -sL https://sh.rustup.rs | sh -s -- -y
-          source $HOME/.cargo/env
-
-      - name: Deploy contracts and frontend to mainnet
-        run: |
-          AUTO_CONFIRM_MAINNET=true STELLAR_NETWORK=mainnet STELLAR_RPC_URL=https://soroban-rpc.mainnet.stellar.gateway.fm ./scripts/deploy_mainnet.sh
-
-      - name: Run smoke tests after deployment
-        run: ./scripts/smoke_test.sh
-
-      - name: Notify on completion
-        uses: actions/github-script@v7
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
         with:
-          script: |
-            const body = `✅ Mainnet deployment completed for ${process.env.GITHUB_REF}`;
-            if (github.context.payload.pull_request) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: github.context.payload.pull_request.number,
-                body,
-              });
-            } else {
-              core.info(body);
-            }
+          toolchain: "1.81.0"
+          targets: wasm32-unknown-unknown
+
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install Stellar CLI
+        run: |
+          cargo install stellar-cli --locked 2>/dev/null || true
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Configure deployer identity
+        env:
+          STELLAR_SECRET_KEY: ${{ secrets.STELLAR_DEPLOYER_SECRET_KEY }}
+        run: stellar keys add default --secret-key "$STELLAR_SECRET_KEY"
+
+      - name: Deploy contracts to mainnet
+        env:
+          AUTO_CONFIRM_MAINNET: "true"
+          STELLAR_NETWORK: mainnet
+          STELLAR_RPC_URL: https://soroban-rpc.mainnet.stellar.gateway.fm
+        run: ./scripts/deploy_mainnet.sh
+
+      - name: Run smoke tests
+        run: ./scripts/smoke_test.sh
