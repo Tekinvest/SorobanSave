@@ -59,7 +59,7 @@ export class BackupService {
     logger.info('[BackupService] Running pg_dump...');
     const data = await this.pgDump();
     const timestamp = new Date();
-    const key = `backups/stellar-save-${formatTimestamp(timestamp)}.dump`;
+    const key = `backups/soroban-save-${formatTimestamp(timestamp)}.dump`;
 
     await this.uploadToS3(data, key);
 
@@ -170,7 +170,7 @@ export class BackupService {
 
   /** Extract the timestamp embedded in a backup key. Returns null for unrecognised keys. */
   private parseKeyTimestamp(key: string): Date | null {
-    const match = key.match(/stellar-save-([0-9T]+Z)\.dump$/);
+    const match = key.match(/soroban-save-([0-9T]+Z)\.dump$/);
     return match ? parseTimestamp(match[1]) : null;
   }
 }

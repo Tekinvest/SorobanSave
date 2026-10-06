@@ -58,7 +58,7 @@ describe('structured logger', () => {
   });
 
   it('carries the service metadata on the logger instance', () => {
-    expect((winstonLogger as any).defaultMeta).toEqual({ service: 'stellar-save-backend' });
+    expect((winstonLogger as any).defaultMeta).toEqual({ service: 'soroban-save-backend' });
   });
 
   it('merges a fields object into the log entry (structured form)', () => {

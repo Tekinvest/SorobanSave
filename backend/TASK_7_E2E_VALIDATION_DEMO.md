@@ -250,14 +250,14 @@ DB_USERNAME=dbuser
 DB_PASSWORD=dbpass123
 DB_HOST=rds.amazonaws.com
 DB_PORT=5432
-DB_NAME=stellar_save
+DB_NAME=soroban_save
 ```
 
 **Result**: ✅ Config constructs URL from components
 
 ```typescript
 // Config constructs URL internally
-config.database.url; // 'postgresql://dbuser:dbpass123@rds.amazonaws.com:5432/stellar_save'
+config.database.url; // 'postgresql://dbuser:dbpass123@rds.amazonaws.com:5432/soroban_save'
 ```
 
 ---
@@ -276,7 +276,7 @@ ADMIN_SECRET=test-admin-secret
 **Result**: ✅ Config loads with fallback (warning logged)
 
 ```typescript
-config.database.url; // 'postgresql://user:pass@localhost:5432/stellar_save'
+config.database.url; // 'postgresql://user:pass@localhost:5432/soroban_save'
 // stderr: {"level":"warn","message":"Neither DATABASE_URL nor complete DB_* variables provided..."}
 ```
 

@@ -41,7 +41,7 @@ docker run -d -p 4566:4566 localstack/localstack
 
 # Create test secrets
 awslocal secretsmanager create-secret \
-  --name stellar-save/test-jwt-secret \
+  --name soroban-save/test-jwt-secret \
   --secret-string "test-secret-value-min-32-characters-long"
 ```
 
@@ -120,7 +120,7 @@ curl -X POST http://localhost:3001/api/decode-transaction \
   -H "Content-Type: application/json" \
   -d '{
     "xdr": "YOUR_TRANSACTION_XDR",
-    "origin": "https://app.stellar-save.com"
+    "origin": "https://app.soroban-save.com"
   }'
 ```
 
@@ -151,7 +151,7 @@ curl -X POST http://localhost:3001/api/decode-transaction \
   -H "Content-Type: application/json" \
   -d '{
     "xdr": "LARGE_PAYMENT_XDR",
-    "origin": "https://app.stellar-save.com"
+    "origin": "https://app.soroban-save.com"
   }'
 ```
 
@@ -198,14 +198,14 @@ curl -X POST http://localhost:3001/api/groups \
 #### 1. Check Secret Metadata
 
 ```bash
-curl http://localhost:3001/api/admin/secrets/stellar-save%2Fjwt-secret/metadata
+curl http://localhost:3001/api/admin/secrets/soroban-save%2Fjwt-secret/metadata
 ```
 
 **Expected response:**
 ```json
 {
   "metadata": {
-    "name": "stellar-save/jwt-secret",
+    "name": "soroban-save/jwt-secret",
     "rotationEnabled": true,
     "rotationIntervalDays": 30,
     "lastRotated": "2024-01-15T10:30:00Z",
@@ -217,7 +217,7 @@ curl http://localhost:3001/api/admin/secrets/stellar-save%2Fjwt-secret/metadata
 #### 2. Trigger Rotation
 
 ```bash
-curl -X POST http://localhost:3001/api/admin/secrets/stellar-save%2Fjwt-secret/rotate
+curl -X POST http://localhost:3001/api/admin/secrets/soroban-save%2Fjwt-secret/rotate
 ```
 
 **Expected:**
@@ -235,7 +235,7 @@ curl http://localhost:3001/api/admin/secrets/rotation-status
 ```json
 {
   "status": {
-    "upToDate": ["stellar-save/jwt-secret"],
+    "upToDate": ["soroban-save/jwt-secret"],
     "needsRotation": [],
     "failed": []
   }
@@ -371,27 +371,27 @@ npm run test:smoke -- --env=staging
 
 ```bash
 # Test transaction decoder
-curl https://api-staging.stellar-save.com/api/decode-transaction \
+curl https://api-staging.soroban-save.com/api/decode-transaction \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"xdr": "TEST_XDR"}'
 
 # Check security headers
-curl -I https://api-staging.stellar-save.com/api/security/health
+curl -I https://api-staging.soroban-save.com/api/security/health
 
 # Verify secrets manager
-curl https://api-staging.stellar-save.com/api/admin/secrets/rotation-status
+curl https://api-staging.soroban-save.com/api/admin/secrets/rotation-status
 ```
 
 #### 3. Monitor
 
 ```bash
 # Check logs
-aws logs tail /aws/lambda/stellar-save-backend --follow
+aws logs tail /aws/lambda/soroban-save-backend --follow
 
 # Check CloudWatch metrics
 aws cloudwatch get-metric-statistics \
-  --namespace "StellarSave/Security" \
+  --namespace "SorobanSave/Security" \
   --metric-name "HighRiskTransactions" \
   --start-time $(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%S) \
   --end-time $(date -u +%Y-%m-%dT%H:%M:%S) \
@@ -405,17 +405,17 @@ aws cloudwatch get-metric-statistics \
 
 ```bash
 # Verify CSP
-curl -I https://api.stellar-save.com | grep -i content-security-policy
+curl -I https://api.soroban-save.com | grep -i content-security-policy
 
 # Verify all security headers
-curl -I https://api.stellar-save.com | grep -iE "x-frame-options|x-content-type-options|x-xss-protection"
+curl -I https://api.soroban-save.com | grep -iE "x-frame-options|x-content-type-options|x-xss-protection"
 ```
 
 #### Transaction Decoder Check
 
 ```bash
 # Test with real transaction
-curl https://api.stellar-save.com/api/decode-transaction \
+curl https://api.soroban-save.com/api/decode-transaction \
   -X POST \
   -H "Content-Type: application/json" \
   -d @test-transaction.json
@@ -426,12 +426,12 @@ curl https://api.stellar-save.com/api/decode-transaction \
 ```bash
 # Verify rotation is working
 aws secretsmanager describe-secret \
-  --secret-id stellar-save/jwt-secret \
+  --secret-id soroban-save/jwt-secret \
   --query 'RotationEnabled'
 
 # Check last rotation
 aws secretsmanager describe-secret \
-  --secret-id stellar-save/jwt-secret \
+  --secret-id soroban-save/jwt-secret \
   --query 'LastRotatedDate'
 ```
 

@@ -1,4 +1,4 @@
-import { withRetry } from '@stellar-save/shared-utils';
+import { withRetry } from '@soroban-save/shared-utils';
 
 import { config } from '../config';
 import { logger } from '../logger';

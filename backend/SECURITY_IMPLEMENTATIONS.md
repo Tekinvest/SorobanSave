@@ -49,7 +49,7 @@ console.log(decoded.educationalPrompts); // User education
 // Validate transaction
 const validation = transactionDecoderService.validateTransaction(
   transactionXdr,
-  'https://app.stellar-save.com'
+  'https://app.soroban-save.com'
 );
 
 if (!validation.isValid) {
@@ -120,7 +120,7 @@ Add known contract addresses to `KNOWN_CONTRACTS` in `transaction_decoder_servic
 
 ```typescript
 const KNOWN_CONTRACTS: Record<string, { name: string; trusted: boolean }> = {
-  'CXXXXXXXXX...': { name: 'Stellar Save Contract', trusted: true },
+  'CXXXXXXXXX...': { name: 'SorobanSave Contract', trusted: true },
   'CYYYYYYYYYY...': { name: 'Partner Contract', trusted: true },
 };
 ```
@@ -454,19 +454,19 @@ AWS Lambda function for automatic secret rotation following the 4-step process:
 ```bash
 # JWT Secret
 aws secretsmanager create-secret \
-  --name stellar-save/jwt-secret \
+  --name soroban-save/jwt-secret \
   --description "JWT signing secret" \
   --secret-string "$(openssl rand -hex 64)"
 
 # Admin Secret
 aws secretsmanager create-secret \
-  --name stellar-save/admin-secret \
+  --name soroban-save/admin-secret \
   --description "Admin API secret" \
   --secret-string "$(openssl rand -hex 32)"
 
 # Database Password
 aws secretsmanager create-secret \
-  --name stellar-save/db-password \
+  --name soroban-save/db-password \
   --description "PostgreSQL password" \
   --secret-string "$(openssl rand -base64 32)"
 ```
@@ -480,7 +480,7 @@ zip -r rotation-lambda.zip secrets_rotation_lambda.ts node_modules/
 
 # Deploy
 aws lambda create-function \
-  --function-name stellar-save-secret-rotation \
+  --function-name soroban-save-secret-rotation \
   --runtime nodejs20.x \
   --handler secrets_rotation_lambda.handler \
   --zip-file fileb://rotation-lambda.zip \
@@ -493,9 +493,9 @@ aws lambda create-function \
 import { secretsManager } from './secrets_manager_service';
 
 // Enable 30-day rotation
-await secretsManager.enableRotation('stellar-save/jwt-secret', {
+await secretsManager.enableRotation('soroban-save/jwt-secret', {
   automaticallyAfterDays: 30,
-  lambdaArn: 'arn:aws:lambda:REGION:ACCOUNT:function:stellar-save-secret-rotation',
+  lambdaArn: 'arn:aws:lambda:REGION:ACCOUNT:function:soroban-save-secret-rotation',
 });
 ```
 
@@ -507,14 +507,14 @@ await secretsManager.enableRotation('stellar-save/jwt-secret', {
 import { secretsManager } from './secrets_manager_service';
 
 // Single secret (cached)
-const jwtSecret = await secretsManager.getSecret('stellar-save/jwt-secret');
+const jwtSecret = await secretsManager.getSecret('soroban-save/jwt-secret');
 console.log(jwtSecret.value);
 
 // Multiple secrets
 const secrets = await secretsManager.getSecrets([
-  'stellar-save/jwt-secret',
-  'stellar-save/admin-secret',
-  'stellar-save/db-password',
+  'soroban-save/jwt-secret',
+  'soroban-save/admin-secret',
+  'soroban-save/db-password',
 ]);
 ```
 
@@ -523,12 +523,12 @@ const secrets = await secretsManager.getSecrets([
 ```typescript
 // Update secret value
 await secretsManager.updateSecret(
-  'stellar-save/api-key',
+  'soroban-save/api-key',
   'new-secret-value'
 );
 
 // Trigger rotation manually
-await secretsManager.rotateSecret('stellar-save/jwt-secret');
+await secretsManager.rotateSecret('soroban-save/jwt-secret');
 ```
 
 #### Application Startup
@@ -553,9 +553,9 @@ async function startServer() {
 
 ```typescript
 const secretNames = [
-  'stellar-save/jwt-secret',
-  'stellar-save/admin-secret',
-  'stellar-save/db-password',
+  'soroban-save/jwt-secret',
+  'soroban-save/admin-secret',
+  'soroban-save/db-password',
 ];
 
 const status = await secretsManager.checkRotationStatus(secretNames);
@@ -571,7 +571,7 @@ The rotation Lambda automatically logs failures. Configure CloudWatch Alarms:
 
 ```bash
 aws cloudwatch put-metric-alarm \
-  --alarm-name stellar-save-rotation-failure \
+  --alarm-name soroban-save-rotation-failure \
   --alarm-description "Alert on secret rotation failure" \
   --metric-name Errors \
   --namespace AWS/Lambda \
@@ -579,7 +579,7 @@ aws cloudwatch put-metric-alarm \
   --period 300 \
   --threshold 1 \
   --comparison-operator GreaterThanThreshold \
-  --dimensions Name=FunctionName,Value=stellar-save-secret-rotation
+  --dimensions Name=FunctionName,Value=soroban-save-secret-rotation
 ```
 
 ### Migration from Environment Variables
@@ -589,7 +589,7 @@ import { migrateSecretToAWS } from './secrets_manager_service';
 
 // Migrate existing secrets
 await migrateSecretToAWS(
-  'stellar-save/jwt-secret',
+  'soroban-save/jwt-secret',
   process.env.JWT_SECRET!,
   'JWT signing secret for authentication'
 );
@@ -619,7 +619,7 @@ Required IAM policy for the application:
         "secretsmanager:GetSecretValue",
         "secretsmanager:DescribeSecret"
       ],
-      "Resource": "arn:aws:secretsmanager:*:*:secret:stellar-save/*"
+      "Resource": "arn:aws:secretsmanager:*:*:secret:soroban-save/*"
     }
   ]
 }
@@ -639,7 +639,7 @@ Required for rotation Lambda:
         "secretsmanager:UpdateSecretVersionStage",
         "secretsmanager:DescribeSecret"
       ],
-      "Resource": "arn:aws:secretsmanager:*:*:secret:stellar-save/*"
+      "Resource": "arn:aws:secretsmanager:*:*:secret:soroban-save/*"
     }
   ]
 }

@@ -47,7 +47,7 @@ export interface TransactionValidation {
 // Known contract addresses and their purposes
 const KNOWN_CONTRACTS: Record<string, { name: string; trusted: boolean }> = {
   // Add your known contract addresses here
-  // Example: 'CXXXXXXX...': { name: 'Stellar Save Contract', trusted: true }
+  // Example: 'CXXXXXXX...': { name: 'SorobanSave Contract', trusted: true }
 };
 
 // Suspicious amount thresholds (in stroops)

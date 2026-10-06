@@ -58,7 +58,7 @@ export class ExportService {
 
       // In a real app, we would upload to S3 or similar
       // For this mock, we'll just use a fake URL
-      job.fileUrl = `https://stellar-save.exports/download/${jobId}.${job.format.toLowerCase()}`;
+      job.fileUrl = `https://soroban-save.exports/download/${jobId}.${job.format.toLowerCase()}`;
       job.status = 'completed';
       job.completedAt = Date.now();
 

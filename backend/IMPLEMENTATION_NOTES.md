@@ -279,7 +279,7 @@ afterAll(async () => {
 
 ```bash
 # Install dependencies
-cd /workspaces/Stellar-Save
+cd /workspaces/SorobanSave
 pnpm install
 
 # Run backend tests
@@ -331,7 +331,7 @@ All changes pass CI before merge.
 # Config (Issue #1506)
 NODE_ENV=development
 PORT=3001
-DATABASE_URL=postgresql://user:pass@localhost:5432/stellar_save
+DATABASE_URL=postgresql://user:pass@localhost:5432/soroban_save
 JWT_SECRET=your-secret-key-min-32-chars
 
 # Rate Limiting (Issue #1507)
@@ -350,10 +350,10 @@ REDIS_PASSWORD=
 
 ```bash
 # Create test database
-createdb stellar_save_test
+createdb soroban_save_test
 
 # Run migrations
-DATABASE_URL=postgresql://user:pass@localhost:5433/stellar_save_test npx prisma migrate deploy
+DATABASE_URL=postgresql://user:pass@localhost:5433/soroban_save_test npx prisma migrate deploy
 
 # Run tests
 npm run test:integration

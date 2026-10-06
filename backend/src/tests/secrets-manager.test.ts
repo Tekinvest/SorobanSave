@@ -25,14 +25,14 @@ describe('SecretsManagerService', () => {
   describe('Secret Retrieval', () => {
     it('should retrieve secret from AWS', async () => {
       // Mock implementation would go here
-      const secretName = 'stellar-save/test-secret';
+      const secretName = 'soroban-save/test-secret';
 
       // In real tests, mock the AWS SDK response
       expect(service.getSecret(secretName)).toBeDefined();
     });
 
     it('should cache secret values', async () => {
-      const secretName = 'stellar-save/cached-secret';
+      const secretName = 'soroban-save/cached-secret';
 
       // First call
       await service.getSecret(secretName);
@@ -45,7 +45,7 @@ describe('SecretsManagerService', () => {
     });
 
     it('should bypass cache when requested', async () => {
-      const secretName = 'stellar-save/no-cache-secret';
+      const secretName = 'soroban-save/no-cache-secret';
 
       // Call with bypassCache = true
       await service.getSecret(secretName, true);
@@ -57,7 +57,7 @@ describe('SecretsManagerService', () => {
 
   describe('Error Handling', () => {
     it('should handle AWS SDK errors gracefully', async () => {
-      const secretName = 'stellar-save/nonexistent-secret';
+      const secretName = 'soroban-save/nonexistent-secret';
 
       // Should not throw when secret doesn't exist
       await expect(service.getSecret(secretName)).resolves.toBeDefined();

@@ -46,7 +46,7 @@ jest.mock('../config', () => ({
   config: {
     tracing: {
       enabled: false,
-      serviceName: 'stellar-save-backend-test',
+      serviceName: 'soroban-save-backend-test',
       otlpEndpoint: '',
       samplerArg: 0.1,
     },

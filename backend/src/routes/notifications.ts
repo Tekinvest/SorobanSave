@@ -164,7 +164,7 @@ export function createNotificationRouter(): Router {
           <body>
             <h1>Unsubscribed</h1>
             <p>You have been unsubscribed from all notifications.</p>
-            <p><a href="${config.urls.frontend}">Return to Stellar-Save</a></p>
+            <p><a href="${config.urls.frontend}">Return to SorobanSave</a></p>
           </body>
         </html>
       `);

@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Stellar-Save Backend API
+  title: SorobanSave Backend API
   description: |
-    REST API for the Stellar-Save decentralised rotational savings platform.
+    REST API for the SorobanSave decentralised rotational savings platform.
 
     ## Authentication
     Most endpoints are public. Endpoints under `/api/user/*` require a Bearer JWT
@@ -25,13 +25,13 @@ info:
     - Analytics write endpoints: stricter limits apply (see individual routes)
   version: 1.0.0
   contact:
-    name: Stellar-Save
-    url: https://github.com/Xoulomon/Stellar-Save
+    name: SorobanSave
+    url: https://github.com/Tekinvest/SorobanSave
 
 servers:
   - url: http://localhost:3001
     description: Local development
-  - url: https://api.stellar-save.app
+  - url: https://api.soroban-save.app
     description: Production
 
 tags:
