@@ -5,10 +5,10 @@ on:
   pull_request:
     branches: [main, develop]
     paths:
-      - 'contracts/stellar-save/src/**'
+      - 'contracts/soroban-save/src/**'
       - 'frontend/src/**'
       - '.github/workflows/mutation-testing.yml'
-      - 'contracts/stellar-save/mutants.toml'
+      - 'contracts/soroban-save/mutants.toml'
       - 'frontend/stryker.config.mjs'
 
   # Weekly scheduled run (Sunday 03:00 UTC) for a full baseline report
@@ -55,14 +55,14 @@ jobs:
         with:
           workspaces: ". -> target"
           # Include cargo-mutants binary in the cache key
-          key: mutants-${{ hashFiles('contracts/stellar-save/Cargo.lock') }}
+          key: mutants-${{ hashFiles('contracts/soroban-save/Cargo.lock') }}
 
       - name: Install cargo-mutants
         # Pin to a specific version for reproducibility
         run: cargo install cargo-mutants --version 24.11.1 --locked
 
       - name: Run mutation tests
-        working-directory: contracts/stellar-save
+        working-directory: contracts/soroban-save
         run: |
           cargo mutants \
             --manifest-path Cargo.toml \
@@ -75,7 +75,7 @@ jobs:
         continue-on-error: true
 
       - name: Parse and display mutation score
-        working-directory: contracts/stellar-save
+        working-directory: contracts/soroban-save
         run: |
           if [ -f mutants-out/mutants.json ]; then
             python3 - <<'EOF'
@@ -125,7 +125,7 @@ jobs:
         if: always()
         with:
           name: contract-mutation-report
-          path: contracts/stellar-save/mutants-out/
+          path: contracts/soroban-save/mutants-out/
           retention-days: 30
 
       - name: Comment mutation score on PR
@@ -134,7 +134,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const path = 'contracts/stellar-save/mutants-out/mutants.json';
+            const path = 'contracts/soroban-save/mutants-out/mutants.json';
 
             if (!fs.existsSync(path)) {
               console.log('No mutants.json found, skipping PR comment');

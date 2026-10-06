@@ -24,7 +24,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  WASM_PATH: target/wasm32-unknown-unknown/release/stellar_save.wasm
+  WASM_PATH: target/wasm32-unknown-unknown/release/soroban_save.wasm
 
 jobs:
   # ─── Build WASM (shared by deploy) ─────────────────────────────────────────
@@ -49,7 +49,7 @@ jobs:
       - name: Build
         run: |
           cargo build \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --target wasm32-unknown-unknown \
             --release
 
@@ -93,7 +93,7 @@ jobs:
           STELLAR_RPC_URL: ${{ github.event.inputs.network == 'mainnet' && 'https://soroban-rpc.mainnet.stellar.gateway.fm' || 'https://soroban-testnet.stellar.org' }}
           DEPLOYER_SECRET: ${{ github.event.inputs.network == 'mainnet' && secrets.MAINNET_DEPLOYER_SECRET || secrets.TESTNET_DEPLOYER_SECRET }}
           CANARY_WEIGHT: ${{ github.event.inputs.canary_weight }}
-          WASM_PATH: target/wasm32-unknown-unknown/release/stellar_save.wasm
+          WASM_PATH: target/wasm32-unknown-unknown/release/soroban_save.wasm
 
       - name: Initial health check
         run: bash scripts/canary_monitor.sh

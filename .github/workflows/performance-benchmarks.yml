@@ -43,7 +43,7 @@ jobs:
         run: |
           mkdir -p ${{ env.RESULTS_DIR }}
           cargo test \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --lib benchmark \
             -- --nocapture \
             --test-threads=1 2>&1 | tee ${{ env.RESULTS_DIR }}/gas-benchmarks.log

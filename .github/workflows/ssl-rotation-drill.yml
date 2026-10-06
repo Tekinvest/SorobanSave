@@ -51,7 +51,7 @@ jobs:
             -keyout /etc/nginx/ssl/server.key \
             -out    /etc/nginx/ssl/server.crt \
             -days 1 \
-            -subj "/CN=staging-old.stellar-save.local/O=StellarSave/C=US" 2>/dev/null
+            -subj "/CN=staging-old.soroban-save.local/O=SorobanSave/C=US" 2>/dev/null
           echo "Old cert generated:"
           openssl x509 -noout -subject -fingerprint -sha256 -in /etc/nginx/ssl/server.crt
 
@@ -63,7 +63,7 @@ jobs:
             -keyout /tmp/ssl-new/key.pem \
             -out    /tmp/ssl-new/cert.pem \
             -days 90 \
-            -subj "/CN=staging-new.stellar-save.local/O=StellarSave/C=US" 2>/dev/null
+            -subj "/CN=staging-new.soroban-save.local/O=SorobanSave/C=US" 2>/dev/null
           echo "New cert generated:"
           openssl x509 -noout -subject -fingerprint -sha256 -in /tmp/ssl-new/cert.pem
 

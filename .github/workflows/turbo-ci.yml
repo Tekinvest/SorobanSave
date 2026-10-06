@@ -75,14 +75,14 @@ jobs:
       - name: Test + coverage
         run: |
           cargo llvm-cov \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --lcov --output-path lcov.info \
             -- --test-threads=1
 
       - name: Check coverage ≥ 95%
         run: |
           cargo llvm-cov \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --summary-only -- --test-threads=1 2>&1 | tee cov.txt
           python3 -c "
           import re, sys
@@ -130,5 +130,5 @@ jobs:
       - name: Build Soroban contract
         run: |
           cargo build \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --target wasm32-unknown-unknown --release

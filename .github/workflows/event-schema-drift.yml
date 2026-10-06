@@ -7,7 +7,7 @@ on:
       - 'packages/events-schema/generated/**'
       - 'packages/events-schema/codegen.js'
       - 'packages/events-schema/check-rust-drift.js'
-      - 'contracts/stellar-save/src/events.rs'
+      - 'contracts/soroban-save/src/events.rs'
   pull_request:
     paths:
       - 'packages/events-schema/schema.json'
@@ -16,7 +16,7 @@ on:
       - 'packages/events-schema/check-rust-drift.js'
       - 'frontend/src/types/events.ts'
       - 'backend/src/contract_event_indexer.ts'
-      - 'contracts/stellar-save/src/events.rs'
+      - 'contracts/soroban-save/src/events.rs'
 
 # Drift is checked in two halves:
 #   schema.json ↔ generated/events.ts → codegen diff (below)

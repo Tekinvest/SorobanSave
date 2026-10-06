@@ -6,7 +6,7 @@ on:
       base_url:
         description: 'Staging API base URL'
         required: false
-        default: 'https://staging.stellar-save.example.com'
+        default: 'https://staging.soroban-save.example.com'
       group_id:
         description: 'Staging group ID to deposit into'
         required: false
@@ -52,7 +52,7 @@ jobs:
 
       - name: Run concurrent deposit load test
         env:
-          BASE_URL: ${{ github.event.inputs.base_url || 'https://staging.stellar-save.example.com' }}
+          BASE_URL: ${{ github.event.inputs.base_url || 'https://staging.soroban-save.example.com' }}
           GROUP_ID: ${{ github.event.inputs.group_id || 'test-group-load-001' }}
           VU_COUNT: ${{ github.event.inputs.vu_count || '20' }}
         run: |

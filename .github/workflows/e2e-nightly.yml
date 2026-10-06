@@ -47,7 +47,7 @@ jobs:
           # Install Stellar CLI
           cargo install --locked stellar-cli --features opt 2>/dev/null || true
           stellar contract deploy \
-            --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm \
+            --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm \
             --source-account root \
             --rpc-url http://localhost:8000/soroban/rpc \
             --network-passphrase "Standalone Network ; February 2017" \

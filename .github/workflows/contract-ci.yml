@@ -56,7 +56,7 @@ jobs:
       - name: Check contract WASM size
         id: size_check
         run: |
-          WASM=target/wasm32-unknown-unknown/release/stellar_save.wasm
+          WASM=target/wasm32-unknown-unknown/release/soroban_save.wasm
           SIZE=$(wc -c < "$WASM")
           LIMIT=$((60 * 1024))
           echo "size=$SIZE" >> "$GITHUB_OUTPUT"

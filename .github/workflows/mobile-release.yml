@@ -249,7 +249,7 @@ jobs:
           tag_name: v${{ inputs.version }}
           name: Mobile Beta v${{ inputs.version }}
           body: |
-            ## Stellar Save Mobile Beta v${{ inputs.version }}
+            ## SorobanSave Mobile Beta v${{ inputs.version }}
             
             ### Platforms Released
             - iOS TestFlight: ${{ needs.ios-release.result == 'success' && '✅' || '❌' }}
