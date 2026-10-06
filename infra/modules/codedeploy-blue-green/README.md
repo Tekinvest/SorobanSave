@@ -87,8 +87,8 @@ CodeDeploy role includes permissions for:
 module "codedeploy" {
   source = "../../modules/codedeploy-blue-green"
   environment                = "staging"
-  load_balancer_name         = "stellar-save-alb-staging"
-  target_group_name          = "stellar-save-backend-staging"
+  load_balancer_name         = "soroban-save-alb-staging"
+  target_group_name          = "soroban-save-backend-staging"
   canary_traffic_percentage  = 10
   canary_duration_minutes    = 5
   error_rate_threshold       = 10
@@ -100,8 +100,8 @@ module "codedeploy" {
 module "codedeploy" {
   source = "../../modules/codedeploy-blue-green"
   environment                = "production"
-  load_balancer_name         = "stellar-save-alb-production"
-  target_group_name          = "stellar-save-backend-production"
+  load_balancer_name         = "soroban-save-alb-production"
+  target_group_name          = "soroban-save-backend-production"
   canary_traffic_percentage  = 10
   canary_duration_minutes    = 5
   error_rate_threshold       = 10
@@ -123,7 +123,7 @@ Before using this module, ensure you have:
 
 ```hcl
 resource "aws_ecs_service" "backend" {
-  name            = "stellar-save-backend-${var.environment}"
+  name            = "soroban-save-backend-${var.environment}"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.backend.arn
   desired_count   = 2
@@ -132,7 +132,7 @@ resource "aws_ecs_service" "backend" {
   # Load balancer configuration
   load_balancer {
     target_group_arn = aws_lb_target_group.backend.arn
-    container_name   = "stellar-save-api"
+    container_name   = "soroban-save-api"
     container_port   = 3000
   }
 
@@ -159,7 +159,7 @@ resource "aws_ecs_service" "backend" {
 
 ```hcl
 resource "aws_iam_role" "ecs_task_execution_role" {
-  name = "stellar-save-ecs-task-execution-role-${var.environment}"
+  name = "soroban-save-ecs-task-execution-role-${var.environment}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -184,7 +184,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy" {
 ### Using AWS Console
 
 1. Navigate to **CodeDeploy** → **Applications**
-2. Select `stellar-save-{environment}`
+2. Select `soroban-save-{environment}`
 3. Click **Create deployment**
 4. Configure:
    - **Revision location**: S3 bucket with deployment package
@@ -197,8 +197,8 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy" {
 ```bash
 # Create a deployment
 aws deploy create-deployment \
-  --application-name stellar-save-staging \
-  --deployment-group-name stellar-save-backend-staging \
+  --application-name soroban-save-staging \
+  --deployment-group-name soroban-save-backend-staging \
   --s3-location s3://my-bucket/deployment.zip \
   --deployment-config-name CodeDeployDefault.AllAtOnce \
   --description "Deploy new backend version"
@@ -237,7 +237,7 @@ Monitor deployments using these key metrics:
 ```bash
 # View deployment status
 aws deploy list-deployments \
-  --application-name stellar-save-staging \
+  --application-name soroban-save-staging \
   --query 'deployments' \
   --output table
 
@@ -249,7 +249,7 @@ aws deploy batch-get-deployments \
 aws cloudwatch get-metric-statistics \
   --namespace AWS/ApplicationELB \
   --metric-name HTTPCode_Target_5XX_Count \
-  --dimensions Name=LoadBalancer,Value=app/stellar-save-alb-staging/xxxxx \
+  --dimensions Name=LoadBalancer,Value=app/soroban-save-alb-staging/xxxxx \
   --start-time $(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%S) \
   --end-time $(date -u +%Y-%m-%dT%H:%M:%S) \
   --period 60 \
@@ -266,7 +266,7 @@ sudo tail -f /var/log/codedeploy-agent/deployments/logs/scripts.log
 sudo tail -f /var/log/codedeploy-agent/codedeploy-agent.log
 
 # View ECS task logs
-aws logs tail /ecs/stellar-save-backend-staging --follow
+aws logs tail /ecs/soroban-save-backend-staging --follow
 ```
 
 ### Common Issues
@@ -299,8 +299,8 @@ aws elbv2 describe-target-health \
 ```bash
 # Verify ECS service deployment status
 aws ecs describe-services \
-  --cluster stellar-save-staging \
-  --services stellar-save-backend-staging
+  --cluster soroban-save-staging \
+  --services soroban-save-backend-staging
 ```
 
 ## Cost Optimization
@@ -386,7 +386,7 @@ error_rate_threshold = 3   # ~3% error rate
 ## Support
 
 For issues or questions:
-1. Check CloudWatch logs: `/aws/stellar-save/{env}/app`
+1. Check CloudWatch logs: `/aws/soroban-save/{env}/app`
 2. Review deployment history in CodeDeploy console
 3. Validate ALB target group health
 4. Check IAM permissions

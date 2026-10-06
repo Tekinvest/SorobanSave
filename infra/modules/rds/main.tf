@@ -2,7 +2,7 @@
 # Reusable module: PostgreSQL RDS instance + Secrets Manager credentials.
 
 locals {
-  identifier = "stellar-save-${var.environment}"
+  identifier = "soroban-save-${var.environment}"
 }
 
 # ── Subnet group ──────────────────────────────────────────────────────────────

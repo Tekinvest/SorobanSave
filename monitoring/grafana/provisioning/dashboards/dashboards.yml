@@ -3,9 +3,9 @@ apiVersion: 1
 # Load every dashboard JSON mounted into /var/lib/grafana/dashboards
 # (backend.json, contract-activity.json, costs.json, distributed-tracing.json …).
 providers:
-  - name: stellar-save
+  - name: soroban-save
     orgId: 1
-    folder: Stellar-Save
+    folder: SorobanSave
     type: file
     disableDeletion: false
     editable: true

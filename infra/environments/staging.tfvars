@@ -11,7 +11,7 @@ allocated_storage  = 20
 multi_az           = false
 
 # Frontend
-domain_names = ["staging.stellar-save.app"]
+domain_names = ["staging.soroban-save.app"]
 
 # Stellar network
 stellar_network = "testnet"

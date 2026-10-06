@@ -10,13 +10,13 @@ terraform {
 
 # CodeDeploy Application for ECS services
 resource "aws_codedeploy_app" "ecs_app" {
-  name             = "stellar-save-${var.environment}"
+  name             = "soroban-save-${var.environment}"
   compute_platform = "ECS"
 
   tags = merge(
     var.tags,
     {
-      Name        = "stellar-save-codedeploy-${var.environment}"
+      Name        = "soroban-save-codedeploy-${var.environment}"
       Environment = var.environment
     }
   )
@@ -26,13 +26,13 @@ resource "aws_codedeploy_app" "ecs_app" {
 resource "aws_codedeploy_deployment_group" "ecs_deployment_group" {
   app_name               = aws_codedeploy_app.ecs_app.name
   service_role_arn       = aws_iam_role.codedeploy_role.arn
-  deployment_group_name  = "stellar-save-backend-${var.environment}"
+  deployment_group_name  = "soroban-save-backend-${var.environment}"
   deployment_config_name = "CodeDeployDefault.ECSCanary10Percent5Minutes"
 
   # ECS service reference
   ecs_service {
-    cluster_name = "stellar-save-${var.environment}"
-    service_name = "stellar-save-backend-${var.environment}"
+    cluster_name = "soroban-save-${var.environment}"
+    service_name = "soroban-save-backend-${var.environment}"
   }
 
   # Load balancer configuration for traffic shifting
@@ -87,7 +87,7 @@ resource "aws_codedeploy_deployment_group" "ecs_deployment_group" {
   tags = merge(
     var.tags,
     {
-      Name        = "stellar-save-deployment-group-${var.environment}"
+      Name        = "soroban-save-deployment-group-${var.environment}"
       Environment = var.environment
     }
   )
@@ -97,7 +97,7 @@ resource "aws_codedeploy_deployment_group" "ecs_deployment_group" {
 
 # CloudWatch Alarm for 5xx error rate > 1%
 resource "aws_cloudwatch_alarm" "high_error_rate" {
-  alarm_name          = "stellar-save-backend-${var.environment}-high-5xx-errors"
+  alarm_name          = "soroban-save-backend-${var.environment}-high-5xx-errors"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "2"
   metric_name         = "HTTPCode_Target_5XX_Count"
@@ -124,7 +124,7 @@ resource "aws_cloudwatch_alarm" "high_error_rate" {
 
 # IAM Role for CodeDeploy
 resource "aws_iam_role" "codedeploy_role" {
-  name = "stellar-save-codedeploy-role-${var.environment}"
+  name = "soroban-save-codedeploy-role-${var.environment}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -150,7 +150,7 @@ resource "aws_iam_role" "codedeploy_role" {
 
 # IAM Policy for CodeDeploy to manage ECS deployments
 resource "aws_iam_role_policy" "codedeploy_policy" {
-  name = "stellar-save-codedeploy-policy-${var.environment}"
+  name = "soroban-save-codedeploy-policy-${var.environment}"
   role = aws_iam_role.codedeploy_role.id
 
   policy = jsonencode({

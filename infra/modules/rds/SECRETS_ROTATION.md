@@ -25,7 +25,7 @@ The rotation system provides:
          ▼
 ┌─────────────────────────┐
 │  Secrets Manager        │
-│  /stellar-save-{env}/   │
+│  /soroban-save-{env}/   │
 │  db-credentials         │
 │                         │
 │  Rotation Schedule:     │
@@ -49,7 +49,7 @@ The rotation system provides:
          ▼
 ┌─────────────────────────┐
 │  RDS PostgreSQL         │
-│  stellar-save-{env}     │
+│  soroban-save-{env}     │
 └─────────────────────────┘
 ```
 
@@ -167,18 +167,18 @@ terraform apply
 1. **Check rotation configuration**:
    ```bash
    aws secretsmanager describe-secret \
-     --secret-id stellar-save-staging/db-credentials
+     --secret-id soroban-save-staging/db-credentials
    ```
 
 2. **Trigger manual rotation** (optional):
    ```bash
    aws secretsmanager rotate-secret \
-     --secret-id stellar-save-staging/db-credentials
+     --secret-id soroban-save-staging/db-credentials
    ```
 
 3. **Monitor Lambda logs**:
    ```bash
-   aws logs tail /aws/lambda/stellar-save-staging-rotation --follow
+   aws logs tail /aws/lambda/soroban-save-staging-rotation --follow
    ```
 
 ## Configuration Variables
@@ -263,14 +263,14 @@ npm test
 ```bash
 # Trigger rotation
 aws secretsmanager rotate-secret \
-  --secret-id stellar-save-staging/db-credentials
+  --secret-id soroban-save-staging/db-credentials
 
 # Watch logs
-aws logs tail /aws/lambda/stellar-save-staging-rotation --follow
+aws logs tail /aws/lambda/soroban-save-staging-rotation --follow
 
 # Verify new credentials work
 aws secretsmanager get-secret-value \
-  --secret-id stellar-save-staging/db-credentials \
+  --secret-id soroban-save-staging/db-credentials \
   --version-stage AWSCURRENT | jq -r .SecretString
 ```
 
@@ -281,19 +281,19 @@ If rotation causes issues:
 ```bash
 # Get previous version ID
 aws secretsmanager describe-secret \
-  --secret-id stellar-save-staging/db-credentials
+  --secret-id soroban-save-staging/db-credentials
 
 # Move AWSCURRENT back to previous version
 aws secretsmanager update-secret-version-stage \
-  --secret-id stellar-save-staging/db-credentials \
+  --secret-id soroban-save-staging/db-credentials \
   --version-stage AWSCURRENT \
   --move-to-version-id <previous-version-id> \
   --remove-from-version-id <current-version-id>
 
 # Restart ECS tasks to fetch old credentials
 aws ecs update-service \
-  --cluster stellar-save-backend-staging \
-  --service stellar-save-backend-staging \
+  --cluster soroban-save-backend-staging \
+  --service soroban-save-backend-staging \
   --force-new-deployment
 ```
 

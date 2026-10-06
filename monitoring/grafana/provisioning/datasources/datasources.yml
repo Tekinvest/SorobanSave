@@ -1,6 +1,6 @@
 apiVersion: 1
 
-# Auto-provisioned Grafana datasources for the Stellar-Save observability stack.
+# Auto-provisioned Grafana datasources for the SorobanSave observability stack.
 
 datasources:
   # Metrics (existing Prometheus stack).

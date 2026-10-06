@@ -16,7 +16,7 @@ variable "hosted_zone_id" {
 }
 
 variable "record_name" {
-  description = "FQDN clients connect to and that traffic is routed for (e.g. api.stellar-save.app)"
+  description = "FQDN clients connect to and that traffic is routed for (e.g. api.soroban-save.app)"
   type        = string
 }
 

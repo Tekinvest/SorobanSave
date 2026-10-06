@@ -15,7 +15,7 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 locals {
-  name_prefix = "stellar-save-${var.environment}"
+  name_prefix = "soroban-save-${var.environment}"
 }
 
 # ── SNS topic for budget notifications ────────────────────────────────────────
