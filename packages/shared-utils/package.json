@@ -1,7 +1,7 @@
 {
-  "name": "@stellar-save/shared-utils",
+  "name": "@soroban-save/shared-utils",
   "version": "0.1.0",
-  "description": "Shared utility functions for Stellar-Save frontend and backend",
+  "description": "Shared utility functions for SorobanSave frontend and backend",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",

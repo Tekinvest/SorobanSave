@@ -1,7 +1,7 @@
 {
-  "name": "@stellar-save/sdk",
+  "name": "@soroban-save/sdk",
   "version": "0.1.0",
-  "description": "Shared TypeScript SDK: contract bindings, types, and API client for Stellar-Save",
+  "description": "Shared TypeScript SDK: contract bindings, types, and API client for SorobanSave",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

@@ -1,5 +1,5 @@
 /**
- * Typed REST API client for the Stellar-Save backend.
+ * Typed REST API client for the SorobanSave backend.
  * Works in both browser (fetch) and Node.js environments.
  */
 import type { Group, GroupFilters, Contribution, Payout, CostReport, PaginatedResponse } from './types';
@@ -14,7 +14,7 @@ export declare class ApiError extends Error {
     readonly status: number;
     constructor(status: number, message: string);
 }
-export declare class StellarSaveApiClient {
+export declare class SorobanSaveApiClient {
     private readonly config;
     constructor(config: ApiClientConfig);
     private request;
@@ -35,5 +35,5 @@ export declare class StellarSaveApiClient {
     getCostReport(): Promise<CostReport>;
 }
 /** Create a client pre-configured from environment variables (Node.js). */
-export declare function createApiClient(overrides?: Partial<ApiClientConfig>): StellarSaveApiClient;
+export declare function createApiClient(overrides?: Partial<ApiClientConfig>): SorobanSaveApiClient;
 //# sourceMappingURL=client.d.ts.map

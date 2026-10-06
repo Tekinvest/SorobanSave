@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "StellarSave Contract Events",
+  "title": "SorobanSave Contract Events",
   "description": "Canonical event schema shared by contract, indexer, and clients. DO NOT edit generated files — edit this file and run codegen.",
   "version": "1",
   "events": {

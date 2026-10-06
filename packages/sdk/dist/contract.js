@@ -1,6 +1,6 @@
 /**
  * Soroban contract error codes and utilities.
- * Generated from the StellarSaveError enum in contracts/stellar-save/src/errors.rs.
+ * Generated from the SorobanSaveError enum in contracts/soroban-save/src/errors.rs.
  * DO NOT edit manually — regenerate from the contract when adding new codes.
  */
 export const CONTRACT_ERROR_MESSAGES = {
@@ -50,7 +50,7 @@ export function parseContractError(err) {
     }
     return new ContractError(null, String(err));
 }
-/** Contract function names, kept in sync with contracts/stellar-save/src/lib.rs. */
+/** Contract function names, kept in sync with contracts/soroban-save/src/lib.rs. */
 export const CONTRACT_FUNCTIONS = {
     CREATE_GROUP: 'create_group',
     GET_GROUP: 'get_group',

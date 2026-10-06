@@ -11,7 +11,7 @@
 
 ## Circuit Description
 
-The Stellar-Save ZK circuit enforces the following constraints:
+The SorobanSave ZK circuit enforces the following constraints:
 
 1. **Contribution Range Check**: Contribution amount is within `[min_contribution, max_contribution]`
 2. **Member Membership Proof**: Prover is a member of the group Merkle tree
