@@ -8,7 +8,7 @@
 
 set -euo pipefail
 
-echo "=== Unused Export Scanner — Stellar-Save ==="
+echo "=== Unused Export Scanner — SorobanSave ==="
 echo ""
 
 if ! command -v ts-prune &>/dev/null && ! npx ts-prune --help &>/dev/null 2>&1; then

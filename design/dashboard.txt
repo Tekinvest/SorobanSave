@@ -1,4 +1,4 @@
-To create the design for Stellar Save, I focused on translating the complex mechanics of a decentralized ROSCA into a user-friendly mobile interface. Here’s a quick breakdown of the design process:
+To create the design for SorobanSave, I focused on translating the complex mechanics of a decentralized ROSCA into a user-friendly mobile interface. Here’s a quick breakdown of the design process:
 
 Information Hierarchy: I prioritized high-level financial health (Total Saved, Payout Dates) at the top of the dashboard to give users immediate peace of mind and clarity.
 Visual Progress Tracking: For the Group Details and Dashboard, I used progress bars and "Round X of Y" indicators to make the rotational nature of the savings circles easy to understand at a glance.

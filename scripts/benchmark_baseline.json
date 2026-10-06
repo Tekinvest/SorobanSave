@@ -4,7 +4,7 @@
   "description": "Baseline CPU instruction counts for all Soroban contract functions. Update by running: bash scripts/benchmark_regression.sh --update-baseline",
   "regression_threshold_pct": 10,
   "contracts": {
-    "stellar-save": {
+    "soroban-save": {
       "description": "Core ROSCA group management contract",
       "functions": {
         "create_group": {

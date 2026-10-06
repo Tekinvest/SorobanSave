@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-echo "=== Cargo Audit — Stellar-Save Contracts ==="
+echo "=== Cargo Audit — SorobanSave Contracts ==="
 
 if ! command -v cargo-audit &>/dev/null; then
   echo "Installing cargo-audit..."

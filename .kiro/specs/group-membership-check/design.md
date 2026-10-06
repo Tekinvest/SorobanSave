@@ -22,7 +22,7 @@ The membership check feature consists of a single public function `is_member` th
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                  StellarSaveContract                     │
+│                  SorobanSaveContract                     │
 │                                                          │
 │  ┌────────────────────────────────────────────────┐    │
 │  │         Public Query Functions                  │    │
@@ -169,7 +169,7 @@ This is a round-trip property that ensures perfect consistency between the `is_m
 
 ### Property 2: Member-Only Function Integration
 
-For any member-only function (such as `get_member_details`), when `is_member(env, group_id, address)` returns `false`, the function SHALL return `StellarSaveError::NotMember` (error code 2002).
+For any member-only function (such as `get_member_details`), when `is_member(env, group_id, address)` returns `false`, the function SHALL return `SorobanSaveError::NotMember` (error code 2002).
 
 This property ensures that all member-only operations consistently use `is_member` for authorization and handle non-members uniformly across the contract.
 
@@ -209,16 +209,16 @@ pub fn get_member_details(
     env: Env,
     group_id: u64,
     address: Address,
-) -> Result<MemberProfile, StellarSaveError> {
+) -> Result<MemberProfile, SorobanSaveError> {
     // 1. Verify group exists
     let group_key = StorageKeyBuilder::group_data(group_id);
     if !env.storage().persistent().has(&group_key) {
-        return Err(StellarSaveError::GroupNotFound);
+        return Err(SorobanSaveError::GroupNotFound);
     }
     
     // 2. Use is_member for membership verification
     if !Self::is_member(env.clone(), group_id, address.clone()) {
-        return Err(StellarSaveError::NotMember);
+        return Err(SorobanSaveError::NotMember);
     }
     
     // 3. Retrieve member profile
@@ -226,7 +226,7 @@ pub fn get_member_details(
     env.storage()
         .persistent()
         .get(&member_key)
-        .ok_or(StellarSaveError::NotMember)
+        .ok_or(SorobanSaveError::NotMember)
 }
 ```
 
@@ -268,8 +268,8 @@ fn property_storage_consistency() {
     
     for _ in 0..100 {
         let env = Env::default();
-        let contract_id = env.register_contract(None, StellarSaveContract);
-        let client = StellarSaveContractClient::new(&env, &contract_id);
+        let contract_id = env.register_contract(None, SorobanSaveContract);
+        let client = SorobanSaveContractClient::new(&env, &contract_id);
         
         // Generate random test data
         let group_id = generate_random_group_id();
@@ -312,8 +312,8 @@ fn property_member_only_integration() {
     
     for _ in 0..100 {
         let env = Env::default();
-        let contract_id = env.register_contract(None, StellarSaveContract);
-        let client = StellarSaveContractClient::new(&env, &contract_id);
+        let contract_id = env.register_contract(None, SorobanSaveContract);
+        let client = SorobanSaveContractClient::new(&env, &contract_id);
         
         // Generate random test data
         let group_id = generate_random_group_id();
@@ -349,8 +349,8 @@ Unit tests focus on specific examples, edge cases, and integration scenarios:
 #[test]
 fn test_is_member_existing_member() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, StellarSaveContract);
-    let client = StellarSaveContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, SorobanSaveContract);
+    let client = SorobanSaveContractClient::new(&env, &contract_id);
     
     let group_id = 1;
     let member_address = Address::generate(&env);
@@ -376,8 +376,8 @@ fn test_is_member_existing_member() {
 #[test]
 fn test_is_member_non_member() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, StellarSaveContract);
-    let client = StellarSaveContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, SorobanSaveContract);
+    let client = SorobanSaveContractClient::new(&env, &contract_id);
     
     let group_id = 1;
     let non_member_address = Address::generate(&env);
@@ -395,8 +395,8 @@ fn test_is_member_non_member() {
 #[test]
 fn test_is_member_non_existent_group() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, StellarSaveContract);
-    let client = StellarSaveContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, SorobanSaveContract);
+    let client = SorobanSaveContractClient::new(&env, &contract_id);
     
     let non_existent_group_id = 999;
     let address = Address::generate(&env);
@@ -412,8 +412,8 @@ fn test_is_member_non_existent_group() {
 #[test]
 fn test_is_member_zero_group_id() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, StellarSaveContract);
-    let client = StellarSaveContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, SorobanSaveContract);
+    let client = SorobanSaveContractClient::new(&env, &contract_id);
     
     let zero_group_id = 0;
     let address = Address::generate(&env);
@@ -429,8 +429,8 @@ fn test_is_member_zero_group_id() {
 #[test]
 fn test_is_member_no_authentication_required() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, StellarSaveContract);
-    let client = StellarSaveContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, SorobanSaveContract);
+    let client = SorobanSaveContractClient::new(&env, &contract_id);
     
     let group_id = 1;
     let address = Address::generate(&env);
@@ -449,8 +449,8 @@ fn test_is_member_no_authentication_required() {
 #[test]
 fn test_get_member_details_uses_is_member() {
     let env = Env::default();
-    let contract_id = env.register_contract(None, StellarSaveContract);
-    let client = StellarSaveContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, SorobanSaveContract);
+    let client = SorobanSaveContractClient::new(&env, &contract_id);
     
     let group_id = 1;
     let creator = Address::generate(&env);
@@ -492,7 +492,7 @@ While not part of the automated test suite, the following performance characteri
 
 ### Implementation Steps
 
-1. Add the `is_member` function to `StellarSaveContract` implementation
+1. Add the `is_member` function to `SorobanSaveContract` implementation
 2. Update `get_member_details` to use `is_member` for validation
 3. Implement property-based tests with 100+ iterations
 4. Implement unit tests for edge cases and examples
@@ -501,9 +501,9 @@ While not part of the automated test suite, the following performance characteri
 
 ### Code Location
 
-- **Function implementation**: `contracts/stellar-save/src/lib.rs` (in `StellarSaveContract` impl block)
-- **Tests**: `contracts/stellar-save/src/lib.rs` (in `tests` module)
-- **Storage keys**: Already exists in `contracts/stellar-save/src/storage.rs`
+- **Function implementation**: `contracts/soroban-save/src/lib.rs` (in `SorobanSaveContract` impl block)
+- **Tests**: `contracts/soroban-save/src/lib.rs` (in `tests` module)
+- **Storage keys**: Already exists in `contracts/soroban-save/src/storage.rs`
 
 ### Dependencies
 

@@ -36,7 +36,7 @@ elif [ -n "$ENV_DIR" ] && [ -d "$ENV_DIR" ]; then
     echo "ERROR: terraform not found in PATH — cannot generate plan" >&2
     exit 1
   fi
-  TMPFILE=$(mktemp /tmp/stellar-save-plan-XXXXXX.json)
+  TMPFILE=$(mktemp /tmp/soroban-save-plan-XXXXXX.json)
   echo "Generating plan for $ENV_DIR ..."
   (
     cd "$ENV_DIR"

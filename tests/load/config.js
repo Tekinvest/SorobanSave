@@ -1,5 +1,5 @@
 /**
- * Shared k6 configuration and performance thresholds for Stellar-Save.
+ * Shared k6 configuration and performance thresholds for SorobanSave.
  * Import this in individual test scenarios.
  */
 

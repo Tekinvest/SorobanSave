@@ -7,7 +7,7 @@
 # and fails if any function regresses beyond the configured threshold (default: 10%).
 #
 # Contracts covered:
-#   - contracts/stellar-save     (create_group, join_group, get_group, is_member,
+#   - contracts/soroban-save     (create_group, join_group, get_group, is_member,
 #                                  get_group_members, contribute, execute_payout)
 #   - contracts/nft-enumerable   (mint, transfer, burn, approve, total_supply,
 #                                  balance, get_owner_token_id)
@@ -18,7 +18,7 @@
 #   bash scripts/benchmark_regression.sh                    # run benchmarks + check
 #   bash scripts/benchmark_regression.sh --update-baseline  # update baseline with current results
 #   bash scripts/benchmark_regression.sh --dry-run          # compare using existing log, no re-run
-#   bash scripts/benchmark_regression.sh --contract stellar-save   # run single contract only
+#   bash scripts/benchmark_regression.sh --contract soroban-save   # run single contract only
 #
 # Optional env vars:
 #   REGRESSION_THRESHOLD_PCT  — override threshold from baseline JSON (e.g. "15")
@@ -109,7 +109,7 @@ info "Regression threshold: ${THRESHOLD_PCT}%"
 # ─── Step 2: Run benchmarks (unless --dry-run) ────────────────────────────────
 # Map of contract name → Cargo manifest path
 declare -A CONTRACT_MANIFESTS=(
-  ["stellar-save"]="contracts/stellar-save/Cargo.toml"
+  ["soroban-save"]="contracts/soroban-save/Cargo.toml"
   ["nft-enumerable"]="contracts/nft-enumerable/Cargo.toml"
   ["fungible-allowlist"]="contracts/fungible-allowlist/Cargo.toml"
 )
@@ -254,8 +254,8 @@ with open(measured_file) as f:
 # flat "functions" dict so old baselines still work.
 contracts_section = baseline.get("contracts", {})
 if not contracts_section:
-    # Legacy: wrap the flat "functions" dict under "stellar-save"
-    contracts_section = {"stellar-save": {"functions": baseline.get("functions", {})}}
+    # Legacy: wrap the flat "functions" dict under "soroban-save"
+    contracts_section = {"soroban-save": {"functions": baseline.get("functions", {})}}
 
 results = []
 
@@ -427,7 +427,7 @@ with open(measured_file) as f:
 
 contracts_section = baseline.get("contracts", {})
 if not contracts_section:
-    contracts_section = {"stellar-save": {"functions": baseline.get("functions", {})}}
+    contracts_section = {"soroban-save": {"functions": baseline.get("functions", {})}}
     baseline["contracts"] = contracts_section
 
 updated = 0

@@ -2,13 +2,13 @@
 
 ## Overview
 
-Extend the Stellar-Save ROSCA contract to support any SEP-41-compliant Soroban token (USDC, EURC, native XLM, etc.) by binding each savings group to a specific token at creation time. All contributions and payouts within a group use that token exclusively via the SEP-41 `transfer_from` / `transfer` interface.
+Extend the SorobanSave ROSCA contract to support any SEP-41-compliant Soroban token (USDC, EURC, native XLM, etc.) by binding each savings group to a specific token at creation time. All contributions and payouts within a group use that token exclusively via the SEP-41 `transfer_from` / `transfer` interface.
 
 ## Tasks
 
 - [x] 1. Add new error variants to `error.rs`
-  - Add `InvalidToken = 5001` to the `StellarSaveError` enum with doc comment
-  - Add `TokenTransferFailed = 5002` to the `StellarSaveError` enum with doc comment
+  - Add `InvalidToken = 5001` to the `SorobanSaveError` enum with doc comment
+  - Add `TokenTransferFailed = 5002` to the `SorobanSaveError` enum with doc comment
   - Add `message()` match arms for both new variants
   - Add `recovery_guidance()` match arms for both new variants
   - Update `category()` to map 5000–5999 to a new `ErrorCategory::Token` variant (or `ErrorCategory::System` if preferred)
@@ -34,15 +34,15 @@ Extend the Stellar-Save ROSCA contract to support any SEP-41-compliant Soroban t
   - **Validates: Requirements 1.2, 2.1, 2.5, 3.1**
 
 - [x] 3. Implement token validation helper
-  - Create `fn validate_token(env: &Env, token_address: &Address) -> Result<u32, StellarSaveError>` (private) in `lib.rs` or a new `token.rs` module
+  - Create `fn validate_token(env: &Env, token_address: &Address) -> Result<u32, SorobanSaveError>` (private) in `lib.rs` or a new `token.rs` module
   - Use `soroban_sdk::token::TokenClient::new(env, token_address).decimals()` to call the token contract
   - Return `Ok(decimals)` if the call succeeds and `decimals <= 38`
-  - Return `Err(StellarSaveError::InvalidToken)` if the call fails or `decimals > 38`
+  - Return `Err(SorobanSaveError::InvalidToken)` if the call fails or `decimals > 38`
   - _Requirements: 4.1, 4.2, 4.3_
 
 - [ ]* 3.1 Write property test for invalid token rejection
   - **Property 2: Invalid token rejection**
-  - For any address that does not implement a callable `decimals()` returning a value in [0, 38], `validate_token` should return `Err(StellarSaveError::InvalidToken)`
+  - For any address that does not implement a callable `decimals()` returning a value in [0, 38], `validate_token` should return `Err(SorobanSaveError::InvalidToken)`
   - **Validates: Requirements 1.4, 4.2, 4.3**
 
 - [x] 4. Update `create_group` to accept and store `token_address`
@@ -60,13 +60,13 @@ Extend the Stellar-Save ROSCA contract to support any SEP-41-compliant Soroban t
 
 - [ ]* 4.2 Write property test for allowlist rejection
   - **Property 9: Allowlist rejection**
-  - For any token address not present in the admin allowlist when an allowlist is configured, `create_group` should return `StellarSaveError::InvalidToken`
+  - For any token address not present in the admin allowlist when an allowlist is configured, `create_group` should return `SorobanSaveError::InvalidToken`
   - **Validates: Requirements 6.1**
 
 - [x] 5. Implement `get_token_config` public function
-  - Add `pub fn get_token_config(env: Env, group_id: u64) -> Result<TokenConfig, StellarSaveError>` to `StellarSaveContract` in `lib.rs`
+  - Add `pub fn get_token_config(env: Env, group_id: u64) -> Result<TokenConfig, SorobanSaveError>` to `SorobanSaveContract` in `lib.rs`
   - Load `TokenConfig` from `StorageKeyBuilder::group_token_config(group_id)`
-  - Return `Err(StellarSaveError::GroupNotFound)` if the key does not exist
+  - Return `Err(SorobanSaveError::GroupNotFound)` if the key does not exist
   - _Requirements: 2.3, 2.4_
 
 - [ ]* 5.1 Write unit tests for `get_token_config`
@@ -81,18 +81,18 @@ Extend the Stellar-Save ROSCA contract to support any SEP-41-compliant Soroban t
   - Load `TokenConfig` for the group at the start of the contribute flow in `lib.rs`
   - Build `soroban_sdk::token::TokenClient::new(&env, &token_config.token_address)`
   - Before recording the contribution, call `token_client.transfer_from(&env.current_contract_address(), &member, &env.current_contract_address(), &amount)`
-  - If the call panics or returns an error, return `Err(StellarSaveError::TokenTransferFailed)` without recording the contribution
+  - If the call panics or returns an error, return `Err(SorobanSaveError::TokenTransferFailed)` without recording the contribution
   - Acquire the existing `ReentrancyGuard` before calling `transfer_from` and release it after
   - _Requirements: 5.1, 5.2, 5.3, 5.4, 4.6, 4.7_
 
 - [ ]* 7.1 Write property test for exact amount enforcement
   - **Property 4: Exact amount enforcement**
-  - For any group with a configured `contribution_amount` and any amount not exactly equal to it, `contribute` should return `StellarSaveError::InvalidAmount` and contribution state should remain unchanged
+  - For any group with a configured `contribution_amount` and any amount not exactly equal to it, `contribute` should return `SorobanSaveError::InvalidAmount` and contribution state should remain unchanged
   - **Validates: Requirements 3.3, 3.4**
 
 - [ ]* 7.2 Write property test for insufficient allowance rejection
   - **Property 6: Insufficient allowance rejection**
-  - For any member who has not granted the contract a token allowance of at least `contribution_amount`, `contribute` should return `StellarSaveError::TokenTransferFailed` and no `ContributionRecord` should be stored
+  - For any member who has not granted the contract a token allowance of at least `contribution_amount`, `contribute` should return `SorobanSaveError::TokenTransferFailed` and no `ContributionRecord` should be stored
   - **Validates: Requirements 4.6, 4.7, 5.2, 5.4**
 
 - [ ]* 7.3 Write property test for contribution balance change
@@ -106,7 +106,7 @@ Extend the Stellar-Save ROSCA contract to support any SEP-41-compliant Soroban t
   - Build `soroban_sdk::token::TokenClient::new(&env, &token_config.token_address)`
   - Replace the placeholder body of `execute_transfer` with `token_client.transfer(&env.current_contract_address(), recipient, &amount)`
   - Remove the now-redundant `verify_contract_balance` placeholder (the token client will panic on insufficient balance, which Soroban reverts)
-  - On any failure, return `Err(StellarSaveError::PayoutFailed)` and do not advance the cycle
+  - On any failure, return `Err(SorobanSaveError::PayoutFailed)` and do not advance the cycle
   - _Requirements: 5.5, 5.6_
 
 - [ ]* 8.1 Write property test for payout balance change
@@ -120,11 +120,11 @@ Extend the Stellar-Save ROSCA contract to support any SEP-41-compliant Soroban t
   - **Validates: Requirements 3.6**
 
 - [x] 9. Implement allowlist management functions
-  - Add `pub fn add_allowed_token(env: Env, admin: Address, token_address: Address) -> Result<(), StellarSaveError>` to `StellarSaveContract`
+  - Add `pub fn add_allowed_token(env: Env, admin: Address, token_address: Address) -> Result<(), SorobanSaveError>` to `SorobanSaveContract`
     - Require auth from `admin`; verify `admin` matches the stored `ContractConfig.admin` — return `Unauthorized` if not
     - Load `Vec<Address>` from `StorageKeyBuilder::allowed_tokens()` (default empty)
     - Append `token_address` if not already present; store back
-  - Add `pub fn remove_allowed_token(env: Env, admin: Address, token_address: Address) -> Result<(), StellarSaveError>`
+  - Add `pub fn remove_allowed_token(env: Env, admin: Address, token_address: Address) -> Result<(), SorobanSaveError>`
     - Same admin check; remove `token_address` from the list if present; store back
   - Add `pub fn is_token_allowed(env: Env, token_address: Address) -> bool`
     - If no `AllowedTokens` key exists, return `true` (open mode)
@@ -133,7 +133,7 @@ Extend the Stellar-Save ROSCA contract to support any SEP-41-compliant Soroban t
 
 - [ ]* 9.1 Write property test for allowlist admin-only management
   - **Property 10: Allowlist admin-only management**
-  - For any caller that is not the contract admin, calling `add_allowed_token` or `remove_allowed_token` should return `StellarSaveError::Unauthorized` and the allowlist should remain unchanged
+  - For any caller that is not the contract admin, calling `add_allowed_token` or `remove_allowed_token` should return `SorobanSaveError::Unauthorized` and the allowlist should remain unchanged
   - **Validates: Requirements 6.2, 6.3**
 
 - [ ]* 9.2 Write property test for open mode accepts any valid token
@@ -150,13 +150,13 @@ Extend the Stellar-Save ROSCA contract to support any SEP-41-compliant Soroban t
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 11. Create multi-token test suite in `tests/multi_token.rs`
-  - Create `contracts/stellar-save/src/tests/` directory and `mod.rs` if not present
-  - Create `contracts/stellar-save/src/tests/multi_token.rs`
+  - Create `contracts/soroban-save/src/tests/` directory and `mod.rs` if not present
+  - Create `contracts/soroban-save/src/tests/multi_token.rs`
   - Add a `test_helpers` sub-module with:
     - `deploy_mock_token(env, decimals) -> Address` — deploys a mock SEP-41 token using `soroban_sdk::token::StellarAssetClient` or a custom mock contract
     - `mint_tokens(env, token, recipient, amount)` — mints tokens to a test address
     - `approve_tokens(env, token, owner, spender, amount)` — sets allowance via `approve`
-    - `create_group_with_token(env, token_address, ...) -> u64` — convenience wrapper around `StellarSaveContract::create_group`
+    - `create_group_with_token(env, token_address, ...) -> u64` — convenience wrapper around `SorobanSaveContract::create_group`
   - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9_
 
 - [ ] 12. Write unit tests in `multi_token.rs`

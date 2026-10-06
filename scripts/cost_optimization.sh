@@ -8,7 +8,7 @@ WARN="\033[33m⚠ \033[0m"
 OK="\033[32m✓ \033[0m"
 TIP="\033[36m💡\033[0m"
 
-echo "=== Stellar-Save Cost Optimization Report ==="
+echo "=== SorobanSave Cost Optimization Report ==="
 echo "Generated: $(date -u '+%Y-%m-%d %H:%M UTC')"
 echo ""
 

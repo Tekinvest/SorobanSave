@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Stellar-Save ROSCA contract currently hard-codes XLM (in stroops) as the only contribution token. This feature extends the contract to support any SEP-41-compliant Soroban token by introducing a `TokenConfig` struct stored per group at creation time.
+The SorobanSave ROSCA contract currently hard-codes XLM (in stroops) as the only contribution token. This feature extends the contract to support any SEP-41-compliant Soroban token by introducing a `TokenConfig` struct stored per group at creation time.
 
 Each group is permanently bound to a single token. All contributions and payouts within that group use that token exclusively. The token is validated at group creation via a live `decimals()` call to the token contract. An optional admin-managed allowlist can restrict which tokens are permitted.
 
@@ -76,8 +76,8 @@ A new helper function validates a token address before a group is created:
 ```rust
 /// Calls decimals() on the token contract at token_address.
 /// Returns Ok(decimals) if the call succeeds and decimals <= 38.
-/// Returns Err(StellarSaveError::InvalidToken) otherwise.
-fn validate_token(env: &Env, token_address: &Address) -> Result<u32, StellarSaveError>
+/// Returns Err(SorobanSaveError::InvalidToken) otherwise.
+fn validate_token(env: &Env, token_address: &Address) -> Result<u32, SorobanSaveError>
 ```
 
 The validator uses `soroban_sdk::token::TokenClient` to call `decimals()`. If the token contract does not exist or does not implement `decimals()`, the Soroban runtime will revert the transaction, which the contract surfaces as `InvalidToken`.
@@ -94,7 +94,7 @@ pub fn create_group(
     cycle_duration: u64,
     max_members: u32,
     token_address: Address,   // NEW parameter
-) -> Result<u64, StellarSaveError>
+) -> Result<u64, SorobanSaveError>
 ```
 
 New steps added to `create_group`:
@@ -123,13 +123,13 @@ The existing `execute_transfer` placeholder must be updated to:
 
 ```rust
 /// Returns the TokenConfig for a group.
-pub fn get_token_config(env: Env, group_id: u64) -> Result<TokenConfig, StellarSaveError>
+pub fn get_token_config(env: Env, group_id: u64) -> Result<TokenConfig, SorobanSaveError>
 
 /// Adds a token to the admin allowlist.
-pub fn add_allowed_token(env: Env, admin: Address, token_address: Address) -> Result<(), StellarSaveError>
+pub fn add_allowed_token(env: Env, admin: Address, token_address: Address) -> Result<(), SorobanSaveError>
 
 /// Removes a token from the admin allowlist.
-pub fn remove_allowed_token(env: Env, admin: Address, token_address: Address) -> Result<(), StellarSaveError>
+pub fn remove_allowed_token(env: Env, admin: Address, token_address: Address) -> Result<(), SorobanSaveError>
 
 /// Returns true if the token is permitted.
 pub fn is_token_allowed(env: Env, token_address: Address) -> bool
@@ -192,7 +192,7 @@ The contract uses `soroban_sdk::token::TokenClient` which exposes:
 
 ### Property 2: Invalid token rejection
 
-*For any* address that does not implement a callable `decimals()` function returning a value in [0, 38], calling `create_group` with that address as `token_address` should return `StellarSaveError::InvalidToken` and no group should be created.
+*For any* address that does not implement a callable `decimals()` function returning a value in [0, 38], calling `create_group` with that address as `token_address` should return `SorobanSaveError::InvalidToken` and no group should be created.
 
 **Validates: Requirements 1.4, 4.2, 4.3**
 
@@ -208,7 +208,7 @@ The contract uses `soroban_sdk::token::TokenClient` which exposes:
 
 ### Property 4: Exact amount enforcement
 
-*For any* group with a configured `contribution_amount` and *for any* amount that is not exactly equal to `contribution_amount`, calling `contribute` with that amount should return `StellarSaveError::InvalidAmount` and the contribution state should remain unchanged.
+*For any* group with a configured `contribution_amount` and *for any* amount that is not exactly equal to `contribution_amount`, calling `contribute` with that amount should return `SorobanSaveError::InvalidAmount` and the contribution state should remain unchanged.
 
 **Validates: Requirements 3.3, 3.4**
 
@@ -224,7 +224,7 @@ The contract uses `soroban_sdk::token::TokenClient` which exposes:
 
 ### Property 6: Insufficient allowance rejection
 
-*For any* member who has not granted the contract a token allowance of at least `contribution_amount`, calling `contribute` should return `StellarSaveError::TokenTransferFailed` and no `ContributionRecord` should be stored.
+*For any* member who has not granted the contract a token allowance of at least `contribution_amount`, calling `contribute` should return `SorobanSaveError::TokenTransferFailed` and no `ContributionRecord` should be stored.
 
 **Validates: Requirements 4.6, 4.7, 5.2, 5.4**
 
@@ -248,7 +248,7 @@ The contract uses `soroban_sdk::token::TokenClient` which exposes:
 
 ### Property 9: Allowlist rejection
 
-*For any* token address not present in the admin allowlist when an allowlist is configured, calling `create_group` with that token address should return `StellarSaveError::InvalidToken`.
+*For any* token address not present in the admin allowlist when an allowlist is configured, calling `create_group` with that token address should return `SorobanSaveError::InvalidToken`.
 
 **Validates: Requirements 6.1**
 
@@ -256,7 +256,7 @@ The contract uses `soroban_sdk::token::TokenClient` which exposes:
 
 ### Property 10: Allowlist admin-only management
 
-*For any* caller that is not the contract admin, calling `add_allowed_token` or `remove_allowed_token` should return `StellarSaveError::Unauthorized` and the allowlist should remain unchanged.
+*For any* caller that is not the contract admin, calling `add_allowed_token` or `remove_allowed_token` should return `SorobanSaveError::Unauthorized` and the allowlist should remain unchanged.
 
 **Validates: Requirements 6.2, 6.3**
 
@@ -348,7 +348,7 @@ Tag format: `// Feature: multi-token-support, Property {N}: {property_text}`
 
 ### Test architecture
 
-All multi-token tests live in `contracts/stellar-save/src/tests/multi_token.rs`. A shared `test_helpers` module provides:
+All multi-token tests live in `contracts/soroban-save/src/tests/multi_token.rs`. A shared `test_helpers` module provides:
 
 - `deploy_mock_token(env, decimals) -> Address` — deploys a mock SEP-41 token
 - `mint_tokens(env, token, recipient, amount)` — mints tokens to a test address

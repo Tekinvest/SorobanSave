@@ -2,13 +2,13 @@
 
 ## Overview
 
-This feature adds a `validate_max_members` helper function to the Stellar-Save Soroban smart contract. The function validates a proposed `max_members` value against the bounds stored in the contract's global `ContractConfig` (`config.min_members` to `config.max_members`), returning a typed `Result` so callers can handle out-of-range values without panicking.
+This feature adds a `validate_max_members` helper function to the SorobanSave Soroban smart contract. The function validates a proposed `max_members` value against the bounds stored in the contract's global `ContractConfig` (`config.min_members` to `config.max_members`), returning a typed `Result` so callers can handle out-of-range values without panicking.
 
 The function follows the exact same pattern as the two existing range validators in `lib.rs`:
 - `validate_cycle_duration` — checks a `u64` against `config.min_cycle_duration` / `config.max_cycle_duration`
 - `validate_contribution_amount_range` — checks an `i128` against `config.min_contribution` / `config.max_contribution`
 
-Both existing helpers live on `StellarSaveContract` as `pub fn` methods, load `ContractConfig` from persistent storage, and return `Ok(())` when no config is present (permissive default). `validate_max_members` will be identical in structure.
+Both existing helpers live on `SorobanSaveContract` as `pub fn` methods, load `ContractConfig` from persistent storage, and return `Ok(())` when no config is present (permissive default). `validate_max_members` will be identical in structure.
 
 The requirements also mandate that `create_group` and `update_group` delegate their `max_members` range check to this new helper, eliminating the duplicated inline validation that currently exists in both functions.
 
@@ -16,17 +16,17 @@ The requirements also mandate that `create_group` and `update_group` delegate th
 
 ## Architecture
 
-The change is entirely within the `contracts/stellar-save` crate. No new modules are introduced.
+The change is entirely within the `contracts/soroban-save` crate. No new modules are introduced.
 
 ```
-contracts/stellar-save/src/
+contracts/soroban-save/src/
   lib.rs          ← add validate_max_members; refactor create_group & update_group
   helpers.rs      ← no change (formatting/display utilities only)
-  error.rs        ← no change (StellarSaveError::InvalidState already exists)
+  error.rs        ← no change (SorobanSaveError::InvalidState already exists)
   storage.rs      ← no change (StorageKeyBuilder::contract_config already exists)
 ```
 
-The function is placed on `StellarSaveContract` (in `lib.rs`) alongside the two existing validators, keeping all validation logic in one place and making it callable from tests via the standard `StellarSaveContract::validate_max_members(&env, value)` pattern.
+The function is placed on `SorobanSaveContract` (in `lib.rs`) alongside the two existing validators, keeping all validation logic in one place and making it callable from tests via the standard `SorobanSaveContract::validate_max_members(&env, value)` pattern.
 
 ---
 
@@ -46,12 +46,12 @@ The function is placed on `StellarSaveContract` (in `lib.rs`) alongside the two 
 ///
 /// # Returns
 /// * `Ok(())` - The value is valid (or no config is stored)
-/// * `Err(StellarSaveError::InvalidState)` - Value is outside allowed range
-pub fn validate_max_members(env: &Env, max_members: u32) -> Result<(), StellarSaveError> {
+/// * `Err(SorobanSaveError::InvalidState)` - Value is outside allowed range
+pub fn validate_max_members(env: &Env, max_members: u32) -> Result<(), SorobanSaveError> {
     let config_key = StorageKeyBuilder::contract_config();
     if let Some(config) = env.storage().persistent().get::<_, ContractConfig>(&config_key) {
         if max_members < config.min_members || max_members > config.max_members {
-            return Err(StellarSaveError::InvalidState);
+            return Err(SorobanSaveError::InvalidState);
         }
     }
     Ok(())
@@ -94,13 +94,13 @@ The storage key used to retrieve the config is `StorageKeyBuilder::contract_conf
 
 ### Property 1: Below-minimum values are rejected
 
-*For any* `ContractConfig` stored in the environment and *for any* `max_members` value strictly less than `config.min_members`, calling `validate_max_members` shall return `Err(StellarSaveError::InvalidState)`.
+*For any* `ContractConfig` stored in the environment and *for any* `max_members` value strictly less than `config.min_members`, calling `validate_max_members` shall return `Err(SorobanSaveError::InvalidState)`.
 
 **Validates: Requirements 1.2**
 
 ### Property 2: Above-maximum values are rejected
 
-*For any* `ContractConfig` stored in the environment and *for any* `max_members` value strictly greater than `config.max_members`, calling `validate_max_members` shall return `Err(StellarSaveError::InvalidState)`.
+*For any* `ContractConfig` stored in the environment and *for any* `max_members` value strictly greater than `config.max_members`, calling `validate_max_members` shall return `Err(SorobanSaveError::InvalidState)`.
 
 **Validates: Requirements 1.3**
 
@@ -112,7 +112,7 @@ The storage key used to retrieve the config is `StorageKeyBuilder::contract_conf
 
 ### Property 4: Contract entry points reject out-of-range max_members
 
-*For any* `ContractConfig` stored in the environment and *for any* `max_members` value outside `[config.min_members, config.max_members]`, both `create_group` and `update_group` shall return `Err(StellarSaveError::InvalidState)`.
+*For any* `ContractConfig` stored in the environment and *for any* `max_members` value outside `[config.min_members, config.max_members]`, both `create_group` and `update_group` shall return `Err(SorobanSaveError::InvalidState)`.
 
 **Validates: Requirements 3.1, 3.2**
 
@@ -128,12 +128,12 @@ The storage key used to retrieve the config is `StorageKeyBuilder::contract_conf
 
 | Scenario | Return value |
 |---|---|
-| `max_members < config.min_members` (config present) | `Err(StellarSaveError::InvalidState)` |
-| `max_members > config.max_members` (config present) | `Err(StellarSaveError::InvalidState)` |
+| `max_members < config.min_members` (config present) | `Err(SorobanSaveError::InvalidState)` |
+| `max_members > config.max_members` (config present) | `Err(SorobanSaveError::InvalidState)` |
 | `max_members` in `[config.min_members, config.max_members]` | `Ok(())` |
 | No `ContractConfig` in storage | `Ok(())` (permissive default) |
 
-`StellarSaveError::InvalidState` (code 1003) is the correct error because an out-of-range `max_members` represents a group configuration that violates the contract's global policy — the same error used by `validate_cycle_duration` for the analogous out-of-range case.
+`SorobanSaveError::InvalidState` (code 1003) is the correct error because an out-of-range `max_members` represents a group configuration that violates the contract's global policy — the same error used by `validate_cycle_duration` for the analogous out-of-range case.
 
 No new error variants are needed.
 
@@ -156,7 +156,7 @@ Unit tests cover the concrete examples and edge cases required by Requirement 4:
 
 ### Property-based tests
 
-The project uses Rust's built-in test framework. For property-based testing, use the [`proptest`](https://github.com/proptest-rs/proptest) crate (add `proptest = "1"` under `[dev-dependencies]` in `contracts/stellar-save/Cargo.toml`).
+The project uses Rust's built-in test framework. For property-based testing, use the [`proptest`](https://github.com/proptest-rs/proptest) crate (add `proptest = "1"` under `[dev-dependencies]` in `contracts/soroban-save/Cargo.toml`).
 
 Each property test runs a minimum of 100 iterations (proptest default is 256, which exceeds this).
 

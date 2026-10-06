@@ -20,10 +20,10 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 VERIFY_SCRIPT="$REPO_ROOT/scripts/verify_reproducible_build.sh"
-CONTRACT_DIR="$REPO_ROOT/contracts/stellar-save"
-WASM_REL="target/wasm32-unknown-unknown/release/stellar_save.wasm"
+CONTRACT_DIR="$REPO_ROOT/contracts/soroban-save"
+WASM_REL="target/wasm32-unknown-unknown/release/soroban_save.wasm"
 WASM_PATH="$REPO_ROOT/$WASM_REL"
-CHECKSUM_FILE="$CONTRACT_DIR/stellar_save.wasm.sha256"
+CHECKSUM_FILE="$CONTRACT_DIR/soroban_save.wasm.sha256"
 
 # ── Argument passthrough ──────────────────────────────────────────────────────
 LOCAL_ONLY=false
@@ -143,9 +143,9 @@ fi
 section "TEST 4 — Baseline checksum file integrity"
 
 if [ -f "$CHECKSUM_FILE" ]; then
-  pass "Checksum file exists: contracts/stellar-save/stellar_save.wasm.sha256"
+  pass "Checksum file exists: contracts/soroban-save/soroban_save.wasm.sha256"
 else
-  fail "Checksum file missing: contracts/stellar-save/stellar_save.wasm.sha256"
+  fail "Checksum file missing: contracts/soroban-save/soroban_save.wasm.sha256"
   echo "       Run: ./scripts/verify_reproducible_build.sh --regen-checksum" >&2
 fi
 

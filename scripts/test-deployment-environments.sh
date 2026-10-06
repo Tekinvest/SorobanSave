@@ -20,15 +20,15 @@ test_env_configs() {
     case $env in
       dev)
         EXPECTED_NETWORK="testnet"
-        EXPECTED_URL="https://dev.stellar-save.app"
+        EXPECTED_URL="https://dev.soroban-save.app"
         ;;
       staging)
         EXPECTED_NETWORK="testnet"
-        EXPECTED_URL="https://staging.stellar-save.app"
+        EXPECTED_URL="https://staging.soroban-save.app"
         ;;
       production)
         EXPECTED_NETWORK="mainnet"
-        EXPECTED_URL="https://stellar-save.app"
+        EXPECTED_URL="https://soroban-save.app"
         ;;
     esac
     

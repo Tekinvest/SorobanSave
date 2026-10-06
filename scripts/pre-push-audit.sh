@@ -115,7 +115,7 @@ run_cargo_audit() {
 }
 
 # ── Run audits ────────────────────────────────────────────────────────────────
-echo -e "${BOLD}Stellar-Save — pre-push dependency audit${NC}"
+echo -e "${BOLD}SorobanSave — pre-push dependency audit${NC}"
 echo "Repo: $REPO_ROOT"
 
 if $RUN_NPM; then

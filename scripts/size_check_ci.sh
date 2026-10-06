@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # scripts/size_check_ci.sh
 #
-# Lightweight CI size gate for the Stellar-Save Soroban contract.
+# Lightweight CI size gate for the SorobanSave Soroban contract.
 #
 # Unlike the full scripts/check_contract_size.sh (which tracks history and
 # generates markdown reports), this script is designed for fast CI feedback:
@@ -31,7 +31,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-WASM_PATH="${WASM_PATH:-$ROOT/target/wasm32-unknown-unknown/release/stellar_save.wasm}"
+WASM_PATH="${WASM_PATH:-$ROOT/target/wasm32-unknown-unknown/release/soroban_save.wasm}"
 SIZE_LIMIT_KB="${SIZE_LIMIT_KB:-100}"
 WARN_THRESHOLD_KB="${WARN_THRESHOLD_KB:-80}"
 SKIP_BUILD="${SKIP_BUILD:-0}"
@@ -44,7 +44,7 @@ WARN_THRESHOLD_BYTES=$(( WARN_THRESHOLD_KB * 1024 ))
 if [[ "$SKIP_BUILD" != "1" && ! -f "$WASM_PATH" ]]; then
   echo "🔨 WASM not found — building release target..."
   cargo build \
-    --manifest-path "$ROOT/contracts/stellar-save/Cargo.toml" \
+    --manifest-path "$ROOT/contracts/soroban-save/Cargo.toml" \
     --target wasm32-unknown-unknown \
     --release \
     --quiet
@@ -52,7 +52,7 @@ fi
 
 if [[ ! -f "$WASM_PATH" ]]; then
   echo "❌ WASM file not found: $WASM_PATH" >&2
-  echo "   Run: cargo build --manifest-path contracts/stellar-save/Cargo.toml --target wasm32-unknown-unknown --release" >&2
+  echo "   Run: cargo build --manifest-path contracts/soroban-save/Cargo.toml --target wasm32-unknown-unknown --release" >&2
   exit 1
 fi
 
@@ -65,9 +65,9 @@ SIZE_KB=$(( (SIZE_BYTES + 1023) / 1024 ))   # ceiling division
 
 if [[ "${CI:-false}" == "true" || "${GITHUB_ACTIONS:-false}" == "true" ]]; then
   if (( SIZE_BYTES > SIZE_LIMIT_BYTES )); then
-    echo "::error file=contracts/stellar-save/Cargo.toml::WASM size ${SIZE_KB} KB exceeds Soroban ${SIZE_LIMIT_KB} KB limit. See docs/size-optimization.md."
+    echo "::error file=contracts/soroban-save/Cargo.toml::WASM size ${SIZE_KB} KB exceeds Soroban ${SIZE_LIMIT_KB} KB limit. See docs/size-optimization.md."
   elif (( SIZE_BYTES > WARN_THRESHOLD_BYTES )); then
-    echo "::warning file=contracts/stellar-save/Cargo.toml::WASM size ${SIZE_KB} KB is above the ${WARN_THRESHOLD_KB} KB warning threshold (limit: ${SIZE_LIMIT_KB} KB)."
+    echo "::warning file=contracts/soroban-save/Cargo.toml::WASM size ${SIZE_KB} KB is above the ${WARN_THRESHOLD_KB} KB warning threshold (limit: ${SIZE_LIMIT_KB} KB)."
   fi
 fi
 

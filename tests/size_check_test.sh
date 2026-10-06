@@ -20,11 +20,11 @@ assert_contains() {
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 make_wasm() {
   # Create a synthetic file of exactly $1 bytes
-  dd if=/dev/zero bs=1 count="$1" of="$TMP/stellar_save.wasm" 2>/dev/null
+  dd if=/dev/zero bs=1 count="$1" of="$TMP/soroban_save.wasm" 2>/dev/null
 }
 
 run_check() {
-  WASM_PATH="$TMP/stellar_save.wasm" \
+  WASM_PATH="$TMP/soroban_save.wasm" \
   WASM_SIZE_LIMIT_KB="${1:-100}" \
   WARN_THRESHOLD_PCT="${2:-80}" \
   GIT_SHA="test-sha" \
@@ -59,7 +59,7 @@ assert_contains "105 KB file shows 🚨 icon"         "🚨"      "$OUT"
 assert_contains "105 KB file shows blocked message" "blocked" "$OUT"
 
 # Confirm exit code is 1
-if ! WASM_PATH="$TMP/stellar_save.wasm" WASM_SIZE_LIMIT_KB=100 WARN_THRESHOLD_PCT=80 GIT_SHA=test \
+if ! WASM_PATH="$TMP/soroban_save.wasm" WASM_SIZE_LIMIT_KB=100 WARN_THRESHOLD_PCT=80 GIT_SHA=test \
      bash "$(dirname "$0")/../scripts/check_contract_size.sh" &>/dev/null; then
   ok "exit code is 1 when limit exceeded"
 else
@@ -70,7 +70,7 @@ fi
 echo
 echo "── History tracking ─────────────────────────────────────────────────────"
 make_wasm $(( 60 * 1024 ))
-WASM_PATH="$TMP/stellar_save.wasm" \
+WASM_PATH="$TMP/soroban_save.wasm" \
 WASM_SIZE_LIMIT_KB=100 \
 WARN_THRESHOLD_PCT=80 \
 GIT_SHA=abc123 \
@@ -109,18 +109,18 @@ echo
 echo "── Trend delta ──────────────────────────────────────────────────────────"
 # First run: 60 KB
 make_wasm $(( 60 * 1024 ))
-WASM_PATH="$TMP/stellar_save.wasm" WASM_SIZE_LIMIT_KB=100 WARN_THRESHOLD_PCT=80 GIT_SHA=sha1 \
+WASM_PATH="$TMP/soroban_save.wasm" WASM_SIZE_LIMIT_KB=100 WARN_THRESHOLD_PCT=80 GIT_SHA=sha1 \
   bash "$(dirname "$0")/../scripts/check_contract_size.sh" &>/dev/null
 
 # Second run: 65 KB (should show positive delta)
 make_wasm $(( 65 * 1024 ))
-OUT=$(WASM_PATH="$TMP/stellar_save.wasm" WASM_SIZE_LIMIT_KB=100 WARN_THRESHOLD_PCT=80 GIT_SHA=sha2 \
+OUT=$(WASM_PATH="$TMP/soroban_save.wasm" WASM_SIZE_LIMIT_KB=100 WARN_THRESHOLD_PCT=80 GIT_SHA=sha2 \
   bash "$(dirname "$0")/../scripts/check_contract_size.sh" 2>&1)
 assert_contains "trend shows positive delta" "↑" "$OUT"
 
 # Third run: 55 KB (should show negative delta)
 make_wasm $(( 55 * 1024 ))
-OUT=$(WASM_PATH="$TMP/stellar_save.wasm" WASM_SIZE_LIMIT_KB=100 WARN_THRESHOLD_PCT=80 GIT_SHA=sha3 \
+OUT=$(WASM_PATH="$TMP/soroban_save.wasm" WASM_SIZE_LIMIT_KB=100 WARN_THRESHOLD_PCT=80 GIT_SHA=sha3 \
   bash "$(dirname "$0")/../scripts/check_contract_size.sh" 2>&1)
 assert_contains "trend shows negative delta" "↓" "$OUT"
 
