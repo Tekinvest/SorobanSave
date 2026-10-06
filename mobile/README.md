@@ -1,6 +1,6 @@
-# Stellar Save Mobile
+# SorobanSave Mobile
 
-Native iOS/Android mobile application for Stellar Save built with Expo (React Native + TypeScript).
+Native iOS/Android mobile application for SorobanSave built with Expo (React Native + TypeScript).
 
 ## Setup & Development
 

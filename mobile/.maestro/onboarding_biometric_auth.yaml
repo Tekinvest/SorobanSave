@@ -1,7 +1,7 @@
 # Biometric auth gate — first-launch and re-lock scenarios
 # Covers: AuthGate initial unlock, biometric prompt, PIN fallback, idle re-lock
 # Prereq: app installed fresh (clearState: true)
-appId: com.stellarsave.app
+appId: com.sorobansave.app
 ---
 # ── Fresh launch: biometric prompt fires automatically ────────────────────────
 - launchApp:

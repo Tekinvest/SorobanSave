@@ -2,7 +2,7 @@
 # Covers: KycStatusScreen pending / approved / rejected / expired states
 # Prereq: app is showing KycStatusScreen (reached via the full onboarding flow
 #         or by launching into a state-seeded build using MAESTRO_KYC_STATUS).
-appId: com.stellarsave.app
+appId: com.sorobansave.app
 ---
 # ── Pending state ─────────────────────────────────────────────────────────────
 - launchApp:

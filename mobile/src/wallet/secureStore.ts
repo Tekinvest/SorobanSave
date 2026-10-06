@@ -1,6 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 
-const SECRET_KEY_STORAGE_KEY = 'stellar_save_secret_key';
+const SECRET_KEY_STORAGE_KEY = 'soroban_save_secret_key';
 
 /**
  * Secret keys must only ever live here (iOS Keychain / Android Keystore via

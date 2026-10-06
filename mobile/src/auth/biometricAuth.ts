@@ -15,7 +15,7 @@
 import * as LocalAuthentication from 'expo-local-authentication';
 import * as SecureStore from 'expo-secure-store';
 
-const PIN_STORAGE_KEY = 'stellar_save_pin';
+const PIN_STORAGE_KEY = 'soroban_save_pin';
 
 // ─── Biometric support ────────────────────────────────────────────────────────
 

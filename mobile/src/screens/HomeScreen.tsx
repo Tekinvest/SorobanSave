@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Stellar Save</Text>
+      <Text style={styles.title}>SorobanSave</Text>
       <Text>Placeholder home tab — built out in follow-up issues.</Text>
     </View>
   );

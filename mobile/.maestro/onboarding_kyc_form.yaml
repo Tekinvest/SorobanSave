@@ -3,7 +3,7 @@
 #         camera permission request, document capture, and form submission
 # Prereq: user has completed wallet setup; app is at the KYC form screen.
 #         Run after onboarding_wallet_setup.yaml or use the full flow file.
-appId: com.stellarsave.app
+appId: com.sorobansave.app
 ---
 # ── Navigate to KYC form ──────────────────────────────────────────────────────
 - launchApp:

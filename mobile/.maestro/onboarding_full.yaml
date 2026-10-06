@@ -7,7 +7,7 @@
 # onboarding_kyc_status, onboarding_biometric_auth) cover edge cases in depth.
 #
 # Fixture data used in this flow is documented in mobile/docs/E2E_FIXTURES.md.
-appId: com.stellarsave.app
+appId: com.sorobansave.app
 ---
 # ═══════════════════════════════════════════════════════════════════════════════
 # STEP 1 — Fresh launch: AuthGate & Welcome
@@ -23,7 +23,7 @@ appId: com.stellarsave.app
     timeout: 15000
 
 - assertVisible:
-    text: "Welcome to Stellar Save"
+    text: "Welcome to SorobanSave"
 
 - assertVisible:
     text: "Let's set up your wallet"

@@ -1,5 +1,5 @@
 # Join Group flow — browse groups, join, confirm membership
-appId: com.stellarsave.app
+appId: com.sorobansave.app
 ---
 # Precondition: user is authenticated
 - launchApp
