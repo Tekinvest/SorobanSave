@@ -53,13 +53,13 @@ npm run test:migrations:bash # Run bash script tests
 The test database runs on:
 - **Host:** localhost
 - **Port:** 5433 (to avoid conflicts)
-- **Database:** stellar_save_test
+- **Database:** soroban_save_test
 - **User:** postgres
 - **Password:** postgres
 
 Connection string:
 ```
-postgresql://postgres:postgres@localhost:5433/stellar_save_test
+postgresql://postgres:postgres@localhost:5433/soroban_save_test
 ```
 
 ## What Gets Tested
@@ -136,4 +136,4 @@ See `.github/workflows/database-migrations.yml` for details.
 
 - [Migration Conventions](MIGRATION_CONVENTIONS.md) - Comprehensive guide
 - [Database README](README.md) - Database structure overview
-- [Issue #1557](https://github.com/Xoulomon/Stellar-Save/issues/1557) - Original issue
+- [Issue #1557](https://github.com/Tekinvest/SorobanSave/issues/1557) - Original issue

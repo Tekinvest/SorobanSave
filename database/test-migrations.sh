@@ -16,7 +16,7 @@
 #
 # Environment Variables:
 #   TEST_DATABASE_URL - PostgreSQL connection string for test database
-#                       Default: postgresql://postgres:postgres@localhost:5432/stellar_save_test
+#                       Default: postgresql://postgres:postgres@localhost:5432/soroban_save_test
 #
 # Exit Codes:
 #   0 - All migrations apply and rollback successfully
@@ -36,7 +36,7 @@ NC='\033[0m' # No Color
 # Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MIGRATIONS_DIR="${SCRIPT_DIR}/migrations"
-TEST_DB_URL="${TEST_DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/stellar_save_test}"
+TEST_DB_URL="${TEST_DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/soroban_save_test}"
 
 # Parse database connection
 DB_USER=$(echo "$TEST_DB_URL" | sed -n 's|.*://\([^:]*\):.*|\1|p')

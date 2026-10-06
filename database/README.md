@@ -100,5 +100,5 @@ Compare `Planning Time` and `Execution Time` in the output before and after the 
 
 - [MIGRATION_CONVENTIONS.md](MIGRATION_CONVENTIONS.md) - Migration guidelines and best practices
 - [INDEX_REVIEW.md](INDEX_REVIEW.md) - Index optimization rationale (Issue #42)
-- [Issue #1557](https://github.com/Xoulomon/Stellar-Save/issues/1557) - Migration rollback tests
-- [Issue #5](https://github.com/Xoulomon/Stellar-Save/issues/5) - Migration conventions
+- [Issue #1557](https://github.com/Tekinvest/SorobanSave/issues/1557) - Migration rollback tests
+- [Issue #5](https://github.com/Tekinvest/SorobanSave/issues/5) - Migration conventions

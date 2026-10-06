@@ -22,7 +22,7 @@ import * as path from 'path';
 
 // Test configuration
 const TEST_DB_URL = process.env.TEST_DATABASE_URL || 
-  'postgresql://postgres:postgres@localhost:5433/stellar_save_test';
+  'postgresql://postgres:postgres@localhost:5433/soroban_save_test';
 
 const MIGRATIONS_DIR = path.join(__dirname, 'migrations');
 
