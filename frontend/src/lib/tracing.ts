@@ -21,7 +21,7 @@
  * Env vars (Vite, must be prefixed with VITE_):
  *   VITE_OTEL_ENABLED=true
  *   VITE_OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318   (OTLP/HTTP base URL)
- *   VITE_OTEL_SERVICE_NAME=stellar-save-frontend             (optional)
+ *   VITE_OTEL_SERVICE_NAME=soroban-save-frontend             (optional)
  *   VITE_OTEL_TRACES_SAMPLER_ARG=0.1                         (root sample ratio)
  *   VITE_OTEL_PROPAGATE_URLS=/api,http://localhost:3001      (CSV of URL prefixes
  *                                                             to attach traceparent to)

@@ -1,11 +1,11 @@
-# @stellar-save/sdk
+# @soroban-save/sdk
 
-Shared TypeScript SDK: contract bindings, types, and API client for Stellar-Save.
+Shared TypeScript SDK: contract bindings, types, and API client for SorobanSave.
 
 ## Installation
 
 ```bash
-pnpm add @stellar-save/sdk
+pnpm add @soroban-save/sdk
 ```
 
 ## ABI Drift Test

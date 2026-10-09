@@ -10,7 +10,7 @@
 
 set -euo pipefail
 
-DOMAIN="${1:-api.stellar-save.io}"
+DOMAIN="${1:-api.soroban-save.io}"
 PORT="${2:-443}"
 MIN_DAYS_UNTIL_EXPIRY=30
 FAILURES=0

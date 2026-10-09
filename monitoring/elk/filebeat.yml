@@ -16,11 +16,11 @@ processors:
 
 output.elasticsearch:
   hosts: ["${ELASTICSEARCH_HOST:elasticsearch:9200}"]
-  index: "stellar-save-backend-%{+yyyy.MM.dd}"
+  index: "soroban-save-backend-%{+yyyy.MM.dd}"
 
 setup.kibana:
   host: "${KIBANA_HOST:kibana:5601}"
 
 setup.ilm.enabled: true
-setup.ilm.rollover_alias: "stellar-save-backend"
+setup.ilm.rollover_alias: "soroban-save-backend"
 setup.ilm.pattern: "{now/d}-000001"

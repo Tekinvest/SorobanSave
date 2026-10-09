@@ -1,8 +1,8 @@
 # Drips Wave Contributor Guide 🌊
 
-Welcome to the **Stellar-Save Drips Wave Contributor Guide**! 
+Welcome to the **SorobanSave Drips Wave Contributor Guide**! 
 
-Stellar-Save is a decentralized, trustless, and transparent Rotational Savings and Credit Association (ROSCA) built on Stellar Soroban smart contracts. We participate in the **Drips Wave** program — an innovative developer funding initiative that rewards open-source contributors for helping us build financial inclusion tools on the Stellar blockchain.
+SorobanSave is a decentralized, trustless, and transparent Rotational Savings and Credit Association (ROSCA) built on Stellar Soroban smart contracts. We participate in the **Drips Wave** program — an innovative developer funding initiative that rewards open-source contributors for helping us build financial inclusion tools on the Stellar blockchain.
 
 This guide explains how you can contribute, earn points, and convert those points into funding.
 
@@ -54,12 +54,12 @@ graph TD
 ```
 
 ### Step 1: Find and Claim an Issue
-1. Browse open issues on [GitHub Issues](https://github.com/Xoulomon/Stellar-Save/issues) labeled `wave-ready` or refer to [docs/wave-ready-issues.md](wave-ready-issues.md).
+1. Browse open issues on [GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues) labeled `wave-ready` or refer to [docs/wave-ready-issues.md](wave-ready-issues.md).
 2. Leave a comment expressing your intent to work on the issue (e.g., *"I would like to claim this issue!"*). 
 3. Wait for a project maintainer to officially assign you to the issue. This avoids duplicated effort.
 
 ### Step 2: Set Up and Branch
-1. Fork the [Stellar-Save repository](https://github.com/Xoulomon/Stellar-Save) and clone it locally.
+1. Fork the [SorobanSave repository](https://github.com/Tekinvest/SorobanSave) and clone it locally.
 2. Create a clean branch from `main` using standard naming conventions:
    ```bash
    git checkout -b feat/issue-title   # For features
@@ -75,7 +75,7 @@ Maintain high standards of code quality. Before submitting, always ensure that f
   ```bash
   cargo fmt                       # Enforces format standards
   cargo clippy -- -D warnings     # Catch lints & errors
-  cargo test -p stellar-save      # Run contract tests
+  cargo test -p soroban-save      # Run contract tests
   ```
 * **For TypeScript React Frontend:**
   ```bash
@@ -86,7 +86,7 @@ Maintain high standards of code quality. Before submitting, always ensure that f
 
 ### Step 4: Commit and Link
 1. Use **Conventional Commits** (e.g., `feat(contract): add validation check`). The repository has Husky hooks that validate commit message formatting automatically.
-2. Open a Pull Request (PR) from your fork to `Xoulomon/Stellar-Save:main`.
+2. Open a Pull Request (PR) from your fork to `Xoulomon/SorobanSave:main`.
 3. **CRITICAL:** Link the PR to the issue by adding the closing keyword in the description:
    ```markdown
    Closes #<issue_number>
@@ -119,7 +119,7 @@ The following issues are currently open and ready to be claimed for the active W
 ## 🙋 4. Getting Support
 
 Need help getting started or got stuck on a Soroban smart contract error?
-* **Discussions:** [GitHub Discussions](https://github.com/Xoulomon/Stellar-Save/discussions)
+* **Discussions:** [GitHub Discussions](https://github.com/Tekinvest/SorobanSave/discussions)
 * **Telegram:** [@Xoulomon](https://t.me/Xoulomon)
 * **Discord:** Drips Wave Contributor Support
 

@@ -37,14 +37,14 @@ export function TestimonialsSection() {
               name: 'Amara K.',
               location: 'Lagos, Nigeria',
               quote:
-                "I've been part of traditional ajo groups my whole life. Stellar Save brings that same trust but with full transparency — I can see every transaction on-chain.",
+                "I've been part of traditional ajo groups my whole life. SorobanSave brings that same trust but with full transparency — I can see every transaction on-chain.",
               avatar: '🧑🏾',
             },
             {
               name: 'Sofia R.',
               location: 'Mexico City, Mexico',
               quote:
-                'Our tanda group used to rely on trust alone. Now with Stellar Save, the smart contract handles everything automatically. No more disputes.',
+                'Our tanda group used to rely on trust alone. Now with SorobanSave, the smart contract handles everything automatically. No more disputes.',
               avatar: '👩🏽',
             },
             {

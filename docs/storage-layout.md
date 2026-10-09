@@ -1,12 +1,12 @@
 # Smart Contract Storage Layout
 
-This document details the storage architecture for the Stellar-Save smart contract. It covers every `StorageKey` variant, the Soroban storage tier used for each, the data stored, access patterns, and cost estimates for capacity planning.
+This document details the storage architecture for the SorobanSave smart contract. It covers every `StorageKey` variant, the Soroban storage tier used for each, the data stored, access patterns, and cost estimates for capacity planning.
 
 ---
 
 ## Storage Strategy Overview
 
-Stellar-Save uses Soroban's tiered storage model to balance performance, persistence, and cost.
+SorobanSave uses Soroban's tiered storage model to balance performance, persistence, and cost.
 
 | Tier | Characteristics | Used For |
 |---|---|---|

@@ -2,7 +2,7 @@
  * k6 load test — Backend API (contract-facing endpoints)
  *
  * Simulates concurrent users hitting the recommendation, search,
- * preferences, and export endpoints that back the Stellar-Save frontend.
+ * preferences, and export endpoints that back the SorobanSave frontend.
  *
  * Run:
  *   k6 run tests/load/api.test.js

@@ -66,7 +66,7 @@ export default function DashboardPage() {
   return (
     <ErrorBoundary>
       <ToastProvider>
-        <AppLayout title="Dashboard" subtitle="Your savings overview" footerText="Stellar Save — Built for transparent, on-chain savings">
+        <AppLayout title="Dashboard" subtitle="Your savings overview" footerText="SorobanSave — Built for transparent, on-chain savings">
           <DashboardContent />
         </AppLayout>
       </ToastProvider>

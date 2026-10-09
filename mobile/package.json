@@ -1,5 +1,5 @@
 {
-  "name": "stellar-save-mobile",
+  "name": "soroban-save-mobile",
   "version": "0.1.0",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
@@ -13,7 +13,7 @@
     "test:quarantine": "jest --config jest.quarantine.config.js"
   },
   "dependencies": {
-    "@stellar-save/sdk": "workspace:*",
+    "@soroban-save/sdk": "workspace:*",
     "@sentry/react-native": "^6.19.0",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.18",

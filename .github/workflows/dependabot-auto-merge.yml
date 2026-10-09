@@ -43,7 +43,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Test contracts
-        run: cargo test --manifest-path contracts/stellar-save/Cargo.toml
+        run: cargo test --manifest-path contracts/soroban-save/Cargo.toml
 
   # ── Auto-merge minor/patch updates after tests pass ───────────────────────
   auto-merge:

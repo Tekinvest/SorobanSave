@@ -35,7 +35,7 @@ interface ThemeContextValue {
 const ThemeModeContext = createContext<ThemeMode | undefined>(undefined);
 const ThemeToggleContext = createContext<(() => void) | undefined>(undefined);
 
-const STORAGE_KEY = 'stellar-save:theme-mode';
+const STORAGE_KEY = 'soroban-save:theme-mode';
 
 // ── Provider ──────────────────────────────────────────────────────────────────
 

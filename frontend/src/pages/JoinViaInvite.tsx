@@ -90,7 +90,7 @@ const JoinViaInvite: React.FC = () => {
           You've been invited!
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          Join a savings group on Stellar Save.
+          Join a savings group on SorobanSave.
         </Typography>
         <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
           Invite code: {inviteCode}

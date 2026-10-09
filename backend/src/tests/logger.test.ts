@@ -10,7 +10,7 @@ describe('Winston logger', () => {
 
   it('winstonLogger has correct service metadata', () => {
     const meta = (winstonLogger as any).defaultMeta;
-    expect(meta).toEqual({ service: 'stellar-save-backend' });
+    expect(meta).toEqual({ service: 'soroban-save-backend' });
   });
 
   it('winstonLogger has at least 2 transports (console + file rotation)', () => {

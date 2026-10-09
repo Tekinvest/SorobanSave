@@ -4,10 +4,10 @@
 // NOTE: The GraphQL API uses separate Group / Member types — see the generated
 // types in `src/generated/graphql.ts` (Group, Member, GetGroupQuery, etc.).
 // The types below are the REST API / UI-layer shapes used by the frontend.
-export type { GroupStatus, PaginationMeta } from '@stellar-save/sdk';
+export type { GroupStatus, PaginationMeta } from '@soroban-save/sdk';
 
 import type { FilterState, SortOption } from '../components/GroupFilters';
-import type { GroupStatus, PaginationMeta } from '@stellar-save/sdk';
+import type { GroupStatus, PaginationMeta } from '@soroban-save/sdk';
 
 export interface PublicGroup {
   id: string;

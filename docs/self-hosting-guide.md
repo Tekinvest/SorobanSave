@@ -1,6 +1,6 @@
 # Self-Hosting Guide
 
-This guide covers deploying your own instance of Stellar-Save — the backend API, frontend, and supporting services. For smart contract deployment to the Stellar network, see [deployment.md](./deployment.md).
+This guide covers deploying your own instance of SorobanSave — the backend API, frontend, and supporting services. For smart contract deployment to the Stellar network, see [deployment.md](./deployment.md).
 
 **Version**: 1.0.0  
 **Last Updated**: 2026-04-26
@@ -27,7 +27,7 @@ This guide covers deploying your own instance of Stellar-Save — the backend AP
 
 ## Architecture Overview
 
-A self-hosted Stellar-Save instance has four components:
+A self-hosted SorobanSave instance has four components:
 
 ```
 Users
@@ -128,8 +128,8 @@ sudo apt-get install -y nginx
 ### 1. Clone and Configure
 
 ```bash
-git clone https://github.com/Xoulomon/Stellar-Save.git
-cd Stellar-Save
+git clone https://github.com/Tekinvest/SorobanSave.git
+cd SorobanSave
 cp .env.example .env
 ```
 
@@ -142,7 +142,7 @@ STELLAR_RPC_URL=https://soroban-rpc.mainnet.stellar.gateway.fm
 STELLAR_NETWORK_PASSPHRASE="Public Global Stellar Network ; September 2015"
 
 # Contract address (fill in after deploying the contract)
-CONTRACT_STELLAR_SAVE=
+CONTRACT_SOROBAN_SAVE=
 
 # Backend
 NODE_ENV=production
@@ -159,7 +159,7 @@ BACKUP_ENABLED=false
 AWS_REGION=us-east-1
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
-BACKUP_S3_BUCKET=stellar-save-backups
+BACKUP_S3_BUCKET=soroban-save-backups
 BACKUP_RETENTION_DAYS=30
 BACKUP_ALERT_WEBHOOK_URL=
 ```
@@ -181,18 +181,18 @@ npm install --omit=dev
 
 #### Run as a systemd service
 
-Create `/etc/systemd/system/stellar-save-api.service`:
+Create `/etc/systemd/system/soroban-save-api.service`:
 
 ```ini
 [Unit]
-Description=Stellar-Save Backend API
+Description=SorobanSave Backend API
 After=network.target elasticsearch.service
 
 [Service]
 Type=simple
 User=www-data
-WorkingDirectory=/opt/stellar-save/backend
-EnvironmentFile=/opt/stellar-save/.env
+WorkingDirectory=/opt/soroban-save/backend
+EnvironmentFile=/opt/soroban-save/.env
 ExecStart=/usr/bin/npx tsx src/index.ts
 Restart=on-failure
 RestartSec=5
@@ -203,15 +203,15 @@ StandardError=journal
 WantedBy=multi-user.target
 ```
 
-> Replace `/opt/stellar-save` with your actual clone path.
+> Replace `/opt/soroban-save` with your actual clone path.
 
 Enable and start:
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable stellar-save-api
-sudo systemctl start stellar-save-api
-sudo systemctl status stellar-save-api
+sudo systemctl enable soroban-save-api
+sudo systemctl start soroban-save-api
+sudo systemctl status soroban-save-api
 ```
 
 Verify it's running:
@@ -227,7 +227,7 @@ curl http://localhost:3001/api/v1/health
 Edit `/etc/elasticsearch/elasticsearch.yml`:
 
 ```yaml
-cluster.name: stellar-save
+cluster.name: soroban-save
 node.name: node-1
 network.host: 127.0.0.1 # bind to localhost only
 http.port: 9200
@@ -254,7 +254,7 @@ sudo /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
 Update `ELASTICSEARCH_PASSWORD` in your `.env` with the generated password, then restart the API:
 
 ```bash
-sudo systemctl restart stellar-save-api
+sudo systemctl restart soroban-save-api
 ```
 
 ### 4. Build and Serve the Frontend
@@ -273,7 +273,7 @@ Edit `.env.production`:
 ```bash
 VITE_STELLAR_NETWORK=mainnet
 VITE_STELLAR_RPC_URL=https://soroban-rpc.mainnet.stellar.gateway.fm
-VITE_CONTRACT_STELLAR_SAVE=<your-contract-id>
+VITE_CONTRACT_SOROBAN_SAVE=<your-contract-id>
 ```
 
 ```bash
@@ -285,7 +285,7 @@ The output lands in `dist/` at the repo root.
 
 #### Serve with nginx
 
-Create `/etc/nginx/sites-available/stellar-save`:
+Create `/etc/nginx/sites-available/soroban-save`:
 
 ```nginx
 server {
@@ -304,7 +304,7 @@ server {
     ssl_ciphers         HIGH:!aNULL:!MD5;
 
     # Frontend static files (built to dist/ at repo root)
-    root /opt/stellar-save/dist;
+    root /opt/soroban-save/dist;
     index index.html;
 
     location / {
@@ -340,7 +340,7 @@ server {
 ```
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/stellar-save /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/soroban-save /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -354,7 +354,7 @@ sudo certbot --nginx -d your-domain.com
 
 ### 5. Deploy Smart Contracts
 
-Follow [deployment.md](./deployment.md) for the full contract deployment process. Once you have a contract ID, update `CONTRACT_STELLAR_SAVE` in `.env` and `VITE_CONTRACT_STELLAR_SAVE` in the frontend build, then rebuild the frontend.
+Follow [deployment.md](./deployment.md) for the full contract deployment process. Once you have a contract ID, update `CONTRACT_SOROBAN_SAVE` in `.env` and `VITE_CONTRACT_SOROBAN_SAVE` in the frontend build, then rebuild the frontend.
 
 ---
 
@@ -367,7 +367,7 @@ All configuration is driven by environment variables in `.env`. Here's the full 
 | `STELLAR_NETWORK`            | Yes        | `testnet`                | `testnet`, `mainnet`, or `standalone`        |
 | `STELLAR_RPC_URL`            | Yes        | testnet URL              | Soroban RPC endpoint                         |
 | `STELLAR_NETWORK_PASSPHRASE` | Yes        | testnet passphrase       | Network passphrase                           |
-| `CONTRACT_STELLAR_SAVE`      | Yes        | —                        | Deployed contract address                    |
+| `CONTRACT_SOROBAN_SAVE`      | Yes        | —                        | Deployed contract address                    |
 | `NODE_ENV`                   | Yes        | `development`            | Set to `production` for live deployments     |
 | `PORT`                       | No         | `3001`                   | Backend API port                             |
 | `ADMIN_SECRET`               | Yes        | `super-secret-admin-key` | Secret for admin API endpoints — change this |
@@ -378,7 +378,7 @@ All configuration is driven by environment variables in `.env`. Here's the full 
 | `AWS_REGION`                 | If backups | `us-east-1`              | AWS region for S3                            |
 | `AWS_ACCESS_KEY_ID`          | If backups | —                        | AWS access key                               |
 | `AWS_SECRET_ACCESS_KEY`      | If backups | —                        | AWS secret key                               |
-| `BACKUP_S3_BUCKET`           | If backups | `stellar-save-backups`   | S3 bucket name                               |
+| `BACKUP_S3_BUCKET`           | If backups | `soroban-save-backups`   | S3 bucket name                               |
 | `BACKUP_RETENTION_DAYS`      | No         | `30`                     | Days to keep backups                         |
 | `BACKUP_ALERT_WEBHOOK_URL`   | No         | —                        | Webhook URL for backup alerts                |
 
@@ -436,7 +436,7 @@ The `x-admin-secret` header is the only gate for admin endpoints. Rotate it peri
 ```bash
 # Check for vulnerabilities
 cd backend && npm audit
-cargo audit --manifest-path contracts/stellar-save/Cargo.toml
+cargo audit --manifest-path contracts/soroban-save/Cargo.toml
 
 # Apply patches
 npm audit fix
@@ -459,8 +459,8 @@ sudo certbot renew --dry-run
 - The `.env` file should be readable only by the service user:
 
 ```bash
-sudo chown www-data:www-data /opt/stellar-save/.env
-sudo chmod 600 /opt/stellar-save/.env
+sudo chown www-data:www-data /opt/soroban-save/.env
+sudo chmod 600 /opt/soroban-save/.env
 ```
 
 ---
@@ -493,7 +493,7 @@ Prometheus is pre-configured to scrape the backend at `backend:3001/metrics` (se
 ```yaml
 # monitoring/prometheus/prometheus.yml
 scrape_configs:
-  - job_name: stellar-save-backend
+  - job_name: soroban-save-backend
     static_configs:
       - targets: ['host.docker.internal:3001'] # host network on Linux: use host IP
     metrics_path: /metrics
@@ -520,14 +520,14 @@ Set `BACKUP_ENABLED=true` in `.env` and provide AWS credentials to enable the bu
 Verify backups are running:
 
 ```bash
-sudo journalctl -u stellar-save-api -f | grep -i backup
+sudo journalctl -u soroban-save-api -f | grep -i backup
 ```
 
 ### Log access
 
 ```bash
 # API logs
-sudo journalctl -u stellar-save-api -n 100 --no-pager
+sudo journalctl -u soroban-save-api -n 100 --no-pager
 
 # nginx access logs
 sudo tail -f /var/log/nginx/access.log
@@ -545,7 +545,7 @@ sudo journalctl -u elasticsearch -n 50 --no-pager
 Check the service logs:
 
 ```bash
-sudo journalctl -u stellar-save-api -n 50 --no-pager
+sudo journalctl -u soroban-save-api -n 50 --no-pager
 ```
 
 Common causes:
@@ -587,7 +587,7 @@ If the contract address or network is wrong, update `.env.production` at the rep
 The backend isn't running or isn't listening on port 3001:
 
 ```bash
-sudo systemctl status stellar-save-api
+sudo systemctl status soroban-save-api
 curl http://localhost:3001/api/v1/health
 ```
 
@@ -596,12 +596,12 @@ curl http://localhost:3001/api/v1/health
 The `x-admin-secret` header doesn't match `ADMIN_SECRET` in `.env`. Verify the value and restart the API after any `.env` change:
 
 ```bash
-sudo systemctl restart stellar-save-api
+sudo systemctl restart soroban-save-api
 ```
 
 ### Contract calls failing
 
-- Confirm `CONTRACT_STELLAR_SAVE` in `.env` matches the deployed contract ID
+- Confirm `CONTRACT_SOROBAN_SAVE` in `.env` matches the deployed contract ID
 - Verify `STELLAR_NETWORK` and `STELLAR_RPC_URL` point to the correct network
 - Check the RPC endpoint is reachable: `curl $STELLAR_RPC_URL/health`
 - For mainnet, ensure the deployer account has sufficient XLM for fees
@@ -614,7 +614,7 @@ Check the webhook URL is reachable and the S3 bucket exists with the correct per
 {
   "Effect": "Allow",
   "Action": ["s3:PutObject", "s3:GetObject", "s3:ListBucket", "s3:DeleteObject"],
-  "Resource": ["arn:aws:s3:::stellar-save-backups", "arn:aws:s3:::stellar-save-backups/*"]
+  "Resource": ["arn:aws:s3:::soroban-save-backups", "arn:aws:s3:::soroban-save-backups/*"]
 }
 ```
 
@@ -683,7 +683,7 @@ Open `https://your-domain.com` in a browser and confirm:
 ## Updating Your Instance
 
 ```bash
-cd /opt/stellar-save
+cd /opt/soroban-save
 git pull origin main
 
 # Rebuild backend dependencies
@@ -693,7 +693,7 @@ cd backend && npm install --omit=dev && cd ..
 npm install && npm run build
 
 # Restart API
-sudo systemctl restart stellar-save-api
+sudo systemctl restart soroban-save-api
 sudo systemctl reload nginx
 ```
 
@@ -703,6 +703,6 @@ If the contract has changed, follow the upgrade path in [upgrade-guide.md](./upg
 
 ## Support
 
-- Issues: [github.com/Xoulomon/Stellar-Save/issues](https://github.com/Xoulomon/Stellar-Save/issues)
+- Issues: [github.com/Tekinvest/SorobanSave/issues](https://github.com/Tekinvest/SorobanSave/issues)
 - Stellar developer docs: [developers.stellar.org](https://developers.stellar.org)
 - Stellar Discord: [discord.gg/stellar](https://discord.gg/stellar)

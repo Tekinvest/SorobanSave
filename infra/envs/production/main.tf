@@ -5,7 +5,7 @@
 # can break down spend by service and environment. See docs/tagging-standard.md.
 locals {
   common_tags = {
-    Project     = "stellar-save"
+    Project     = "soroban-save"
     Environment = "production"
     ManagedBy   = "terraform"
     CostCenter  = "engineering"
@@ -33,7 +33,7 @@ module "rds" {
 module "frontend" {
   source              = "../../modules/frontend"
   environment         = "production"
-  domain_names        = ["stellar-save.app", "www.stellar-save.app"]
+  domain_names        = ["soroban-save.app", "www.soroban-save.app"]
   acm_certificate_arn = var.acm_certificate_arn
 
   tags = merge(local.common_tags, { Service = "frontend" })
@@ -61,7 +61,7 @@ module "rds_read_replica" {
   kms_key_id                 = var.replica_kms_key_id
 
   tags = {
-    Project    = "stellar-save"
+    Project    = "soroban-save"
     ManagedBy  = "terraform"
     StellarNet = "mainnet"
   }
@@ -97,7 +97,7 @@ module "multi_region" {
   failover_secondary_key = "${var.secondary_aws_region}-secondary"
 
   tags = {
-    Project    = "stellar-save"
+    Project    = "soroban-save"
     ManagedBy  = "terraform"
     StellarNet = "mainnet"
   }
@@ -108,10 +108,10 @@ module "codedeploy" {
   source = "../../modules/codedeploy-blue-green"
 
   environment             = "production"
-  load_balancer_name      = var.alb_name != "" ? var.alb_name : "stellar-save-alb-production"
+  load_balancer_name      = var.alb_name != "" ? var.alb_name : "soroban-save-alb-production"
   listener_arn            = var.listener_arn
-  blue_target_group_name  = var.blue_target_group_name != "" ? var.blue_target_group_name : "stellar-save-backend-blue-production"
-  green_target_group_name = var.green_target_group_name != "" ? var.green_target_group_name : "stellar-save-backend-green-production"
+  blue_target_group_name  = var.blue_target_group_name != "" ? var.blue_target_group_name : "soroban-save-backend-blue-production"
+  green_target_group_name = var.green_target_group_name != "" ? var.green_target_group_name : "soroban-save-backend-green-production"
 
   canary_traffic_percentage     = var.canary_traffic_percentage
   canary_duration_minutes       = var.canary_duration_minutes
@@ -139,9 +139,9 @@ module "cost_dashboard" {
 
   environment                = "production"
   aws_region                 = var.aws_region
-  ecs_cluster_name           = "stellar-save-backend-production"
-  ecs_service_name           = "stellar-save-backend-production"
-  rds_instance_identifier    = "stellar-save-production"
+  ecs_cluster_name           = "soroban-save-backend-production"
+  ecs_service_name           = "soroban-save-backend-production"
+  rds_instance_identifier    = "soroban-save-production"
   cloudfront_distribution_id = module.frontend.cloudfront_distribution_id
   budget_sns_topic_arn       = module.budget_alerts.sns_topic_arn
   monthly_budget_usd         = var.monthly_budget_usd

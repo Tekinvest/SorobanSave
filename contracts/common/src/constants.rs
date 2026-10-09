@@ -1,4 +1,4 @@
-//! Shared numeric constants used across Stellar-Save contracts.
+//! Shared numeric constants used across SorobanSave contracts.
 //!
 //! All contracts in this workspace should import protocol-level constants
 //! from here rather than redefining them locally, so that the single
@@ -6,7 +6,7 @@
 //!
 //! # Usage
 //! ```rust,ignore
-//! use stellar_save_common::constants::STROOPS_PER_XLM;
+//! use soroban_save_common::constants::STROOPS_PER_XLM;
 //! ```
 
 // ─── XLM / Stroop Conversions ─────────────────────────────────────────────────

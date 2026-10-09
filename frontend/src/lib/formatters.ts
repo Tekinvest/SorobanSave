@@ -8,12 +8,12 @@ export {
   formatDate,
   formatDistanceToNow,
   formatAddress,
-} from '@stellar-save/sdk';
+} from '@soroban-save/sdk';
 export type {
   FormatAmountOptions,
   FormatDateOptions,
   FormatAddressOptions,
-} from '@stellar-save/sdk';
+} from '@soroban-save/sdk';
 
 export const STROOPS_PER_XLM = 10_000_000;
 

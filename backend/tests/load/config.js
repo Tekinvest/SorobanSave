@@ -1,5 +1,5 @@
 /**
- * Shared k6 configuration for Stellar-Save load tests.
+ * Shared k6 configuration for SorobanSave load tests.
  *
  * All load test files import BASE_URL and loadOptions from here so that
  * environment-specific settings are set in one place.

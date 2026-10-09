@@ -19,7 +19,7 @@ const resources = {
   yo: { translation: yo },
 };
 
-const stored = typeof window !== 'undefined' ? localStorage.getItem('stellar_save_language') : null;
+const stored = typeof window !== 'undefined' ? localStorage.getItem('soroban_save_language') : null;
 const defaultLng: LanguageCode =
   (stored as LanguageCode) || (navigator?.language?.startsWith('fr') ? 'fr' : 'en');
 

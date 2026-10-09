@@ -3,7 +3,7 @@
  *
  * Lets the user join an existing group by:
  * 1. Receiving a `groupId` route param (from GroupListScreen)
- * 2. Accepting a pasted invite link (stellarsave://join?groupId=123)
+ * 2. Accepting a pasted invite link (sorobansave://join?groupId=123)
  * 3. Manual input of a numeric group ID
  *
  * Client-side validation guards against submitting clearly invalid IDs.
@@ -26,7 +26,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useQueryClient } from '@tanstack/react-query';
 import type { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { formatStroops } from '@stellar-save/sdk';
+import { formatStroops } from '@soroban-save/sdk';
 import { joinGroup, getGroup, ContractError, type Group } from '../services/contractService';
 import { useAuthGate } from '../auth/AuthGate';
 import type { RootStackParamList } from '../navigation';
@@ -34,7 +34,7 @@ import type { RootStackParamList } from '../navigation';
 type Props = NativeStackScreenProps<RootStackParamList, 'JoinGroup'>;
 type Nav = NativeStackNavigationProp<RootStackParamList>;
 
-// Parse group ID from an invite link: stellarsave://join?groupId=123
+// Parse group ID from an invite link: sorobansave://join?groupId=123
 function parseInviteLink(input: string): string | null {
   try {
     const url = new URL(input);

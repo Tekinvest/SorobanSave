@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-This guide covers common issues users encounter with Stellar-Save, along with step-by-step solutions and diagnostic commands.
+This guide covers common issues users encounter with SorobanSave, along with step-by-step solutions and diagnostic commands.
 
 ## Table of Contents
 
@@ -351,7 +351,7 @@ stellar contract invoke \
   --source <YOUR_KEY> \
   -- approve \
   --from <YOUR_ADDRESS> \
-  --spender <STELLAR_SAVE_CONTRACT_ID> \
+  --spender <SOROBAN_SAVE_CONTRACT_ID> \
   --amount <CONTRIBUTION_AMOUNT> \
   --expiration_ledger <FUTURE_LEDGER>
 ```
@@ -405,8 +405,8 @@ Then retry the contribution.
 
 If your issue is not covered here:
 
-1. **Search existing issues**: [GitHub Issues](https://github.com/Xoulomon/Stellar-Save/issues)
-2. **Ask in Discussions**: [GitHub Discussions](https://github.com/Xoulomon/Stellar-Save/discussions)
+1. **Search existing issues**: [GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues)
+2. **Ask in Discussions**: [GitHub Discussions](https://github.com/Tekinvest/SorobanSave/discussions)
 3. **Report a bug**: Open a new issue with:
    - The error code and full error message
    - The contract ID and network you are using

@@ -18,7 +18,7 @@ locals {
 
 # ── Example: API Server Task Definition ───────────────────────────────────────
 # resource "aws_ecs_task_definition" "api_server" {
-#   family                   = "stellar-save-api-server-${var.environment}"
+#   family                   = "soroban-save-api-server-${var.environment}"
 #   network_mode             = "awsvpc"
 #   requires_compatibilities = ["FARGATE"]
 #   cpu                      = "256"
@@ -29,7 +29,7 @@ locals {
 #   container_definitions = jsonencode([
 #     {
 #       name      = "api-server"
-#       image     = "stellar-save:${var.image_tag}"
+#       image     = "soroban-save:${var.image_tag}"
 #       essential = true
 #       portMappings = [
 #         {
@@ -53,14 +53,14 @@ locals {
 #   tags = merge(
 #     var.tags,
 #     {
-#       Name = "stellar-save-api-server-${var.environment}"
+#       Name = "soroban-save-api-server-${var.environment}"
 #     }
 #   )
 # }
 
 # ── IAM Role for ECS Task Execution ───────────────────────────────────────────
 resource "aws_iam_role" "ecs_task_execution_role" {
-  name = "stellar-save-ecs-task-execution-role-${var.environment}"
+  name = "soroban-save-ecs-task-execution-role-${var.environment}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -78,7 +78,7 @@ resource "aws_iam_role" "ecs_task_execution_role" {
   tags = merge(
     var.tags,
     {
-      Name = "stellar-save-ecs-task-execution-role-${var.environment}"
+      Name = "soroban-save-ecs-task-execution-role-${var.environment}"
     }
   )
 }
@@ -97,7 +97,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy" {
 
 # ── IAM Role for ECS Task (Application) ───────────────────────────────────────
 resource "aws_iam_role" "ecs_task_role" {
-  name = "stellar-save-ecs-task-role-${var.environment}"
+  name = "soroban-save-ecs-task-role-${var.environment}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -115,7 +115,7 @@ resource "aws_iam_role" "ecs_task_role" {
   tags = merge(
     var.tags,
     {
-      Name = "stellar-save-ecs-task-role-${var.environment}"
+      Name = "soroban-save-ecs-task-role-${var.environment}"
     }
   )
 }
@@ -123,7 +123,7 @@ resource "aws_iam_role" "ecs_task_role" {
 # ── Lambda Execution Role (if using Lambda functions) ───────────────────────────
 resource "aws_iam_role" "lambda_execution_role" {
   count = var.create_lambda_role ? 1 : 0
-  name  = "stellar-save-lambda-execution-role-${var.environment}"
+  name  = "soroban-save-lambda-execution-role-${var.environment}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -141,7 +141,7 @@ resource "aws_iam_role" "lambda_execution_role" {
   tags = merge(
     var.tags,
     {
-      Name = "stellar-save-lambda-execution-role-${var.environment}"
+      Name = "soroban-save-lambda-execution-role-${var.environment}"
     }
   )
 }

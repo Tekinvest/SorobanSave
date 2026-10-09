@@ -25,7 +25,7 @@ export function LandingFooter() {
         spacing={2}
       >
         <Typography variant="body2" color="text.secondary">
-          © 2024 Stellar Save. Built on Stellar.
+          © 2024 SorobanSave. Built on Stellar.
         </Typography>
         <Stack component="nav" aria-label="Footer navigation" direction="row" spacing={3}>
           {['Terms', 'Privacy', 'Docs'].map((link) => (

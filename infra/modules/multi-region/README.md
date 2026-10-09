@@ -32,7 +32,7 @@ module "multi_region" {
 
   environment    = "production"
   hosted_zone_id = "ZXXXXXXXXXXXXX"
-  record_name    = "api.stellar-save.app"
+  record_name    = "api.soroban-save.app"
   routing_policy = "latency" # or "geolocation"
 
   regions = {

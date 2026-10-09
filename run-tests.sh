@@ -1,7 +1,7 @@
 #!/bin/bash
-# Quick test runner script for Stellar-Save
+# Quick test runner script for SorobanSave
 
-echo "🧪 Running Stellar-Save Test Suite"
+echo "🧪 Running SorobanSave Test Suite"
 echo "=================================="
 echo ""
 

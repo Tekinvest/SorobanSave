@@ -25,7 +25,7 @@ describe('auth_service Unit Test Coverage', () => {
   describe('generateChallenge()', () => {
     it('returns a formatted string with nonce and timestamp for valid address', async () => {
       const msg = await generateChallenge(validAddress);
-      expect(msg).toMatch(/^Sign this message to authenticate with Stellar Save\./);
+      expect(msg).toMatch(/^Sign this message to authenticate with SorobanSave\./);
       expect(msg).toContain(validAddress);
     });
 

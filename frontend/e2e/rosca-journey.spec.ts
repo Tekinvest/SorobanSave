@@ -31,7 +31,7 @@ test.describe.serial('ROSCA full journey', () => {
   test('landing page loads and shows key content', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveTitle(/stellar.save/i);
-    await expect(page.getByRole('heading', { name: /save together|stellar save/i }).first()).toBeVisible();
+    await expect(page.getByRole('heading', { name: /save together|sorobansave/i }).first()).toBeVisible();
     await expect(page.getByRole('button', { name: /get started/i }).first()).toBeVisible();
   });
 

@@ -22,7 +22,7 @@ function renderHeader() {
 describe('Header', () => {
   it('renders the logo text', () => {
     renderHeader();
-    expect(screen.getByText('Stellar-Save')).toBeInTheDocument();
+    expect(screen.getByText('SorobanSave')).toBeInTheDocument();
   });
 
   it('renders navigation links', () => {

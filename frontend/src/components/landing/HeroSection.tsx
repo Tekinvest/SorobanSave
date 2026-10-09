@@ -57,7 +57,7 @@ export function HeroSection() {
                 <AppButton
                   variant="contained"
                   size="large"
-                  aria-label="Get started with Stellar Save"
+                  aria-label="Get started with SorobanSave"
                 >
                   Get Started
                 </AppButton>
@@ -65,7 +65,7 @@ export function HeroSection() {
                   variant="outlined"
                   size="large"
                   href="#how-it-works"
-                  aria-label="Learn how Stellar Save works"
+                  aria-label="Learn how SorobanSave works"
                 >
                   How It Works
                 </AppButton>

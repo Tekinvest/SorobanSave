@@ -1,5 +1,5 @@
 # Contribute flow — navigate to a group and submit a contribution
-appId: com.stellarsave.app
+appId: com.sorobansave.app
 ---
 # Precondition: user is a member of at least one active group
 - launchApp

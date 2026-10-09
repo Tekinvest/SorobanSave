@@ -83,7 +83,7 @@ describe('BrowseGroupsPage', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     // BrowseGroupsPage persists the active search/filter state to
-    // localStorage (stellar-save:search-preferences) so it survives
+    // localStorage (soroban-save:search-preferences) so it survives
     // navigation. Clear it between tests so one test's search term
     // doesn't leak into the next test's initial filters.
     window.localStorage.clear();

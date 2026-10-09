@@ -57,7 +57,7 @@ export default function MemberProfilePage() {
     <AppLayout
       title="Member Profile"
       subtitle="Contribution history and reputation"
-      footerText="Stellar Save — Built for transparent, on-chain savings"
+      footerText="SorobanSave — Built for transparent, on-chain savings"
     >
       {isLoading && <LoadingState message="Loading member profile…" />}
 

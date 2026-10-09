@@ -9,7 +9,7 @@
  *   isNotificationsEnabled()        // read current preference
  */
 
-const PREF_KEY = 'stellar_save_notifications_enabled';
+const PREF_KEY = 'soroban_save_notifications_enabled';
 
 /**
  * Returns true if the user has opted in to notifications.

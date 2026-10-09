@@ -1,4 +1,4 @@
-# OpenTelemetry Collector configuration for Stellar-Save distributed tracing.
+# OpenTelemetry Collector configuration for SorobanSave distributed tracing.
 #
 # Pipeline: receive OTLP from every service (backend, indexer, frontend browser)
 # -> batch + sample -> export to Jaeger over OTLP.
@@ -18,7 +18,7 @@ receivers:
         cors:
           allowed_origins:
             - "http://localhost:*"
-            - "https://*.stellar-save.com"
+            - "https://*.soroban-save.com"
 
 processors:
   # Bound memory so a trace spike can't OOM the collector.

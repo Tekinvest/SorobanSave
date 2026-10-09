@@ -1,6 +1,6 @@
 {
-  "title": "Stellar-Save Backend",
-  "uid": "stellar-save-backend",
+  "title": "SorobanSave Backend",
+  "uid": "soroban-save-backend",
   "schemaVersion": 38,
   "refresh": "30s",
   "time": { "from": "now-1h", "to": "now" },
@@ -11,7 +11,7 @@
       "type": "timeseries",
       "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
       "targets": [{
-        "expr": "sum(rate(http_requests_total{app=\"stellar-save-backend\"}[1m])) by (route)",
+        "expr": "sum(rate(http_requests_total{app=\"soroban-save-backend\"}[1m])) by (route)",
         "legendFormat": "{{route}}"
       }]
     },
@@ -21,7 +21,7 @@
       "type": "timeseries",
       "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
       "targets": [{
-        "expr": "100 * sum(rate(http_requests_total{app=\"stellar-save-backend\",status_code=~\"5..\"}[1m])) / sum(rate(http_requests_total{app=\"stellar-save-backend\"}[1m]))",
+        "expr": "100 * sum(rate(http_requests_total{app=\"soroban-save-backend\",status_code=~\"5..\"}[1m])) / sum(rate(http_requests_total{app=\"soroban-save-backend\"}[1m]))",
         "legendFormat": "error %"
       }]
     },
@@ -31,7 +31,7 @@
       "type": "timeseries",
       "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 },
       "targets": [{
-        "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{app=\"stellar-save-backend\"}[5m])) by (le, route))",
+        "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{app=\"soroban-save-backend\"}[5m])) by (le, route))",
         "legendFormat": "p95 {{route}}"
       }]
     },
@@ -41,7 +41,7 @@
       "type": "stat",
       "gridPos": { "x": 12, "y": 8, "w": 6, "h": 8 },
       "targets": [{
-        "expr": "active_connections{app=\"stellar-save-backend\"}",
+        "expr": "active_connections{app=\"soroban-save-backend\"}",
         "legendFormat": "connections"
       }]
     },
@@ -51,7 +51,7 @@
       "type": "timeseries",
       "gridPos": { "x": 18, "y": 8, "w": 6, "h": 8 },
       "targets": [{
-        "expr": "nodejs_heap_size_used_bytes{app=\"stellar-save-backend\"} / 1024 / 1024",
+        "expr": "nodejs_heap_size_used_bytes{app=\"soroban-save-backend\"} / 1024 / 1024",
         "legendFormat": "heap MB"
       }]
     },
@@ -62,11 +62,11 @@
       "gridPos": { "x": 0, "y": 16, "w": 12, "h": 8 },
       "targets": [
         {
-          "expr": "sum(rate(backup_jobs_total{app=\"stellar-save-backend\",status=\"success\"}[5m]))",
+          "expr": "sum(rate(backup_jobs_total{app=\"soroban-save-backend\",status=\"success\"}[5m]))",
           "legendFormat": "success/s"
         },
         {
-          "expr": "sum(rate(backup_jobs_total{app=\"stellar-save-backend\",status=\"failure\"}[5m]))",
+          "expr": "sum(rate(backup_jobs_total{app=\"soroban-save-backend\",status=\"failure\"}[5m]))",
           "legendFormat": "failure/s"
         }
       ]
@@ -77,7 +77,7 @@
       "type": "timeseries",
       "gridPos": { "x": 12, "y": 16, "w": 12, "h": 8 },
       "targets": [{
-        "expr": "sum(rate(export_jobs_total{app=\"stellar-save-backend\"}[5m])) by (format)",
+        "expr": "sum(rate(export_jobs_total{app=\"soroban-save-backend\"}[5m])) by (format)",
         "legendFormat": "{{format}}"
       }]
     },
@@ -88,11 +88,11 @@
       "gridPos": { "x": 0, "y": 24, "w": 12, "h": 8 },
       "targets": [
         {
-          "expr": "sum(rate(backup_restore_drills_total{app=\"stellar-save-backend\",status=\"passed\"}[1h]))",
+          "expr": "sum(rate(backup_restore_drills_total{app=\"soroban-save-backend\",status=\"passed\"}[1h]))",
           "legendFormat": "passed/h"
         },
         {
-          "expr": "sum(rate(backup_restore_drills_total{app=\"stellar-save-backend\",status=\"failed\"}[1h]))",
+          "expr": "sum(rate(backup_restore_drills_total{app=\"soroban-save-backend\",status=\"failed\"}[1h]))",
           "legendFormat": "failed/h"
         }
       ]
@@ -103,7 +103,7 @@
       "type": "timeseries",
       "gridPos": { "x": 12, "y": 24, "w": 12, "h": 8 },
       "targets": [{
-        "expr": "histogram_quantile(0.95, sum(rate(backup_restore_drill_duration_seconds_bucket{app=\"stellar-save-backend\"}[5m])) by (le, status))",
+        "expr": "histogram_quantile(0.95, sum(rate(backup_restore_drill_duration_seconds_bucket{app=\"soroban-save-backend\"}[5m])) by (le, status))",
         "legendFormat": "p95 {{status}}"
       }]
     },
@@ -113,7 +113,7 @@
       "type": "stat",
       "gridPos": { "x": 0, "y": 32, "w": 6, "h": 6 },
       "targets": [{
-        "expr": "stellar_save_last_successful_backup_restore_timestamp{app=\"stellar-save-backend\"}",
+        "expr": "soroban_save_last_successful_backup_restore_timestamp{app=\"soroban-save-backend\"}",
         "legendFormat": "restore ts"
       }]
     }

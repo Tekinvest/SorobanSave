@@ -6,7 +6,7 @@
 
 import { generateCSSVars, type Theme } from './tokens';
 
-const STORAGE_KEY = 'stellar-save:theme';
+const STORAGE_KEY = 'soroban-save:theme';
 
 export type ThemePreference = Theme | 'system';
 

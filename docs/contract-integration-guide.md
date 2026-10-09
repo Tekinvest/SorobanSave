@@ -1,6 +1,6 @@
 # Smart Contract Integration Guide
 
-A comprehensive reference for developers integrating with the Stellar-Save Soroban smart contract.
+A comprehensive reference for developers integrating with the SorobanSave Soroban smart contract.
 
 ## Table of Contents
 
@@ -22,9 +22,9 @@ A comprehensive reference for developers integrating with the Stellar-Save Sorob
 
 ## Overview
 
-Stellar-Save is a Soroban smart contract implementing a ROSCA (Rotating Savings and Credit Association). Members contribute a fixed amount each cycle; one member receives the full pool per cycle, rotating until everyone has been paid out.
+SorobanSave is a Soroban smart contract implementing a ROSCA (Rotating Savings and Credit Association). Members contribute a fixed amount each cycle; one member receives the full pool per cycle, rotating until everyone has been paid out.
 
-**Contract source:** `contracts/stellar-save/src/lib.rs`  
+**Contract source:** `contracts/soroban-save/src/lib.rs`  
 **Network:** Stellar testnet / mainnet  
 **Language:** Rust (Soroban SDK)
 
@@ -236,17 +236,17 @@ Subscribe to Soroban contract events to receive real-time updates instead of pol
 ```rust
 use soroban_sdk::{contract, contractimpl, Address, Env};
 
-// Import the Stellar-Save contract client
-mod stellar_save {
+// Import the SorobanSave contract client
+mod soroban_save {
     soroban_sdk::contractimport!(
-        file = "path/to/stellar_save.wasm"
+        file = "path/to/soroban_save.wasm"
     );
 }
 
 #[contractimpl]
 impl MyContract {
-    pub fn check_membership(env: Env, stellar_save_id: Address, group_id: u64, member: Address) -> bool {
-        let client = stellar_save::Client::new(&env, &stellar_save_id);
+    pub fn check_membership(env: Env, soroban_save_id: Address, group_id: u64, member: Address) -> bool {
+        let client = soroban_save::Client::new(&env, &soroban_save_id);
         client.is_member(&group_id, &member)
     }
 }
@@ -432,4 +432,4 @@ Call `get_contribution_status` first. All members must have `has_contributed = t
 **RPC timeout**  
 Soroban RPC endpoints occasionally time out under load. Retry with exponential back-off. For production use, consider running your own RPC node or using a paid provider.
 
-**Need help?** Open an issue on [GitHub](https://github.com/Xoulomon/Stellar-Save/issues) or start a [Discussion](https://github.com/Xoulomon/Stellar-Save/discussions).
+**Need help?** Open an issue on [GitHub](https://github.com/Tekinvest/SorobanSave/issues) or start a [Discussion](https://github.com/Tekinvest/SorobanSave/discussions).

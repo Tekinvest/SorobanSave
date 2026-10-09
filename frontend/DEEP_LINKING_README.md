@@ -1,6 +1,6 @@
 # Deep Linking for Group Invites
 
-This document explains the deep linking implementation for Stellar Save mobile apps.
+This document explains the deep linking implementation for SorobanSave mobile apps.
 
 ## Features
 
@@ -34,14 +34,14 @@ npx cap sync
 ```bash
 npx cap open ios
 # In Terminal while simulator runs:
-xcrun simctl openurl booted "stellarsave://join/TEST123"
+xcrun simctl openurl booted "sorobansave://join/TEST123"
 ```
 
 5. **Test on Android Emulator**:
 ```bash
 npx cap open android
 # Via adb:
-adb shell am start -W -a android.intent.action.VIEW -d "stellarsave://join/TEST123" com.stellarsave.app
+adb shell am start -W -a android.intent.action.VIEW -d "sorobansave://join/TEST123" com.sorobansave.app
 ```
 
 ## Architecture
@@ -86,7 +86,7 @@ docs/
 ```
 ┌─────────────────────────────────────┐
 │ User receives invite link           │
-│ https://stellarsave.app/join/ABC123 │
+│ https://sorobansave.app/join/ABC123 │
 └──────────────┬──────────────────────┘
                │
                ▼
@@ -129,8 +129,8 @@ The app supports three types of deep links:
 
 ### 1. Universal/App Links (Production)
 ```
-https://stellarsave.app/join/ABC123
-https://app.stellarsave.app/join/ABC123
+https://sorobansave.app/join/ABC123
+https://app.sorobansave.app/join/ABC123
 ```
 
 **Requirements:**
@@ -141,7 +141,7 @@ https://app.stellarsave.app/join/ABC123
 
 ### 2. Custom Scheme (Testing & SMS)
 ```
-stellarsave://join/ABC123
+sorobansave://join/ABC123
 ```
 
 **Advantages:**
@@ -151,7 +151,7 @@ stellarsave://join/ABC123
 
 ### 3. App Download Fallback
 ```
-https://stellarsave.app/app/ABC123
+https://sorobansave.app/app/ABC123
 ```
 
 Used when generating shareable links to ensure non-users get prompted to download the app.
@@ -167,9 +167,9 @@ Pure utility functions for parsing deep link URLs:
 - Unit tests in `deepLinking.test.ts` cover edge cases (malformed links, various schemes, etc.)
 
 Supports formats:
-- Custom scheme: `stellarsave://join/ABC123` → `/join/ABC123`
-- HTTPS: `https://stellarsave.app/join/ABC123` → `/join/ABC123`
-- Subdomains: `https://app.stellarsave.app/join/ABC123` → `/join/ABC123`
+- Custom scheme: `sorobansave://join/ABC123` → `/join/ABC123`
+- HTTPS: `https://sorobansave.app/join/ABC123` → `/join/ABC123`
+- Subdomains: `https://app.sorobansave.app/join/ABC123` → `/join/ABC123`
 
 ### useDeepLink Hook
 
@@ -215,14 +215,14 @@ Web fallback for users without the app:
 
 **iOS - Apple App Site Association**
 
-Host at: `https://stellarsave.app/.well-known/apple-app-site-association`
+Host at: `https://sorobansave.app/.well-known/apple-app-site-association`
 
 ```json
 {
   "applinks": {
     "apps": [],
     "details": [{
-      "appID": "YOUR_TEAM_ID.com.stellarsave.app",
+      "appID": "YOUR_TEAM_ID.com.sorobansave.app",
       "paths": ["/join/*", "/app/*"]
     }]
   }
@@ -231,14 +231,14 @@ Host at: `https://stellarsave.app/.well-known/apple-app-site-association`
 
 **Android - Digital Asset Links**
 
-Host at: `https://stellarsave.app/.well-known/assetlinks.json`
+Host at: `https://sorobansave.app/.well-known/assetlinks.json`
 
 ```json
 [{
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target": {
     "namespace": "android_app",
-    "package_name": "com.stellarsave.app",
+    "package_name": "com.sorobansave.app",
     "sha256_cert_fingerprints": ["YOUR_SHA256_FINGERPRINT"]
   }
 }]
@@ -262,7 +262,7 @@ Copy configuration from `docs/android-manifest-deep-link-config.xml` into your `
 **iOS:**
 ```bash
 # Verify AASA file
-curl https://stellarsave.app/.well-known/apple-app-site-association
+curl https://sorobansave.app/.well-known/apple-app-site-association
 
 # Test on device
 Send test link via Messages app
@@ -271,10 +271,10 @@ Send test link via Messages app
 **Android:**
 ```bash
 # Verify assetlinks
-curl https://stellarsave.app/.well-known/assetlinks.json
+curl https://sorobansave.app/.well-known/assetlinks.json
 
 # Check verification status
-adb shell pm get-app-links com.stellarsave.app
+adb shell pm get-app-links com.sorobansave.app
 ```
 
 ## Generating Invite Links
@@ -291,13 +291,13 @@ async function shareInvite(groupId: string) {
   const inviteCode = generateInviteCode(groupId);
   
   // Use app download route for better conversion
-  const inviteLink = `https://stellarsave.app/app/${inviteCode}`;
+  const inviteLink = `https://sorobansave.app/app/${inviteCode}`;
   
   if (Capacitor.isNativePlatform()) {
     // Use native sharing
     await Share.share({
-      title: 'Join my Stellar Save group',
-      text: `I'm saving with Stellar Save. Join my group!`,
+      title: 'Join my SorobanSave group',
+      text: `I'm saving with SorobanSave. Join my group!`,
       url: inviteLink,
       dialogTitle: 'Share group invite',
     });

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "contract": "StellarSaveContract",
+  "contract": "SorobanSaveContract",
   "methods": [
     "create_group",
     "get_group",

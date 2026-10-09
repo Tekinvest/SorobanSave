@@ -1,7 +1,7 @@
 # Reusable module: ECS Fargate cluster + service for the backend Node.js API.
 
 locals {
-  name_prefix = "stellar-save-backend-${var.environment}"
+  name_prefix = "soroban-save-backend-${var.environment}"
 }
 
 # ── ECS Cluster ───────────────────────────────────────────────────────────────

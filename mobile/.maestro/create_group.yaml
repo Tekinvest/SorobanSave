@@ -1,5 +1,5 @@
 # Create Group flow — fill out group creation form and confirm
-appId: com.stellarsave.app
+appId: com.sorobansave.app
 ---
 # Precondition: user is authenticated (wallet connected)
 - launchApp

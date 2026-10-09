@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "Stellar Save",
-    "slug": "stellar-save-mobile",
+    "name": "SorobanSave",
+    "slug": "soroban-save-mobile",
     "version": "0.1.0",
     "orientation": "portrait",
-    "scheme": "stellarsave",
+    "scheme": "sorobansave",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.stellarsave.mobile"
+      "bundleIdentifier": "com.sorobansave.mobile"
     },
     "android": {
-      "package": "com.stellarsave.mobile"
+      "package": "com.sorobansave.mobile"
     }
   }
 }

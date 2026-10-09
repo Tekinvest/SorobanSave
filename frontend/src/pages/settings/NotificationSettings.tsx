@@ -93,7 +93,7 @@ export default function NotificationSettings() {
     <AppLayout
       title="Notification Preferences"
       subtitle="Choose what you want to be notified about"
-      footerText="Stellar Save — Built for transparent, on-chain savings"
+      footerText="SorobanSave — Built for transparent, on-chain savings"
     >
       <AppCard sx={{ maxWidth: 600 }}>
         <Stack spacing={3}>

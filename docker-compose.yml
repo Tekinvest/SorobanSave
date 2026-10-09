@@ -1,6 +1,6 @@
 version: '3.9'
 
-# One-command local development stack for Stellar-Save.
+# One-command local development stack for SorobanSave.
 # Usage: docker compose up --build
 #
 # Services:
@@ -17,7 +17,7 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_DB: stellar_save
+      POSTGRES_DB: soroban_save
       POSTGRES_USER: stellar
       POSTGRES_PASSWORD: stellar_dev
     ports:
@@ -25,7 +25,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U stellar -d stellar_save"]
+      test: ["CMD-SHELL", "pg_isready -U stellar -d soroban_save"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -68,7 +68,7 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3001
-      DATABASE_URL: postgresql://stellar:stellar_dev@postgres:5432/stellar_save
+      DATABASE_URL: postgresql://stellar:stellar_dev@postgres:5432/soroban_save
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ""
@@ -142,7 +142,7 @@ services:
     working_dir: /seed
     entrypoint: ["sh", "/seed/seed.sh"]
     environment:
-      DATABASE_URL: postgresql://stellar:stellar_dev@postgres:5432/stellar_save
+      DATABASE_URL: postgresql://stellar:stellar_dev@postgres:5432/soroban_save
       STELLAR_RPC_URL: http://quickstart:8000/soroban/rpc
       STELLAR_NETWORK_PASSPHRASE: "Standalone Network ; February 2017"
       BACKEND_URL: http://backend:3001

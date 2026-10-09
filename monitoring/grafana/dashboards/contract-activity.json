@@ -41,7 +41,7 @@
       "type": "timeseries",
       "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 },
       "targets": [{
-        "expr": "100 * sum(rate(http_requests_total{app=\"stellar-save-backend\",status_code=~\"5..\"}[5m])) / sum(rate(http_requests_total{app=\"stellar-save-backend\"}[5m]))",
+        "expr": "100 * sum(rate(http_requests_total{app=\"soroban-save-backend\",status_code=~\"5..\"}[5m])) / sum(rate(http_requests_total{app=\"soroban-save-backend\"}[5m]))",
         "legendFormat": "error %"
       }]
     }

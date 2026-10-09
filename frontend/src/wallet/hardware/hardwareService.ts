@@ -7,7 +7,7 @@ import type {
   TxApprovalStatus,
 } from './types';
 
-const STORAGE_KEY = 'stellar-save:hardware-wallet';
+const STORAGE_KEY = 'soroban-save:hardware-wallet';
 
 const MOCK_DEVICES: Record<string, HardwareDeviceInfo[]> = {
   ledger: [

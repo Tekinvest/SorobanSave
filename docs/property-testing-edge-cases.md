@@ -2,21 +2,21 @@
 
 This document records edge cases and invariant violations discovered (or
 confirmed absent) by the Proptest property-based test suite in
-`contracts/stellar-save/src/property_tests.rs` and `fuzz_tests.rs`.
+`contracts/soroban-save/src/property_tests.rs` and `fuzz_tests.rs`.
 
 ## How to run
 
 ```bash
 # Run all property tests (256 cases per property)
 PROPTEST_CASES=256 cargo test \
-  --manifest-path contracts/stellar-save/Cargo.toml \
+  --manifest-path contracts/soroban-save/Cargo.toml \
   --test-threads=1 \
   property_tests fuzz_tests \
   -- --nocapture
 
 # Increase cases for deeper exploration
 PROPTEST_CASES=10000 cargo test \
-  --manifest-path contracts/stellar-save/Cargo.toml \
+  --manifest-path contracts/soroban-save/Cargo.toml \
   --test-threads=1 \
   property_tests
 ```

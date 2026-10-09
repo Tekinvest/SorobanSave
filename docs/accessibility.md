@@ -1,12 +1,12 @@
 # Accessibility Guide
 
-This guide documents accessibility features, best practices, and compliance information for Stellar-Save.
+This guide documents accessibility features, best practices, and compliance information for SorobanSave.
 
 ---
 
 ## Keyboard Navigation
 
-All interactive elements in the Stellar-Save frontend are reachable and operable via keyboard.
+All interactive elements in the SorobanSave frontend are reachable and operable via keyboard.
 
 | Action | Shortcut |
 |---|---|
@@ -23,7 +23,7 @@ All interactive elements in the Stellar-Save frontend are reachable and operable
 
 ## Keyboard Conventions
 
-This section documents the keyboard interaction patterns used consistently throughout Stellar-Save.
+This section documents the keyboard interaction patterns used consistently throughout SorobanSave.
 
 ### Skip Navigation
 
@@ -93,7 +93,7 @@ Every interactive element must have a clearly visible focus indicator meeting WC
 
 ## Screen Reader Compatibility
 
-Stellar-Save is tested with the following screen readers:
+SorobanSave is tested with the following screen readers:
 
 - **NVDA** (Windows) with Firefox or Chrome
 - **JAWS** (Windows) with Chrome
@@ -113,7 +113,7 @@ Stellar-Save is tested with the following screen readers:
 
 ## High Contrast Mode
 
-Stellar-Save respects the operating system / browser high contrast preference via the CSS media query `prefers-contrast: more`.
+SorobanSave respects the operating system / browser high contrast preference via the CSS media query `prefers-contrast: more`.
 
 ### Enabling high contrast
 
@@ -132,7 +132,7 @@ Stellar-Save respects the operating system / browser high contrast preference vi
 
 ## WCAG Compliance
 
-Stellar-Save targets **WCAG 2.1 Level AA** conformance.
+SorobanSave targets **WCAG 2.1 Level AA** conformance.
 
 | Criterion | Level | Status |
 |---|---|---|

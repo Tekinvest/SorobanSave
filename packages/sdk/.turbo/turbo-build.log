@@ -1,5 +1,5 @@
 
-> @stellar-save/sdk@0.1.0 build /workspaces/Stellar-Save/packages/sdk
+> @soroban-save/sdk@0.1.0 build /workspaces/SorobanSave/packages/sdk
 > tsc --project tsconfig.json
 
 src/client.ts(40,49): error TS2304: Cannot find name 'RequestInit'.

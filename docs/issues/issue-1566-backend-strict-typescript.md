@@ -247,7 +247,7 @@ at the `tsc` output rather than just the unit test results.
 ## Relationship to Issue #111
 
 Issue #111 (frontend strict TypeScript) is the counterpart to this issue.
-Once both are complete, the entire TypeScript surface of Stellar-Save — frontend
+Once both are complete, the entire TypeScript surface of SorobanSave — frontend
 (`vitest` / `tsc`), backend (`jest` / `tsc`), and shared SDK — will operate
 under a consistent strict-mode contract, making cross-boundary type errors
 detectable at compile time rather than at runtime in production.

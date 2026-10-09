@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Group Analytics feature provides a dedicated admin view for group creators on the Stellar Save platform. It surfaces three key performance indicators — per-cycle contribution rates, on-time payment percentages, and a projected completion date — through interactive charts. Access is restricted to the group creator to protect member privacy and prevent misuse of aggregate financial data.
+The Group Analytics feature provides a dedicated admin view for group creators on the SorobanSave platform. It surfaces three key performance indicators — per-cycle contribution rates, on-time payment percentages, and a projected completion date — through interactive charts. Access is restricted to the group creator to protect member privacy and prevent misuse of aggregate financial data.
 
 The frontend is built with React + TypeScript + MUI. Charts will use Recharts (to be added as a dependency). Data is derived from on-chain contribution and cycle records exposed through the existing contract client and group/contribution hooks.
 

@@ -21,7 +21,7 @@ describe('logger — production mode (IS_DEV = false)', () => {
     const { logger } = await import('../utils/logger');
     logger.warn('test warning');
     expect(consoleWarn).toHaveBeenCalledWith(
-      expect.stringContaining('[StellarSave]'),
+      expect.stringContaining('[SorobanSave]'),
       expect.stringContaining('test warning')
     );
   });
@@ -30,7 +30,7 @@ describe('logger — production mode (IS_DEV = false)', () => {
     const { logger } = await import('../utils/logger');
     logger.error('test error');
     expect(consoleError).toHaveBeenCalledWith(
-      expect.stringContaining('[StellarSave]'),
+      expect.stringContaining('[SorobanSave]'),
       expect.stringContaining('test error')
     );
   });
@@ -55,7 +55,7 @@ describe('logger — production mode (IS_DEV = false)', () => {
     const obj = { id: 1 };
     logger.warn('message', obj);
     expect(consoleWarn).toHaveBeenCalledWith(
-      expect.stringContaining('[StellarSave]'),
+      expect.stringContaining('[SorobanSave]'),
       expect.stringContaining('message'),
       obj
     );

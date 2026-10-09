@@ -2,14 +2,14 @@
 
 ## Overview
 
-This feature adds a `calculate_current_cycle` pure helper function to `contracts/stellar-save/src/helpers.rs`. The function determines the current cycle index for a savings group by computing how many full `cycle_duration` windows have elapsed since `started_at`, capping the result at `max_members - 1`.
+This feature adds a `calculate_current_cycle` pure helper function to `contracts/soroban-save/src/helpers.rs`. The function determines the current cycle index for a savings group by computing how many full `cycle_duration` windows have elapsed since `started_at`, capping the result at `max_members - 1`.
 
 It is called internally by contribution validation, payout scheduling, and cycle advancement logic to avoid duplicating cycle-calculation arithmetic across the contract.
 
 Key design decisions:
 - **Pure helper, no state mutation**: the function only reads from storage and the ledger clock.
 - **Placed in `helpers.rs`**: consistent with the existing `is_cycle_deadline_passed` helper that lives there.
-- **Returns `Result<u32, StellarSaveError>`**: typed errors let callers handle failures without panicking.
+- **Returns `Result<u32, SorobanSaveError>`**: typed errors let callers handle failures without panicking.
 - **`u64` arithmetic throughout**: avoids signed-integer overflow; cast to `u32` only after the cap is applied.
 
 ---
@@ -47,15 +47,15 @@ flowchart TD
 /// # Returns
 /// * `Ok(0)`                        - group not yet started, or current_time < started_at
 /// * `Ok(n)` where n ≤ max_members-1 - number of complete cycles elapsed, capped
-/// * `Err(StellarSaveError::GroupNotFound)` - group_id not in storage
-pub fn calculate_current_cycle(env: &Env, group_id: u64) -> Result<u32, StellarSaveError>
+/// * `Err(SorobanSaveError::GroupNotFound)` - group_id not in storage
+pub fn calculate_current_cycle(env: &Env, group_id: u64) -> Result<u32, SorobanSaveError>
 ```
 
 ### Placement
 
-File: `contracts/stellar-save/src/helpers.rs`
+File: `contracts/soroban-save/src/helpers.rs`
 
-The function is a free function (not a method on `StellarSaveContract`) consistent with `format_group_id` and `is_cycle_deadline_passed` already in that file.
+The function is a free function (not a method on `SorobanSaveContract`) consistent with `format_group_id` and `is_cycle_deadline_passed` already in that file.
 
 ### Interaction with Existing Code
 
@@ -66,7 +66,7 @@ The function is a free function (not a method on `StellarSaveContract`) consiste
 | `Group.started_at` | Base timestamp for elapsed calculation |
 | `Group.cycle_duration` | Divisor for integer division |
 | `Group.max_members` | Cap: result ≤ `max_members - 1` |
-| `StellarSaveError::GroupNotFound` | Returned when group absent from storage |
+| `SorobanSaveError::GroupNotFound` | Returned when group absent from storage |
 | `env.ledger().timestamp()` | Current on-chain time |
 
 ---
@@ -108,7 +108,7 @@ Edge cases handled before the computation:
 
 ### Property 1: GroupNotFound for unknown group_id
 
-*For any* `group_id` that has not been stored in persistent storage, `calculate_current_cycle` must return `Err(StellarSaveError::GroupNotFound)`.
+*For any* `group_id` that has not been stored in persistent storage, `calculate_current_cycle` must return `Err(SorobanSaveError::GroupNotFound)`.
 
 **Validates: Requirements 1.2, 5.1**
 
@@ -150,7 +150,7 @@ Edge cases handled before the computation:
 
 | Condition | Return value | Notes |
 |---|---|---|
-| `group_id` not in storage | `Err(StellarSaveError::GroupNotFound)` | Propagated from `.ok_or(...)` on storage get |
+| `group_id` not in storage | `Err(SorobanSaveError::GroupNotFound)` | Propagated from `.ok_or(...)` on storage get |
 | `group.started == false` | `Ok(0)` | Early return before any arithmetic |
 | `current_time < started_at` | `Ok(0)` | Clock-skew guard; no panic |
 | Normal operation | `Ok(n)` where `0 <= n <= max_members - 1` | Integer division + cap |
@@ -174,7 +174,7 @@ Unit tests cover specific examples and edge cases:
 
 ### Property-Based Tests
 
-Property-based testing library: **`proptest`** (already available in the Rust ecosystem; add to `[dev-dependencies]` in `contracts/stellar-save/Cargo.toml`).
+Property-based testing library: **`proptest`** (already available in the Rust ecosystem; add to `[dev-dependencies]` in `contracts/soroban-save/Cargo.toml`).
 
 Each property test runs a minimum of **100 iterations**.
 

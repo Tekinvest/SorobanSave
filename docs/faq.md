@@ -1,6 +1,6 @@
 # Frequently Asked Questions (FAQ) 🔍
 
-Welcome to the **Stellar-Save FAQ**! This comprehensive document addresses common questions, operational mechanics, troubleshooting scenarios, and community queries.
+Welcome to the **SorobanSave FAQ**! This comprehensive document addresses common questions, operational mechanics, troubleshooting scenarios, and community queries.
 
 > [!TIP]
 > **Quick Search:** Press `Ctrl + F` (Windows/Linux) or `Cmd + F` (Mac) to quickly search for specific keywords or error codes.
@@ -22,11 +22,11 @@ Welcome to the **Stellar-Save FAQ**! This comprehensive document addresses commo
 
 ## 🎒 1. Wallet Setup & Testnet Faucets
 
-### Q1.1: Which cryptocurrency wallets can I use with Stellar-Save?
-Stellar-Save supports any wallet that integrates with Stellar's Soroban smart contract environment. The primary recommended wallet is **Freighter** (available as a web extension for Chrome, Brave, Firefox, and Edge). You can also use **Lobstr** or **Albedo** for wallet connection.
+### Q1.1: Which cryptocurrency wallets can I use with SorobanSave?
+SorobanSave supports any wallet that integrates with Stellar's Soroban smart contract environment. The primary recommended wallet is **Freighter** (available as a web extension for Chrome, Brave, Firefox, and Edge). You can also use **Lobstr** or **Albedo** for wallet connection.
 
-### Q1.2: How do I configure my Freighter wallet for Stellar-Save development?
-To interact with Stellar-Save during development and staging:
+### Q1.2: How do I configure my Freighter wallet for SorobanSave development?
+To interact with SorobanSave during development and staging:
 1. Open the Freighter extension.
 2. Go to **Settings** (gear icon) -> **Preferences** -> **Experimental Features**.
 3. Toggle **Enable Soroban** to `ON`.
@@ -54,7 +54,7 @@ This is typically caused by one of two scenarios:
 By default, savings groups have boundaries enforced by the contract's configuration (`ContractConfig`):
 * **Minimum members**: Enforced at `2` (a ROSCA requires at least two participants).
 * **Maximum members**: The default is capped at `20` members to manage cycle duration risk, though this can be configured differently by the contract admin.
-Creating a group with members outside these boundaries will fail with `StellarSaveError::InvalidState`.
+Creating a group with members outside these boundaries will fail with `SorobanSaveError::InvalidState`.
 
 ### Q2.2: Can we adjust the contribution amount or cycle duration after a group has been created?
 **No.** Once a group is created, all parameters—including the `contribution_amount`, `cycle_duration`, `max_members`, and the rotating payout order—are permanently locked on-chain in storage (`Group` struct). This prevents a group creator or late-joining member from changing rules unfairly after participants have committed funds.
@@ -79,7 +79,7 @@ Yes. If the savings group uses a custom SEP-41 token (like USDC or EURC), you mu
 * If you are calling the contract directly via CLI, you must call `approve(member, contract_address, amount)` on the token contract first. Otherwise, the call will fail with a `TokenTransferFailed` error.
 
 ### Q3.3: Can I contribute more than the set contribution amount to get a double payout?
-**No.** The contract enforces exact amount checks. If you try to call `contribute` with an amount other than `group.contribution_amount`, the smart contract will immediately reject the transaction with a `StellarSaveError::InvalidAmount` error, and no tokens will leave your wallet.
+**No.** The contract enforces exact amount checks. If you try to call `contribute` with an amount other than `group.contribution_amount`, the smart contract will immediately reject the transaction with a `SorobanSaveError::InvalidAmount` error, and no tokens will leave your wallet.
 
 ### Q3.4: What are the network gas fees for contributing?
 Stellar's Soroban fees are incredibly cheap, usually costing less than **0.001 XLM** (a tiny fraction of a cent) per transaction. This makes micro-savings groups highly viable compared to other L1 blockchains.
@@ -143,10 +143,10 @@ To discourage late payments and protect participating members, we are building s
 Neither of these allows the creator to withdraw other members' funds.
 
 ### Q6.2: How does the contract prevent reentrancy attacks?
-Stellar-Save implements a strict **Reentrancy Guard** on all state-modifying transfer entry points. The contract checks and locks a reentrancy flag in storage at the beginning of a contribution or payout transfer call and releases it only upon exit, blocking nested recursive transaction calls.
+SorobanSave implements a strict **Reentrancy Guard** on all state-modifying transfer entry points. The contract checks and locks a reentrancy flag in storage at the beginning of a contribution or payout transfer call and releases it only upon exit, blocking nested recursive transaction calls.
 
 ### Q6.3: Where can I audit the contract code?
-Our smart contracts are completely open-source and public goods. You can audit the Rust implementation, error mappings, and validation checks directly in the repository at [contracts/stellar-save/src/](file:///c:/Users/user/Documents/Wave%205/Stellar-Save/contracts/stellar-save/src/).
+Our smart contracts are completely open-source and public goods. You can audit the Rust implementation, error mappings, and validation checks directly in the repository at [contracts/soroban-save/src/](file:///c:/Users/user/Documents/Wave%205/SorobanSave/contracts/soroban-save/src/).
 
 ---
 
@@ -184,20 +184,20 @@ This section describes specific error codes returned by the smart contract and h
 * **Why it happens**: The connection between Freighter and the Stellar RPC node timed out, or local network latency is high.
 * **Resolution**:
   1. Go to Freighter Settings -> Network, and verify that the RPC URL is correct and active (e.g., `https://soroban-testnet.stellar.org` for Testnet).
-  2. Refresh the Stellar-Save frontend browser tab and reconnect your wallet.
+  2. Refresh the SorobanSave frontend browser tab and reconnect your wallet.
 
 ---
 
 ## 🌍 8. Community & Contribution Programs
 
-### Q8.1: How does Stellar-Save participate in Drips Wave?
-Stellar-Save is an approved public goods project under the **Drips Wave** program. Contributors can earn funding by taking on designated development, testing, and documentation issues.
+### Q8.1: How does SorobanSave participate in Drips Wave?
+SorobanSave is an approved public goods project under the **Drips Wave** program. Contributors can earn funding by taking on designated development, testing, and documentation issues.
 * Each open issue has an assigned point value (100–200 points).
 * Once your PR is reviewed and merged, you receive points that convert to USDC at the end of the Wave cycle.
 * Read the **[Wave Contributor Guide](wave-guide.md)** for complete rules.
 
 ### Q8.2: Where can I ask more questions or get development help?
 We have an extremely active and welcoming community!
-* **GitHub Discussions**: Post questions, ideas, and showcase work at [Stellar-Save Discussions](https://github.com/Xoulomon/Stellar-Save/discussions).
+* **GitHub Discussions**: Post questions, ideas, and showcase work at [SorobanSave Discussions](https://github.com/Tekinvest/SorobanSave/discussions).
 * **Telegram Channel**: Join us for quick chat at [@Xoulomon](https://t.me/Xoulomon).
-* **Developer Issues**: Submit bugs and tasks at [Stellar-Save GitHub Issues](https://github.com/Xoulomon/Stellar-Save/issues).
+* **Developer Issues**: Submit bugs and tasks at [SorobanSave GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues).

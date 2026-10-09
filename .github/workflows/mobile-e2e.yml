@@ -63,7 +63,7 @@ jobs:
         # For a real pipeline this step downloads the .app from a build artifact
         run: |
           echo "⚠️  App install step: replace with actual .app download/build step"
-          echo "Example: xcrun simctl install booted path/to/StellarSave.app"
+          echo "Example: xcrun simctl install booted path/to/SorobanSave.app"
 
       - name: Run smoke suite (iOS)
         run: |
@@ -153,7 +153,7 @@ jobs:
         # Replace with actual APK download step
         run: |
           echo "⚠️  APK install step: replace with actual .apk download/build step"
-          echo "Example: adb install path/to/StellarSave.apk"
+          echo "Example: adb install path/to/SorobanSave.apk"
 
       - name: Run smoke suite (Android)
         uses: reactivecircus/android-emulator-runner@v2

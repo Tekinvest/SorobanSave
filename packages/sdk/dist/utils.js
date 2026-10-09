@@ -1,5 +1,5 @@
 /**
- * Shared formatting, validation, and date utilities for Stellar Save.
+ * Shared formatting, validation, and date utilities for SorobanSave.
  *
  * Platform-agnostic — works in React (web), React Native (mobile), and Node.js.
  * Both the frontend (frontend/src) and mobile (mobile/src) import from here

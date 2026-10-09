@@ -2,7 +2,7 @@
 
 **Status**: Accepted  
 **Date**: 2026-05-29  
-**Author**: Stellar-Save Team  
+**Author**: SorobanSave Team  
 **Deciders**: Architecture & Backend Team
 
 ## Context

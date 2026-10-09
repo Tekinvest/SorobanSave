@@ -20,7 +20,7 @@ terraform {
 }
 
 locals {
-  identifier = "stellar-save-${var.environment}-replica"
+  identifier = "soroban-save-${var.environment}-replica"
   enabled    = var.create ? 1 : 0
 }
 

@@ -1,13 +1,13 @@
-# ADR-004: Contract Module Boundaries in `contracts/stellar-save/`
+# ADR-004: Contract Module Boundaries in `contracts/soroban-save/`
 
 **Status**: Accepted
 **Date**: 2026-07-29
-**Author**: Stellar-Save Team
+**Author**: SorobanSave Team
 **Deciders**: Architecture & Contracts Team
 
 ## Context
 
-`contracts/stellar-save/src/` has grown into ~30 Rust modules as the ROSCA contract picked up governance, penalties, ratings, milestones, and storage migrations on top of the original group/contribution/payout flow. There was no single document explaining why the crate is split the way it is, which made it hard for new contributors to know where a given piece of logic belongs.
+`contracts/soroban-save/src/` has grown into ~30 Rust modules as the ROSCA contract picked up governance, penalties, ratings, milestones, and storage migrations on top of the original group/contribution/payout flow. There was no single document explaining why the crate is split the way it is, which made it hard for new contributors to know where a given piece of logic belongs.
 
 Note: an earlier draft of this ADR's scope assumed the crate had separate `insurance` and `escrow` modules. Neither exists in the current codebase — this ADR documents the module boundaries as they actually are today.
 
@@ -55,7 +55,7 @@ Split the crate by **domain responsibility**, not by technical layer, so each mo
 - **`search.rs`** — filtering/pagination queries over groups (status, contribution range, member count).
 - **`token.rs`** — SEP-41 token-contract validation before a token is accepted for a group.
 - **`events.rs`** — event emission (`EventEmitter`) used by state-changing modules to publish on-chain events.
-- **`error.rs`** / **`errors.rs`** — shared error types (`StellarSaveError`) returned across the crate.
+- **`error.rs`** / **`errors.rs`** — shared error types (`SorobanSaveError`) returned across the crate.
 - **`status.rs`** — state-transition error types for invalid `GroupStatus` changes.
 - **`types.rs`** — shared primitive/shared types with no other natural home.
 - **`contract.rs`** — the `#[contract]` entry point that wires the public functions to the modules above.
@@ -124,10 +124,10 @@ Everything ultimately depends on `storage.rs` (how state is keyed) and `error.rs
 
 - **Positive**: a contributor adding a feature can find the right module by asking "which domain concern is this?" rather than "which layer?" — e.g. a new penalty rule goes in `penalty.rs`, not scattered across `contract.rs`.
 - **Positive**: `governance/` shows the pattern for splitting a growing concern into sub-modules (proposal/voting/execution) instead of one large file — a template for future growth (e.g. if payout logic needs the same treatment).
-- **Trade-off**: with ~30 modules, discoverability depends on this document and `contracts/stellar-save/QUICK_REFERENCE.md` staying current — there's no compiler-enforced boundary preventing a new module from reaching into another's internals.
+- **Trade-off**: with ~30 modules, discoverability depends on this document and `contracts/soroban-save/QUICK_REFERENCE.md` staying current — there's no compiler-enforced boundary preventing a new module from reaching into another's internals.
 
 ## Related
 
-- [contracts/stellar-save/QUICK_REFERENCE.md](../../contracts/stellar-save/QUICK_REFERENCE.md)
+- [contracts/soroban-save/QUICK_REFERENCE.md](../../contracts/soroban-save/QUICK_REFERENCE.md)
 - [ADR-001: Soroban Platform Choice](./ADR-001-soroban-platform-choice.md)
 - [ADR-003: Event Indexing Approach](./ADR-003-event-indexing-approach.md)

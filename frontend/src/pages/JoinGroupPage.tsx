@@ -49,7 +49,7 @@ const JoinGroupPage: React.FC = () => {
           You've been invited!
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          You were invited to join a savings group on Stellar Save.
+          You were invited to join a savings group on SorobanSave.
         </Typography>
       </Stack>
       <Stack direction="row" spacing={2}>

@@ -23,8 +23,8 @@ export const Navbar: React.FC = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-brand">
-          <Link to="/" aria-label="Stellar Save home">
-            StellarSave
+          <Link to="/" aria-label="SorobanSave home">
+            SorobanSave
           </Link>
         </div>
         <div className="navbar-links">

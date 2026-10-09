@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This feature adds a `validate_max_members` helper function to the Stellar-Save smart contract. The function checks whether a proposed `max_members` value falls within the allowed range defined by the contract's global `ContractConfig` (i.e., `config.min_members` to `config.max_members`). It returns a typed validation result so callers can handle out-of-range values without panicking. The function lives in `helpers.rs` and follows the same pattern as the existing `validate_cycle_duration` and `validate_contribution_amount_range` helpers in `lib.rs`.
+This feature adds a `validate_max_members` helper function to the SorobanSave smart contract. The function checks whether a proposed `max_members` value falls within the allowed range defined by the contract's global `ContractConfig` (i.e., `config.min_members` to `config.max_members`). It returns a typed validation result so callers can handle out-of-range values without panicking. The function lives in `helpers.rs` and follows the same pattern as the existing `validate_cycle_duration` and `validate_contribution_amount_range` helpers in `lib.rs`.
 
 ## Glossary
 
@@ -11,8 +11,8 @@ This feature adds a `validate_max_members` helper function to the Stellar-Save s
 - **max_members**: The `u32` value representing the maximum number of members a group may have.
 - **min_members**: The lower bound for `max_members` as stored in `ContractConfig`.
 - **config_max_members**: The upper bound for `max_members` as stored in `ContractConfig`.
-- **StellarSaveError**: The contract's error enum defined in `error.rs`.
-- **ContractResult**: The `Result<T, StellarSaveError>` type alias used throughout the contract.
+- **SorobanSaveError**: The contract's error enum defined in `error.rs`.
+- **ContractResult**: The `Result<T, SorobanSaveError>` type alias used throughout the contract.
 
 ---
 
@@ -25,8 +25,8 @@ This feature adds a `validate_max_members` helper function to the Stellar-Save s
 #### Acceptance Criteria
 
 1. THE Validator SHALL accept a reference to the Soroban `Env` and a `u32` value representing the proposed `max_members`.
-2. WHEN the `ContractConfig` is present in storage and the proposed `max_members` is less than `config.min_members`, THE Validator SHALL return `Err(StellarSaveError::InvalidState)`.
-3. WHEN the `ContractConfig` is present in storage and the proposed `max_members` is greater than `config.max_members`, THE Validator SHALL return `Err(StellarSaveError::InvalidState)`.
+2. WHEN the `ContractConfig` is present in storage and the proposed `max_members` is less than `config.min_members`, THE Validator SHALL return `Err(SorobanSaveError::InvalidState)`.
+3. WHEN the `ContractConfig` is present in storage and the proposed `max_members` is greater than `config.max_members`, THE Validator SHALL return `Err(SorobanSaveError::InvalidState)`.
 4. WHEN the `ContractConfig` is present in storage and the proposed `max_members` is within the inclusive range `[config.min_members, config.max_members]`, THE Validator SHALL return `Ok(())`.
 5. WHEN no `ContractConfig` is present in storage, THE Validator SHALL return `Ok(())` (permissive default, consistent with existing helpers).
 
@@ -45,8 +45,8 @@ This feature adds a `validate_max_members` helper function to the Stellar-Save s
 
 #### Acceptance Criteria
 
-1. WHEN `create_group` is called with an out-of-range `max_members`, THE StellarSaveContract SHALL return `Err(StellarSaveError::InvalidState)` by delegating to the Validator.
-2. WHEN `update_group` is called with an out-of-range `max_members`, THE StellarSaveContract SHALL return `Err(StellarSaveError::InvalidState)` by delegating to the Validator.
+1. WHEN `create_group` is called with an out-of-range `max_members`, THE SorobanSaveContract SHALL return `Err(SorobanSaveError::InvalidState)` by delegating to the Validator.
+2. WHEN `update_group` is called with an out-of-range `max_members`, THE SorobanSaveContract SHALL return `Err(SorobanSaveError::InvalidState)` by delegating to the Validator.
 
 ### Requirement 4: Test Coverage
 
@@ -57,7 +57,7 @@ This feature adds a `validate_max_members` helper function to the Stellar-Save s
 1. THE test suite SHALL include a test that verifies `Ok(())` is returned when `max_members` equals `config.min_members` (lower boundary).
 2. THE test suite SHALL include a test that verifies `Ok(())` is returned when `max_members` equals `config.max_members` (upper boundary).
 3. THE test suite SHALL include a test that verifies `Ok(())` is returned for a value strictly between `config.min_members` and `config.max_members`.
-4. THE test suite SHALL include a test that verifies `Err(StellarSaveError::InvalidState)` is returned when `max_members` is below `config.min_members`.
-5. THE test suite SHALL include a test that verifies `Err(StellarSaveError::InvalidState)` is returned when `max_members` exceeds `config.max_members`.
+4. THE test suite SHALL include a test that verifies `Err(SorobanSaveError::InvalidState)` is returned when `max_members` is below `config.min_members`.
+5. THE test suite SHALL include a test that verifies `Err(SorobanSaveError::InvalidState)` is returned when `max_members` exceeds `config.max_members`.
 6. THE test suite SHALL include a test that verifies `Ok(())` is returned when no `ContractConfig` is stored (no-config permissive path).
 7. FOR ALL valid `max_members` values `v` in `[config.min_members, config.max_members]`, calling the Validator twice with the same `v` SHALL produce the same result (idempotence property).

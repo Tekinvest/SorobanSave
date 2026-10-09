@@ -4,7 +4,7 @@ const faqs = [
   {
     question: 'What happens if someone misses a contribution?',
     answer:
-      'The group can set rules in advance. Stellar-Save can automatically pause payouts or apply penalties if configured.',
+      'The group can set rules in advance. SorobanSave can automatically pause payouts or apply penalties if configured.',
   },
   {
     question: 'Is my money safe on Stellar?',
@@ -22,7 +22,7 @@ const faqs = [
       'Very low — only standard Stellar network fees (usually less than $0.01 per transaction).',
   },
   {
-    question: 'Is Stellar-Save available worldwide?',
+    question: 'Is SorobanSave available worldwide?',
     answer: 'Yes! Anyone with a Stellar wallet can participate. No bank account required.',
   },
 ];

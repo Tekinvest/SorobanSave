@@ -1,6 +1,6 @@
-# Stellar Save Mobile Apps
+# SorobanSave Mobile Apps
 
-Native iOS and Android applications built with Capacitor, wrapping the Stellar Save web application.
+Native iOS and Android applications built with Capacitor, wrapping the SorobanSave web application.
 
 **Last verified:** July 28, 2026
 
@@ -89,8 +89,8 @@ See [docs/mobile-cicd-setup.md](../../docs/mobile-cicd-setup.md) for complete se
 
 ### App ID
 
-- **iOS**: `com.stellarsave.app`
-- **Android**: `com.stellarsave.app`
+- **iOS**: `com.sorobansave.app`
+- **Android**: `com.sorobansave.app`
 
 ### Capacitor Config
 
@@ -180,7 +180,7 @@ npx cap sync
 
 ## Accessibility
 
-Stellar Save is designed to be fully accessible with screen readers from the start. This section documents the accessibility conventions for the mobile apps.
+SorobanSave is designed to be fully accessible with screen readers from the start. This section documents the accessibility conventions for the mobile apps.
 
 ### Screen Reader Support
 

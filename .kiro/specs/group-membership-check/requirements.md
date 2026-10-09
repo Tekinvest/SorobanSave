@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This document specifies the requirements for implementing a group membership check feature in the Stellar-Save smart contract. The feature enables efficient verification of whether a given address is a member of a specific savings group, supporting both internal contract logic and external queries.
+This document specifies the requirements for implementing a group membership check feature in the SorobanSave smart contract. The feature enables efficient verification of whether a given address is a member of a specific savings group, supporting both internal contract logic and external queries.
 
 ## Glossary
 
-- **Contract**: The Stellar-Save smart contract system
+- **Contract**: The SorobanSave smart contract system
 - **Group**: A rotational savings and credit association (ROSCA) identified by a unique group_id
 - **Member**: A Stellar address that has joined a specific group
 - **Member_Profile**: Storage record containing member-specific data (address, group_id, joined_at timestamp)

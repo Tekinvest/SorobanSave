@@ -27,7 +27,7 @@ jobs:
       - name: Run property tests
         run: |
           cargo test \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --test-threads=1 \
             property_tests \
             -- --nocapture
@@ -37,7 +37,7 @@ jobs:
       - name: Run fuzz tests
         run: |
           cargo test \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --test-threads=1 \
             fuzz_tests \
             -- --nocapture

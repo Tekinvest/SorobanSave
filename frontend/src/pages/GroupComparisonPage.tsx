@@ -10,7 +10,7 @@ export default function GroupComparisonPage() {
     <AppLayout
       title="Compare Groups"
       subtitle="Compare up to 3 groups side-by-side before joining"
-      footerText="Stellar Save - Built for transparent, on-chain savings"
+      footerText="SorobanSave - Built for transparent, on-chain savings"
     >
       <AppCard>
         {isLoading && <Spinner />}

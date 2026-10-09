@@ -33,7 +33,7 @@ export default function AdminDashboardPage() {
     <AppLayout
       title="Admin Dashboard"
       subtitle="Platform health, moderation, and audit logs"
-      footerText="Stellar Save"
+      footerText="SorobanSave"
     >
       <Stack spacing={3}>
         <PlatformOverview />

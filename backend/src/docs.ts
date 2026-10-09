@@ -20,7 +20,7 @@ const openApiSpec = yaml.load(fs.readFileSync(openApiPath, 'utf8')) as object;
 const swaggerOptions = {
   explorer: true,
   customCss: '.swagger-ui .topbar { display: none }',
-  customSiteTitle: 'Stellar-Save API Documentation',
+  customSiteTitle: 'SorobanSave API Documentation',
   swaggerOptions: {
     persistAuthorization: true,
     displayRequestDuration: true,
@@ -39,7 +39,7 @@ router.get('/redoc', (_req, res) => {
     <!DOCTYPE html>
     <html>
       <head>
-        <title>Stellar-Save API Reference</title>
+        <title>SorobanSave API Reference</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">

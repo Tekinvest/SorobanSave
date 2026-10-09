@@ -16,7 +16,7 @@ The `OnChainMonitor` has not updated its last-run timestamp for more than 5 minu
    ```
 2. Check recent backend logs for errors from `[OnChainMonitor]`:
    ```bash
-   docker logs stellar-save-backend --tail 100 | grep OnChainMonitor
+   docker logs soroban-save-backend --tail 100 | grep OnChainMonitor
    ```
 3. If the process is running but the monitor is stuck, restart the backend service.
 

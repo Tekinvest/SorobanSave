@@ -1,6 +1,6 @@
 /**
  * @file factory.ts
- * @description Central fixture factory for the Stellar-Save backend test suite.
+ * @description Central fixture factory for the SorobanSave backend test suite.
  *
  * Provides hand-rolled builders for every major domain model used in unit and
  * integration tests.  Every builder is:

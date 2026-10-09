@@ -1,6 +1,6 @@
 /**
- * Re-exports from the shared @stellar-save/sdk package.
+ * Re-exports from the shared @soroban-save/sdk package.
  * Existing imports of this module continue to work unchanged.
  */
-export { formatAmount, formatStroops } from '@stellar-save/sdk';
-export type { FormatAmountOptions } from '@stellar-save/sdk';
+export { formatAmount, formatStroops } from '@soroban-save/sdk';
+export type { FormatAmountOptions } from '@soroban-save/sdk';

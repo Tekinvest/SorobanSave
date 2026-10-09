@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Stellar-Save smart contract currently supports only XLM (denominated in stroops) as the contribution token for ROSCA savings groups. This feature extends the contract to support multiple Stellar token types — including USDC, EURC, and any other SEP-41-compliant token — alongside XLM. Each savings group will be configured with a specific token at creation time, and all contributions and payouts within that group will use that token exclusively. The feature includes token selection during group creation, decimal-aware amount handling, token contract validation, and comprehensive multi-token test coverage.
+The SorobanSave smart contract currently supports only XLM (denominated in stroops) as the contribution token for ROSCA savings groups. This feature extends the contract to support multiple Stellar token types — including USDC, EURC, and any other SEP-41-compliant token — alongside XLM. Each savings group will be configured with a specific token at creation time, and all contributions and payouts within that group will use that token exclusively. The feature includes token selection during group creation, decimal-aware amount handling, token contract validation, and comprehensive multi-token test coverage.
 
 ## Glossary
 
@@ -14,9 +14,9 @@ The Stellar-Save smart contract currently supports only XLM (denominated in stro
 - **Token_Validator**: The contract component responsible for verifying that a given Token_Address refers to a valid, callable SEP-41 token contract.
 - **Group**: A ROSCA savings group as defined in the existing contract, extended to include a token configuration.
 - **Token_Config**: A new data structure storing the Token_Address and Token_Decimals associated with a Group.
-- **StellarSaveContract**: The existing Soroban smart contract being extended.
+- **SorobanSaveContract**: The existing Soroban smart contract being extended.
 - **SEP-41**: The Stellar Ecosystem Proposal defining the standard token interface for Soroban contracts.
-- **Allowance**: The amount a token holder has pre-approved for the StellarSaveContract to transfer on their behalf, as required by the SEP-41 `transfer_from` pattern.
+- **Allowance**: The amount a token holder has pre-approved for the SorobanSaveContract to transfer on their behalf, as required by the SEP-41 `transfer_from` pattern.
 
 ## Requirements
 
@@ -26,26 +26,26 @@ The Stellar-Save smart contract currently supports only XLM (denominated in stro
 
 #### Acceptance Criteria
 
-1. WHEN a creator calls `create_group`, THE StellarSaveContract SHALL accept a `token_address` parameter of type `Address` identifying the token to use for the group.
-2. THE StellarSaveContract SHALL store the `token_address` as part of the group's persistent data alongside the existing group fields.
+1. WHEN a creator calls `create_group`, THE SorobanSaveContract SHALL accept a `token_address` parameter of type `Address` identifying the token to use for the group.
+2. THE SorobanSaveContract SHALL store the `token_address` as part of the group's persistent data alongside the existing group fields.
 3. WHEN `create_group` is called with a `token_address`, THE Token_Validator SHALL verify the token contract is callable before the group is stored.
-4. IF the `token_address` fails validation, THEN THE StellarSaveContract SHALL return `StellarSaveError::InvalidToken` and SHALL NOT create the group.
-5. WHEN a group is successfully created with a token, THE StellarSaveContract SHALL emit a `GroupCreated` event that includes the `token_address`.
-6. THE StellarSaveContract SHALL support the native XLM token address as a valid `token_address`, preserving backward-compatible behavior for XLM groups.
+4. IF the `token_address` fails validation, THEN THE SorobanSaveContract SHALL return `SorobanSaveError::InvalidToken` and SHALL NOT create the group.
+5. WHEN a group is successfully created with a token, THE SorobanSaveContract SHALL emit a `GroupCreated` event that includes the `token_address`.
+6. THE SorobanSaveContract SHALL support the native XLM token address as a valid `token_address`, preserving backward-compatible behavior for XLM groups.
 
 ---
 
 ### Requirement 2: Token Configuration Storage
 
-**User Story:** As a developer integrating with Stellar-Save, I want to query the token configuration of any group, so that I can display the correct token symbol and format amounts correctly in the UI.
+**User Story:** As a developer integrating with SorobanSave, I want to query the token configuration of any group, so that I can display the correct token symbol and format amounts correctly in the UI.
 
 #### Acceptance Criteria
 
-1. THE StellarSaveContract SHALL store a `Token_Config` struct (containing `token_address: Address` and `token_decimals: u32`) for each group in persistent storage.
-2. WHEN `get_group` is called, THE StellarSaveContract SHALL return the group data including the associated `Token_Config`.
-3. THE StellarSaveContract SHALL provide a `get_token_config(group_id: u64)` function that returns the `Token_Config` for a group.
-4. IF `get_token_config` is called with a non-existent `group_id`, THEN THE StellarSaveContract SHALL return `StellarSaveError::GroupNotFound`.
-5. THE StellarSaveContract SHALL store `token_decimals` as a `u32` value fetched from the token contract at group creation time and cached in `Token_Config`.
+1. THE SorobanSaveContract SHALL store a `Token_Config` struct (containing `token_address: Address` and `token_decimals: u32`) for each group in persistent storage.
+2. WHEN `get_group` is called, THE SorobanSaveContract SHALL return the group data including the associated `Token_Config`.
+3. THE SorobanSaveContract SHALL provide a `get_token_config(group_id: u64)` function that returns the `Token_Config` for a group.
+4. IF `get_token_config` is called with a non-existent `group_id`, THEN THE SorobanSaveContract SHALL return `SorobanSaveError::GroupNotFound`.
+5. THE SorobanSaveContract SHALL store `token_decimals` as a `u32` value fetched from the token contract at group creation time and cached in `Token_Config`.
 
 ---
 
@@ -55,12 +55,12 @@ The Stellar-Save smart contract currently supports only XLM (denominated in stro
 
 #### Acceptance Criteria
 
-1. WHEN a group is created, THE StellarSaveContract SHALL query the token contract for its `decimals()` value and store it in the group's `Token_Config`.
-2. THE StellarSaveContract SHALL store and compare all contribution amounts in the token's base units (the smallest indivisible unit).
-3. WHEN a member calls `contribute`, THE StellarSaveContract SHALL validate that the provided `amount` equals the group's `contribution_amount` exactly in base units.
-4. IF a member provides an `amount` that does not match the group's `contribution_amount` in base units, THEN THE StellarSaveContract SHALL return `StellarSaveError::InvalidAmount`.
-5. THE StellarSaveContract SHALL NOT perform any decimal conversion internally; all callers are responsible for providing amounts in base units.
-6. WHEN calculating the total pool amount for a payout cycle, THE StellarSaveContract SHALL compute `contribution_amount * member_count` in base units without loss of precision.
+1. WHEN a group is created, THE SorobanSaveContract SHALL query the token contract for its `decimals()` value and store it in the group's `Token_Config`.
+2. THE SorobanSaveContract SHALL store and compare all contribution amounts in the token's base units (the smallest indivisible unit).
+3. WHEN a member calls `contribute`, THE SorobanSaveContract SHALL validate that the provided `amount` equals the group's `contribution_amount` exactly in base units.
+4. IF a member provides an `amount` that does not match the group's `contribution_amount` in base units, THEN THE SorobanSaveContract SHALL return `SorobanSaveError::InvalidAmount`.
+5. THE SorobanSaveContract SHALL NOT perform any decimal conversion internally; all callers are responsible for providing amounts in base units.
+6. WHEN calculating the total pool amount for a payout cycle, THE SorobanSaveContract SHALL compute `contribution_amount * member_count` in base units without loss of precision.
 
 ---
 
@@ -72,11 +72,11 @@ The Stellar-Save smart contract currently supports only XLM (denominated in stro
 
 1. WHEN a `token_address` is provided to `create_group`, THE Token_Validator SHALL attempt to call the `decimals()` function on the token contract at that address.
 2. IF the `decimals()` call succeeds and returns a value in the range [0, 38], THEN THE Token_Validator SHALL consider the token valid.
-3. IF the `decimals()` call fails or panics, THEN THE Token_Validator SHALL consider the token invalid and THE StellarSaveContract SHALL return `StellarSaveError::InvalidToken`.
-4. THE StellarSaveContract SHALL define a new error variant `InvalidToken = 5001` in the `StellarSaveError` enum for token validation failures.
-5. THE StellarSaveContract SHALL define a new error variant `TokenTransferFailed = 5002` in the `StellarSaveError` enum for token transfer failures during contribution or payout.
-6. WHEN a contribution is made, THE StellarSaveContract SHALL verify the member has granted sufficient Allowance to the contract before initiating the token transfer.
-7. IF the member's Allowance is insufficient, THEN THE StellarSaveContract SHALL return `StellarSaveError::TokenTransferFailed` without modifying any contribution state.
+3. IF the `decimals()` call fails or panics, THEN THE Token_Validator SHALL consider the token invalid and THE SorobanSaveContract SHALL return `SorobanSaveError::InvalidToken`.
+4. THE SorobanSaveContract SHALL define a new error variant `InvalidToken = 5001` in the `SorobanSaveError` enum for token validation failures.
+5. THE SorobanSaveContract SHALL define a new error variant `TokenTransferFailed = 5002` in the `SorobanSaveError` enum for token transfer failures during contribution or payout.
+6. WHEN a contribution is made, THE SorobanSaveContract SHALL verify the member has granted sufficient Allowance to the contract before initiating the token transfer.
+7. IF the member's Allowance is insufficient, THEN THE SorobanSaveContract SHALL return `SorobanSaveError::TokenTransferFailed` without modifying any contribution state.
 
 ---
 
@@ -86,12 +86,12 @@ The Stellar-Save smart contract currently supports only XLM (denominated in stro
 
 #### Acceptance Criteria
 
-1. WHEN a member calls `contribute(group_id, amount)`, THE StellarSaveContract SHALL transfer `amount` base units of the group's configured token from the member's address to the contract's address using the SEP-41 `transfer_from` interface.
-2. THE StellarSaveContract SHALL require the member to have called `approve` on the token contract granting the StellarSaveContract an Allowance of at least `amount` before calling `contribute`.
-3. WHEN the token transfer succeeds, THE StellarSaveContract SHALL record the `ContributionRecord` with the transferred `amount`.
-4. IF the token transfer fails for any reason, THEN THE StellarSaveContract SHALL return `StellarSaveError::TokenTransferFailed` and SHALL NOT record the contribution.
-5. WHEN all members have contributed in a cycle, THE StellarSaveContract SHALL transfer the total pool amount in the group's configured token to the cycle's designated payout recipient using the SEP-41 `transfer` interface.
-6. IF the payout token transfer fails, THEN THE StellarSaveContract SHALL return `StellarSaveError::PayoutFailed` and SHALL NOT advance the cycle.
+1. WHEN a member calls `contribute(group_id, amount)`, THE SorobanSaveContract SHALL transfer `amount` base units of the group's configured token from the member's address to the contract's address using the SEP-41 `transfer_from` interface.
+2. THE SorobanSaveContract SHALL require the member to have called `approve` on the token contract granting the SorobanSaveContract an Allowance of at least `amount` before calling `contribute`.
+3. WHEN the token transfer succeeds, THE SorobanSaveContract SHALL record the `ContributionRecord` with the transferred `amount`.
+4. IF the token transfer fails for any reason, THEN THE SorobanSaveContract SHALL return `SorobanSaveError::TokenTransferFailed` and SHALL NOT record the contribution.
+5. WHEN all members have contributed in a cycle, THE SorobanSaveContract SHALL transfer the total pool amount in the group's configured token to the cycle's designated payout recipient using the SEP-41 `transfer` interface.
+6. IF the payout token transfer fails, THEN THE SorobanSaveContract SHALL return `SorobanSaveError::PayoutFailed` and SHALL NOT advance the cycle.
 
 ---
 
@@ -101,11 +101,11 @@ The Stellar-Save smart contract currently supports only XLM (denominated in stro
 
 #### Acceptance Criteria
 
-1. WHERE an admin allowlist is configured, THE StellarSaveContract SHALL reject `create_group` calls with a `token_address` not present in the allowlist, returning `StellarSaveError::InvalidToken`.
-2. WHERE an admin allowlist is configured, THE StellarSaveContract SHALL provide an `add_allowed_token(token_address: Address)` function callable only by the contract admin.
-3. WHERE an admin allowlist is configured, THE StellarSaveContract SHALL provide a `remove_allowed_token(token_address: Address)` function callable only by the contract admin.
-4. WHERE no allowlist is configured, THE StellarSaveContract SHALL accept any token address that passes the Token_Validator check (open mode).
-5. THE StellarSaveContract SHALL provide an `is_token_allowed(token_address: Address)` query function that returns `true` if the token is permitted.
+1. WHERE an admin allowlist is configured, THE SorobanSaveContract SHALL reject `create_group` calls with a `token_address` not present in the allowlist, returning `SorobanSaveError::InvalidToken`.
+2. WHERE an admin allowlist is configured, THE SorobanSaveContract SHALL provide an `add_allowed_token(token_address: Address)` function callable only by the contract admin.
+3. WHERE an admin allowlist is configured, THE SorobanSaveContract SHALL provide a `remove_allowed_token(token_address: Address)` function callable only by the contract admin.
+4. WHERE no allowlist is configured, THE SorobanSaveContract SHALL accept any token address that passes the Token_Validator check (open mode).
+5. THE SorobanSaveContract SHALL provide an `is_token_allowed(token_address: Address)` query function that returns `true` if the token is permitted.
 
 ---
 

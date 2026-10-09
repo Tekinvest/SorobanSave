@@ -62,7 +62,7 @@ test.describe('Payout execution flow', () => {
   test('landing page loads correctly', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveTitle(/stellar.save/i);
-    const heading = page.getByRole('heading', { name: /save together|stellar save/i }).first();
+    const heading = page.getByRole('heading', { name: /save together|sorobansave/i }).first();
     await expect(heading).toBeVisible();
   });
 });

@@ -1,9 +1,9 @@
-//! Cross-contract integration tests for `fungible-allowlist` ↔ `stellar-save`
+//! Cross-contract integration tests for `fungible-allowlist` ↔ `soroban-save`
 //! (Issue #1723).
 //!
 //! # What this tests
 //!
-//! The Stellar-Save ROSCA contract uses a SEP-41 token for contributions and
+//! The SorobanSave ROSCA contract uses a SEP-41 token for contributions and
 //! payouts. When that token is backed by the `fungible-allowlist` contract, the
 //! token enforces an on-chain allowlist: only allowlisted accounts may receive
 //! or transfer tokens.
@@ -26,11 +26,11 @@
 //! * The `fungible-allowlist` `ExampleContract` as the token (via `crate::`
 //!   since this file lives inside the same crate).
 //! * A minimal `MockSavingsPool` contract defined below that simulates
-//!   `stellar-save`'s contribution path:
+//!   `soroban-save`'s contribution path:
 //!   `token.transfer_from(pool, member, pool, amount)`.
 //!
 //! Using an inline mock avoids cross-crate binary-dependency issues (both
-//! `stellar-save` and `fungible-allowlist` are `cdylib` crates), while still
+//! `soroban-save` and `fungible-allowlist` are `cdylib` crates), while still
 //! exercising the real allowlist enforcement code path end-to-end.
 
 #![cfg(test)]
@@ -51,7 +51,7 @@ use crate::{
 
 // ── Minimal mock savings-pool contract ───────────────────────────────────────
 //
-// In production `stellar-save` calls `token.transfer_from(spender, from, to, amount)`
+// In production `soroban-save` calls `token.transfer_from(spender, from, to, amount)`
 // when a member makes a contribution. We replicate that call here so the test
 // exercises the real allowlist enforcement code path.
 
@@ -64,7 +64,7 @@ impl MockSavingsPool {
     ///
     /// Pulls `amount` tokens from `member` into this pool address using
     /// `transfer_from`. This mirrors the critical transfer path in
-    /// `stellar-save::contract::contribute`.
+    /// `soroban-save::contract::contribute`.
     pub fn contribute(e: &Env, token: Address, member: Address, amount: i128) {
         let pool = e.current_contract_address();
         TokenClient::new(e, &token).transfer_from(&pool, &member, &pool, &amount);
@@ -73,7 +73,7 @@ impl MockSavingsPool {
     /// Simulate a payout.
     ///
     /// Sends `amount` tokens from the pool to `recipient`. This mirrors
-    /// `stellar-save::contract::execute_payout`.
+    /// `soroban-save::contract::execute_payout`.
     pub fn payout(e: &Env, token: Address, recipient: Address, amount: i128) {
         let pool = e.current_contract_address();
         TokenClient::new(e, &token).transfer(&pool, &recipient, &amount);

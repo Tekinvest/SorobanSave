@@ -4,7 +4,7 @@
  * Replaces direct `console.log` calls throughout the application with a
  * structured logger that:
  * - Is completely silent in production (`VITE_APP_ENV !== 'development'`)
- * - Prefixes all messages with a `[StellarSave]` tag for easy filtering
+ * - Prefixes all messages with a `[SorobanSave]` tag for easy filtering
  * - Provides `debug`, `info`, `warn`, and `error` levels
  * - Respects the ESLint `no-console` rule (only `warn` and `error` are
  *   used in production code; `debug`/`info` are stripped at build time via
@@ -25,7 +25,7 @@
  * since those are permitted by the ESLint `no-console` rule.
  */
 
-const PREFIX = '[StellarSave]';
+const PREFIX = '[SorobanSave]';
 const IS_DEV = import.meta.env['DEV'] === true || import.meta.env['MODE'] === 'development';
 
 function fmt(level: string, ...args: unknown[]): unknown[] {

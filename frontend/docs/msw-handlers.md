@@ -1,7 +1,7 @@
 # MSW Handler Convention
 
 This document describes how Mock Service Worker (MSW) is set up in the
-Stellar Save frontend test suite and the conventions for adding new handlers.
+SorobanSave frontend test suite and the conventions for adding new handlers.
 
 ## Overview
 

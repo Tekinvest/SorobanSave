@@ -137,7 +137,7 @@ The mock server:
 
 | Field | Value |
 |-------|-------|
-| API base URL | `http://localhost:3001` (mock) / `https://staging.stellar-save.example.com` (staging) |
+| API base URL | `http://localhost:3001` (mock) / `https://staging.soroban-save.example.com` (staging) |
 | Auth token | `test-jwt-token-for-e2e` (accepted by mock server) |
 | User ID | `e2e-test-user-onboarding` |
 

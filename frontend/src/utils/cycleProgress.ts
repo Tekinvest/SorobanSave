@@ -1,5 +1,5 @@
 /**
- * Cycle progress calculation utility for Stellar Save groups.
+ * Cycle progress calculation utility for SorobanSave groups.
  * Calculates time-based and contribution-based progress percentages.
  * Handles edge cases like unstarted cycles, zero duration, invalid dates.
  */

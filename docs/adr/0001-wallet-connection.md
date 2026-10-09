@@ -12,7 +12,7 @@
 
 ## Context
 
-Stellar-Save users need to connect a Stellar wallet to interact with the ROSCA smart contract — contributing funds, triggering payouts, and signing authentication challenges. At the time this decision was made:
+SorobanSave users need to connect a Stellar wallet to interact with the ROSCA smart contract — contributing funds, triggering payouts, and signing authentication challenges. At the time this decision was made:
 
 - **Freighter** is the most widely adopted browser extension for Stellar.
 - **Albedo** is a web-based wallet and signing service that requires no extension installation.

@@ -465,7 +465,7 @@ const debouncedValue = useDebounce(value, { delay: 500 });
 
 ## License
 
-This hook is part of the Stellar-Save project.
+This hook is part of the SorobanSave project.
 
 ## Contributing
 

@@ -9,7 +9,7 @@ import { StyleSheet, Text, View, TouchableOpacity, ScrollView, RefreshControl } 
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-import { formatStroops } from '@stellar-save/sdk';
+import { formatStroops } from '@soroban-save/sdk';
 import { useBalance } from '../hooks/useBalance';
 import { useGroups } from '../hooks/useGroups';
 import type { RootStackParamList } from '../navigation';

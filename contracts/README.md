@@ -1,13 +1,13 @@
 # Contracts
 
-Soroban smart contracts for the Stellar Save project.
+Soroban smart contracts for the SorobanSave project.
 
 ## Crates
 
 | Crate                | Description                                              |
 | -------------------- | -------------------------------------------------------- |
 | `common`             | Shared, contract-agnostic types, errors, and helpers.    |
-| `stellar-save`       | Savings contract.                                        |
+| `soroban-save`       | Savings contract.                                        |
 | `fungible-allowlist` | Fungible token with allowlist support.                   |
 | `guess-the-number`   | Guess-the-number game contract.                          |
 | `nft-enumerable`     | Enumerable NFT contract.                                 |

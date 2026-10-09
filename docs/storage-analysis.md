@@ -1,8 +1,8 @@
-# Storage Analysis Report - Stellar-Save
+# Storage Analysis Report - SorobanSave
 
 ## Executive Summary
 
-This document provides a comprehensive analysis of current storage usage in Stellar-Save and quantifies the improvements from optimization strategies.
+This document provides a comprehensive analysis of current storage usage in SorobanSave and quantifies the improvements from optimization strategies.
 
 **Key Finding:** Bitmap-based contribution tracking reduces storage by **97-99.7%** for large groups, translating to **$600-$30,000 annual savings** per group on Soroban.
 
@@ -12,7 +12,7 @@ This document provides a comprehensive analysis of current storage usage in Stel
 
 ### Storage Layout Overview
 
-The Stellar-Save contract uses a hierarchical key structure with 6 main categories:
+The SorobanSave contract uses a hierarchical key structure with 6 main categories:
 
 ```
 StorageKey

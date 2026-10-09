@@ -5,7 +5,7 @@
 # can break down spend by service and environment. See docs/tagging-standard.md.
 locals {
   common_tags = {
-    Project     = "stellar-save"
+    Project     = "soroban-save"
     Environment = "staging"
     ManagedBy   = "terraform"
     CostCenter  = "engineering"
@@ -35,7 +35,7 @@ module "rds" {
 module "frontend" {
   source              = "../../modules/frontend"
   environment         = "staging"
-  domain_names        = ["staging.stellar-save.app"]
+  domain_names        = ["staging.soroban-save.app"]
   acm_certificate_arn = var.acm_certificate_arn
 
   tags = merge(local.common_tags, { Service = "frontend" })
@@ -46,10 +46,10 @@ module "codedeploy" {
   source = "../../modules/codedeploy-blue-green"
 
   environment             = "staging"
-  load_balancer_name      = var.alb_name != "" ? var.alb_name : "stellar-save-alb-staging"
+  load_balancer_name      = var.alb_name != "" ? var.alb_name : "soroban-save-alb-staging"
   listener_arn            = var.listener_arn
-  blue_target_group_name  = var.blue_target_group_name != "" ? var.blue_target_group_name : "stellar-save-backend-blue-staging"
-  green_target_group_name = var.green_target_group_name != "" ? var.green_target_group_name : "stellar-save-backend-green-staging"
+  blue_target_group_name  = var.blue_target_group_name != "" ? var.blue_target_group_name : "soroban-save-backend-blue-staging"
+  green_target_group_name = var.green_target_group_name != "" ? var.green_target_group_name : "soroban-save-backend-green-staging"
 
   canary_traffic_percentage     = var.canary_traffic_percentage
   canary_duration_minutes       = var.canary_duration_minutes
@@ -77,9 +77,9 @@ module "cost_dashboard" {
 
   environment                = "staging"
   aws_region                 = var.aws_region
-  ecs_cluster_name           = "stellar-save-backend-staging"
-  ecs_service_name           = "stellar-save-backend-staging"
-  rds_instance_identifier    = "stellar-save-staging"
+  ecs_cluster_name           = "soroban-save-backend-staging"
+  ecs_service_name           = "soroban-save-backend-staging"
+  rds_instance_identifier    = "soroban-save-staging"
   cloudfront_distribution_id = module.frontend.cloudfront_distribution_id
   budget_sns_topic_arn       = module.budget_alerts.sns_topic_arn
   monthly_budget_usd         = var.monthly_budget_usd

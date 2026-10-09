@@ -79,7 +79,7 @@ export default function Header() {
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <StarIcon sx={{ color: 'primary.main', fontSize: 22 }} />
           <Typography variant="h6" fontWeight={700} color="primary">
-            Stellar-Save
+            SorobanSave
           </Typography>
         </Box>
         <IconButton onClick={handleDrawerClose} aria-label="Close navigation menu" size="small">
@@ -172,7 +172,7 @@ export default function Header() {
               color: 'inherit',
               flexShrink: 0,
             }}
-            aria-label="Stellar-Save home"
+            aria-label="SorobanSave home"
           >
             <StarIcon sx={{ color: 'primary.main', fontSize: 26 }} />
             <Typography
@@ -181,7 +181,7 @@ export default function Header() {
               color="primary"
               sx={{ display: { xs: 'none', sm: 'block' } }}
             >
-              Stellar-Save
+              SorobanSave
             </Typography>
           </Box>
 

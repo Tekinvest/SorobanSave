@@ -1,8 +1,8 @@
 // Re-export shared primitives from the canonical SDK package so there is a
 // single source of truth for these types across frontend, backend, and mobile.
-export type { MemberStatus, PayoutStatus } from '@stellar-save/sdk';
+export type { MemberStatus, PayoutStatus } from '@soroban-save/sdk';
 
-import type { MemberStatus, PayoutStatus } from '@stellar-save/sdk';
+import type { MemberStatus, PayoutStatus } from '@soroban-save/sdk';
 
 // ─── Contribution-cycle types (frontend-specific) ─────────────────────────────
 

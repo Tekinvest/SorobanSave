@@ -51,7 +51,7 @@ pub fn update_group_metadata(
     name: String,
     description: String,
     image_url: String,
-) -> Result<(), StellarSaveError>
+) -> Result<(), SorobanSaveError>
 ```
 
 **Validation:**
@@ -113,7 +113,7 @@ Added CSS classes for metadata display:
 
 ```rust
 // Update group metadata
-StellarSaveContract::update_group_metadata(
+SorobanSaveContract::update_group_metadata(
     env,
     group_id,
     creator_address,

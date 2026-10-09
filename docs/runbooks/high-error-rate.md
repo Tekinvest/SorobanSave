@@ -17,8 +17,8 @@
 
 2. Check logs for the error detail:
    ```bash
-   docker logs --tail 200 stellar-save-backend 2>&1 | grep '"level":"error"'
-   # Kibana: level=error AND service=stellar-save-backend
+   docker logs --tail 200 soroban-save-backend 2>&1 | grep '"level":"error"'
+   # Kibana: level=error AND service=soroban-save-backend
    ```
 
 3. Common causes and fixes:
@@ -32,8 +32,8 @@
 
 4. If a bad deploy caused the spike, roll back:
    ```bash
-   docker pull stellar-save-backend:<previous-tag>
-   docker restart stellar-save-backend
+   docker pull soroban-save-backend:<previous-tag>
+   docker restart soroban-save-backend
    ```
 
 ## Escalation

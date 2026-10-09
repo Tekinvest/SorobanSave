@@ -10,7 +10,7 @@ interface SettingsSectionProps {
 
 export function SettingsSection({ className = '' }: SettingsSectionProps) {
   const [settings, setSettings] = useState({
-    displayName: 'Stellar Saver',
+    displayName: 'SorobanSaver',
     emailNotifications: true,
     pushNotifications: false,
     theme: 'dark',

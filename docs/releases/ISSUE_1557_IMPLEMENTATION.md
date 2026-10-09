@@ -176,7 +176,7 @@ Comprehensive GitHub Actions workflow with 5 jobs:
 ## File Structure
 
 ```
-Stellar-Save/
+SorobanSave/
 ├── .github/
 │   └── workflows/
 │       └── database-migrations.yml          # CI/CD workflow

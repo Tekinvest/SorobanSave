@@ -9,7 +9,7 @@ export default function DepositPage() {
     <AppLayout
       title="Buy Crypto"
       subtitle="Purchase XLM or stablecoins directly from your bank account"
-      footerText="Stellar Save — Built for transparent, on-chain savings"
+      footerText="SorobanSave — Built for transparent, on-chain savings"
     >
       <KycGate>
         <FiatRampScreen

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # tests/multi_region_failover_test.sh
-# Multi-region failover integration test for Stellar-Save.
+# Multi-region failover integration test for SorobanSave.
 #
 # Simulates a primary-region outage by disabling the Route53 health check,
 # asserts that traffic reroutes to the secondary region within the documented
@@ -9,7 +9,7 @@
 #
 # Required env vars (live mode, DRY_RUN=0):
 #   PRIMARY_HEALTH_CHECK_ID  — Route53 health check ID for the primary region
-#   API_ENDPOINT             — base URL, e.g. https://api.stellar-save.app
+#   API_ENDPOINT             — base URL, e.g. https://api.soroban-save.app
 #
 # Optional:
 #   PRIMARY_REGION           — AWS region of the primary (default: us-east-1)
@@ -113,7 +113,7 @@ _restore_primary_health_check() {
 }
 
 _get_resolved_ip() {
-  # Returns the IP that api.stellar-save.app resolves to, or a mock in dry-run.
+  # Returns the IP that api.soroban-save.app resolves to, or a mock in dry-run.
   if [ "$DRY_RUN" = "1" ]; then
     if [ "$_DRY_HC_DISABLED" = "true" ]; then
       echo "10.0.2.1"   # mock secondary IP

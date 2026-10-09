@@ -1,6 +1,6 @@
 # Changelog — frontend
 
-All notable changes to the `stellar-save-frontend` package are documented here.
+All notable changes to the `soroban-save-frontend` package are documented here.
 This file follows the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 format. Versions align with `frontend/package.json` and correspond to Git tags
 prefixed with `frontend/`.
@@ -19,7 +19,7 @@ _No unreleased changes tracked yet._
 
 ## [0.1.0] — 2026-08-28
 
-Initial public release of the Stellar Save React SPA.
+Initial public release of the SorobanSave React SPA.
 
 ### Added
 
@@ -159,5 +159,5 @@ When these hooks are migrated (tracked in #56), callers will need to:
 
 ---
 
-[Unreleased]: https://github.com/Xoulomon/Stellar-Save/compare/frontend/v0.1.0...HEAD
-[0.1.0]: https://github.com/Xoulomon/Stellar-Save/releases/tag/frontend/v0.1.0
+[Unreleased]: https://github.com/Tekinvest/SorobanSave/compare/frontend/v0.1.0...HEAD
+[0.1.0]: https://github.com/Tekinvest/SorobanSave/releases/tag/frontend/v0.1.0

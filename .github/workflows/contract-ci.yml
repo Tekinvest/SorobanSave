@@ -53,31 +53,40 @@ jobs:
       - name: Clippy (deny warnings)
         run: cargo clippy --workspace --all-targets -- -D warnings
 
-      - name: Check contract WASM size
+      - name: Check contract WASM sizes
         id: size_check
         run: |
-          WASM=target/wasm32-unknown-unknown/release/stellar_save.wasm
-          SIZE=$(wc -c < "$WASM")
           LIMIT=$((60 * 1024))
-          echo "size=$SIZE" >> "$GITHUB_OUTPUT"
-          echo "Contract size: $SIZE bytes (limit: $LIMIT bytes)"
-          if [ "$SIZE" -gt "$LIMIT" ]; then
-            echo "ERROR: Contract size $SIZE bytes exceeds 60KB limit ($LIMIT bytes)"
-            exit 1
-          fi
+          FAILED=0
+          REPORT=""
 
-      - name: Post contract size as PR comment
+          for WASM in target/wasm32-unknown-unknown/release/*.wasm; do
+            NAME=$(basename "$WASM")
+            SIZE=$(wc -c < "$WASM")
+            PCT=$(awk "BEGIN {printf \"%.1f\", ($SIZE/$LIMIT)*100}")
+            STATUS="✅"
+            if [ "$SIZE" -gt "$LIMIT" ]; then
+              STATUS="❌"
+              FAILED=1
+              echo "ERROR: $NAME size ${SIZE} bytes exceeds 60KB limit"
+            fi
+            echo "$NAME: ${SIZE} bytes (${PCT}% of limit) $STATUS"
+            REPORT="${REPORT}| \`${NAME}\` | ${SIZE} | ${PCT}% | ${STATUS} |\n"
+          done
+
+          printf "report<<EOF\n%b\nEOF\n" "$REPORT" >> "$GITHUB_OUTPUT"
+          exit $FAILED
+
+      - name: Post contract sizes as PR comment
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
-            const size = ${{ steps.size_check.outputs.size }};
+            const report = `${{ steps.size_check.outputs.report }}`;
             const limit = 60 * 1024;
-            const pct = ((size / limit) * 100).toFixed(1);
-            const status = size <= limit ? '✅ Within limit' : '❌ Exceeds limit';
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `## Contract Size Report\n| | |\n|---|---|\n| **Size** | ${size} bytes |\n| **Limit** | ${limit} bytes (60 KB) |\n| **Usage** | ${pct}% |\n| **Status** | ${status} |`
+              body: `## Contract Size Report\n\n| Contract | Size (bytes) | % of limit | Status |\n|----------|-------------|------------|--------|\n${report}\n\n_Limit: ${limit} bytes (60 KB)_`
             });

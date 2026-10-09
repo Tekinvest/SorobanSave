@@ -13,14 +13,14 @@ export const adminRoutes: RouteConfig[] = [
     path: ROUTES.PLATFORM_ANALYTICS,
     component: PlatformAnalyticsDashboard,
     protected: true,
-    title: 'Platform Analytics - Stellar Save',
+    title: 'Platform Analytics - SorobanSave',
     description: 'Platform-wide metrics and stakeholder insights',
   },
   {
     path: ROUTES.FEEDBACK_ADMIN,
     component: FeedbackAdminPage,
     protected: true,
-    title: 'Feedback Dashboard - Stellar Save',
+    title: 'Feedback Dashboard - SorobanSave',
     description: 'Review and respond to user feedback',
   },
   {
@@ -28,7 +28,7 @@ export const adminRoutes: RouteConfig[] = [
     component: AdminDashboardPage,
     protected: true,
     adminOnly: true,
-    title: 'Admin Dashboard - Stellar Save',
+    title: 'Admin Dashboard - SorobanSave',
     description: 'Platform health, moderation, and audit logs',
   },
 ];

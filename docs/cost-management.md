@@ -1,6 +1,6 @@
 # Cost Management
 
-This document describes how Stellar-Save monitors, alerts on, and optimises infrastructure costs.
+This document describes how SorobanSave monitors, alerts on, and optimises infrastructure costs.
 
 ## Cost components
 
@@ -23,15 +23,15 @@ cost-monitoring.yml (daily cron)
         └─► backend cost_metrics.ts  (Prometheus gauges)
                 │
                 ▼
-        Prometheus ──► alerts.yml (stellar-save-costs group)
+        Prometheus ──► alerts.yml (soroban-save-costs group)
                 │
                 ▼
-        Grafana dashboard (stellar-save-costs)
+        Grafana dashboard (soroban-save-costs)
 ```
 
 ## Grafana dashboard
 
-Open `http://localhost:3000/d/stellar-save-costs` after starting the monitoring stack:
+Open `http://localhost:3000/d/soroban-save-costs` after starting the monitoring stack:
 
 ```bash
 docker compose -f monitoring/docker-compose.yml up -d
@@ -49,7 +49,7 @@ Panels:
 
 ## Prometheus alerts
 
-Defined in `monitoring/prometheus/alerts.yml` under the `stellar-save-costs` group:
+Defined in `monitoring/prometheus/alerts.yml` under the `soroban-save-costs` group:
 
 | Alert | Condition | Severity |
 |-------|-----------|----------|
@@ -122,7 +122,7 @@ All monetary thresholds are defined in two places and should be kept in sync:
 
 | File | Location |
 |------|----------|
-| `monitoring/prometheus/alerts.yml` | `stellar-save-costs` group `expr` values |
+| `monitoring/prometheus/alerts.yml` | `soroban-save-costs` group `expr` values |
 | `monitoring/grafana/dashboards/costs.json` | `thresholds.steps[].value` in each panel |
 
 To change the warning threshold from $30 to $40, update both files and redeploy the monitoring stack.

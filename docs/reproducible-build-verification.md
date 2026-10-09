@@ -1,6 +1,6 @@
 # Reproducible Build Verification
 
-Stellar-Save publishes a deterministic WASM build whose SHA-256 hash is committed to the repository. Every CI run and every deployment can be independently verified to confirm that:
+SorobanSave publishes a deterministic WASM build whose SHA-256 hash is committed to the repository. Every CI run and every deployment can be independently verified to confirm that:
 
 1. The WASM produced from source is bit-for-bit identical across machines.
 2. The deployed on-chain contract matches that locally-built artifact.
@@ -33,7 +33,7 @@ Stellar-Save publishes a deterministic WASM build whose SHA-256 hash is committe
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  Source code  (contracts/stellar-save/src/)                     │
+│  Source code  (contracts/soroban-save/src/)                     │
 │  + rust-toolchain.toml  (channel: stable, pinned)               │
 └────────────────────┬────────────────────────────────────────────┘
                      │  Docker: rust:<channel>
@@ -41,7 +41,7 @@ Stellar-Save publishes a deterministic WASM build whose SHA-256 hash is committe
                      │  CARGO_INCREMENTAL=0
                      │  RUSTFLAGS="-C metadata=00000000 ..."
                      ▼
-          stellar_save.wasm  (WASM artifact)
+          soroban_save.wasm  (WASM artifact)
                      │
           ┌──────────┴──────────┐
           │                     │
@@ -91,7 +91,7 @@ export CONTRACT_ID=CXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 Options:
   --local-only        Skip on-chain hash comparison
   --skip-build        Reuse existing WASM artifact (must be already built)
-  --regen-checksum    Rebuild and overwrite contracts/stellar-save/stellar_save.wasm.sha256
+  --regen-checksum    Rebuild and overwrite contracts/soroban-save/soroban_save.wasm.sha256
   --help              Show usage
 ```
 
@@ -125,7 +125,7 @@ Exit code `0` = all tests passed. Non-zero = at least one failure; details print
 
 ## What the Checksum File Is
 
-`contracts/stellar-save/stellar_save.wasm.sha256` contains a single 64-character lowercase hexadecimal SHA-256 hash, e.g.:
+`contracts/soroban-save/soroban_save.wasm.sha256` contains a single 64-character lowercase hexadecimal SHA-256 hash, e.g.:
 
 ```
 a3f2b9e1c042d5f76ab89ed1234567890abcdef1234567890abcdef1234567890
@@ -141,7 +141,7 @@ Run this when you intentionally change the contract source, update the Rust tool
 
 ```bash
 ./scripts/verify_reproducible_build.sh --regen-checksum
-git add contracts/stellar-save/stellar_save.wasm.sha256
+git add contracts/soroban-save/soroban_save.wasm.sha256
 git commit -m "chore(contracts): update WASM baseline checksum"
 ```
 
@@ -161,13 +161,13 @@ If the second run produces a different hash, the build is not yet reproducible. 
 
 **Symptom:** `❌  WASM hash MISMATCH — build is NOT reproducible`
 
-**Meaning:** The WASM built from the current source does not match `stellar_save.wasm.sha256`.
+**Meaning:** The WASM built from the current source does not match `soroban_save.wasm.sha256`.
 
 **Triage steps:**
 
 1. **Was the contract source intentionally changed?**
    - If yes: regenerate the checksum (see [Regenerating the Baseline Checksum](#regenerating-the-baseline-checksum)).
-   - If no: check `git diff contracts/stellar-save/` for unexpected changes.
+   - If no: check `git diff contracts/soroban-save/` for unexpected changes.
 
 2. **Were Cargo dependencies updated?**
    - Run `git diff Cargo.lock` to see if lock file changed.
@@ -214,7 +214,7 @@ If the second run produces a different hash, the build is not yet reproducible. 
 
 5. **Re-deploy from a verified build:**
    - Build with `./scripts/verify_reproducible_build.sh --local-only`.
-   - Deploy the `target/wasm32-unknown-unknown/release/stellar_save.wasm` produced by this run.
+   - Deploy the `target/wasm32-unknown-unknown/release/soroban_save.wasm` produced by this run.
    - Re-run verification to confirm the on-chain hash now matches.
 
 ---
@@ -241,10 +241,10 @@ If the second run produces a different hash, the build is not yet reproducible. 
    ```bash
    # Build twice, saving each output
    ./scripts/verify_reproducible_build.sh --regen-checksum
-   cp target/wasm32-unknown-unknown/release/stellar_save.wasm /tmp/build1.wasm
+   cp target/wasm32-unknown-unknown/release/soroban_save.wasm /tmp/build1.wasm
 
    ./scripts/verify_reproducible_build.sh --regen-checksum
-   cp target/wasm32-unknown-unknown/release/stellar_save.wasm /tmp/build2.wasm
+   cp target/wasm32-unknown-unknown/release/soroban_save.wasm /tmp/build2.wasm
 
    # Diff the raw bytes
    cmp /tmp/build1.wasm /tmp/build2.wasm || echo "DIFFERS"
@@ -300,17 +300,17 @@ If the second run produces a different hash, the build is not yet reproducible. 
 1. **File missing** — this is expected on a fresh clone before the first build. Generate it:
    ```bash
    ./scripts/verify_reproducible_build.sh --regen-checksum
-   git add contracts/stellar-save/stellar_save.wasm.sha256
+   git add contracts/soroban-save/soroban_save.wasm.sha256
    git commit -m "chore(contracts): add WASM baseline checksum"
    ```
 
 2. **File malformed** — the file must contain exactly one 64-character lowercase hex string with no trailing newline issues. Recreate it:
    ```bash
-   sha256sum target/wasm32-unknown-unknown/release/stellar_save.wasm | awk '{print $1}' \
-     > contracts/stellar-save/stellar_save.wasm.sha256
+   sha256sum target/wasm32-unknown-unknown/release/soroban_save.wasm | awk '{print $1}' \
+     > contracts/soroban-save/soroban_save.wasm.sha256
    ```
 
-3. **File was committed with a Windows line ending** — use `dos2unix contracts/stellar-save/stellar_save.wasm.sha256`.
+3. **File was committed with a Windows line ending** — use `dos2unix contracts/soroban-save/soroban_save.wasm.sha256`.
 
 ---
 
@@ -346,7 +346,7 @@ A hash mismatch between the local build and the on-chain contract should be trea
 
 | File | Purpose |
 |---|---|
-| `contracts/stellar-save/stellar_save.wasm.sha256` | Committed baseline SHA-256 of the canonical WASM |
+| `contracts/soroban-save/soroban_save.wasm.sha256` | Committed baseline SHA-256 of the canonical WASM |
 | `scripts/build_reproducible.sh` | Low-level Docker build script |
 | `scripts/verify_reproducible_build.sh` | Full verification pipeline (build → hash → on-chain) |
 | `tests/reproducible_build_test.sh` | Automated test suite for CI |

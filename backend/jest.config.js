@@ -16,12 +16,12 @@ module.exports = {
   },
   setupFilesAfterEnv: [],
   moduleFileExtensions: ['ts', 'js'],
-  // `@stellar-save/shared-utils` ships ESM (tsconfig `module: ESNext`) but this
+  // `@soroban-save/shared-utils` ships ESM (tsconfig `module: ESNext`) but this
   // suite runs as CommonJS, so resolve the package to its TypeScript sources and
   // let ts-jest transform them. Mapping to the source also means the workspace
   // package does not need building before backend tests run.
   moduleNameMapper: {
-    '^@stellar-save/shared-utils$': '<rootDir>/../packages/shared-utils/src/index.ts',
+    '^@soroban-save/shared-utils$': '<rootDir>/../packages/shared-utils/src/index.ts',
   },
   transform: {
     '^.+\\.ts$': [

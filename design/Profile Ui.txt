@@ -16,7 +16,7 @@ Momentum Tracking: I included the +12% monthly growth indicator to provide immed
 Category Breakdown: I structured the Active Groups and Groups Completed modules to reflect the diversity of user goals—ranging from home upgrades to charitable contributions.
 
 3. The Milestone & Award Timeline
-To reinforce the Stellar-Save philosophy, I implemented a vertical History & Milestones feed.
+To reinforce the SorobanSave philosophy, I implemented a vertical History & Milestones feed.
 
 Event Logging: I designed this section to celebrate "Zero-Effort" wins, such as the successful completion of the Home Renovation Group.
 

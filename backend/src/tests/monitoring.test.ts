@@ -137,7 +137,7 @@ async function run() {
     assert(info['@timestamp'] !== undefined, 'log entry has @timestamp');
     assert(info.level === 'info', 'info level correct');
     assert(info.message === 'test message', 'message correct');
-    assert(info.service === 'stellar-save-backend', 'service field present');
+    assert(info.service === 'soroban-save-backend', 'service field present');
     assert(info.foo === 'bar', 'extra fields included');
 
     const err = JSON.parse(lines[1]);

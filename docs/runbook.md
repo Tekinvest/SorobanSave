@@ -1,6 +1,6 @@
-# Stellar-Save Infrastructure Runbook
+# SorobanSave Infrastructure Runbook
 
-Operational procedures for the Stellar-Save platform. This runbook covers routine
+Operational procedures for the SorobanSave platform. This runbook covers routine
 infrastructure tasks, incident response, and on-call escalation.
 
 For the full disaster-recovery workflow see [disaster-recovery.md](disaster-recovery.md).
@@ -28,8 +28,8 @@ Use the steps below when you need to override the desired count manually.
 
 ```bash
 # Replace <env> with production or staging
-CLUSTER="stellar-save-backend-<env>"
-SERVICE="stellar-save-backend-<env>"
+CLUSTER="soroban-save-backend-<env>"
+SERVICE="soroban-save-backend-<env>"
 
 aws ecs describe-services \
   --cluster "$CLUSTER" \
@@ -43,8 +43,8 @@ Use this when CPU or request latency is elevated and auto-scaling has not yet
 reacted, or when you need to pre-warm capacity before a known traffic spike.
 
 ```bash
-CLUSTER="stellar-save-backend-production"
-SERVICE="stellar-save-backend-production"
+CLUSTER="soroban-save-backend-production"
+SERVICE="soroban-save-backend-production"
 DESIRED=6   # adjust to required count; max_capacity is set in Terraform
 
 aws ecs update-service \
@@ -65,7 +65,7 @@ echo "Service stable at $DESIRED tasks"
 ```bash
 # Poll the readiness probe until all tasks are healthy
 for i in $(seq 1 12); do
-  STATUS=$(curl -sf https://api.stellar-save.app/api/v2/ready | jq -r '.status')
+  STATUS=$(curl -sf https://api.soroban-save.app/api/v2/ready | jq -r '.status')
   echo "$(date -u +%H:%M:%S) status=$STATUS"
   [ "$STATUS" = "ready" ] && break
   sleep 10
@@ -75,8 +75,8 @@ done
 ### 1.3 Scale Down (After Load Subsides)
 
 ```bash
-CLUSTER="stellar-save-backend-production"
-SERVICE="stellar-save-backend-production"
+CLUSTER="soroban-save-backend-production"
+SERVICE="soroban-save-backend-production"
 DESIRED=2   # minimum healthy count; never go below min_capacity (1)
 
 aws ecs update-service \
@@ -146,7 +146,7 @@ aws cloudwatch get-metric-statistics \
 
 ## 2. Database Restore from S3
 
-The PostgreSQL database (RDS, `stellar-save-production`) is backed up by the
+The PostgreSQL database (RDS, `soroban-save-production`) is backed up by the
 `BackupService` in the backend. Backups are stored in S3 and tracked in the
 `BackupJob` table. Automated backups run on the schedule configured in
 `BackupScheduler`; RDS automated snapshots are retained for 7 days with a
@@ -158,19 +158,19 @@ backup window of 03:00–04:00 UTC.
 
 ```bash
 # List completed backup jobs, newest first
-curl -sf https://api.stellar-save.app/api/v1/backup \
+curl -sf https://api.soroban-save.app/api/v1/backup \
   | jq '[.[] | select(.status=="completed")] | sort_by(.completedAt) | reverse | .[0:5]'
 ```
 
 **Option B — via AWS Console:**
 
-1. Open **RDS → Databases → stellar-save-production → Maintenance & backups**
+1. Open **RDS → Databases → soroban-save-production → Maintenance & backups**
 2. Note the snapshot identifier or point-in-time restore window.
 
 **Option C — list S3 objects directly:**
 
 ```bash
-S3_BUCKET="${BACKUP_S3_BUCKET:-stellar-save-backups-production}"
+S3_BUCKET="${BACKUP_S3_BUCKET:-soroban-save-backups-production}"
 
 aws s3 ls "s3://$S3_BUCKET/backups/" \
   --recursive \
@@ -185,12 +185,12 @@ and applies it to the database.
 
 ```bash
 # Restore from the latest completed backup
-curl -X POST https://api.stellar-save.app/api/v1/backup/restore \
+curl -X POST https://api.soroban-save.app/api/v1/backup/restore \
   -H 'Content-Type: application/json' \
   -d '{}'
 
 # Restore from a specific job
-curl -X POST https://api.stellar-save.app/api/v1/backup/restore \
+curl -X POST https://api.soroban-save.app/api/v1/backup/restore \
   -H 'Content-Type: application/json' \
   -d '{"jobId": "<job-id>"}'
 ```
@@ -199,7 +199,7 @@ Monitor restore progress:
 
 ```bash
 JOB_ID="<job-id>"
-watch -n 5 "curl -sf https://api.stellar-save.app/api/v1/backup/$JOB_ID | jq '{status,completedAt}'"
+watch -n 5 "curl -sf https://api.soroban-save.app/api/v1/backup/$JOB_ID | jq '{status,completedAt}'"
 ```
 
 ### 2.3 Restore via the DR Script
@@ -221,9 +221,9 @@ Required environment variables: `BACKEND_URL`, `STELLAR_NETWORK`.
 Use this only when the application-level backup is unavailable or corrupted.
 
 ```bash
-DB_IDENTIFIER="stellar-save-production"
+DB_IDENTIFIER="soroban-save-production"
 RESTORE_TIME="2026-05-27T03:00:00Z"   # ISO 8601 UTC
-NEW_IDENTIFIER="stellar-save-production-restored"
+NEW_IDENTIFIER="soroban-save-production-restored"
 
 aws rds restore-db-instance-to-point-in-time \
   --source-db-instance-identifier "$DB_IDENTIFIER" \
@@ -247,8 +247,8 @@ After the instance is available:
 2. Restart ECS tasks to pick up the new connection string:
    ```bash
    aws ecs update-service \
-     --cluster stellar-save-backend-production \
-     --service stellar-save-backend-production \
+     --cluster soroban-save-backend-production \
+     --service soroban-save-backend-production \
      --force-new-deployment
    ```
 3. Run smoke tests:
@@ -261,13 +261,13 @@ After the instance is available:
 
 ```bash
 # Check readiness probe — database dependency must be up
-curl -sf https://api.stellar-save.app/api/v2/ready | jq '.dependencies.database'
+curl -sf https://api.soroban-save.app/api/v2/ready | jq '.dependencies.database'
 
 # Spot-check event count (should be non-zero after restore)
-curl -sf "https://api.stellar-save.app/api/v1/events/stats" | jq '.totalEvents'
+curl -sf "https://api.soroban-save.app/api/v1/events/stats" | jq '.totalEvents'
 
 # Check backup alerts for any post-restore warnings
-curl -sf "https://api.stellar-save.app/api/v1/backup/alerts?unacknowledgedOnly=true"
+curl -sf "https://api.soroban-save.app/api/v1/backup/alerts?unacknowledgedOnly=true"
 ```
 
 ---
@@ -291,15 +291,15 @@ A contract pause may be detected via:
 
 ```bash
 # 1. Confirm the contract is paused
-curl -sf https://api.stellar-save.app/api/v2/ready | jq '.'
+curl -sf https://api.soroban-save.app/api/v2/ready | jq '.'
 
 # 2. Check recent contract events for a pause event
-curl -sf "https://api.stellar-save.app/api/v1/events?eventType=GroupStatusChanged&limit=10" \
+curl -sf "https://api.soroban-save.app/api/v1/events?eventType=GroupStatusChanged&limit=10" \
   | jq '.items[] | {timestamp, data}'
 
 # 3. Check backend logs for errors
 # In CloudWatch Logs:
-#   Log group: /ecs/stellar-save-backend-production
+#   Log group: /ecs/soroban-save-backend-production
 #   Filter: { $.level = "error" }
 ```
 
@@ -318,7 +318,7 @@ Work through each item in sequence. Check the box as you complete it.
   ```
 - [ ] **Assess blast radius** — how many active groups are affected?
   ```bash
-  curl -sf "https://api.stellar-save.app/api/v1/stats/groups" | jq '.activeGroups'
+  curl -sf "https://api.soroban-save.app/api/v1/stats/groups" | jq '.activeGroups'
   ```
 - [ ] **Determine if pause was intentional** — check with the deployer or admin
   key holder. If intentional (e.g., emergency security response), skip to
@@ -349,7 +349,7 @@ echo "RPC: $STELLAR_RPC_URL"
 bash scripts/dr_recover.sh unpause-all-groups
 
 # Verify groups are accepting contributions again
-curl -sf "https://api.stellar-save.app/api/v1/events?eventType=GroupStatusChanged&limit=5" \
+curl -sf "https://api.soroban-save.app/api/v1/events?eventType=GroupStatusChanged&limit=5" \
   | jq '.items[] | {timestamp, data}'
 ```
 
@@ -361,9 +361,9 @@ curl -sf "https://api.stellar-save.app/api/v1/events?eventType=GroupStatusChange
   ```
 - [ ] Acknowledge any outstanding backup or monitoring alerts:
   ```bash
-  curl -sf "https://api.stellar-save.app/api/v1/backup/alerts?unacknowledgedOnly=true" \
+  curl -sf "https://api.soroban-save.app/api/v1/backup/alerts?unacknowledgedOnly=true" \
     | jq '.[].alertId' \
-    | xargs -I{} curl -X POST "https://api.stellar-save.app/api/v1/backup/alerts/{}/acknowledge"
+    | xargs -I{} curl -X POST "https://api.soroban-save.app/api/v1/backup/alerts/{}/acknowledge"
   ```
 - [ ] Write an incident report covering:
   - Timeline of events
@@ -392,20 +392,20 @@ curl -sf "https://api.stellar-save.app/api/v1/events?eventType=GroupStatusChange
 
 ```bash
 # Build and push Docker image
-IMAGE="<ecr-registry>/stellar-save-backend:<git-sha>"
+IMAGE="<ecr-registry>/soroban-save-backend:<git-sha>"
 docker build -t "$IMAGE" backend/
 docker push "$IMAGE"
 
 # Update ECS task definition and force new deployment
 aws ecs update-service \
-  --cluster stellar-save-backend-production \
-  --service stellar-save-backend-production \
+  --cluster soroban-save-backend-production \
+  --service soroban-save-backend-production \
   --force-new-deployment
 
 # Monitor rollout
 aws ecs wait services-stable \
-  --cluster stellar-save-backend-production \
-  --services stellar-save-backend-production
+  --cluster soroban-save-backend-production \
+  --services soroban-save-backend-production
 
 bash scripts/smoke_test_post_deploy.sh
 ```
@@ -415,17 +415,17 @@ bash scripts/smoke_test_post_deploy.sh
 ```bash
 # Find the previous task definition revision
 aws ecs describe-task-definition \
-  --task-definition stellar-save-backend-production \
+  --task-definition soroban-save-backend-production \
   --query 'taskDefinition.revision'
 
 PREV_REVISION=$(($(aws ecs describe-task-definition \
-  --task-definition stellar-save-backend-production \
+  --task-definition soroban-save-backend-production \
   --query 'taskDefinition.revision' --output text) - 1))
 
 aws ecs update-service \
-  --cluster stellar-save-backend-production \
-  --service stellar-save-backend-production \
-  --task-definition "stellar-save-backend-production:$PREV_REVISION"
+  --cluster soroban-save-backend-production \
+  --service soroban-save-backend-production \
+  --task-definition "soroban-save-backend-production:$PREV_REVISION"
 ```
 
 Or use the rollback script:
@@ -442,13 +442,13 @@ NEW_PASS=$(openssl rand -base64 32)
 
 # Update RDS
 aws rds modify-db-instance \
-  --db-instance-identifier stellar-save-production \
+  --db-instance-identifier soroban-save-production \
   --master-user-password "$NEW_PASS" \
   --apply-immediately
 
 # Update Secrets Manager
 SECRET_ARN=$(aws secretsmanager list-secrets \
-  --query "SecretList[?Name=='stellar-save-production/db-credentials'].ARN" \
+  --query "SecretList[?Name=='soroban-save-production/db-credentials'].ARN" \
   --output text)
 
 aws secretsmanager put-secret-value \
@@ -457,8 +457,8 @@ aws secretsmanager put-secret-value \
 
 # Force ECS task restart to pick up new credentials
 aws ecs update-service \
-  --cluster stellar-save-backend-production \
-  --service stellar-save-backend-production \
+  --cluster soroban-save-backend-production \
+  --service soroban-save-backend-production \
   --force-new-deployment
 ```
 
@@ -466,12 +466,12 @@ aws ecs update-service \
 
 ```bash
 # Full backup
-curl -X POST https://api.stellar-save.app/api/v1/backup \
+curl -X POST https://api.soroban-save.app/api/v1/backup \
   -H 'Content-Type: application/json' \
   -d '{"type":"full"}'
 
 # Incremental backup
-curl -X POST https://api.stellar-save.app/api/v1/backup \
+curl -X POST https://api.soroban-save.app/api/v1/backup \
   -H 'Content-Type: application/json' \
   -d '{"type":"incremental"}'
 ```
@@ -480,24 +480,24 @@ curl -X POST https://api.stellar-save.app/api/v1/backup \
 
 ```bash
 # Liveness
-curl -sf https://api.stellar-save.app/api/v2/health | jq '.'
+curl -sf https://api.soroban-save.app/api/v2/health | jq '.'
 
 # Readiness (checks DB + Horizon)
-curl -sf https://api.stellar-save.app/api/v2/ready | jq '.'
+curl -sf https://api.soroban-save.app/api/v2/ready | jq '.'
 
 # Prometheus metrics
-curl -sf https://api.stellar-save.app/metrics | grep -E '^(http_|process_)'
+curl -sf https://api.soroban-save.app/metrics | grep -E '^(http_|process_)'
 ```
 
 ### 4.6 View Application Logs
 
 ```bash
 # Stream live logs from ECS (requires awslogs or CloudWatch Logs Insights)
-aws logs tail /ecs/stellar-save-backend-production --follow
+aws logs tail /ecs/soroban-save-backend-production --follow
 
 # Search for errors in the last hour
 aws logs filter-log-events \
-  --log-group-name /ecs/stellar-save-backend-production \
+  --log-group-name /ecs/soroban-save-backend-production \
   --start-time $(($(date +%s) - 3600))000 \
   --filter-pattern '{ $.level = "error" }' \
   --query 'events[*].message' \
@@ -540,12 +540,12 @@ aws logs filter-log-events \
 
 | Resource | Identifier |
 |----------|-----------|
-| ECS Cluster | `stellar-save-backend-production` |
-| ECS Service | `stellar-save-backend-production` |
-| RDS Instance | `stellar-save-production` |
-| CloudWatch Log Group | `/ecs/stellar-save-backend-production` |
-| S3 Backup Bucket | `stellar-save-backups-production` |
-| Secrets Manager | `stellar-save-production/db-credentials` |
+| ECS Cluster | `soroban-save-backend-production` |
+| ECS Service | `soroban-save-backend-production` |
+| RDS Instance | `soroban-save-production` |
+| CloudWatch Log Group | `/ecs/soroban-save-backend-production` |
+| S3 Backup Bucket | `soroban-save-backups-production` |
+| Secrets Manager | `soroban-save-production/db-credentials` |
 
 ### 5.4 Related Documentation
 

@@ -1,6 +1,6 @@
-# Accessibility Testing — Stellar Save
+# Accessibility Testing — SorobanSave
 
-This document describes the automated accessibility testing suite for Stellar Save, how to run it, and known issues.
+This document describes the automated accessibility testing suite for SorobanSave, how to run it, and known issues.
 
 > **Note:** Automated tools catch roughly 30–40% of WCAG issues. Full compliance requires manual testing with assistive technologies (screen readers, keyboard-only navigation, high-contrast mode). See [Manual Testing](#manual-testing) below.
 

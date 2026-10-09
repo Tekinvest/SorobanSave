@@ -27,9 +27,9 @@ export function LandingNav() {
         <Typography
           variant="h2"
           sx={{ color: 'primary.main', fontWeight: 700 }}
-          aria-label="Stellar Save home"
+          aria-label="SorobanSave home"
         >
-          Stellar Save
+          SorobanSave
         </Typography>
         <Stack component="nav" aria-label="Main navigation" direction="row" spacing={2}>
           <AppButton variant="text" size="small" href="#how-it-works">

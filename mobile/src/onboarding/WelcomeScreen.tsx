@@ -7,7 +7,7 @@ interface Props {
 export function WelcomeScreen({ onContinue }: Props) {
   return (
     <View style={styles.container} testID="welcome-screen">
-      <Text style={styles.title}>Welcome to Stellar Save</Text>
+      <Text style={styles.title}>Welcome to SorobanSave</Text>
       <Text style={styles.body}>
         Let&apos;s set up your wallet and verify your identity so you can start saving.
       </Text>

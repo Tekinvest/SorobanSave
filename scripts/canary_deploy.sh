@@ -18,7 +18,7 @@ set -euo pipefail
 : "${DEPLOYER_SECRET:?}"
 
 CANARY_WEIGHT="${CANARY_WEIGHT:-10}"
-WASM_PATH="${WASM_PATH:-target/wasm32-unknown-unknown/release/stellar_save.wasm}"
+WASM_PATH="${WASM_PATH:-target/wasm32-unknown-unknown/release/soroban_save.wasm}"
 REGISTRY="deployment-records/active.json"
 
 cd "$(dirname "$0")/.."
@@ -33,7 +33,7 @@ echo "════════════════════════�
 if [ ! -f "$WASM_PATH" ]; then
   echo "── Building WASM ────────────────────────────────────────────────────────"
   cargo build \
-    --manifest-path contracts/stellar-save/Cargo.toml \
+    --manifest-path contracts/soroban-save/Cargo.toml \
     --target wasm32-unknown-unknown \
     --release
 fi

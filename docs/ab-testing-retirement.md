@@ -1,7 +1,7 @@
 # A/B Testing Experiment Retirement Process
 
 ## Overview
-This document defines the lifecycle and retirement process for A/B testing experiment definitions within Stellar-Save (Issue #1700).
+This document defines the lifecycle and retirement process for A/B testing experiment definitions within SorobanSave (Issue #1700).
 
 Stale experiment definitions and feature flags introduce cognitive overhead, unnecessary branching, dead code paths, and telemetry pollution. To maintain codebase hygiene and predictable runtime behavior, all concluded experiments must follow this formal retirement workflow.
 

@@ -37,7 +37,7 @@ jobs:
         working-directory: infra/envs/staging
         run: |
           terraform init -input=false -reconfigure \
-            -backend-config="bucket=stellar-save-terraform-state" \
+            -backend-config="bucket=soroban-save-terraform-state" \
             -backend-config="key=staging/terraform.tfstate" \
             -backend-config="region=us-east-1" 2>/dev/null || \
           terraform init -input=false -backend=false 2>/dev/null || true
@@ -150,7 +150,7 @@ jobs:
           | CI minutes used | ${MINUTES_USED} / ${MINUTES_LIMIT} (${PCT}%) |
           | CI overage cost | \$${CI_COST} |
 
-          > Full details: [Cost Monitoring dashboard](http://localhost:3000/d/stellar-save-costs)
+          > Full details: [Cost Monitoring dashboard](http://localhost:3000/d/soroban-save-costs)
           > Optimization tips: run \`scripts/cost_optimization.sh\`"
 
           gh issue create \

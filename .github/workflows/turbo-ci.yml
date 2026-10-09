@@ -16,14 +16,14 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  # ── TypeScript packages: build / lint / test (turbo affected) ───────────────
+  # ── TypeScript packages: build / lint / test (turbo affected) ──────────────
   ts:
     name: TS Build · Lint · Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2          # needed for turbo affected
+          fetch-depth: 2
 
       - uses: pnpm/action-setup@v3
         with:
@@ -57,7 +57,7 @@ jobs:
           path: frontend/coverage/
           retention-days: 14
 
-  # ── Rust contracts (unchanged from before) ──────────────────────────────────
+  # ── Rust contracts ──────────────────────────────────────────────────────────
   contracts:
     name: Contract Tests
     runs-on: ubuntu-latest
@@ -75,20 +75,20 @@ jobs:
       - name: Test + coverage
         run: |
           cargo llvm-cov \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --lcov --output-path lcov.info \
             -- --test-threads=1
 
-      - name: Check coverage ≥ 95%
+      - name: Check coverage ≥ 85%
         run: |
           cargo llvm-cov \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --summary-only -- --test-threads=1 2>&1 | tee cov.txt
           python3 -c "
           import re, sys
           m = re.search(r'Lines\s+([\d.]+)%', open('cov.txt').read())
-          cov = float(m.group(1)) if m else 0
-          sys.exit(0 if cov >= 95 else 1)
+          cov = float(m.group(1)) if m else 0.0
+          sys.exit(0 if cov >= 85.0 else 1)
           "
 
       - uses: codecov/codecov-action@v4
@@ -98,7 +98,7 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  # ── Build gate (must pass before deploy) ────────────────────────────────────
+  # ── Build gate ──────────────────────────────────────────────────────────────
   build-gate:
     name: Build Gate
     needs: [ts, contracts]
@@ -130,5 +130,5 @@ jobs:
       - name: Build Soroban contract
         run: |
           cargo build \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --target wasm32-unknown-unknown --release

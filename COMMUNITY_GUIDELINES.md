@@ -1,6 +1,6 @@
-# Stellar-Save Community Guidelines
+# SorobanSave Community Guidelines
 
-Welcome to the Stellar-Save community — a decentralized rotational savings platform built on Stellar Soroban. These guidelines exist to keep our community welcoming, productive, and safe for everyone.
+Welcome to the SorobanSave community — a decentralized rotational savings platform built on Stellar Soroban. These guidelines exist to keep our community welcoming, productive, and safe for everyone.
 
 ---
 
@@ -66,11 +66,11 @@ Moderation decisions are final. If you believe a decision was made in error, you
 
 ## Contribution Spaces
 
-These guidelines apply in all Stellar-Save spaces:
+These guidelines apply in all SorobanSave spaces:
 
 - GitHub repository (issues, PRs, discussions, code reviews)
 - Telegram group and direct messages with maintainers
-- Any public forum where you represent the Stellar-Save project
+- Any public forum where you represent the SorobanSave project
 
 ---
 
@@ -79,7 +79,7 @@ These guidelines apply in all Stellar-Save spaces:
 - **Contributing guide**: [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Code of Conduct**: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 - **Security policy**: [SECURITY.md](SECURITY.md)
-- **GitHub Discussions**: [github.com/Xoulomon/Stellar-Save/discussions](https://github.com/Xoulomon/Stellar-Save/discussions)
+- **GitHub Discussions**: [github.com/Tekinvest/SorobanSave/discussions](https://github.com/Tekinvest/SorobanSave/discussions)
 - **Telegram**: [@Xoulomon](https://t.me/Xoulomon)
 - **Wave contributor guide**: [docs/wave-guide.md](docs/wave-guide.md)
 

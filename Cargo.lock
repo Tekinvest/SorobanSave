@@ -729,7 +729,7 @@ dependencies = [
  "soroban-sdk 28.0.0",
  "stellar-access",
  "stellar-macros",
- "stellar-save-common",
+ "soroban-save-common",
  "stellar-tokens",
 ]
 
@@ -798,7 +798,7 @@ version = "0.1.0"
 dependencies = [
  "soroban-sdk 28.0.0",
  "stellar-registry",
- "stellar-save-common",
+ "soroban-save-common",
 ]
 
 [[package]]
@@ -1017,8 +1017,13 @@ checksum = "6b947ae49db0d222b1dbc6b113ce7248a3fc3a6ca21b696717bfc000ba4484d8"
 name = "nft-enumerable-example"
 version = "0.1.0"
 dependencies = [
+dependabot/cargo/soroban-48332073ba
  "soroban-sdk 28.0.0",
  "stellar-save-common",
+
+ "soroban-sdk",
+ "soroban-save-common",
+main
  "stellar-tokens",
 ]
 
@@ -1857,6 +1862,7 @@ dependencies = [
 ]
 
 [[package]]
+
 name = "stellar-registry-macro"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1874,16 +1880,27 @@ dependencies = [
 
 [[package]]
 name = "stellar-registry-name"
+
+name = "soroban-save"
+
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cb45025b1f475b3246651ecf4afef9e64c26c0adf27cc8a6d748e7a9c1f95169"
 dependencies = [
+ 
  "semver",
  "thiserror 2.0.19",
 ]
 
 [[package]]
 name = "stellar-save"
+ "soroban-sdk",
+ "soroban-save-common",
+]
+
+[[package]]
+name = "soroban-save-common"
+ 
 version = "0.1.0"
 dependencies = [
  "soroban-sdk 28.0.0",

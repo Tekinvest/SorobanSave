@@ -1,5 +1,5 @@
 /**
- * MSW handlers for the Stellar Save backend REST API.
+ * MSW handlers for the SorobanSave backend REST API.
  *
  * These intercept `fetch` calls against the `/api` base path, matching
  * the `request()` helper in `src/utils/api.ts`.

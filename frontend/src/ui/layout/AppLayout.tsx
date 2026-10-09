@@ -39,7 +39,7 @@ export function AppLayout({
   navItems = [],
   sidebar,
   children,
-  footerText = 'Stellar Save',
+  footerText = 'SorobanSave',
 }: AppLayoutProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const hasSidebar = Boolean(sidebar);

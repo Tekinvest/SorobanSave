@@ -46,7 +46,7 @@ variable "engine_version" {
 variable "db_name" {
   description = "Initial database name"
   type        = string
-  default     = "stellarsave"
+  default     = "sorobansave"
 }
 
 variable "db_username" {

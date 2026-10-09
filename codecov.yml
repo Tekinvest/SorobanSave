@@ -69,7 +69,7 @@ coverage:
 
     contracts:
       paths:
-        - contracts/stellar-save/src/
+        - contracts/soroban-save/src/
       carryforward: false
 
     backend:
@@ -89,6 +89,6 @@ ignore:
   - "frontend/src/**/*.example.tsx"
   - "frontend/src/main.tsx"
   - "frontend/src/components/*Demo.tsx"
-  - "contracts/stellar-save/test_snapshots/**"
+  - "contracts/soroban-save/test_snapshots/**"
   - "backend/src/tests/**"
   - "backend/src/generated/**"

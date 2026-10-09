@@ -6,7 +6,7 @@
 
 ## Overview
 
-Stellar-Save uses on-chain governance to manage protocol parameters, upgrades, and major decisions. This document explains how governance works, who can participate, and how proposals move from creation to execution.
+SorobanSave uses on-chain governance to manage protocol parameters, upgrades, and major decisions. This document explains how governance works, who can participate, and how proposals move from creation to execution.
 
 ## Key Concepts
 
@@ -402,7 +402,7 @@ stellar contract invoke --id GOV_CONTRACT \
 ```
 
 **On-chain execution:**
-1. Governance contract calls StellarSave contract
+1. Governance contract calls SorobanSave contract
 2. `update_config` function is invoked
 3. `max_members` is set to 50
 4. Configuration stored on-chain
@@ -419,7 +419,7 @@ stellar contract invoke --id GOV_CONTRACT \
 
 **Verification:**
 ```bash
-stellar contract invoke --id STELLARSAVE_CONTRACT \
+stellar contract invoke --id SOROBANSAVE_CONTRACT \
   -- get_config
 
 # Output shows max_members: 50 ✅
@@ -556,7 +556,7 @@ A: Governor set can vote to remove inactive governor and add replacement.
 ## Governance Contract Source
 
 View the governance contract implementation:
-- **Repository:** [contracts/governance](https://github.com/Xoulomon/Stellar-Save/tree/main/contracts/governance)
+- **Repository:** [contracts/governance](https://github.com/Tekinvest/SorobanSave/tree/main/contracts/governance)
 - **Audit Report:** [docs/security-audit-report.md](security-audit-report.md)
 - **Testnet Deployment:** `CGOV...` (see [deployment.md](deployment.md))
 

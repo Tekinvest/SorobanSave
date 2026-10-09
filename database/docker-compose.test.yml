@@ -23,11 +23,11 @@ version: '3.8'
 services:
   postgres-test:
     image: postgres:16-alpine
-    container_name: stellar-save-postgres-test
+    container_name: soroban-save-postgres-test
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: stellar_save_test
+      POSTGRES_DB: soroban_save_test
     ports:
       - "5433:5432"  # Use non-standard port to avoid conflicts
     volumes:

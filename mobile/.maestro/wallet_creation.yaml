@@ -1,5 +1,5 @@
 # Wallet creation flow — create new wallet, backup seed phrase, confirm
-appId: com.stellarsave.app
+appId: com.sorobansave.app
 ---
 # Step 1: Launch app
 - launchApp:

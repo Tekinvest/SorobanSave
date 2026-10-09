@@ -1,7 +1,7 @@
 /**
  * k6 Load Test — Concurrent Contributions Near Cycle Deadline
  * ============================================================
- * Simulates the highest-contention path in Stellar-Save: all members of a
+ * Simulates the highest-contention path in SorobanSave: all members of a
  * savings pool racing to submit their contribution simultaneously as the cycle
  * deadline approaches.
  *
@@ -34,7 +34,7 @@
  *   k6 run backend/tests/load/deadline-contributions.js
  *
  *   # Against staging with custom member count:
- *   BASE_URL=https://staging.stellar-save.example.com \
+ *   BASE_URL=https://staging.soroban-save.example.com \
  *   GROUP_ID=<staging-group-id>                       \
  *   MEMBER_COUNT=10                                   \
  *   k6 run backend/tests/load/deadline-contributions.js
@@ -206,7 +206,7 @@ function getGroupBalance(groupId, tags) {
 
 export function setup() {
   console.log('═══════════════════════════════════════════════════════════');
-  console.log(' Stellar-Save — Deadline Contributions Load Test');
+  console.log(' SorobanSave — Deadline Contributions Load Test');
   console.log('═══════════════════════════════════════════════════════════');
   console.log(`  BASE_URL         : ${BASE_URL}`);
   console.log(`  GROUP_ID         : ${GROUP_ID}`);
@@ -466,7 +466,7 @@ function textSummary(data) {
   return [
     '',
     '─────────────────────────────────────────────────────────────',
-    ' Stellar-Save — Deadline Contributions Summary',
+    ' SorobanSave — Deadline Contributions Summary',
     '─────────────────────────────────────────────────────────────',
     ` deadline_contribution_duration_ms  p50=${p50}ms  p95=${p95}ms  p99=${p99}ms`,
     ` deadline_contribution_error_rate   ${errR}%`,

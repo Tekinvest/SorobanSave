@@ -2,7 +2,7 @@
 
 **Status**: Accepted  
 **Date**: 2026-05-29  
-**Author**: Stellar-Save Team  
+**Author**: SorobanSave Team  
 **Deciders**: Product & Architecture Team
 
 ## Context
@@ -160,5 +160,5 @@ fn advance_payout_position(group_id: u64) {
 ## References
 
 - [Traditional ROSCA Practices](https://en.wikipedia.org/wiki/Rotating_savings_and_credit_association)
-- [Stellar-Save Architecture](../architecture.md)
-- [Contract Implementation](../../contracts/stellar-save/src/payout.rs)
+- [SorobanSave Architecture](../architecture.md)
+- [Contract Implementation](../../contracts/soroban-save/src/payout.rs)

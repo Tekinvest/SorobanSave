@@ -1,6 +1,6 @@
-# Stellar Save Frontend
+# SorobanSave Frontend
 
-Frontend single-page application (SPA) for Stellar Save built with React, TypeScript, Vite, and Material-UI (MUI).
+Frontend single-page application (SPA) for SorobanSave built with React, TypeScript, Vite, and Material-UI (MUI).
 
 ## Development & Setup
 

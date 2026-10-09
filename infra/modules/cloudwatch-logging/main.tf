@@ -7,13 +7,13 @@ data "aws_region" "current" {}
 # ── Application Log Group ─────────────────────────────────────────────────────
 # Standard 30-day retention for application logs
 resource "aws_cloudwatch_log_group" "app_logs" {
-  name              = "/aws/stellar-save/${var.environment}/app"
+  name              = "/aws/soroban-save/${var.environment}/app"
   retention_in_days = var.app_log_retention_days
 
   tags = merge(
     var.tags,
     {
-      Name        = "stellar-save-app-logs-${var.environment}"
+      Name        = "soroban-save-app-logs-${var.environment}"
       LogType     = "application"
       Environment = var.environment
     }
@@ -23,13 +23,13 @@ resource "aws_cloudwatch_log_group" "app_logs" {
 # ── Audit Log Group ───────────────────────────────────────────────────────────
 # Extended 90-day retention for audit and compliance logs
 resource "aws_cloudwatch_log_group" "audit_logs" {
-  name              = "/aws/stellar-save/${var.environment}/audit"
+  name              = "/aws/soroban-save/${var.environment}/audit"
   retention_in_days = var.audit_log_retention_days
 
   tags = merge(
     var.tags,
     {
-      Name        = "stellar-save-audit-logs-${var.environment}"
+      Name        = "soroban-save-audit-logs-${var.environment}"
       LogType     = "audit"
       Environment = var.environment
     }
@@ -45,7 +45,7 @@ resource "aws_cloudwatch_log_group_metric_filter" "app_errors" {
 
   metric_transformation {
     name      = "ApplicationErrorCount"
-    namespace = "StellarSave/${var.environment}"
+    namespace = "SorobanSave/${var.environment}"
     value     = "1"
     unit      = "Count"
 
@@ -64,7 +64,7 @@ resource "aws_cloudwatch_log_group_metric_filter" "app_warnings" {
 
   metric_transformation {
     name      = "ApplicationWarningCount"
-    namespace = "StellarSave/${var.environment}"
+    namespace = "SorobanSave/${var.environment}"
     value     = "1"
     unit      = "Count"
 
@@ -83,7 +83,7 @@ resource "aws_cloudwatch_log_group_metric_filter" "critical_errors" {
 
   metric_transformation {
     name      = "ApplicationCriticalErrorCount"
-    namespace = "StellarSave/${var.environment}"
+    namespace = "SorobanSave/${var.environment}"
     value     = "1"
     unit      = "Count"
 
@@ -102,7 +102,7 @@ resource "aws_cloudwatch_log_group_metric_filter" "audit_events" {
 
   metric_transformation {
     name      = "AuditEventCount"
-    namespace = "StellarSave/${var.environment}"
+    namespace = "SorobanSave/${var.environment}"
     value     = "1"
     unit      = "Count"
 
@@ -115,7 +115,7 @@ resource "aws_cloudwatch_log_group_metric_filter" "audit_events" {
 # ── IAM Policy for ECS Task Execution Role ────────────────────────────────────
 # Allows ECS tasks to write logs to CloudWatch
 resource "aws_iam_role_policy" "ecs_cloudwatch_logs_policy" {
-  name   = "stellar-save-ecs-cloudwatch-logs-${var.environment}"
+  name   = "soroban-save-ecs-cloudwatch-logs-${var.environment}"
   role   = var.ecs_task_execution_role_id
   policy = jsonencode({
     Version = "2012-10-17"
@@ -140,7 +140,7 @@ resource "aws_iam_role_policy" "ecs_cloudwatch_logs_policy" {
 # Allows Lambda functions to write logs to CloudWatch
 resource "aws_iam_role_policy" "lambda_cloudwatch_logs_policy" {
   count  = var.lambda_execution_role_id != null ? 1 : 0
-  name   = "stellar-save-lambda-cloudwatch-logs-${var.environment}"
+  name   = "soroban-save-lambda-cloudwatch-logs-${var.environment}"
   role   = var.lambda_execution_role_id
   policy = jsonencode({
     Version = "2012-10-17"
@@ -165,11 +165,11 @@ resource "aws_iam_role_policy" "lambda_cloudwatch_logs_policy" {
 # Alarm triggers when critical errors exceed threshold
 resource "aws_cloudwatch_metric_alarm" "critical_errors_alarm" {
   count               = var.create_alarms ? 1 : 0
-  alarm_name          = "stellar-save-critical-errors-${var.environment}"
+  alarm_name          = "soroban-save-critical-errors-${var.environment}"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1
   metric_name         = "ApplicationCriticalErrorCount"
-  namespace           = "StellarSave/${var.environment}"
+  namespace           = "SorobanSave/${var.environment}"
   period              = 300
   statistic           = "Sum"
   threshold           = var.critical_error_alarm_threshold
@@ -181,7 +181,7 @@ resource "aws_cloudwatch_metric_alarm" "critical_errors_alarm" {
   tags = merge(
     var.tags,
     {
-      Name = "stellar-save-critical-errors-alarm-${var.environment}"
+      Name = "soroban-save-critical-errors-alarm-${var.environment}"
     }
   )
 }

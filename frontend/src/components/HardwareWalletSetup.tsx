@@ -271,7 +271,7 @@ export function HardwareWalletSetup({ onComplete, onCancel }: HardwareWalletSetu
             {HARDWARE_WALLET_I18N[selectedDevice?.connection || 'ble']}.
           </Typography>
           <Typography variant="body2" color="text.secondary" textAlign="center">
-            Import accounts to start using your hardware wallet with Stellar Save.
+            Import accounts to start using your hardware wallet with SorobanSave.
           </Typography>
           <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
             <Button variant="secondary" onClick={onCancel}>

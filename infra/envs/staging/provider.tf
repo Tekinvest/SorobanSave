@@ -11,10 +11,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "stellar-save-terraform-state"
+    bucket         = "soroban-save-terraform-state"
     key            = "staging/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "stellar-save-terraform-locks"
+    dynamodb_table = "soroban-save-terraform-locks"
     encrypt        = true
   }
 }
@@ -26,7 +26,7 @@ provider "aws" {
   # tagging standard. Module-specific tags (Service) are merged on top.
   default_tags {
     tags = {
-      Project     = "stellar-save"
+      Project     = "soroban-save"
       Environment = "staging"
       ManagedBy   = "terraform"
       CostCenter  = "engineering"

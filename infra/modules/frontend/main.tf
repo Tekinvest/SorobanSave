@@ -2,7 +2,7 @@
 # Reusable module: S3 static hosting + CloudFront CDN for the React SPA.
 
 locals {
-  bucket_name = "stellar-save-frontend-${var.environment}"
+  bucket_name = "soroban-save-frontend-${var.environment}"
   origin_id   = "s3-${local.bucket_name}"
 }
 

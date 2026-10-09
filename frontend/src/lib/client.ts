@@ -1,21 +1,21 @@
 /**
  * client.ts
  *
- * Centralised, typed SDK client for the StellarSave smart contract.
+ * Centralised, typed SDK client for the SorobanSave smart contract.
  *
  * All contract interactions go through this class. Components and hooks
- * should import the `stellarSaveClient` singleton rather than calling
+ * should import the `sorobanSaveClient` singleton rather than calling
  * `contractClient` functions directly.
  *
  * @example
  * ```ts
- * import { stellarSaveClient } from '../lib/client';
+ * import { sorobanSaveClient } from '../lib/client';
  *
  * // Read-only (no wallet required)
- * const group = await stellarSaveClient.getGroup(1n);
+ * const group = await sorobanSaveClient.getGroup(1n);
  *
  * // Write (requires connected wallet / Freighter)
- * const txHash = await stellarSaveClient.joinGroup({ groupId: 1n, member: address });
+ * const txHash = await sorobanSaveClient.joinGroup({ groupId: 1n, member: address });
  * ```
  */
 
@@ -69,17 +69,17 @@ export type {
 
 export { ContractError, parseContractError, CONTRACT_ERROR_MESSAGES, CONTRACT_ID, server };
 
-// ─── StellarSaveClient ────────────────────────────────────────────────────────
+// ─── SorobanSaveClient ────────────────────────────────────────────────────────
 
 /**
- * Typed SDK client for the StellarSave Soroban contract.
+ * Typed SDK client for the SorobanSave Soroban contract.
  *
  * Wraps all low-level `contractClient` functions as instance methods so that:
  * - IDE autocomplete works on every method and parameter
- * - Callers have a single import point (`stellarSaveClient`)
+ * - Callers have a single import point (`sorobanSaveClient`)
  * - The implementation can be swapped or mocked in tests
  */
-export class StellarSaveClient {
+export class SorobanSaveClient {
   // ── Write operations (require Freighter wallet) ───────────────────────────
 
   /**
@@ -301,14 +301,14 @@ export class StellarSaveClient {
 // ─── Singleton ────────────────────────────────────────────────────────────────
 
 /**
- * Pre-instantiated `StellarSaveClient` singleton.
+ * Pre-instantiated `SorobanSaveClient` singleton.
  * Import this in components, hooks, and utilities instead of calling
  * `contractClient` functions directly.
  *
  * @example
  * ```ts
- * import { stellarSaveClient } from '../lib/client';
- * const balance = await stellarSaveClient.getGroupBalance(groupId);
+ * import { sorobanSaveClient } from '../lib/client';
+ * const balance = await sorobanSaveClient.getGroupBalance(groupId);
  * ```
  */
-export const stellarSaveClient = new StellarSaveClient();
+export const sorobanSaveClient = new SorobanSaveClient();

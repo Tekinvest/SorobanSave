@@ -1,4 +1,4 @@
-//! Common test utilities shared across all Stellar-Save contracts.
+//! Common test utilities shared across all SorobanSave contracts.
 //!
 //! This module provides reusable test helpers to eliminate duplication across
 //! fungible-allowlist, nft-enumerable, guess-the-number, and other contracts.

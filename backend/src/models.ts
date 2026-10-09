@@ -1,5 +1,5 @@
 // Re-export shared domain types from the SDK so backend code can import from
-// one place: `import type { Group, Contribution } from '@stellar-save/sdk'`
+// one place: `import type { Group, Contribution } from '@soroban-save/sdk'`
 export type {
   Group as SdkGroup,
   Contribution as SdkContribution,
@@ -7,7 +7,7 @@ export type {
   ServiceCost,
   OptimizationRecommendation,
   CostReport,
-} from '@stellar-save/sdk';
+} from '@soroban-save/sdk';
 
 export interface UserPreference {
   userId: string;

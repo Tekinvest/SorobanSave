@@ -27,3 +27,21 @@ Thumbs.db
 
 # Test snapshots (optional - uncomment if you don't want to commit these)
 # **/test_snapshots/
+
+# AI / Coding assistant artifacts
+.kiro/
+.claude/
+.cursor/
+.aider*
+.continue/
+claude.md
+CLAUDE.md
+.anthropic/
+copilot-instructions.md
+.github/copilot-instructions.md
+*.kiro.json
+*.claude.json
+ai-notes/
+llm-context/
+agent-workspace/
+.agents/

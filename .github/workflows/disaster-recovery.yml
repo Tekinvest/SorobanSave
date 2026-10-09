@@ -49,7 +49,7 @@ jobs:
       - name: Contract tests — pause/unpause scenarios
         run: |
           cargo test \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             -- pause --nocapture --test-threads=1
 
       # ── 4. Recovery service unit tests ──────────────────────────────────────

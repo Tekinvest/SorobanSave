@@ -20,7 +20,7 @@ with `backend/`.
 
 ## [1.0.0] — 2026-08-28
 
-Initial production release of the Stellar Save backend service.
+Initial production release of the SorobanSave backend service.
 
 ### Added
 
@@ -246,5 +246,5 @@ Full migration guide: [`docs/api-versioning.md`](../docs/api-versioning.md).
 
 ---
 
-[Unreleased]: https://github.com/Xoulomon/Stellar-Save/compare/backend/v1.0.0...HEAD
-[1.0.0]: https://github.com/Xoulomon/Stellar-Save/releases/tag/backend/v1.0.0
+[Unreleased]: https://github.com/Tekinvest/SorobanSave/compare/backend/v1.0.0...HEAD
+[1.0.0]: https://github.com/Tekinvest/SorobanSave/releases/tag/backend/v1.0.0

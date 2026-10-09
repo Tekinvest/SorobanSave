@@ -2,7 +2,7 @@
 
 use soroban_sdk::{contracterror, contracttype};
 
-/// Canonical failure conditions shared across all Stellar-Save contracts.
+/// Canonical failure conditions shared across all SorobanSave contracts.
 ///
 /// Codes are reserved in the range `1..=99` and are stable across contract
 /// versions: clients decode them identically no matter which contract trapped.

@@ -1,6 +1,6 @@
 # Threat Model & Security Assumptions
 
-This document describes the security model for the Stellar-Save smart contract, a ROSCA (Rotating Savings and Credit Association) built on Stellar Soroban. It covers what the contract trusts, what it verifies, identified attack vectors and their mitigations, and what is explicitly out of scope.
+This document describes the security model for the SorobanSave smart contract, a ROSCA (Rotating Savings and Credit Association) built on Stellar Soroban. It covers what the contract trusts, what it verifies, identified attack vectors and their mitigations, and what is explicitly out of scope.
 
 For a tabular reference of privileged-role trust boundaries and the formal invariants the
 contract guarantees (each mapped to its protecting test), see
@@ -36,7 +36,7 @@ contract guarantees (each mapped to its protecting test), see
 
 ### 2.1 Reentrancy
 
-**Description**: A malicious token contract's `transfer` callback re-enters the Stellar-Save contract before state is finalized, potentially triggering a double-payout.
+**Description**: A malicious token contract's `transfer` callback re-enters the SorobanSave contract before state is finalized, potentially triggering a double-payout.
 
 **Soroban context**: Unlike EVM, Soroban does not support arbitrary callbacks during token transfers for native XLM. For SEP-41 tokens, cross-contract calls are possible.
 
@@ -161,7 +161,7 @@ The following are explicitly **not** covered by the smart contract security mode
 | **Private key compromise** | If a user's or admin's private key is stolen, the contract cannot prevent unauthorized transactions. Use hardware wallets and multisig for high-value accounts. |
 | **Stellar network-level attacks** | Eclipse attacks, validator collusion, or Stellar protocol bugs are outside the contract's control. |
 | **Social engineering** | Members being coerced into joining malicious groups or sharing seed phrases is a human problem, not a contract problem. |
-| **Oracle / price feeds** | Stellar-Save uses fixed contribution amounts in a single token; no price oracle is used. Token price volatility is a user risk. |
+| **Oracle / price feeds** | SorobanSave uses fixed contribution amounts in a single token; no price oracle is used. Token price volatility is a user risk. |
 | **Regulatory compliance** | KYC/AML obligations depend on jurisdiction and are the responsibility of group operators, not the contract. |
 | **Off-chain coordination** | Disputes between members that do not involve on-chain funds (e.g., verbal agreements) are not enforceable by the contract. |
 | **Upgradability risks** | Contract upgrade authorization and migration correctness are covered separately in [docs/upgrade-guide.md](upgrade-guide.md). |

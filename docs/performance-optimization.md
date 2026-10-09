@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide covers performance optimization techniques for Stellar-Save users and developers. It includes gas optimization strategies, frontend performance tips, caching best practices, monitoring guidance, and benchmarking instructions.
+This guide covers performance optimization techniques for SorobanSave users and developers. It includes gas optimization strategies, frontend performance tips, caching best practices, monitoring guidance, and benchmarking instructions.
 
 ## Table of Contents
 
@@ -149,7 +149,7 @@ The `PayoutPositionIndex(group_id, position) → Address` reverse index (written
 
 ### Benchmark Coverage
 
-The benchmark suite lives in `contracts/stellar-save/src/gas_benchmark_tests.rs` and is run alongside the test suite:
+The benchmark suite lives in `contracts/soroban-save/src/gas_benchmark_tests.rs` and is run alongside the test suite:
 
 ```bash
 cargo test -- bench  --nocapture  # prints CPU instruction counts
@@ -720,7 +720,7 @@ setTimeout(() => fetchGroupHistory(), 100);
 
 #### 1. Client-Side Caching with React Query
 
-**Optimal configuration for Stellar-Save:**
+**Optimal configuration for SorobanSave:**
 ```javascript
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -776,11 +776,11 @@ const mutation = useMutation({
 ```javascript
 // Cache user preferences (survives page reload)
 const cacheUserPreferences = (prefs) => {
-  localStorage.setItem('stellar_save_prefs', JSON.stringify(prefs));
+  localStorage.setItem('soroban_save_prefs', JSON.stringify(prefs));
 };
 
 const getUserPreferences = () => {
-  const cached = localStorage.getItem('stellar_save_prefs');
+  const cached = localStorage.getItem('soroban_save_prefs');
   return cached ? JSON.parse(cached) : getDefaultPreferences();
 };
 
@@ -835,7 +835,7 @@ cacheSessionData('group_creation_draft', {
 **Cache static assets:**
 ```javascript
 // service-worker.js
-const CACHE_NAME = 'stellar-save-v1';
+const CACHE_NAME = 'soroban-save-v1';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -1155,7 +1155,7 @@ pub fn contribute(env: &Env, group_id: u64, member: Address, amount: i128) {
 **Track gas trends over time:**
 ```bash
 # Run benchmarks and capture results
-cargo test --manifest-path contracts/stellar-save/Cargo.toml benchmark -- --nocapture > gas_results.txt
+cargo test --manifest-path contracts/soroban-save/Cargo.toml benchmark -- --nocapture > gas_results.txt
 
 # Extract and store metrics
 grep "Gas used:" gas_results.txt | awk '{print $NF}' >> performance-results/gas-trends.json
@@ -1262,7 +1262,7 @@ getINP(sendMetricToAnalytics);
 ```javascript
 // Store metrics in IndexedDB for historical analysis
 const storeMetric = async (metric) => {
-  const db = await openDB('stellar-save-metrics');
+  const db = await openDB('soroban-save-metrics');
   const tx = db.transaction('metrics', 'readwrite');
   await tx.store.add({
     name: metric.name,
@@ -1274,7 +1274,7 @@ const storeMetric = async (metric) => {
 
 // Query historical data
 const getMetricTrend = async (metricName, days = 7) => {
-  const db = await openDB('stellar-save-metrics');
+  const db = await openDB('soroban-save-metrics');
   const cutoff = Date.now() - (days * 24 * 60 * 60 * 1000);
   
   const allMetrics = await db.getAll('metrics');
@@ -1555,17 +1555,17 @@ try {
 
 **Run all benchmarks:**
 ```bash
-cargo test --manifest-path contracts/stellar-save/Cargo.toml benchmark -- --nocapture
+cargo test --manifest-path contracts/soroban-save/Cargo.toml benchmark -- --nocapture
 ```
 
 **Run specific benchmark:**
 ```bash
-cargo test --manifest-path contracts/stellar-save/Cargo.toml benchmark_create_group_gas -- --nocapture
+cargo test --manifest-path contracts/soroban-save/Cargo.toml benchmark_create_group_gas -- --nocapture
 ```
 
 **With detailed output:**
 ```bash
-RUST_BACKTRACE=1 cargo test --manifest-path contracts/stellar-save/Cargo.toml benchmark -- --nocapture --test-threads=1
+RUST_BACKTRACE=1 cargo test --manifest-path contracts/soroban-save/Cargo.toml benchmark -- --nocapture --test-threads=1
 ```
 
 #### 2. Storage Benchmarks
@@ -1573,10 +1573,10 @@ RUST_BACKTRACE=1 cargo test --manifest-path contracts/stellar-save/Cargo.toml be
 **Analyze storage usage:**
 ```bash
 # Run storage analysis
-cargo test --manifest-path contracts/stellar-save/Cargo.toml test_storage_analysis -- --nocapture
+cargo test --manifest-path contracts/soroban-save/Cargo.toml test_storage_analysis -- --nocapture
 
 # Compare traditional vs optimized
-cargo test --manifest-path contracts/stellar-save/Cargo.toml test_storage_comparison -- --nocapture
+cargo test --manifest-path contracts/soroban-save/Cargo.toml test_storage_comparison -- --nocapture
 ```
 
 **Expected output:**
@@ -1830,9 +1830,9 @@ cat performance-results/lighthouse-trends.json
 ## Getting Help
 
 **Performance issues?**
-- Check [GitHub Issues](https://github.com/Xoulomon/Stellar-Save/issues) for known issues
+- Check [GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues) for known issues
 - Review [FAQ](faq.md) for common questions
-- Join [Discussions](https://github.com/Xoulomon/Stellar-Save/discussions) for community help
+- Join [Discussions](https://github.com/Tekinvest/SorobanSave/discussions) for community help
 
 **Found a performance bug?**
 - Open an issue with benchmark results
@@ -1847,7 +1847,7 @@ cat performance-results/lighthouse-trends.json
 
 ### Overview
 
-Stellar-Save enforces a per-chunk size limit of **100 KB** (uncompressed) via Vite's `chunkSizeWarningLimit`. Breaching this limit emits a build warning and will fail CI once the bundle-size gate is added. The goal is to keep the **initial load** under 200 KB gzipped across all entry-point chunks.
+SorobanSave enforces a per-chunk size limit of **100 KB** (uncompressed) via Vite's `chunkSizeWarningLimit`. Breaching this limit emits a build warning and will fail CI once the bundle-size gate is added. The goal is to keep the **initial load** under 200 KB gzipped across all entry-point chunks.
 
 ### Running the Analyzer
 
@@ -1905,4 +1905,4 @@ Run `npm run build` locally before opening a PR that adds new dependencies. Chec
 ---
 
 **Last Updated:** June 2026  
-**Maintained by:** Stellar-Save Contributors
+**Maintained by:** SorobanSave Contributors

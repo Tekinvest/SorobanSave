@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // check-rust-drift.js — fails if the topics emitted by
-// contracts/stellar-save/src/events.rs and the topics in schema.json diverge.
+// contracts/soroban-save/src/events.rs and the topics in schema.json diverge.
 // Mirrors the `test_every_*_topic_*` unit tests in events.rs so the check also
 // runs in CI without a Rust toolchain.
 
@@ -9,7 +9,7 @@ const path = require('path');
 
 const schema = JSON.parse(fs.readFileSync(path.join(__dirname, 'schema.json'), 'utf8'));
 const eventsRs = fs.readFileSync(
-  path.join(__dirname, '..', '..', 'contracts', 'stellar-save', 'src', 'events.rs'),
+  path.join(__dirname, '..', '..', 'contracts', 'soroban-save', 'src', 'events.rs'),
   'utf8'
 );
 

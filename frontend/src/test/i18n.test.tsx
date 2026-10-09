@@ -46,9 +46,9 @@ describe('i18n translations', () => {
 
   it('interpolates variables in translation strings', () => {
     const result = i18n.t('settings.footerText', {
-      defaultValue: 'Stellar Save - Built for transparent, on-chain savings',
+      defaultValue: 'SorobanSave - Built for transparent, on-chain savings',
     });
-    expect(result).toContain('Stellar Save');
+    expect(result).toContain('SorobanSave');
   });
 });
 
@@ -73,7 +73,7 @@ describe('useI18n', () => {
     await act(async () => {
       result.current.changeLanguage('yo');
     });
-    expect(localStorage.getItem('stellar_save_language')).toBe('yo');
+    expect(localStorage.getItem('soroban_save_language')).toBe('yo');
   });
 
   it('exposes supportedLanguages with 3 entries', () => {

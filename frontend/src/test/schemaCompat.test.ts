@@ -48,7 +48,7 @@
  * 5. insuranceEnabled / insurancePremiumRate (frontend only) — ⚠️  ACCIDENTAL DRIFT
  *    These fields were added to the frontend as part of Issue #1012 (insurance
  *    pool MVP) but the corresponding backend validation has not been added yet.
- *    Tracked in: https://github.com/Xoulomon/Stellar-Save/issues/1012
+ *    Tracked in: https://github.com/Tekinvest/SorobanSave/issues/1012
  *    Action required: once the backend endpoint accepts these fields, add them
  *    to schemas.createGroup and update the assertions below.
  *

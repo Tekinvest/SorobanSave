@@ -1,7 +1,7 @@
-# Load Tests — Stellar-Save Backend
+# Load Tests — SorobanSave Backend
 
 This directory contains [k6](https://k6.io/) load test scenarios for the
-Stellar-Save backend/staging API.
+SorobanSave backend/staging API.
 
 ---
 
@@ -52,7 +52,7 @@ docker run --rm -i grafana/k6 run - < backend/tests/load/deadline-contributions.
 k6 run backend/tests/load/deadline-contributions.js
 
 # Custom member count and staging URL
-BASE_URL=https://staging.stellar-save.example.com \
+BASE_URL=https://staging.soroban-save.example.com \
 GROUP_ID=<your-staging-group-id>                  \
 MEMBER_COUNT=10                                   \
 k6 run backend/tests/load/deadline-contributions.js
