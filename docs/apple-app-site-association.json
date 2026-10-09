@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "TEAM_ID.com.stellarsave.app",
+        "appID": "TEAM_ID.com.sorobansave.app",
         "paths": [
           "/join/*",
           "/app/*"
@@ -13,7 +13,7 @@
   },
   "webcredentials": {
     "apps": [
-      "TEAM_ID.com.stellarsave.app"
+      "TEAM_ID.com.sorobansave.app"
     ]
   }
 }

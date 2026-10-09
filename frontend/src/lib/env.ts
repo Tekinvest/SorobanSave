@@ -60,7 +60,7 @@ export const envSchema = z
     // ── Stellar network / contract ───────────────────────────────────────
     VITE_STELLAR_NETWORK: stellarNetworkSchema.default('testnet'),
     VITE_STELLAR_RPC_URL: z.url().default('https://soroban-testnet.stellar.org'),
-    VITE_STELLAR_SAVE_CONTRACT_ID: z.string().default(''),
+    VITE_SOROBAN_SAVE_CONTRACT_ID: z.string().default(''),
 
     // ── Backend API ───────────────────────────────────────────────────────
     // Intentionally a plain string, not `.url()` — the default is a
@@ -77,7 +77,7 @@ export const envSchema = z
     // ── OpenTelemetry web tracing (opt-in; see lib/tracing.ts) ───────────
     VITE_OTEL_ENABLED: booleanFlag(false),
     VITE_OTEL_EXPORTER_OTLP_ENDPOINT: z.url().default('http://localhost:4318'),
-    VITE_OTEL_SERVICE_NAME: z.string().default('stellar-save-frontend'),
+    VITE_OTEL_SERVICE_NAME: z.string().default('soroban-save-frontend'),
     VITE_OTEL_TRACES_SAMPLER_ARG: z.coerce.number().min(0).max(1).default(0.1),
     // CSV of URL prefixes — also plain strings/paths (e.g. "/api"), not URLs.
     VITE_OTEL_PROPAGATE_URLS: z.string().default('/api'),
@@ -87,12 +87,12 @@ export const envSchema = z
     // call already fails with a clear ContractError telling you to set this).
     // Shipping a production build with no contract ID is a real deployment
     // bug, though, so promote it to a hard, fail-fast requirement there.
-    if (value.PROD && value.VITE_STELLAR_SAVE_CONTRACT_ID.trim() === '') {
+    if (value.PROD && value.VITE_SOROBAN_SAVE_CONTRACT_ID.trim() === '') {
       ctx.addIssue({
         code: 'custom',
-        path: ['VITE_STELLAR_SAVE_CONTRACT_ID'],
+        path: ['VITE_SOROBAN_SAVE_CONTRACT_ID'],
         message:
-          'VITE_STELLAR_SAVE_CONTRACT_ID is required in production builds. ' +
+          'VITE_SOROBAN_SAVE_CONTRACT_ID is required in production builds. ' +
           'Set it in your .env file before running `npm run build`.',
       });
     }

@@ -1,8 +1,8 @@
-ut# Stellar-Save Security Guide
+ut# SorobanSave Security Guide
 
-This guide covers security best practices for everyone who interacts with Stellar-Save — from end users managing their savings groups to developers building on or contributing to the protocol.
+This guide covers security best practices for everyone who interacts with SorobanSave — from end users managing their savings groups to developers building on or contributing to the protocol.
 
-> **Reporting a vulnerability?** Do not open a public issue. Use [GitHub Private Security Advisories](https://github.com/Xoulomon/Stellar-Save/security/advisories/new). See [SECURITY.md](../SECURITY.md) for the full disclosure policy.
+> **Reporting a vulnerability?** Do not open a public issue. Use [GitHub Private Security Advisories](https://github.com/Tekinvest/SorobanSave/security/advisories/new). See [SECURITY.md](../SECURITY.md) for the full disclosure policy.
 
 ---
 
@@ -25,7 +25,7 @@ Your Stellar wallet is the only key to your funds. If your private key or seed p
 
 - Write it down on paper and store it somewhere physically secure (e.g. a safe). Do not photograph it or store it in cloud notes, email, or messaging apps.
 - Never type your seed phrase into any website, browser extension prompt, or app that you did not deliberately open yourself.
-- No legitimate Stellar-Save interface, support channel, or maintainer will ever ask for your seed phrase.
+- No legitimate SorobanSave interface, support channel, or maintainer will ever ask for your seed phrase.
 
 ### Use a hardware wallet for mainnet
 
@@ -38,9 +38,9 @@ For any meaningful amount of XLM, use a hardware wallet (Ledger or Trezor) with 
 
 Every transaction you sign moves real funds. Before approving:
 
-1. Check the **contract ID** matches the official Stellar-Save deployment (published in the repository's `environments.toml` and release notes)
+1. Check the **contract ID** matches the official SorobanSave deployment (published in the repository's `environments.toml` and release notes)
 2. Check the **function name** — legitimate operations are `contribute`, `join_group`, `execute_payout`, `pause_group`, `unpause_group`
-3. Check the **amount** — Stellar-Save never requires you to send more than your group's `contribution_amount`
+3. Check the **amount** — SorobanSave never requires you to send more than your group's `contribution_amount`
 4. Use [Stellar Laboratory](https://laboratory.stellar.org) to inspect any transaction XDR before signing if you are unsure
 
 ### Keep software up to date
@@ -51,7 +51,7 @@ Every transaction you sign moves real funds. Before approving:
 
 ### Separate wallets for separate purposes
 
-Use a dedicated wallet address for Stellar-Save groups rather than your primary holding address. This limits exposure if a group interaction goes wrong.
+Use a dedicated wallet address for SorobanSave groups rather than your primary holding address. This limits exposure if a group interaction goes wrong.
 
 ---
 
@@ -59,7 +59,7 @@ Use a dedicated wallet address for Stellar-Save groups rather than your primary 
 
 ### How the contract protects funds
 
-The Stellar-Save Soroban contract includes the following protections:
+The SorobanSave Soroban contract includes the following protections:
 
 | Protection | Implementation |
 |---|---|
@@ -114,22 +114,22 @@ Blockchain savings platforms attract social engineering attacks. These are the m
 - Check the creator's on-chain history using [Stellar Expert](https://stellar.expert) — look for prior group activity
 - Legitimate ROSCAs do not promise returns beyond the pooled contributions
 
-### Impersonation of the Stellar-Save team
+### Impersonation of the SorobanSave team
 
-**How it works**: Someone contacts you via Telegram, Discord, or email claiming to be a Stellar-Save maintainer. They ask you to send funds to a "recovery address", share your seed phrase, or approve a transaction to "verify your wallet".
+**How it works**: Someone contacts you via Telegram, Discord, or email claiming to be a SorobanSave maintainer. They ask you to send funds to a "recovery address", share your seed phrase, or approve a transaction to "verify your wallet".
 
 **How to avoid it**:
-- The Stellar-Save team will never DM you first asking for funds or credentials
+- The SorobanSave team will never DM you first asking for funds or credentials
 - All official communication happens through GitHub Issues, GitHub Discussions, and the official Telegram channel listed in the README
 - If someone claims to be a maintainer, verify by checking their GitHub profile and contribution history
 
 ### Phishing sites
 
-**How it works**: A fake website mimics the Stellar-Save frontend. It prompts you to connect your wallet and then requests approval for a malicious transaction.
+**How it works**: A fake website mimics the SorobanSave frontend. It prompts you to connect your wallet and then requests approval for a malicious transaction.
 
 **How to avoid it**:
 - Bookmark the official frontend URL and always navigate from your bookmark
-- Check the browser address bar carefully — phishing sites often use lookalike domains (e.g. `stellar-save.io` vs `stellarsave.app`)
+- Check the browser address bar carefully — phishing sites often use lookalike domains (e.g. `soroban-save.io` vs `sorobansave.app`)
 - Freighter will show the contract ID being called — verify it matches the official deployment before approving
 - If a site asks for your seed phrase, close it immediately
 
@@ -144,7 +144,7 @@ Blockchain savings platforms attract social engineering attacks. These are the m
 
 ### Malicious contract clones
 
-**How it works**: A scammer deploys a contract that looks like Stellar-Save but has a backdoor allowing them to drain funds.
+**How it works**: A scammer deploys a contract that looks like SorobanSave but has a backdoor allowing them to drain funds.
 
 **How to avoid it**:
 - Always verify the contract ID against the official deployment listed in the repository
@@ -208,7 +208,7 @@ The full operational incident response process is documented in [docs/incident-r
    ```bash
    bash scripts/dr_recover.sh pause-all-groups
    ```
-3. Open a [GitHub Private Security Advisory](https://github.com/Xoulomon/Stellar-Save/security/advisories/new)
+3. Open a [GitHub Private Security Advisory](https://github.com/Tekinvest/SorobanSave/security/advisories/new)
 4. Assess whether a contract rollback or new deployment is needed
 5. Communicate to users via the status page — do not leave them without information
 
@@ -238,7 +238,7 @@ For key compromise, contract rollback, and data recovery procedures see the runb
 
 - [ ] `cargo audit` passes with no critical or high advisories
 - [ ] `npm audit` passes with no critical or high advisories
-- [ ] All contract tests pass: `cargo test -p stellar-save`
+- [ ] All contract tests pass: `cargo test -p soroban-save`
 - [ ] Semgrep and CodeQL scans are clean (check the Security tab)
 - [ ] Contract ID is published in `environments.toml` and release notes
 - [ ] Emergency pause has been tested on testnet
@@ -277,14 +277,14 @@ The contract has been reviewed internally. A third-party audit is recommended be
 
 ### Fuzz testing
 
-Property-based and fuzz tests live in `contracts/stellar-save/src/fuzz_tests.rs`. Run them with:
+Property-based and fuzz tests live in `contracts/soroban-save/src/fuzz_tests.rs`. Run them with:
 
 ```bash
-cargo test -p stellar-save fuzz
+cargo test -p soroban-save fuzz
 ```
 
 The fuzzing strategy is documented in [docs/fuzzing-strategy.md](fuzzing-strategy.md).
 
 ---
 
-*For questions about this guide, open a [GitHub Discussion](https://github.com/Xoulomon/Stellar-Save/discussions). For vulnerabilities, use [GitHub Private Security Advisories](https://github.com/Xoulomon/Stellar-Save/security/advisories/new).*
+*For questions about this guide, open a [GitHub Discussion](https://github.com/Tekinvest/SorobanSave/discussions). For vulnerabilities, use [GitHub Private Security Advisories](https://github.com/Tekinvest/SorobanSave/security/advisories/new).*

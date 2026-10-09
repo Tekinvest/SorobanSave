@@ -29,9 +29,9 @@ function formatEarnedDate(ts: number): string {
 }
 
 function buildShareText(badge: MemberBadge, walletAddress?: string): string {
-  const base = `I earned the "${badge.name}" badge on Stellar Save! ${badge.artwork}`;
+  const base = `I earned the "${badge.name}" badge on SorobanSave! ${badge.artwork}`;
   if (walletAddress) {
-    return `${base}\nhttps://stellar-save.app/members/${walletAddress}`;
+    return `${base}\nhttps://soroban-save.app/members/${walletAddress}`;
   }
   return base;
 }

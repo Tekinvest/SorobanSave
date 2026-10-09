@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This feature adds a `calculate_current_cycle` helper function to the Stellar-Save Soroban smart contract. The function determines the current cycle number for a savings group based on the time elapsed since the group was started. It reads the group's `started_at` timestamp and `cycle_duration` from storage, retrieves the current ledger timestamp, and computes how many full cycles have elapsed. This is a pure helper used internally by other contract operations (e.g., contribution validation, payout scheduling) to avoid duplicating cycle-calculation logic.
+This feature adds a `calculate_current_cycle` helper function to the SorobanSave Soroban smart contract. The function determines the current cycle number for a savings group based on the time elapsed since the group was started. It reads the group's `started_at` timestamp and `cycle_duration` from storage, retrieves the current ledger timestamp, and computes how many full cycles have elapsed. This is a pure helper used internally by other contract operations (e.g., contribution validation, payout scheduling) to avoid duplicating cycle-calculation logic.
 
 ## Glossary
 
@@ -14,7 +14,7 @@ This feature adds a `calculate_current_cycle` helper function to the Stellar-Sav
 - **Elapsed_Seconds**: The difference `current_time - started_at` in seconds.
 - **Cycle_Calculator**: The helper function `calculate_current_cycle` being specified here.
 - **Group**: The `Group` struct defined in `group.rs`, loaded from persistent storage via `StorageKeyBuilder::group_data(group_id)`.
-- **StellarSaveError**: The contract error enum defined in `error.rs`.
+- **SorobanSaveError**: The contract error enum defined in `error.rs`.
 
 ---
 
@@ -27,7 +27,7 @@ This feature adds a `calculate_current_cycle` helper function to the Stellar-Sav
 #### Acceptance Criteria
 
 1. WHEN `calculate_current_cycle` is called with a valid `group_id`, THE `Cycle_Calculator` SHALL load the `Group` struct from persistent storage using `StorageKeyBuilder::group_data(group_id)`.
-2. IF the `group_id` does not exist in storage, THEN THE `Cycle_Calculator` SHALL return `Err(StellarSaveError::GroupNotFound)`.
+2. IF the `group_id` does not exist in storage, THEN THE `Cycle_Calculator` SHALL return `Err(SorobanSaveError::GroupNotFound)`.
 3. IF the `Group` has `started` set to `false`, THEN THE `Cycle_Calculator` SHALL return `Ok(0)` indicating no cycles have elapsed.
 
 ---
@@ -75,9 +75,9 @@ This feature adds a `calculate_current_cycle` helper function to the Stellar-Sav
 
 #### Acceptance Criteria
 
-1. IF the group is not found in storage, THEN THE `Cycle_Calculator` SHALL return `Err(StellarSaveError::GroupNotFound)`.
+1. IF the group is not found in storage, THEN THE `Cycle_Calculator` SHALL return `Err(SorobanSaveError::GroupNotFound)`.
 2. THE `Cycle_Calculator` SHALL NOT panic under any valid input combination.
-3. THE `Cycle_Calculator` SHALL return `Result<u32, StellarSaveError>` as its return type.
+3. THE `Cycle_Calculator` SHALL return `Result<u32, SorobanSaveError>` as its return type.
 
 ---
 
@@ -87,7 +87,7 @@ This feature adds a `calculate_current_cycle` helper function to the Stellar-Sav
 
 #### Acceptance Criteria
 
-1. THE test suite SHALL include a test verifying that calling `calculate_current_cycle` with a non-existent `group_id` returns `Err(StellarSaveError::GroupNotFound)`.
+1. THE test suite SHALL include a test verifying that calling `calculate_current_cycle` with a non-existent `group_id` returns `Err(SorobanSaveError::GroupNotFound)`.
 2. THE test suite SHALL include a test verifying that a group that has not been started returns `Ok(0)`.
 3. THE test suite SHALL include a test verifying that a group started at time `T` with `cycle_duration` `D`, queried at time `T + D * N`, returns `Ok(N)` for representative values of `N`.
 4. THE test suite SHALL include a test verifying that the returned cycle is capped at `max_members - 1` when more cycles have elapsed than the group has members.

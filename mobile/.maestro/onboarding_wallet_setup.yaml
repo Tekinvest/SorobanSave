@@ -1,7 +1,7 @@
 # Onboarding flow — wallet setup step
 # Covers: WalletSetupScreen (create + import paths)
 # Prereq: app launched fresh (clearState: true)
-appId: com.stellarsave.app
+appId: com.sorobansave.app
 ---
 # ── Arrive at WalletSetupScreen ───────────────────────────────────────────────
 - launchApp:

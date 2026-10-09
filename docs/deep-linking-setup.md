@@ -1,14 +1,14 @@
 # Deep Linking Setup Guide
 
-This document explains how deep linking is configured for Stellar Save mobile apps and how to test it.
+This document explains how deep linking is configured for SorobanSave mobile apps and how to test it.
 
 ## Overview
 
-Deep linking allows users to open the Stellar Save mobile app directly from invite links shared via SMS, email, or the web. The implementation supports:
+Deep linking allows users to open the SorobanSave mobile app directly from invite links shared via SMS, email, or the web. The implementation supports:
 
-- **Universal Links (iOS)** - Opens the app when users tap `https://stellarsave.app/join/ABC123`
-- **App Links (Android)** - Opens the app when users tap `https://stellarsave.app/join/ABC123`
-- **Custom Scheme** - Falls back to `stellarsave://join/ABC123` for testing
+- **Universal Links (iOS)** - Opens the app when users tap `https://sorobansave.app/join/ABC123`
+- **App Links (Android)** - Opens the app when users tap `https://sorobansave.app/join/ABC123`
+- **Custom Scheme** - Falls back to `sorobansave://join/ABC123` for testing
 
 ## How It Works
 
@@ -17,9 +17,9 @@ Deep linking allows users to open the Stellar Save mobile app directly from invi
 The app recognizes these URL patterns:
 
 ```
-stellarsave://join/:inviteCode          (Custom scheme)
-https://stellarsave.app/join/:inviteCode (Universal/App Link)
-https://app.stellarsave.app/join/:inviteCode (Subdomain)
+sorobansave://join/:inviteCode          (Custom scheme)
+https://sorobansave.app/join/:inviteCode (Universal/App Link)
+https://app.sorobansave.app/join/:inviteCode (Subdomain)
 ```
 
 ### 2. Flow
@@ -43,10 +43,10 @@ Located at `frontend/ios/App/App/Info.plist`:
 <array>
     <dict>
         <key>CFBundleURLName</key>
-        <string>com.stellarsave.app</string>
+        <string>com.sorobansave.app</string>
         <key>CFBundleURLSchemes</key>
         <array>
-            <string>stellarsave</string>
+            <string>sorobansave</string>
         </array>
     </dict>
 </array>
@@ -59,14 +59,14 @@ Located at `frontend/ios/App/App/App.entitlements`:
 ```xml
 <key>com.apple.developer.associated-domains</key>
 <array>
-    <string>applinks:stellarsave.app</string>
-    <string>applinks:app.stellarsave.app</string>
+    <string>applinks:sorobansave.app</string>
+    <string>applinks:app.sorobansave.app</string>
 </array>
 ```
 
 ### Apple App Site Association (AASA)
 
-You need to host this file at `https://stellarsave.app/.well-known/apple-app-site-association`:
+You need to host this file at `https://sorobansave.app/.well-known/apple-app-site-association`:
 
 ```json
 {
@@ -74,7 +74,7 @@ You need to host this file at `https://stellarsave.app/.well-known/apple-app-sit
     "apps": [],
     "details": [
       {
-        "appID": "TEAM_ID.com.stellarsave.app",
+        "appID": "TEAM_ID.com.sorobansave.app",
         "paths": ["/join/*", "/app/*"]
       }
     ]
@@ -99,11 +99,11 @@ Add to `frontend/android/app/src/main/AndroidManifest.xml` inside the MainActivi
         <category android:name="android.intent.category.BROWSABLE" />
         <data 
             android:scheme="https"
-            android:host="stellarsave.app"
+            android:host="sorobansave.app"
             android:pathPrefix="/join" />
         <data 
             android:scheme="https"
-            android:host="app.stellarsave.app"
+            android:host="app.sorobansave.app"
             android:pathPrefix="/join" />
     </intent-filter>
     
@@ -112,14 +112,14 @@ Add to `frontend/android/app/src/main/AndroidManifest.xml` inside the MainActivi
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="stellarsave" />
+        <data android:scheme="sorobansave" />
     </intent-filter>
 </activity>
 ```
 
 ### Digital Asset Links
 
-Host this file at `https://stellarsave.app/.well-known/assetlinks.json`:
+Host this file at `https://sorobansave.app/.well-known/assetlinks.json`:
 
 ```json
 [
@@ -127,7 +127,7 @@ Host this file at `https://stellarsave.app/.well-known/assetlinks.json`:
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.stellarsave.app",
+      "package_name": "com.sorobansave.app",
       "sha256_cert_fingerprints": [
         "YOUR_APP_SHA256_FINGERPRINT"
       ]
@@ -177,8 +177,8 @@ npx cap sync ios
 npx cap open ios
 
 # Test deep link (in Terminal while simulator is running)
-xcrun simctl openurl booted "stellarsave://join/ABC123"
-xcrun simctl openurl booted "https://stellarsave.app/join/ABC123"
+xcrun simctl openurl booted "sorobansave://join/ABC123"
+xcrun simctl openurl booted "https://sorobansave.app/join/ABC123"
 ```
 
 ### Android Emulator
@@ -191,8 +191,8 @@ npx cap sync android
 npx cap open android
 
 # Test deep link (via adb)
-adb shell am start -W -a android.intent.action.VIEW -d "stellarsave://join/ABC123" com.stellarsave.app
-adb shell am start -W -a android.intent.action.VIEW -d "https://stellarsave.app/join/ABC123" com.stellarsave.app
+adb shell am start -W -a android.intent.action.VIEW -d "sorobansave://join/ABC123" com.sorobansave.app
+adb shell am start -W -a android.intent.action.VIEW -d "https://sorobansave.app/join/ABC123" com.sorobansave.app
 ```
 
 ### Physical Devices
@@ -209,13 +209,13 @@ In your group detail page or share functionality, generate links like:
 
 ```typescript
 const inviteCode = generateInviteCode(groupId); // Your implementation
-const inviteLink = `https://stellarsave.app/join/${inviteCode}`;
+const inviteLink = `https://sorobansave.app/join/${inviteCode}`;
 
 // Share via native sharing
 if (Capacitor.isNativePlatform()) {
   await Share.share({
-    title: 'Join my Stellar Save group',
-    text: `Join my savings group on Stellar Save!`,
+    title: 'Join my SorobanSave group',
+    text: `Join my savings group on SorobanSave!`,
     url: inviteLink,
     dialogTitle: 'Share invite link',
   });

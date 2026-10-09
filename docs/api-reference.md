@@ -1,7 +1,7 @@
-# Stellar-Save Smart Contract API Reference
+# SorobanSave Smart Contract API Reference
 
 **Version:** 1.0.0  
-**Contract:** StellarSaveContract  
+**Contract:** SorobanSaveContract  
 **Platform:** Stellar Soroban
 
 > This document is supplemented by [Contract API Reference](contract-api-reference.md), which covers all public helper types and functions in `group.rs`, `contribution.rs`, and `payout.rs`. Looking for the backend REST/HTTP API instead of the on-chain contract API? See the [Public API Reference](api/interactive-api-reference.md).
@@ -22,7 +22,7 @@
 
 ## Overview
 
-The Stellar-Save smart contract implements a decentralized Rotating Savings and Credit Association (ROSCA) on the Stellar blockchain. This API reference documents all public functions, their parameters, return types, and usage examples.
+The SorobanSave smart contract implements a decentralized Rotating Savings and Credit Association (ROSCA) on the Stellar blockchain. This API reference documents all public functions, their parameters, return types, and usage examples.
 
 ### Key Concepts
 
@@ -35,7 +35,7 @@ The Stellar-Save smart contract implements a decentralized Rotating Savings and 
 
 Deploy the contract and note the contract ID for invocation:
 ```bash
-stellar contract deploy --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm --network testnet
+stellar contract deploy --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm --network testnet
 ```
 
 ---
@@ -152,7 +152,7 @@ pub struct ContractConfig {
 
 ## Error Codes
 
-All errors return `StellarSaveError` with specific error codes.
+All errors return `SorobanSaveError` with specific error codes.
 
 ### Group Errors (1000-1999)
 
@@ -211,7 +211,7 @@ pub fn create_group(
     contribution_amount: i128,
     cycle_duration: u64,
     max_members: u32,
-) -> Result<u64, StellarSaveError>
+) -> Result<u64, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -223,7 +223,7 @@ pub fn create_group(
 
 **Returns:**
 - `Ok(u64)`: Unique group ID
-- `Err(StellarSaveError)`: Error if validation fails
+- `Err(SorobanSaveError)`: Error if validation fails
 
 **Automatic Rounding:**
 - Contribution amounts are automatically rounded to the nearest 0.01 XLM (100,000 stroops) to prevent precision issues with very small amounts
@@ -272,7 +272,7 @@ pub fn update_group(
     new_contribution: i128,
     new_duration: u64,
     new_max_members: u32,
-) -> Result<(), StellarSaveError>
+) -> Result<(), SorobanSaveError>
 ```
 
 **Parameters:**
@@ -284,7 +284,7 @@ pub fn update_group(
 
 **Returns:**
 - `Ok(())`: Group successfully updated
-- `Err(StellarSaveError)`: Error if validation fails
+- `Err(SorobanSaveError)`: Error if validation fails
 
 **Errors:**
 - `GroupNotFound`: Group doesn't exist
@@ -314,7 +314,7 @@ Retrieves group details.
 pub fn get_group(
     env: Env,
     group_id: u64
-) -> Result<Group, StellarSaveError>
+) -> Result<Group, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -323,7 +323,7 @@ pub fn get_group(
 
 **Returns:**
 - `Ok(Group)`: Group data structure
-- `Err(StellarSaveError::GroupNotFound)`: Group doesn't exist
+- `Err(SorobanSaveError::GroupNotFound)`: Group doesn't exist
 
 **Example:**
 ```rust
@@ -344,7 +344,7 @@ Deletes a group. Only allowed if no members have joined.
 pub fn delete_group(
     env: Env,
     group_id: u64
-) -> Result<(), StellarSaveError>
+) -> Result<(), SorobanSaveError>
 ```
 
 **Parameters:**
@@ -353,7 +353,7 @@ pub fn delete_group(
 
 **Returns:**
 - `Ok(())`: Group successfully deleted
-- `Err(StellarSaveError)`: Error if validation fails
+- `Err(SorobanSaveError)`: Error if validation fails
 
 **Errors:**
 - `GroupNotFound`: Group doesn't exist
@@ -379,7 +379,7 @@ pub fn list_groups(
     cursor: u64,
     limit: u32,
     status_filter: Option<GroupStatus>,
-) -> Result<Vec<Group>, StellarSaveError>
+) -> Result<Vec<Group>, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -390,7 +390,7 @@ pub fn list_groups(
 
 **Returns:**
 - `Ok(Vec<Group>)`: Vector of group data
-- `Err(StellarSaveError)`: Error if operation fails
+- `Err(SorobanSaveError)`: Error if operation fails
 
 **Example:**
 ```rust
@@ -479,7 +479,7 @@ pub fn pause_group(
     env: Env,
     group_id: u64,
     caller: Address,
-) -> Result<(), StellarSaveError>
+) -> Result<(), SorobanSaveError>
 ```
 
 **Parameters:**
@@ -489,7 +489,7 @@ pub fn pause_group(
 
 **Returns:**
 - `Ok(())`: Group paused successfully
-- `Err(StellarSaveError)`: Error if validation fails
+- `Err(SorobanSaveError)`: Error if validation fails
 
 **Errors:**
 - `GroupNotFound`: Group doesn't exist
@@ -517,7 +517,7 @@ pub fn unpause_group(
     env: Env,
     group_id: u64,
     caller: Address,
-) -> Result<(), StellarSaveError>
+) -> Result<(), SorobanSaveError>
 ```
 
 **Parameters:**
@@ -527,7 +527,7 @@ pub fn unpause_group(
 
 **Returns:**
 - `Ok(())`: Group unpaused successfully
-- `Err(StellarSaveError)`: Error if validation fails
+- `Err(SorobanSaveError)`: Error if validation fails
 
 **Errors:**
 - `GroupNotFound`: Group doesn't exist
@@ -555,7 +555,7 @@ pub fn join_group(
     env: Env,
     group_id: u64,
     member: Address,
-) -> Result<(), StellarSaveError>
+) -> Result<(), SorobanSaveError>
 ```
 
 **Parameters:**
@@ -565,7 +565,7 @@ pub fn join_group(
 
 **Returns:**
 - `Ok(())`: Member successfully joined
-- `Err(StellarSaveError)`: Error if validation fails
+- `Err(SorobanSaveError)`: Error if validation fails
 
 **Errors:**
 - `GroupNotFound`: Group doesn't exist
@@ -605,7 +605,7 @@ Returns the number of members in a group.
 pub fn get_member_count(
     env: Env,
     group_id: u64
-) -> Result<u32, StellarSaveError>
+) -> Result<u32, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -614,7 +614,7 @@ pub fn get_member_count(
 
 **Returns:**
 - `Ok(u32)`: Number of members in the group
-- `Err(StellarSaveError::GroupNotFound)`: Group doesn't exist
+- `Err(SorobanSaveError::GroupNotFound)`: Group doesn't exist
 
 **Example:**
 ```rust
@@ -634,7 +634,7 @@ pub fn get_payout_position(
     env: Env,
     group_id: u64,
     member_address: Address,
-) -> Result<u32, StellarSaveError>
+) -> Result<u32, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -644,7 +644,7 @@ pub fn get_payout_position(
 
 **Returns:**
 - `Ok(u32)`: Payout position (0-indexed)
-- `Err(StellarSaveError)`: Error if member not found
+- `Err(SorobanSaveError)`: Error if member not found
 
 **Errors:**
 - `NotMember`: Address is not a member of the group
@@ -673,7 +673,7 @@ pub fn assign_payout_positions(
     group_id: u64,
     caller: Address,
     mode: AssignmentMode,
-) -> Result<(), StellarSaveError>
+) -> Result<(), SorobanSaveError>
 ```
 
 **Parameters:**
@@ -684,7 +684,7 @@ pub fn assign_payout_positions(
 
 **Returns:**
 - `Ok(())`: Positions successfully assigned
-- `Err(StellarSaveError)`: Error if validation fails
+- `Err(SorobanSaveError)`: Error if validation fails
 
 **Errors:**
 - `GroupNotFound`: Group doesn't exist
@@ -731,7 +731,7 @@ pub fn has_received_payout(
     env: Env,
     group_id: u64,
     member_address: Address,
-) -> Result<bool, StellarSaveError>
+) -> Result<bool, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -741,7 +741,7 @@ pub fn has_received_payout(
 
 **Returns:**
 - `Ok(bool)`: true if member received payout, false otherwise
-- `Err(StellarSaveError::GroupNotFound)`: Group doesn't exist
+- `Err(SorobanSaveError::GroupNotFound)`: Group doesn't exist
 
 **Example:**
 ```rust
@@ -770,7 +770,7 @@ pub fn contribute(
     group_id: u64,
     member: Address,
     amount: i128,
-) -> Result<(), StellarSaveError>
+) -> Result<(), SorobanSaveError>
 ```
 
 **Parameters:**
@@ -781,7 +781,7 @@ pub fn contribute(
 
 **Returns:**
 - `Ok(())`: Contribution recorded successfully
-- `Err(StellarSaveError)`: Error if validation fails
+- `Err(SorobanSaveError)`: Error if validation fails
 
 **Errors:**
 - `GroupNotFound`: Group doesn't exist
@@ -813,7 +813,7 @@ pub fn validate_contribution_amount(
     env: &Env,
     group_id: u64,
     amount: i128,
-) -> Result<(), StellarSaveError>
+) -> Result<(), SorobanSaveError>
 ```
 
 **Parameters:**
@@ -823,7 +823,7 @@ pub fn validate_contribution_amount(
 
 **Returns:**
 - `Ok(())`: Amount is valid
-- `Err(StellarSaveError)`: Error if validation fails
+- `Err(SorobanSaveError)`: Error if validation fails
 
 **Errors:**
 - `GroupNotFound`: Group doesn't exist
@@ -847,7 +847,7 @@ pub fn get_member_total_contributions(
     env: Env,
     group_id: u64,
     member: Address,
-) -> Result<i128, StellarSaveError>
+) -> Result<i128, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -857,7 +857,7 @@ pub fn get_member_total_contributions(
 
 **Returns:**
 - `Ok(i128)`: Total contribution amount (stroops)
-- `Err(StellarSaveError)`: Error if operation fails
+- `Err(SorobanSaveError)`: Error if operation fails
 
 **Errors:**
 - `GroupNotFound`: Group doesn't exist
@@ -883,7 +883,7 @@ pub fn get_member_contribution_history(
     member: Address,
     start_cycle: u32,
     limit: u32,
-) -> Result<Vec<ContributionRecord>, StellarSaveError>
+) -> Result<Vec<ContributionRecord>, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -895,7 +895,7 @@ pub fn get_member_contribution_history(
 
 **Returns:**
 - `Ok(Vec<ContributionRecord>)`: Vector of contribution records
-- `Err(StellarSaveError::GroupNotFound)`: Group doesn't exist
+- `Err(SorobanSaveError::GroupNotFound)`: Group doesn't exist
 
 **Example:**
 ```rust
@@ -929,7 +929,7 @@ pub fn get_cycle_contributions(
     env: Env,
     group_id: u64,
     cycle_number: u32,
-) -> Result<Vec<ContributionRecord>, StellarSaveError>
+) -> Result<Vec<ContributionRecord>, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -939,7 +939,7 @@ pub fn get_cycle_contributions(
 
 **Returns:**
 - `Ok(Vec<ContributionRecord>)`: Vector of all contributions in the cycle
-- `Err(StellarSaveError::GroupNotFound)`: Group doesn't exist
+- `Err(SorobanSaveError::GroupNotFound)`: Group doesn't exist
 
 **Example:**
 ```rust
@@ -964,7 +964,7 @@ pub fn is_cycle_complete(
     env: Env,
     group_id: u64,
     cycle_number: u32,
-) -> Result<bool, StellarSaveError>
+) -> Result<bool, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -974,7 +974,7 @@ pub fn is_cycle_complete(
 
 **Returns:**
 - `Ok(bool)`: true if all members contributed, false otherwise
-- `Err(StellarSaveError::GroupNotFound)`: Group doesn't exist
+- `Err(SorobanSaveError::GroupNotFound)`: Group doesn't exist
 
 **Example:**
 ```rust
@@ -996,7 +996,7 @@ pub fn get_missed_contributions(
     env: Env,
     group_id: u64,
     cycle_number: u32,
-) -> Result<Vec<Address>, StellarSaveError>
+) -> Result<Vec<Address>, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -1006,7 +1006,7 @@ pub fn get_missed_contributions(
 
 **Returns:**
 - `Ok(Vec<Address>)`: Vector of addresses who haven't contributed
-- `Err(StellarSaveError::GroupNotFound)`: Group doesn't exist
+- `Err(SorobanSaveError::GroupNotFound)`: Group doesn't exist
 
 **Example:**
 ```rust
@@ -1036,7 +1036,7 @@ pub fn get_contribution_deadline(
     env: Env,
     group_id: u64,
     cycle_number: u32,
-) -> Result<u64, StellarSaveError>
+) -> Result<u64, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -1046,7 +1046,7 @@ pub fn get_contribution_deadline(
 
 **Returns:**
 - `Ok(u64)`: Unix timestamp when cycle deadline expires
-- `Err(StellarSaveError)`: Error if operation fails
+- `Err(SorobanSaveError)`: Error if operation fails
 
 **Errors:**
 - `GroupNotFound`: Group doesn't exist
@@ -1108,7 +1108,7 @@ Initializes or updates the global contract configuration. Only callable by admin
 pub fn update_config(
     env: Env,
     new_config: ContractConfig
-) -> Result<(), StellarSaveError>
+) -> Result<(), SorobanSaveError>
 ```
 
 **Parameters:**
@@ -1117,7 +1117,7 @@ pub fn update_config(
 
 **Returns:**
 - `Ok(())`: Configuration successfully updated
-- `Err(StellarSaveError::InvalidState)`: Configuration validation failed
+- `Err(SorobanSaveError::InvalidState)`: Configuration validation failed
 
 **Errors:**
 - `InvalidState`: Configuration values are invalid
@@ -1389,7 +1389,7 @@ flowchart TD
 ### Complete ROSCA Lifecycle Example
 
 ```rust
-use stellar_save::{StellarSaveContract, GroupStatus, AssignmentMode};
+use soroban_save::{SorobanSaveContract, GroupStatus, AssignmentMode};
 
 // 1. Create a group
 let group_id = contract.create_group(
@@ -1493,7 +1493,7 @@ println!("Member receives payout in cycle {}", position);
 ### Admin Configuration Example
 
 ```rust
-use stellar_save::ContractConfig;
+use soroban_save::ContractConfig;
 
 // Initialize contract configuration
 let config = ContractConfig {
@@ -1689,9 +1689,9 @@ stellar contract invoke \
 
 ## Support and Resources
 
-- **Documentation**: [https://github.com/Xoulomon/Stellar-Save/tree/main/docs](https://github.com/Xoulomon/Stellar-Save/tree/main/docs)
-- **Issues**: [https://github.com/Xoulomon/Stellar-Save/issues](https://github.com/Xoulomon/Stellar-Save/issues)
-- **Discussions**: [https://github.com/Xoulomon/Stellar-Save/discussions](https://github.com/Xoulomon/Stellar-Save/discussions)
+- **Documentation**: [https://github.com/Tekinvest/SorobanSave/tree/main/docs](https://github.com/Tekinvest/SorobanSave/tree/main/docs)
+- **Issues**: [https://github.com/Tekinvest/SorobanSave/issues](https://github.com/Tekinvest/SorobanSave/issues)
+- **Discussions**: [https://github.com/Tekinvest/SorobanSave/discussions](https://github.com/Tekinvest/SorobanSave/discussions)
 - **Stellar Docs**: [https://developers.stellar.org/docs](https://developers.stellar.org/docs)
 - **Soroban Docs**: [https://soroban.stellar.org/docs](https://soroban.stellar.org/docs)
 

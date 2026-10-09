@@ -4,9 +4,9 @@
 // NOTE: The GraphQL API uses a different Transaction shape — see the generated
 // types in `src/generated/graphql.ts` (Transaction, TransactionType).
 // The types below represent the Stellar Horizon REST API / on-chain shape.
-export type { TransactionType, Transaction } from '@stellar-save/sdk';
+export type { TransactionType, Transaction } from '@soroban-save/sdk';
 
-import type { TransactionType } from '@stellar-save/sdk';
+import type { TransactionType } from '@soroban-save/sdk';
 
 // TransactionFilters is frontend-only (date range, asset filter for the UI)
 export interface TransactionFilters {

@@ -2,12 +2,12 @@
 
 ## Overview
 
-Implement a lightweight, gas-efficient membership verification function for the Stellar-Save smart contract. The implementation adds a public `is_member` function that queries persistent storage using the `has()` method, integrates with existing member-only functions, and includes comprehensive property-based and unit tests.
+Implement a lightweight, gas-efficient membership verification function for the SorobanSave smart contract. The implementation adds a public `is_member` function that queries persistent storage using the `has()` method, integrates with existing member-only functions, and includes comprehensive property-based and unit tests.
 
 ## Tasks
 
 - [ ] 1. Implement the is_member function
-  - Add public `is_member` function to StellarSaveContract implementation
+  - Add public `is_member` function to SorobanSaveContract implementation
   - Use `StorageKeyBuilder::member_profile(group_id, address)` to construct storage key
   - Query persistent storage using `env.storage().persistent().has(&member_key)`
   - Return boolean result (true if member exists, false otherwise)
@@ -81,4 +81,4 @@ Implement a lightweight, gas-efficient membership verification function for the 
 - Unit tests validate specific examples and edge cases
 - The is_member function is error-free by design (returns false for all error conditions)
 - Implementation uses Rust with Soroban SDK
-- Code location: `contracts/stellar-save/src/lib.rs`
+- Code location: `contracts/soroban-save/src/lib.rs`

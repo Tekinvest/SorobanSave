@@ -32,12 +32,12 @@ describe('Config - Database URL Construction', () => {
     process.env.DB_PASSWORD = 'dbpass123';
     process.env.DB_HOST = 'rds.amazonaws.com';
     process.env.DB_PORT = '5432';
-    process.env.DB_NAME = 'stellarsave';
+    process.env.DB_NAME = 'sorobansave';
 
     const { config } = await import('../config');
 
     expect(config.database.url).toBe(
-      'postgresql://dbuser:dbpass123@rds.amazonaws.com:5432/stellarsave'
+      'postgresql://dbuser:dbpass123@rds.amazonaws.com:5432/sorobansave'
     );
   });
 
@@ -64,7 +64,7 @@ describe('Config - Database URL Construction', () => {
 
     const { config } = await import('../config');
 
-    expect(config.database.url).toBe('postgresql://user:pass@localhost:5432/stellar_save');
+    expect(config.database.url).toBe('postgresql://user:pass@localhost:5432/soroban_save');
   });
 
   it('should use fallback when components are incomplete', async () => {
@@ -75,7 +75,7 @@ describe('Config - Database URL Construction', () => {
 
     const { config } = await import('../config');
 
-    expect(config.database.url).toBe('postgresql://user:pass@localhost:5432/stellar_save');
+    expect(config.database.url).toBe('postgresql://user:pass@localhost:5432/soroban_save');
   });
 
   it('should handle special characters in password', async () => {

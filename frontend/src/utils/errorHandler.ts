@@ -1,5 +1,5 @@
 /**
- * Centralized error handler for Stellar Save frontend
+ * Centralized error handler for SorobanSave frontend
  * Parses contract/network/wallet errors into user-friendly messages.
  */
 

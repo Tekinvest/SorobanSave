@@ -5,8 +5,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-MANIFEST="$ROOT/contracts/stellar-save/Cargo.toml"
-WASM="$ROOT/target/wasm32-unknown-unknown/release/stellar_save.wasm"
+MANIFEST="$ROOT/contracts/soroban-save/Cargo.toml"
+WASM="$ROOT/target/wasm32-unknown-unknown/release/soroban_save.wasm"
 WASM_SIZE_LIMIT_KB="${WASM_SIZE_LIMIT_KB:-100}"
 
 PASS=0

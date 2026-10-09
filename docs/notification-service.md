@@ -24,7 +24,7 @@ TODO: paste content from the old NOTIFICATION_SERVICE_INTEGRATION.md here when a
 
 ## Overview
 
-The Stellar-Save notification service provides a comprehensive solution for sending email and push notifications to users about contribution reminders, group updates, and payout notifications. The system is built with flexibility, scalability, and user preference management at its core.
+The SorobanSave notification service provides a comprehensive solution for sending email and push notifications to users about contribution reminders, group updates, and payout notifications. The system is built with flexibility, scalability, and user preference management at its core.
 
 ## Architecture
 
@@ -67,8 +67,8 @@ Add the following to your `.env` file:
 ```env
 # SendGrid Email
 SENDGRID_API_KEY=SG.your_api_key_here
-SENDGRID_FROM_EMAIL=noreply@stellar-save.com
-SENDGRID_REPLY_TO=support@stellar-save.com
+SENDGRID_FROM_EMAIL=noreply@soroban-save.com
+SENDGRID_REPLY_TO=support@soroban-save.com
 
 # Firebase Cloud Messaging
 FIREBASE_PROJECT_ID=your-project-id
@@ -82,8 +82,8 @@ ONESIGNAL_API_KEY=your-api-key
 PUSH_PROVIDER=firebase
 
 # Frontend URLs
-FRONTEND_URL=https://stellar-save.com
-APP_URL=https://stellar-save.com
+FRONTEND_URL=https://soroban-save.com
+APP_URL=https://soroban-save.com
 
 # Processing
 NOTIFICATION_QUEUE_BATCH_SIZE=100
@@ -215,9 +215,9 @@ Content-Type: application/json
     "amount": "100",
     "dueDate": "2024-03-20",
     "daysRemaining": "3",
-    "appUrl": "https://stellar-save.com",
+    "appUrl": "https://soroban-save.com",
     "groupId": "group-123",
-    "unsubscribeUrl": "https://stellar-save.com/unsubscribe/token-xxx"
+    "unsubscribeUrl": "https://soroban-save.com/unsubscribe/token-xxx"
   }
 }
 ```
@@ -418,9 +418,9 @@ async function sendContributionReminder(userId: string, groupId: string) {
       amount: '100',
       dueDate: '2024-03-20',
       daysRemaining: '3',
-      appUrl: 'https://stellar-save.com',
+      appUrl: 'https://soroban-save.com',
       groupId,
-      unsubscribeUrl: `https://stellar-save.com/unsubscribe/${unsubscribeToken}`,
+      unsubscribeUrl: `https://soroban-save.com/unsubscribe/${unsubscribeToken}`,
     },
     'Reminder: Contribution due for Weekly Savings'
   );
@@ -528,7 +528,7 @@ Tests cover:
 
 ## Integration with Events
 
-The notification service can be integrated with Stellar-Save smart contract events:
+The notification service can be integrated with SorobanSave smart contract events:
 
 ```typescript
 import { ContractEventIndexer } from './contract_event_indexer';

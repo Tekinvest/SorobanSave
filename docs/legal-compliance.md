@@ -1,6 +1,6 @@
 # Legal & Compliance Guide
 
-> **Disclaimer**: This document is for informational purposes only and does not constitute legal advice. Stellar-Save is an open-source software project. Operators, deployers, and users are solely responsible for ensuring their use of this software complies with applicable laws in their jurisdiction. Consult a qualified legal professional before deploying or operating this system in a commercial or regulated context.
+> **Disclaimer**: This document is for informational purposes only and does not constitute legal advice. SorobanSave is an open-source software project. Operators, deployers, and users are solely responsible for ensuring their use of this software complies with applicable laws in their jurisdiction. Consult a qualified legal professional before deploying or operating this system in a commercial or regulated context.
 
 ---
 
@@ -16,7 +16,7 @@
 
 ## Terms of Service
 
-The following is a template terms of service for operators deploying Stellar-Save. Adapt it to your jurisdiction and use case before publishing.
+The following is a template terms of service for operators deploying SorobanSave. Adapt it to your jurisdiction and use case before publishing.
 
 ---
 
@@ -24,7 +24,7 @@ The following is a template terms of service for operators deploying Stellar-Sav
 
 **Last updated**: [DATE]
 
-**Service**: [YOUR SERVICE NAME] powered by Stellar-Save
+**Service**: [YOUR SERVICE NAME] powered by SorobanSave
 
 #### 1. Acceptance of Terms
 
@@ -44,7 +44,7 @@ Nothing on this platform constitutes financial, investment, legal, or tax advice
 
 #### 5. Irreversibility of Transactions
 
-All contributions and payouts are executed on-chain and are irreversible. The operator and the Stellar-Save software project have no ability to reverse, refund, or modify on-chain transactions.
+All contributions and payouts are executed on-chain and are irreversible. The operator and the SorobanSave software project have no ability to reverse, refund, or modify on-chain transactions.
 
 #### 6. User Responsibilities
 
@@ -56,7 +56,7 @@ You are responsible for:
 
 #### 7. Limitation of Liability
 
-To the maximum extent permitted by law, the operator and the Stellar-Save open-source project are not liable for any loss of funds, missed payouts, smart contract failures, or any other damages arising from use of this service.
+To the maximum extent permitted by law, the operator and the SorobanSave open-source project are not liable for any loss of funds, missed payouts, smart contract failures, or any other damages arising from use of this service.
 
 #### 8. Modifications
 
@@ -162,7 +162,7 @@ For privacy inquiries: [CONTACT EMAIL OR CHANNEL]
 
 ## Compliance Checklist
 
-Use this checklist before deploying Stellar-Save in a production or commercial context.
+Use this checklist before deploying SorobanSave in a production or commercial context.
 
 ### Legal Entity & Governance
 - [ ] Legal entity established (if operating commercially)
@@ -205,7 +205,7 @@ Use this checklist before deploying Stellar-Save in a production or commercial c
 
 ### General Software Disclaimer
 
-> Stellar-Save is open-source software provided "as is" without warranty of any kind, express or implied. The authors and contributors are not liable for any loss of funds, data, or other damages arising from the use of this software. Use at your own risk.
+> SorobanSave is open-source software provided "as is" without warranty of any kind, express or implied. The authors and contributors are not liable for any loss of funds, data, or other damages arising from the use of this software. Use at your own risk.
 
 ### Financial Activity Disclaimer
 

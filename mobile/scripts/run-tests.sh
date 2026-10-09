@@ -48,7 +48,7 @@ if [[ -f "$QUARANTINE_FILE" ]]; then
   done < "$QUARANTINE_FILE"
 fi
 
-echo "=== Stellar Save Mobile E2E ==="
+echo "=== SorobanSave Mobile E2E ==="
 echo "Flows directory : $FLOWS_DIR"
 echo "Quarantined     : ${#QUARANTINED[@]} test(s)"
 echo "Repeat          : ${REPEAT}x per flow"

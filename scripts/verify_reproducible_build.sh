@@ -12,7 +12,7 @@
 # Options:
 #   --local-only        Skip on-chain hash comparison (no Stellar CLI or network required)
 #   --skip-build        Skip Docker build; use existing WASM artifact (must already exist)
-#   --regen-checksum    Rebuild and overwrite contracts/stellar-save/stellar_save.wasm.sha256
+#   --regen-checksum    Rebuild and overwrite contracts/soroban-save/soroban_save.wasm.sha256
 #   --help              Show this help message
 #
 # Environment variables (only needed without --local-only):
@@ -30,10 +30,10 @@ set -euo pipefail
 # ── Paths ─────────────────────────────────────────────────────────────────────
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-CONTRACT_DIR="$REPO_ROOT/contracts/stellar-save"
-WASM_REL="target/wasm32-unknown-unknown/release/stellar_save.wasm"
+CONTRACT_DIR="$REPO_ROOT/contracts/soroban-save"
+WASM_REL="target/wasm32-unknown-unknown/release/soroban_save.wasm"
 WASM_PATH="$REPO_ROOT/$WASM_REL"
-CHECKSUM_FILE="$CONTRACT_DIR/stellar_save.wasm.sha256"
+CHECKSUM_FILE="$CONTRACT_DIR/soroban_save.wasm.sha256"
 RUST_VERSION=$(grep 'channel' "$REPO_ROOT/rust-toolchain.toml" | sed 's/.*"\(.*\)".*/\1/')
 
 # ── Argument parsing ──────────────────────────────────────────────────────────
@@ -71,7 +71,7 @@ section() { printf "\n── %s\n" "$*"; }
 
 # ── Banner ────────────────────────────────────────────────────────────────────
 echo "============================================================"
-echo "  Stellar-Save Reproducible Build Verification"
+echo "  SorobanSave Reproducible Build Verification"
 echo "  $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 echo "  Rust channel   : $RUST_VERSION"
 echo "  Local-only     : $LOCAL_ONLY"
@@ -126,7 +126,7 @@ else
       set -euo pipefail
       rustup target add wasm32-unknown-unknown 2>/dev/null
       cargo build \
-        --manifest-path contracts/stellar-save/Cargo.toml \
+        --manifest-path contracts/soroban-save/Cargo.toml \
         --target wasm32-unknown-unknown \
         --release
     " 2>&1 | sed 's/^/    | /'
@@ -153,7 +153,7 @@ if $REGEN_CHECKSUM; then
   ok "  $ACTUAL_HASH"
 else
   if [ ! -f "$CHECKSUM_FILE" ]; then
-    fail "Checksum file not found: contracts/stellar-save/stellar_save.wasm.sha256"
+    fail "Checksum file not found: contracts/soroban-save/soroban_save.wasm.sha256"
     echo "       Run with --regen-checksum to create it from the current build." >&2
     ((FAIL++)) || true
   else

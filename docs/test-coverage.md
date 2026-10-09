@@ -1,7 +1,7 @@
 # Test Coverage Enforcement
 
-Stellar-Save tracks and enforces test coverage across all three workspaces and
-publishes results to [Codecov](https://codecov.io/gh/Xoulomon/Stellar-Save) for
+SorobanSave tracks and enforces test coverage across all three workspaces and
+publishes results to [Codecov](https://codecov.io/gh/Tekinvest/SorobanSave) for
 public reporting and historical trend analysis.
 
 ## Overview
@@ -85,10 +85,10 @@ cd backend && npm run test:coverage
 Codecov automatically retains coverage history per commit and per flag. View
 trends, sunburst graphs, and per-file coverage at:
 
-<https://codecov.io/gh/Xoulomon/Stellar-Save>
+<https://codecov.io/gh/Tekinvest/SorobanSave>
 
 Per-flag dashboards:
 
-- frontend: <https://codecov.io/gh/Xoulomon/Stellar-Save?flags[0]=frontend>
-- contracts: <https://codecov.io/gh/Xoulomon/Stellar-Save?flags[0]=contracts>
-- backend: <https://codecov.io/gh/Xoulomon/Stellar-Save?flags[0]=backend>
+- frontend: <https://codecov.io/gh/Tekinvest/SorobanSave?flags[0]=frontend>
+- contracts: <https://codecov.io/gh/Tekinvest/SorobanSave?flags[0]=contracts>
+- backend: <https://codecov.io/gh/Tekinvest/SorobanSave?flags[0]=backend>

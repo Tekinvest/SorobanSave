@@ -6,7 +6,7 @@
 
 ## Overview
 
-Stellar-Save now includes a comprehensive offline-first architecture that enables the mobile web app to remain fully functional with intermittent or no connectivity. Users can view cached data, queue actions while offline, and have those actions automatically replayed when connection is restored.
+SorobanSave now includes a comprehensive offline-first architecture that enables the mobile web app to remain fully functional with intermittent or no connectivity. Users can view cached data, queue actions while offline, and have those actions automatically replayed when connection is restored.
 
 ## Features
 
@@ -244,7 +244,7 @@ self.addEventListener('sync', (event) => {
 **Scenario 3: Foreground Sync**
 1. Open app, browse data
 2. Switch to another tab for 5+ minutes
-3. Return to Stellar-Save tab
+3. Return to SorobanSave tab
 4. ✅ Data should sync automatically
 5. ✅ Fresh data should replace stale cache
 

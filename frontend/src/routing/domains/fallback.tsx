@@ -18,7 +18,7 @@ export const fallbackRoutes: RouteConfig[] = [
     path: ROUTES.ERROR,
     component: ErrorPage,
     protected: false,
-    title: 'Error - Stellar Save',
+    title: 'Error - SorobanSave',
   },
   ...(import.meta.env['VITE_VISUAL_GALLERY'] === 'true'
     ? [

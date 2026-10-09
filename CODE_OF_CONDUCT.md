@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-We as contributors and maintainers of Stellar-Save pledge to make participation in our project and community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
+We as contributors and maintainers of SorobanSave pledge to make participation in our project and community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
 
 We pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive, and healthy community.
 
@@ -43,7 +43,7 @@ Enforcement actions scale with severity — from a warning for minor violations 
 
 ## Scope
 
-This Code of Conduct applies within all project spaces — GitHub repository, discussions, pull requests, and any public space where an individual is representing the Stellar-Save project or community.
+This Code of Conduct applies within all project spaces — GitHub repository, discussions, pull requests, and any public space where an individual is representing the SorobanSave project or community.
 
 ## Attribution
 

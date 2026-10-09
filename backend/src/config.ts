@@ -1,6 +1,6 @@
 // @app/config
 /**
- * Centralised environment configuration for the Stellar-Save backend.
+ * Centralised environment configuration for the SorobanSave backend.
  *
  * All process.env access is consolidated here. The schema is validated once at
  * startup using zod; if any required variable is missing or malformed the
@@ -51,7 +51,7 @@ const envSchema = z.object({
   JWT_SECRET: z
     .string()
     .min(32, 'JWT_SECRET must be at least 32 characters')
-    .default('stellar-save-jwt-secret-change-in-production-min32chars'),
+    .default('soroban-save-jwt-secret-change-in-production-min32chars'),
   JWT_ACCESS_TOKEN_TTL: z.string().default('15m'),
   JWT_REFRESH_TOKEN_TTL_DAYS: z.string().regex(/^\d+$/).default('30').transform(Number),
 
@@ -79,7 +79,7 @@ const envSchema = z.object({
     .enum(['true', 'false'])
     .default('false')
     .transform((v) => v === 'true'),
-  BACKUP_S3_BUCKET: z.string().default('stellar-save-backups'),
+  BACKUP_S3_BUCKET: z.string().default('soroban-save-backups'),
   BACKUP_RETENTION_DAYS: z
     .string()
     .regex(/^\d+$/, 'BACKUP_RETENTION_DAYS must be a positive integer')
@@ -142,13 +142,13 @@ const envSchema = z.object({
   CORS_ALLOWED_ORIGINS: z.string().default(''),
 
   // ── Frontend / App URL ────────────────────────────────────────────────────
-  FRONTEND_URL: z.string().url().default('https://stellar-save.com'),
-  APP_URL: z.string().url().default('https://stellar-save.com'),
+  FRONTEND_URL: z.string().url().default('https://soroban-save.com'),
+  APP_URL: z.string().url().default('https://soroban-save.com'),
 
   // ── SendGrid ──────────────────────────────────────────────────────────────
   SENDGRID_API_KEY: z.string().default(''),
-  SENDGRID_FROM_EMAIL: z.string().email().default('noreply@stellar-save.com'),
-  SENDGRID_REPLY_TO: z.string().email().default('support@stellar-save.com'),
+  SENDGRID_FROM_EMAIL: z.string().email().default('noreply@soroban-save.com'),
+  SENDGRID_REPLY_TO: z.string().email().default('support@soroban-save.com'),
 
   // ── Push notifications ────────────────────────────────────────────────────
   PUSH_PROVIDER: z.enum(['firebase', 'onesignal']).default('firebase'),
@@ -160,14 +160,14 @@ const envSchema = z.object({
   // ── VAPID (Web Push) ──────────────────────────────────────────────────────
   VAPID_PUBLIC_KEY: z.string().default(''),
   VAPID_PRIVATE_KEY: z.string().default(''),
-  VAPID_SUBJECT: z.string().default('mailto:noreply@stellar-save.com'),
+  VAPID_SUBJECT: z.string().default('mailto:noreply@soroban-save.com'),
 
   // ── Distributed Tracing (OpenTelemetry) ──────────────────────────────────
   OTEL_TRACES_ENABLED: z
     .enum(['true', 'false'])
     .default('false')
     .transform((v) => v === 'true'),
-  OTEL_SERVICE_NAME: z.string().default('stellar-save-backend'),
+  OTEL_SERVICE_NAME: z.string().default('soroban-save-backend'),
   OTEL_EXPORTER_OTLP_ENDPOINT: z.string().default('http://localhost:4318'),
   OTEL_TRACES_SAMPLER_ARG: z
     .string()
@@ -297,7 +297,7 @@ function getDatabaseUrl(): string {
         'Neither DATABASE_URL nor complete DB_* variables provided; using default local connection',
     }) + '\n'
   );
-  return 'postgresql://user:pass@localhost:5432/stellar_save';
+  return 'postgresql://user:pass@localhost:5432/soroban_save';
 }
 
 // ---------------------------------------------------------------------------

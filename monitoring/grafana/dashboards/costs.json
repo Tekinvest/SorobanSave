@@ -1,6 +1,6 @@
 {
-  "title": "Stellar-Save Cost Monitoring",
-  "uid": "stellar-save-costs",
+  "title": "SorobanSave Cost Monitoring",
+  "uid": "soroban-save-costs",
   "schemaVersion": 38,
   "refresh": "5m",
   "time": { "from": "now-30d", "to": "now" },
@@ -13,7 +13,7 @@
       "options": { "colorMode": "background", "graphMode": "none", "reduceOptions": { "calcs": ["lastNotNull"] } },
       "fieldConfig": { "defaults": { "unit": "currencyUSD", "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 20 }, { "color": "red", "value": 50 }] } } },
       "targets": [{
-        "expr": "sum(total_estimated_monthly_cost_usd{app=\"stellar-save-backend\"})",
+        "expr": "sum(total_estimated_monthly_cost_usd{app=\"soroban-save-backend\"})",
         "legendFormat": "Total"
       }]
     },
@@ -25,7 +25,7 @@
       "options": { "colorMode": "background", "graphMode": "none", "reduceOptions": { "calcs": ["lastNotNull"] } },
       "fieldConfig": { "defaults": { "unit": "currencyUSD", "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 10 }, { "color": "red", "value": 30 }] } } },
       "targets": [{
-        "expr": "total_estimated_monthly_cost_usd{app=\"stellar-save-backend\",component=\"ci\"}",
+        "expr": "total_estimated_monthly_cost_usd{app=\"soroban-save-backend\",component=\"ci\"}",
         "legendFormat": "CI"
       }]
     },
@@ -37,7 +37,7 @@
       "options": { "colorMode": "background", "graphMode": "none", "reduceOptions": { "calcs": ["lastNotNull"] } },
       "fieldConfig": { "defaults": { "unit": "currencyUSD", "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 5 }, { "color": "red", "value": 15 }] } } },
       "targets": [{
-        "expr": "total_estimated_monthly_cost_usd{app=\"stellar-save-backend\",component=\"storage\"}",
+        "expr": "total_estimated_monthly_cost_usd{app=\"soroban-save-backend\",component=\"storage\"}",
         "legendFormat": "Storage"
       }]
     },
@@ -49,8 +49,8 @@
       "options": { "orientation": "horizontal", "reduceOptions": { "calcs": ["lastNotNull"] } },
       "fieldConfig": { "defaults": { "unit": "none", "min": 0, "thresholds": { "mode": "percentage", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 70 }, { "color": "red", "value": 90 }] } } },
       "targets": [
-        { "expr": "sum(ci_minutes_used_total{app=\"stellar-save-backend\"})", "legendFormat": "Used" },
-        { "expr": "ci_minutes_limit_total{app=\"stellar-save-backend\"}", "legendFormat": "Limit" }
+        { "expr": "sum(ci_minutes_used_total{app=\"soroban-save-backend\"})", "legendFormat": "Used" },
+        { "expr": "ci_minutes_limit_total{app=\"soroban-save-backend\"}", "legendFormat": "Limit" }
       ]
     },
     {
@@ -60,7 +60,7 @@
       "gridPos": { "x": 0, "y": 4, "w": 12, "h": 8 },
       "fieldConfig": { "defaults": { "unit": "none" } },
       "targets": [{
-        "expr": "ci_minutes_used_total{app=\"stellar-save-backend\"}",
+        "expr": "ci_minutes_used_total{app=\"soroban-save-backend\"}",
         "legendFormat": "{{workflow}}"
       }]
     },
@@ -71,7 +71,7 @@
       "gridPos": { "x": 12, "y": 4, "w": 12, "h": 8 },
       "fieldConfig": { "defaults": { "unit": "none" } },
       "targets": [{
-        "expr": "increase(stellar_transaction_fees_xlm_total{app=\"stellar-save-backend\"}[1d])",
+        "expr": "increase(stellar_transaction_fees_xlm_total{app=\"soroban-save-backend\"}[1d])",
         "legendFormat": "{{network}} / {{operation}}"
       }]
     },
@@ -82,7 +82,7 @@
       "gridPos": { "x": 0, "y": 12, "w": 12, "h": 8 },
       "fieldConfig": { "defaults": { "unit": "decgbytes" } },
       "targets": [{
-        "expr": "storage_bytes_used{app=\"stellar-save-backend\"} / 1073741824",
+        "expr": "storage_bytes_used{app=\"soroban-save-backend\"} / 1073741824",
         "legendFormat": "{{type}}"
       }]
     },
@@ -93,7 +93,7 @@
       "gridPos": { "x": 12, "y": 12, "w": 12, "h": 8 },
       "fieldConfig": { "defaults": { "unit": "currencyUSD" } },
       "targets": [{
-        "expr": "total_estimated_monthly_cost_usd{app=\"stellar-save-backend\"}",
+        "expr": "total_estimated_monthly_cost_usd{app=\"soroban-save-backend\"}",
         "legendFormat": "{{component}}"
       }]
     },
@@ -108,7 +108,7 @@
       "options": { "legend": { "displayMode": "table", "placement": "right" } },
       "fieldConfig": { "defaults": { "unit": "currencyUSD" } },
       "targets": [{
-        "expr": "aws_cost_by_service_usd{app=\"stellar-save-backend\"}",
+        "expr": "aws_cost_by_service_usd{app=\"soroban-save-backend\"}",
         "legendFormat": "{{service}}"
       }]
     },
@@ -120,7 +120,7 @@
       "options": { "colorMode": "background", "graphMode": "none", "reduceOptions": { "calcs": ["lastNotNull"] } },
       "fieldConfig": { "defaults": { "unit": "currencyUSD", "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 30 }, { "color": "red", "value": 60 }] } } },
       "targets": [{
-        "expr": "aws_cost_forecast_usd{app=\"stellar-save-backend\"}",
+        "expr": "aws_cost_forecast_usd{app=\"soroban-save-backend\"}",
         "legendFormat": "Forecast"
       }]
     },
@@ -132,7 +132,7 @@
       "options": { "colorMode": "background", "graphMode": "none", "reduceOptions": { "calcs": ["lastNotNull"] } },
       "fieldConfig": { "defaults": { "unit": "currencyUSD", "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 5 }, { "color": "orange", "value": 20 }] } } },
       "targets": [{
-        "expr": "sum(aws_optimization_savings_usd{app=\"stellar-save-backend\"})",
+        "expr": "sum(aws_optimization_savings_usd{app=\"soroban-save-backend\"})",
         "legendFormat": "Est. Savings"
       }]
     },
@@ -144,7 +144,7 @@
       "options": { "orientation": "horizontal", "reduceOptions": { "calcs": ["lastNotNull"] } },
       "fieldConfig": { "defaults": { "unit": "none", "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 3 }, { "color": "red", "value": 10 }] } } },
       "targets": [{
-        "expr": "aws_recommendation_count{app=\"stellar-save-backend\"}",
+        "expr": "aws_recommendation_count{app=\"soroban-save-backend\"}",
         "legendFormat": "{{finding}}"
       }]
     },
@@ -156,7 +156,7 @@
       "options": { "colorMode": "background", "graphMode": "area", "reduceOptions": { "calcs": ["sum"] } },
       "fieldConfig": { "defaults": { "unit": "short", "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 1 }, { "color": "red", "value": 5 }] } } },
       "targets": [{
-        "expr": "increase(aws_cost_spike_total{app=\"stellar-save-backend\"}[30d])",
+        "expr": "increase(aws_cost_spike_total{app=\"soroban-save-backend\"}[30d])",
         "legendFormat": "{{service}}"
       }]
     },
@@ -167,7 +167,7 @@
       "gridPos": { "x": 8, "y": 30, "w": 16, "h": 8 },
       "fieldConfig": { "defaults": { "unit": "currencyUSD" } },
       "targets": [{
-        "expr": "aws_cost_by_service_usd{app=\"stellar-save-backend\"}",
+        "expr": "aws_cost_by_service_usd{app=\"soroban-save-backend\"}",
         "legendFormat": "{{service}}"
       }]
     }

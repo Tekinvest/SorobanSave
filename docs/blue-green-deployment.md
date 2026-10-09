@@ -1,6 +1,6 @@
 # Blue-Green Frontend Deployment
 
-Zero-downtime deployments for the Stellar-Save frontend using a blue-green strategy.
+Zero-downtime deployments for the SorobanSave frontend using a blue-green strategy.
 
 ## How it works
 

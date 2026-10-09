@@ -2,14 +2,14 @@
 
 ## Overview
 
-Add structured input validation to all public functions of the `StellarSaveContract`, replacing panics and partial checks with typed `StellarSaveError` returns. Tasks are ordered so each step builds on the previous, ending with full integration and test coverage.
+Add structured input validation to all public functions of the `SorobanSaveContract`, replacing panics and partial checks with typed `SorobanSaveError` returns. Tasks are ordered so each step builds on the previous, ending with full integration and test coverage.
 
 ## Tasks
 
 - [x] 1. Add early numeric guards to `create_group`
-  - Before any storage write, check `contribution_amount > 0` → `StellarSaveError::InvalidAmount`
-  - Check `cycle_duration > 0` → `StellarSaveError::InvalidState`
-  - Check `max_members >= 2` → `StellarSaveError::InvalidState`
+  - Before any storage write, check `contribution_amount > 0` → `SorobanSaveError::InvalidAmount`
+  - Check `cycle_duration > 0` → `SorobanSaveError::InvalidState`
+  - Check `max_members >= 2` → `SorobanSaveError::InvalidState`
   - When `ContractConfig` is present, validate all three values against configured bounds
   - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7_
 
@@ -22,9 +22,9 @@ Add structured input validation to all public functions of the `StellarSaveContr
     - _Requirements: 10.1, 10.2, 10.3, 10.10_
 
 - [x] 2. Add early numeric guards to `update_group`
-  - Before any storage write, check `new_contribution > 0` → `StellarSaveError::InvalidAmount`
-  - Check `new_duration > 0` → `StellarSaveError::InvalidState`
-  - Check `new_max_members >= 2` → `StellarSaveError::InvalidState`
+  - Before any storage write, check `new_contribution > 0` → `SorobanSaveError::InvalidAmount`
+  - Check `new_duration > 0` → `SorobanSaveError::InvalidState`
+  - Check `new_max_members >= 2` → `SorobanSaveError::InvalidState`
   - When `ContractConfig` is present, validate all three values against configured bounds
   - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
 
@@ -35,9 +35,9 @@ Add structured input validation to all public functions of the `StellarSaveContr
     - _Requirements: 10.10_
 
 - [x] 3. Add address validation to `create_group`, `join_group`, and `update_config`
-  - In `create_group`: reject `creator == env.current_contract_address()` → `StellarSaveError::Unauthorized`
-  - In `join_group`: reject `member == env.current_contract_address()` → `StellarSaveError::Unauthorized`
-  - In `update_config`: reject `new_config.admin == env.current_contract_address()` → `StellarSaveError::Unauthorized`
+  - In `create_group`: reject `creator == env.current_contract_address()` → `SorobanSaveError::Unauthorized`
+  - In `join_group`: reject `member == env.current_contract_address()` → `SorobanSaveError::Unauthorized`
+  - In `update_config`: reject `new_config.admin == env.current_contract_address()` → `SorobanSaveError::Unauthorized`
   - _Requirements: 3.1, 3.2, 3.5, 3.6_
 
   - [x]* 3.1 Write unit tests for address validation
@@ -46,11 +46,11 @@ Add structured input validation to all public functions of the `StellarSaveContr
     - _Requirements: 10.10_
 
 - [x] 4. Add state-transition guards to `join_group`, `activate_group`, `pause_group`, and `resume_group`
-  - `join_group`: reject if `status` is `Completed` or `Cancelled` → `StellarSaveError::InvalidState`
-  - `activate_group`: reject if `status` is not `Pending` → `StellarSaveError::InvalidState`
-  - `pause_group`: reject if `status` is not `Active` → `StellarSaveError::InvalidState`
-  - `resume_group`: reject if `status` is not `Paused` → `StellarSaveError::InvalidState`
-  - For any transition to a terminal state, reject if already terminal → `StellarSaveError::InvalidState`
+  - `join_group`: reject if `status` is `Completed` or `Cancelled` → `SorobanSaveError::InvalidState`
+  - `activate_group`: reject if `status` is not `Pending` → `SorobanSaveError::InvalidState`
+  - `pause_group`: reject if `status` is not `Active` → `SorobanSaveError::InvalidState`
+  - `resume_group`: reject if `status` is not `Paused` → `SorobanSaveError::InvalidState`
+  - For any transition to a terminal state, reject if already terminal → `SorobanSaveError::InvalidState`
   - _Requirements: 4.3, 4.4, 4.5, 4.6, 4.7, 4.8_
 
   - [x]* 4.1 Write unit tests for state-transition guards
@@ -59,11 +59,11 @@ Add structured input validation to all public functions of the `StellarSaveContr
     - _Requirements: 10.10_
 
 - [x] 5. Add validation to `contribute`: state, address, amount exactness, and duplicate prevention
-  - Reject if group `status != Active` → `StellarSaveError::InvalidState`
-  - Reject if `member` is not a registered member → `StellarSaveError::NotMember`
-  - Reject if `amount <= 0` → `StellarSaveError::InvalidAmount`
-  - Reject if `amount != group.contribution_amount` → `StellarSaveError::InvalidAmount`
-  - Reject if member already contributed this cycle → `StellarSaveError::AlreadyContributed`
+  - Reject if group `status != Active` → `SorobanSaveError::InvalidState`
+  - Reject if `member` is not a registered member → `SorobanSaveError::NotMember`
+  - Reject if `amount <= 0` → `SorobanSaveError::InvalidAmount`
+  - Reject if `amount != group.contribution_amount` → `SorobanSaveError::InvalidAmount`
+  - Reject if member already contributed this cycle → `SorobanSaveError::AlreadyContributed`
   - _Requirements: 3.3, 4.1, 5.1, 5.2, 5.3, 6.1, 6.2_
 
   - [x]* 5.1 Write unit tests for `contribute` validation
@@ -80,11 +80,11 @@ Add structured input validation to all public functions of the `StellarSaveContr
     - **Validates: Requirements 5.4**
 
 - [x] 6. Add validation to `execute_payout`: state, recipient eligibility, cycle completeness
-  - Reject if group `status != Active` → `StellarSaveError::InvalidState`
-  - Reject if `recipient` is not a registered member → `StellarSaveError::InvalidRecipient`
-  - Reject if `recipient.payout_position != group.current_cycle` → `StellarSaveError::InvalidRecipient`
-  - Reject if recipient already received a payout → `StellarSaveError::PayoutAlreadyProcessed`
-  - Reject if current cycle pool is not complete → `StellarSaveError::CycleNotComplete`
+  - Reject if group `status != Active` → `SorobanSaveError::InvalidState`
+  - Reject if `recipient` is not a registered member → `SorobanSaveError::InvalidRecipient`
+  - Reject if `recipient.payout_position != group.current_cycle` → `SorobanSaveError::InvalidRecipient`
+  - Reject if recipient already received a payout → `SorobanSaveError::PayoutAlreadyProcessed`
+  - Reject if current cycle pool is not complete → `SorobanSaveError::CycleNotComplete`
   - _Requirements: 3.4, 4.2, 7.1, 7.2, 7.3, 7.4_
 
   - [x]* 6.1 Write unit tests for `execute_payout` validation
@@ -100,12 +100,12 @@ Add structured input validation to all public functions of the `StellarSaveContr
   - Ensure all tests pass, ask the user if questions arise.
 
 - [x] 8. Strengthen `update_config` validation
-  - Reject `min_contribution <= 0` → `StellarSaveError::InvalidState`
-  - Reject `max_contribution < min_contribution` → `StellarSaveError::InvalidState`
-  - Reject `min_members < 2` → `StellarSaveError::InvalidState`
-  - Reject `max_members < min_members` → `StellarSaveError::InvalidState`
-  - Reject `min_cycle_duration == 0` → `StellarSaveError::InvalidState`
-  - Reject `max_cycle_duration < min_cycle_duration` → `StellarSaveError::InvalidState`
+  - Reject `min_contribution <= 0` → `SorobanSaveError::InvalidState`
+  - Reject `max_contribution < min_contribution` → `SorobanSaveError::InvalidState`
+  - Reject `min_members < 2` → `SorobanSaveError::InvalidState`
+  - Reject `max_members < min_members` → `SorobanSaveError::InvalidState`
+  - Reject `min_cycle_duration == 0` → `SorobanSaveError::InvalidState`
+  - Reject `max_cycle_duration < min_cycle_duration` → `SorobanSaveError::InvalidState`
   - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7_
 
   - [x]* 8.1 Write unit tests for `update_config` validation
@@ -116,8 +116,8 @@ Add structured input validation to all public functions of the `StellarSaveContr
 
 - [x] 9. Audit and fix checked arithmetic across all public functions
   - Replace any unchecked `+`, `-`, `*` on `i128`/`u64`/`u32` with `checked_add`, `checked_sub`, `checked_mul`
-  - Return `StellarSaveError::Overflow` on overflow/underflow
-  - Verify `PoolCalculator::calculate_total_pool` returns `StellarSaveError::InternalError` on overflow
+  - Return `SorobanSaveError::Overflow` on overflow/underflow
+  - Verify `PoolCalculator::calculate_total_pool` returns `SorobanSaveError::InternalError` on overflow
   - _Requirements: 9.1, 9.2, 9.3, 9.4_
 
   - [x]* 9.1 Write unit tests for overflow-safe arithmetic
@@ -136,6 +136,6 @@ Add structured input validation to all public functions of the `StellarSaveContr
 ## Notes
 
 - Tasks marked with `*` are optional and can be skipped for a faster MVP
-- All implementation is in `contracts/stellar-save/src/lib.rs` and supporting modules
+- All implementation is in `contracts/soroban-save/src/lib.rs` and supporting modules
 - `proptest` is already a dev-dependency in `Cargo.toml`
 - Soroban's `env.current_contract_address()` is used for self-address checks

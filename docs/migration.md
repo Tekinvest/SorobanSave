@@ -1,12 +1,12 @@
 # Migration Guide
 
-Schema migrations for the Stellar-Save Soroban contract.
+Schema migrations for the SorobanSave Soroban contract.
 
 ---
 
 ## Overview
 
-The migration framework tracks an on-chain `schema_version` (stored under the `SCH_VER` persistent key). Each migration step is a Rust module under `contracts/stellar-save/src/migrations/` that exposes `apply` and `rollback` functions. Migrations are admin-gated and idempotent.
+The migration framework tracks an on-chain `schema_version` (stored under the `SCH_VER` persistent key). Each migration step is a Rust module under `contracts/soroban-save/src/migrations/` that exposes `apply` and `rollback` functions. Migrations are admin-gated and idempotent.
 
 ```
 schema_version (on-chain)
@@ -118,7 +118,7 @@ Before running any migration on mainnet:
 
 ## Adding a New Migration
 
-1. Create `contracts/stellar-save/src/migrations/v2_to_v3.rs` with `apply(env, admin, ...)` and `rollback(env, admin)`.
+1. Create `contracts/soroban-save/src/migrations/v2_to_v3.rs` with `apply(env, admin, ...)` and `rollback(env, admin)`.
 2. Add `pub mod v2_to_v3;` to `migrations/mod.rs`.
 3. Update `CURRENT_SCHEMA_VERSION` in `migration.rs` to `V3 = 3`.
 4. Add a test module in `migration_tests.rs`.
@@ -129,5 +129,5 @@ Before running any migration on mainnet:
 ## Running Tests
 
 ```bash
-cargo test --manifest-path contracts/stellar-save/Cargo.toml migration_tests -- --test-threads=1
+cargo test --manifest-path contracts/soroban-save/Cargo.toml migration_tests -- --test-threads=1
 ```

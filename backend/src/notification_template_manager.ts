@@ -56,7 +56,7 @@ export class NotificationTemplateManager {
                   </a>
                 </p>
                 <p style="margin-top: 30px; color: #666; font-size: 12px;">
-                  You're receiving this email because you're a member of {{groupName}} on Stellar-Save.
+                  You're receiving this email because you're a member of {{groupName}} on SorobanSave.
                   <br>
                   <a href="{{unsubscribeUrl}}" style="color: #666;">Unsubscribe</a>
                 </p>

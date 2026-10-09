@@ -85,8 +85,8 @@ jobs:
           {
             "dev": {
               "network": "testnet",
-              "frontend_url": "https://dev.stellar-save.app",
-              "api_base": "https://api-dev.stellar-save.app",
+              "frontend_url": "https://dev.soroban-save.app",
+              "api_base": "https://api-dev.soroban-save.app",
               "network_passphrase": "Test SDF Network ; September 2015",
               "soroban_network": "testnet",
               "auto_deploy": true,
@@ -94,8 +94,8 @@ jobs:
             },
             "staging": {
               "network": "testnet",
-              "frontend_url": "https://staging.stellar-save.app",
-              "api_base": "https://api-staging.stellar-save.app",
+              "frontend_url": "https://staging.soroban-save.app",
+              "api_base": "https://api-staging.soroban-save.app",
               "network_passphrase": "Test SDF Network ; September 2015",
               "soroban_network": "testnet",
               "auto_deploy": true,
@@ -103,8 +103,8 @@ jobs:
             },
             "production": {
               "network": "mainnet",
-              "frontend_url": "https://stellar-save.app",
-              "api_base": "https://api.stellar-save.app",
+              "frontend_url": "https://soroban-save.app",
+              "api_base": "https://api.soroban-save.app",
               "network_passphrase": "Public Global Stellar Network ; September 2015",
               "soroban_network": "mainnet",
               "auto_deploy": false,
@@ -150,7 +150,7 @@ jobs:
       - name: Build Soroban contract
         run: |
           cargo build \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --target wasm32-unknown-unknown \
             --release
 
@@ -191,7 +191,7 @@ jobs:
           echo "Deploying frontend to dev environment..."
           ls -la build-artifacts/frontend/
           # Add deployment commands here
-          echo "✓ Frontend deployed to https://dev.stellar-save.app"
+          echo "✓ Frontend deployed to https://dev.soroban-save.app"
 
       - name: Deploy contracts to dev testnet
         run: |
@@ -214,7 +214,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '✅ **Dev Deployment Complete**\n\n- Frontend: https://dev.stellar-save.app\n- Status: Ready for testing'
+              body: '✅ **Dev Deployment Complete**\n\n- Frontend: https://dev.soroban-save.app\n- Status: Ready for testing'
             });
 
   # ─── Deploy to Staging Environment ──────────────────────────────────────────
@@ -239,7 +239,7 @@ jobs:
         run: |
           echo "Deploying frontend to staging environment..."
           ls -la build-artifacts/frontend/
-          echo "✓ Frontend deployed to https://staging.stellar-save.app"
+          echo "✓ Frontend deployed to https://staging.soroban-save.app"
 
       - name: Deploy contracts to staging testnet
         run: |
@@ -269,7 +269,7 @@ jobs:
       needs.configure-environment.outputs.deployment_enabled == 'true'
     environment:
       name: production
-      url: https://stellar-save.app
+      url: https://soroban-save.app
 
     steps:
       - uses: actions/checkout@v4
@@ -292,7 +292,7 @@ jobs:
         run: |
           echo "Deploying frontend to production..."
           ls -la build-artifacts/frontend/
-          echo "✓ Frontend deployed to https://stellar-save.app"
+          echo "✓ Frontend deployed to https://soroban-save.app"
 
       - name: Deploy contracts to production mainnet
         run: |
@@ -320,7 +320,7 @@ jobs:
               repo: context.repo.repo,
               tag_name: "v$(new Date().toISOString().split('T')[0])",
               name: `Production Release - ${new Date().toISOString().split('T')[0]}`,
-              body: `**Production Deployment**\n\nCommit: ${{ github.sha }}\n\n- Frontend: https://stellar-save.app\n- Network: Mainnet\n- Status: Live`
+              body: `**Production Deployment**\n\nCommit: ${{ github.sha }}\n\n- Frontend: https://soroban-save.app\n- Network: Mainnet\n- Status: Live`
             });
 
   # ─── Promotion Workflow ─────────────────────────────────────────────────────
@@ -387,13 +387,13 @@ jobs:
           ENV="${{ needs.configure-environment.outputs.environment }}"
           case "${ENV}" in
             production)
-              URL="https://stellar-save.app"
+              URL="https://soroban-save.app"
               ;;
             staging)
-              URL="https://staging.stellar-save.app"
+              URL="https://staging.soroban-save.app"
               ;;
             dev)
-              URL="https://dev.stellar-save.app"
+              URL="https://dev.soroban-save.app"
               ;;
           esac
           

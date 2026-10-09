@@ -2,12 +2,12 @@
 
 **Status**: Accepted  
 **Date**: 2026-05-29  
-**Author**: Stellar-Save Team  
+**Author**: SorobanSave Team  
 **Deciders**: Architecture Team
 
 ## Context
 
-Stellar-Save is a decentralized Rotating Savings and Credit Association (ROSCA) platform that requires a smart contract platform to manage group creation, membership, contributions, and automated payouts. The team evaluated multiple blockchain platforms and smart contract ecosystems before selecting Soroban.
+SorobanSave is a decentralized Rotating Savings and Credit Association (ROSCA) platform that requires a smart contract platform to manage group creation, membership, contributions, and automated payouts. The team evaluated multiple blockchain platforms and smart contract ecosystems before selecting Soroban.
 
 ### Alternatives Considered
 
@@ -41,7 +41,7 @@ Stellar-Save is a decentralized Rotating Savings and Credit Association (ROSCA) 
 
 ## Decision
 
-**We chose Soroban as the smart contract platform for Stellar-Save.**
+**We chose Soroban as the smart contract platform for SorobanSave.**
 
 ## Rationale
 
@@ -81,7 +81,7 @@ Stellar-Save is a decentralized Rotating Savings and Credit Association (ROSCA) 
 ### 6. **Alignment with Mission**
 - Stellar's mission: "Democratize access to financial services"
 - Soroban enables building on Stellar's infrastructure
-- **Impact**: Direct alignment with Stellar-Save's goal of financial inclusion
+- **Impact**: Direct alignment with SorobanSave's goal of financial inclusion
 - **Benefit**: Potential for ecosystem partnerships and integrations
 
 ## Consequences

@@ -2,7 +2,7 @@
  * k6 Load Test — Concurrent Deposit Requests
  * ===========================================
  * Simulates multiple users concurrently submitting deposit (contribution)
- * transactions to the Stellar-Save staging RPC endpoint.
+ * transactions to the SorobanSave staging RPC endpoint.
  *
  * Acceptance criteria verified by this script:
  *   1. No balance drift — final balances match expected totals
@@ -13,7 +13,7 @@
  *   k6 run backend/tests/load/concurrent-deposits.js
  *
  * Run against staging:
- *   BASE_URL=https://staging.stellar-save.example.com \
+ *   BASE_URL=https://staging.soroban-save.example.com \
  *   RPC_URL=https://soroban-testnet.stellar.org \
  *   k6 run backend/tests/load/concurrent-deposits.js
  *

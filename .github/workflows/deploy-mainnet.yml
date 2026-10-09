@@ -41,14 +41,14 @@ jobs:
       - name: Build WASM (release)
         run: |
           cargo build \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --target wasm32-unknown-unknown \
             --release
 
       - name: Compute WASM SHA-256
         id: hash
         run: |
-          WASM=target/wasm32-unknown-unknown/release/stellar_save.wasm
+          WASM=target/wasm32-unknown-unknown/release/soroban_save.wasm
           SHA=$(sha256sum "$WASM" | awk '{print $1}')
           echo "sha256=$SHA" >> "$GITHUB_OUTPUT"
           echo "WASM SHA-256: $SHA"
@@ -56,8 +56,8 @@ jobs:
       - name: Upload WASM artifact
         uses: actions/upload-artifact@v4
         with:
-          name: stellar-save-wasm
-          path: target/wasm32-unknown-unknown/release/stellar_save.wasm
+          name: soroban-save-wasm
+          path: target/wasm32-unknown-unknown/release/soroban_save.wasm
           retention-days: 30
 
   # ── 2. Manual approval gate ──────────────────────────────────────────────────
@@ -87,7 +87,7 @@ jobs:
       - name: Download WASM artifact
         uses: actions/download-artifact@v4
         with:
-          name: stellar-save-wasm
+          name: soroban-save-wasm
           path: target/wasm32-unknown-unknown/release/
 
       - name: Install Stellar CLI

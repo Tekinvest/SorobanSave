@@ -31,7 +31,7 @@ export function FeaturesSection() {
             Built for Trust and Transparency
           </Typography>
           <Typography color="text.secondary" sx={{ maxWidth: 600, mx: 'auto' }}>
-            Stellar Save leverages blockchain technology to ensure every transaction is secure,
+            SorobanSave leverages blockchain technology to ensure every transaction is secure,
             transparent, and instant.
           </Typography>
         </Box>

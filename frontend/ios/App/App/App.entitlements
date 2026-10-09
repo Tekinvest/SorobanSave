@@ -4,8 +4,8 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:stellarsave.app</string>
-		<string>applinks:app.stellarsave.app</string>
+		<string>applinks:sorobansave.app</string>
+		<string>applinks:app.sorobansave.app</string>
 	</array>
 </dict>
 </plist>

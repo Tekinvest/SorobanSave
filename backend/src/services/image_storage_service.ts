@@ -168,7 +168,7 @@ export class S3ImageStorageService extends BaseImageStorageService {
 
   constructor(s3Client?: S3Client, bucket?: string) {
     super();
-    this.bucket = bucket || config.backup.bucket || 'stellar-save-assets';
+    this.bucket = bucket || config.backup.bucket || 'soroban-save-assets';
     this.s3Client =
       s3Client ||
       new S3Client({

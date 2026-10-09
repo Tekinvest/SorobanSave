@@ -41,7 +41,7 @@ const transports: winston.transport[] = [
 
 export const winstonLogger = winston.createLogger({
   level: config.logging.level,
-  defaultMeta: { service: 'stellar-save-backend' },
+  defaultMeta: { service: 'soroban-save-backend' },
   transports,
 });
 

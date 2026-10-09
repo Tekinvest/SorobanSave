@@ -1,8 +1,8 @@
-# Storage Optimization for Stellar-Save
+# Storage Optimization for SorobanSave
 
 ## Overview
 
-This document describes the storage optimization strategies implemented in Stellar-Save to reduce costs for groups with many members. The optimizations focus on three key areas:
+This document describes the storage optimization strategies implemented in SorobanSave to reduce costs for groups with many members. The optimizations focus on three key areas:
 
 1. **Bitmap-based contribution tracking** - Reduces per-cycle storage from O(n) to O(1)
 2. **Compact member profiles** - Reduces per-member storage through bit-packing

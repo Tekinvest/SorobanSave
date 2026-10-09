@@ -53,7 +53,7 @@ jobs:
       - name: Record baseline checksum
         id: baseline
         run: |
-          SHA=$(cat contracts/stellar-save/stellar_save.wasm.sha256)
+          SHA=$(cat contracts/soroban-save/soroban_save.wasm.sha256)
           echo "sha256=$SHA" >> "$GITHUB_OUTPUT"
           echo "Build-1 SHA-256: $SHA"
 
@@ -64,12 +64,12 @@ jobs:
       # ── Hash-match assertion against committed checksum ─────────────────────
       - name: Assert WASM hash matches committed checksum file
         run: |
-          if [ ! -f contracts/stellar-save/stellar_save.wasm.sha256 ]; then
+          if [ ! -f contracts/soroban-save/soroban_save.wasm.sha256 ]; then
             echo "::error::Baseline checksum file not found — run verify_reproducible_build.sh --regen-checksum and commit the result."
             exit 1
           fi
 
-          COMMITTED=$(cat contracts/stellar-save/stellar_save.wasm.sha256)
+          COMMITTED=$(cat contracts/soroban-save/soroban_save.wasm.sha256)
           BUILT="${{ steps.baseline.outputs.sha256 }}"
 
           echo "Committed checksum : $COMMITTED"
@@ -101,10 +101,10 @@ jobs:
       - name: Upload WASM artifact and checksum
         uses: actions/upload-artifact@v4
         with:
-          name: stellar-save-wasm-reproducible
+          name: soroban-save-wasm-reproducible
           path: |
-            target/wasm32-unknown-unknown/release/stellar_save.wasm
-            contracts/stellar-save/stellar_save.wasm.sha256
+            target/wasm32-unknown-unknown/release/soroban_save.wasm
+            contracts/soroban-save/soroban_save.wasm.sha256
           retention-days: 90
 
       # ── Step summary ────────────────────────────────────────────────────────
@@ -112,7 +112,7 @@ jobs:
         if: always()
         run: |
           SHA="${{ steps.baseline.outputs.sha256 }}"
-          COMMITTED=$(cat contracts/stellar-save/stellar_save.wasm.sha256 2>/dev/null || echo "N/A")
+          COMMITTED=$(cat contracts/soroban-save/soroban_save.wasm.sha256 2>/dev/null || echo "N/A")
           MATCH="❌"
           [ "$SHA" = "$COMMITTED" ] && MATCH="✅"
 

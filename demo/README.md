@@ -1,6 +1,6 @@
 # demo/
 
-This directory contains demonstration scripts and walkthroughs for the Stellar-Save platform.
+This directory contains demonstration scripts and walkthroughs for the SorobanSave platform.
 It is **not part of any build pipeline** — no build tool (Vite, tsc, Vitest, Jest) includes
 this directory. Files here are pure documentation.
 

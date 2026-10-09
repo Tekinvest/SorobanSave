@@ -35,7 +35,7 @@ export async function generateChallenge(walletAddress: string): Promise<string> 
   const nonce = crypto.randomBytes(32).toString('hex');
   const challengeKey = `auth:challenge:${walletAddress}`;
   const timestamp = Date.now();
-  const message = `Sign this message to authenticate with Stellar Save.\n\nWallet: ${walletAddress}\nNonce: ${nonce}\nTimestamp: ${timestamp}`;
+  const message = `Sign this message to authenticate with SorobanSave.\n\nWallet: ${walletAddress}\nNonce: ${nonce}\nTimestamp: ${timestamp}`;
 
   await redisClient.set(challengeKey, { nonce, message, timestamp }, CHALLENGE_TTL_SECONDS);
   return message;

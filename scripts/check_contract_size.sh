@@ -12,14 +12,14 @@
 #   1 — exceeds limit
 #
 # Optional env vars:
-#   WASM_PATH            (default: target/wasm32-unknown-unknown/release/stellar_save.wasm)
+#   WASM_PATH            (default: target/wasm32-unknown-unknown/release/soroban_save.wasm)
 #   WASM_SIZE_LIMIT_KB   (default: 100)
 #   WARN_THRESHOLD_PCT   (default: 80)  — warn when size > this % of limit
 #   GIT_SHA              (default: git rev-parse HEAD)
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-WASM="${WASM_PATH:-$ROOT/target/wasm32-unknown-unknown/release/stellar_save.wasm}"
+WASM="${WASM_PATH:-$ROOT/target/wasm32-unknown-unknown/release/soroban_save.wasm}"
 LIMIT_KB="${WASM_SIZE_LIMIT_KB:-100}"
 WARN_PCT="${WARN_THRESHOLD_PCT:-80}"
 SHA="${GIT_SHA:-$(git -C "$ROOT" rev-parse --short HEAD 2>/dev/null || echo unknown)}"
@@ -32,7 +32,7 @@ mkdir -p "$ROOT/deployment-records"
 if [ ! -f "$WASM" ]; then
   echo "Building WASM..."
   cargo build \
-    --manifest-path "$ROOT/contracts/stellar-save/Cargo.toml" \
+    --manifest-path "$ROOT/contracts/soroban-save/Cargo.toml" \
     --target wasm32-unknown-unknown \
     --release --quiet
 fi
@@ -125,7 +125,7 @@ if [ "$STATUS" != "OK" ] || [ "$SIZE_KB" -gt $(( LIMIT_KB * 60 / 100 )) ]; then
 | Avoid `String` — use `Symbol` or `Bytes` for fixed identifiers | 1–5% |
 | Split large contracts into smaller composable contracts | varies |
 
-Add to `contracts/stellar-save/Cargo.toml`:
+Add to `contracts/soroban-save/Cargo.toml`:
 ```toml
 [profile.release]
 opt-level = "z"

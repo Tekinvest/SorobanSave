@@ -1,7 +1,7 @@
 # Smoke suite — runs critical flows in sequence
 # A failure in any flow fails the entire suite determin istically.
 # Exit status 1 is returned on any assertion failure → CI fails the build.
-appId: com.stellarsave.app
+appId: com.sorobansave.app
 ---
 # ── Onboarding ────────────────────────────────────────────────────────────────
 - launchApp:
@@ -9,7 +9,7 @@ appId: com.stellarsave.app
 - assertVisible:
     id: "welcome-screen"
 - assertVisible:
-    text: "Welcome to Stellar Save"
+    text: "Welcome to SorobanSave"
 - tapOn:
     id: "get-started-button"
 - extendedWaitUntil:

@@ -9,7 +9,7 @@ export default function WithdrawPage() {
     <AppLayout
       title="Sell Crypto"
       subtitle="Withdraw XLM or stablecoins to your bank account"
-      footerText="Stellar Save — Built for transparent, on-chain savings"
+      footerText="SorobanSave — Built for transparent, on-chain savings"
     >
       <KycGate>
         <FiatRampScreen

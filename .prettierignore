@@ -29,7 +29,7 @@ backend/logs/
 
 # Compiled / binary artefacts
 **/*.rcgu.o
-contracts/stellar-save/test_migration_simple.*
+contracts/soroban-save/test_migration_simple.*
 
 # Lock / toml files Prettier doesn't understand
 Cargo.lock

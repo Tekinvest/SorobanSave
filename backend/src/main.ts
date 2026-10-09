@@ -22,7 +22,7 @@ async function bootstrap() {
   const port = config.port;
   await app.listen(port);
 
-  logger.info(`🚀 Stellar Save Backend is running on http://localhost:${port}`, {
+  logger.info(`🚀 SorobanSave Backend is running on http://localhost:${port}`, {
     environment: config.nodeEnv,
     network: config.stellar.network,
   });

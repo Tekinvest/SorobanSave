@@ -1,6 +1,6 @@
 /**
  * Soroban contract error codes and utilities.
- * Generated from the StellarSaveError enum in contracts/stellar-save/src/errors.rs.
+ * Generated from the SorobanSaveError enum in contracts/soroban-save/src/errors.rs.
  * DO NOT edit manually — regenerate from the contract when adding new codes.
  */
 export declare const CONTRACT_ERROR_MESSAGES: Readonly<Record<number, string>>;
@@ -10,7 +10,7 @@ export declare class ContractError extends Error {
 }
 /** Parse a raw Soroban invocation error into a typed ContractError. */
 export declare function parseContractError(err: unknown): ContractError;
-/** Contract function names, kept in sync with contracts/stellar-save/src/lib.rs. */
+/** Contract function names, kept in sync with contracts/soroban-save/src/lib.rs. */
 export declare const CONTRACT_FUNCTIONS: {
     readonly CREATE_GROUP: "create_group";
     readonly GET_GROUP: "get_group";

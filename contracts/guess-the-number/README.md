@@ -21,7 +21,7 @@ production contracts.
 This contract is **excluded** from all testnet and mainnet deployment
 scripts (`scripts/deploy_testnet.sh`, `scripts/deploy_mainnet.sh`).  The
 scripts skip any directory named `guess-the-number` explicitly.  It will
-therefore never appear in any official Stellar-Save deployment.
+therefore never appear in any official SorobanSave deployment.
 
 ## Debug affordances
 

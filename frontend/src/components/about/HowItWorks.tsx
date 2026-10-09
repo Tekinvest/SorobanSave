@@ -30,7 +30,7 @@ const HowItWorks: React.FC = () => {
     <section className="py-20">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">How Stellar-Save Works</h2>
+          <h2 className="text-4xl font-bold mb-4">How SorobanSave Works</h2>
           <p className="text-gray-400 text-lg">Simple, transparent, and powered by Stellar</p>
         </div>
 

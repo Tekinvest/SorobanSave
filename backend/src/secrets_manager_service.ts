@@ -354,7 +354,7 @@ export async function migrateSecretToAWS(
   try {
     await secretsManager.createSecret(secretName, envVarValue, description, {
       Environment: config.nodeEnv,
-      ManagedBy: 'stellar-save-backend',
+      ManagedBy: 'soroban-save-backend',
       CreatedAt: new Date().toISOString(),
     });
 
@@ -379,9 +379,9 @@ export async function initializeSecrets(): Promise<void> {
 
   // List of secrets to initialize
   const secretConfigs = [
-    { name: 'stellar-save/jwt-secret', envVar: 'JWT_SECRET' },
-    { name: 'stellar-save/admin-secret', envVar: 'ADMIN_SECRET' },
-    { name: 'stellar-save/db-password', envVar: 'DB_PASSWORD' },
+    { name: 'soroban-save/jwt-secret', envVar: 'JWT_SECRET' },
+    { name: 'soroban-save/admin-secret', envVar: 'ADMIN_SECRET' },
+    { name: 'soroban-save/db-password', envVar: 'DB_PASSWORD' },
   ];
 
   for (const { name, envVar } of secretConfigs) {

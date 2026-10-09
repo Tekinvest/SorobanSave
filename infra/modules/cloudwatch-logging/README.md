@@ -17,17 +17,17 @@ The module provides:
 
 | Log Group | Retention | Purpose |
 |-----------|-----------|---------|
-| `/aws/stellar-save/{env}/app` | 30 days | Application logs from services |
-| `/aws/stellar-save/{env}/audit` | 90 days | Audit trail and compliance logs |
+| `/aws/soroban-save/{env}/app` | 30 days | Application logs from services |
+| `/aws/soroban-save/{env}/audit` | 90 days | Audit trail and compliance logs |
 
 ### Metric Filters
 
 | Filter | Pattern | Namespace | Metric |
 |--------|---------|-----------|--------|
-| ERROR | `[ERROR] || [error] || Exception || exception` | `StellarSave/{env}` | `ApplicationErrorCount` |
-| WARN | `[WARN] || [warn] || warning` | `StellarSave/{env}` | `ApplicationWarningCount` |
-| CRITICAL | `[CRITICAL] || [FATAL] || [fatal]` | `StellarSave/{env}` | `ApplicationCriticalErrorCount` |
-| AUDIT | Structured events | `StellarSave/{env}` | `AuditEventCount` |
+| ERROR | `[ERROR] || [error] || Exception || exception` | `SorobanSave/{env}` | `ApplicationErrorCount` |
+| WARN | `[WARN] || [warn] || warning` | `SorobanSave/{env}` | `ApplicationWarningCount` |
+| CRITICAL | `[CRITICAL] || [FATAL] || [fatal]` | `SorobanSave/{env}` | `ApplicationCriticalErrorCount` |
+| AUDIT | Structured events | `SorobanSave/{env}` | `AuditEventCount` |
 
 ### IAM Roles
 
@@ -55,7 +55,7 @@ module "cloudwatch_logging" {
   create_alarms              = true
   create_lambda_role         = false
   tags = {
-    Project   = "stellar-save"
+    Project   = "soroban-save"
     ManagedBy = "terraform"
   }
 }
@@ -77,7 +77,7 @@ resource "aws_ecs_task_definition" "api_server" {
 
   container_definitions = jsonencode([{
     name              = "api-server"
-    image             = "stellar-save:latest"
+    image             = "soroban-save:latest"
     essential         = true
     logConfiguration  = {
       logDriver = "awslogs"
@@ -175,22 +175,22 @@ timestamp,request_id,action,user_id,resource,result
 
 ```bash
 # View recent logs
-aws logs tail /aws/stellar-save/production/app --follow
+aws logs tail /aws/soroban-save/production/app --follow
 
 # Search for errors
 aws logs filter-log-events \
-  --log-group-name /aws/stellar-save/production/app \
+  --log-group-name /aws/soroban-save/production/app \
   --filter-pattern "[ERROR]"
 ```
 
 ### CloudWatch Metrics
 
-Metrics are automatically published to the `StellarSave/{environment}` namespace:
+Metrics are automatically published to the `SorobanSave/{environment}` namespace:
 
 ```bash
 # Query error metrics
 aws cloudwatch get-metric-statistics \
-  --namespace "StellarSave/production" \
+  --namespace "SorobanSave/production" \
   --metric-name "ApplicationErrorCount" \
   --start-time 2026-05-31T00:00:00Z \
   --end-time 2026-05-31T23:59:59Z \
@@ -204,14 +204,14 @@ Critical error alarms are created when the module is enabled. Configure SNS topi
 
 ```hcl
 resource "aws_sns_topic" "alerts" {
-  name = "stellar-save-alerts"
+  name = "soroban-save-alerts"
 }
 
 # Subscribe to alerts
 resource "aws_sns_topic_subscription" "alerts_email" {
   topic_arn = aws_sns_topic.alerts.arn
   protocol  = "email"
-  endpoint  = "ops@stellar-save.app"
+  endpoint  = "ops@soroban-save.app"
 }
 ```
 
@@ -229,7 +229,7 @@ resource "aws_sns_topic_subscription" "alerts_email" {
 ### Logs not appearing
 
 1. Check IAM role permissions
-2. Verify log group exists: `aws logs describe-log-groups --log-group-name-prefix /aws/stellar-save`
+2. Verify log group exists: `aws logs describe-log-groups --log-group-name-prefix /aws/soroban-save`
 3. Check task/function execution role has CloudWatch Logs permissions
 4. Verify awslogs driver configuration in task/function definition
 

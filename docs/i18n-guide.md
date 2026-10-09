@@ -1,6 +1,6 @@
 # Internationalization (i18n) Guide
 
-This guide covers everything you need to know to contribute translations or work on multi-language support in Stellar-Save.
+This guide covers everything you need to know to contribute translations or work on multi-language support in SorobanSave.
 
 ---
 
@@ -19,7 +19,7 @@ This guide covers everything you need to know to contribute translations or work
 
 ## Overview
 
-Stellar-Save uses [i18next](https://www.i18next.com/) with [react-i18next](https://react.i18next.com/) for internationalization. Translation files live in:
+SorobanSave uses [i18next](https://www.i18next.com/) with [react-i18next](https://react.i18next.com/) for internationalization. Translation files live in:
 
 ```
 frontend/src/i18n/
@@ -155,7 +155,7 @@ For languages with more plural forms (e.g., Arabic), use `_zero`, `_one`, `_two`
 
 ### Domain glossary
 
-These terms have specific meanings in Stellar-Save. Use consistent translations for them.
+These terms have specific meanings in SorobanSave. Use consistent translations for them.
 
 | English term        | Meaning                                                                 |
 |---------------------|-------------------------------------------------------------------------|
@@ -180,7 +180,7 @@ These terms have specific meanings in Stellar-Save. Use consistent translations 
 
 - Currency codes: `XLM`, `USDC`, `EURC`
 - Wallet names: `Freighter`, `Lobstr`, `Albedo`
-- Brand name: `Stellar Save` / `Stellar-Save`
+- Brand name: `SorobanSave` / `SorobanSave`
 - Technical identifiers: contract IDs, addresses, transaction hashes
 - Interpolation variables: `{{balance}}`, `{{total}}`, `{{name}}`
 
@@ -332,7 +332,7 @@ console.log(\`\nTotal: \${unused.length} unused keys\`);
 
 - Yorùbá uses tone marks (e.g., `ẹ`, `ọ`, `à`, `á`). Ensure your editor saves files as UTF-8.
 - There is no standard plural form distinction — use the same string for singular and plural where natural.
-- The language is spoken by ~50 million people, primarily in Nigeria and the Yoruba diaspora — a core target audience for Stellar-Save.
+- The language is spoken by ~50 million people, primarily in Nigeria and the Yoruba diaspora — a core target audience for SorobanSave.
 
 ### French (`fr`)
 
@@ -368,7 +368,7 @@ We welcome community contributions for new and existing languages. Here's how to
 
 ### For translators
 
-1. Check [GitHub Issues](https://github.com/Xoulomon/Stellar-Save/issues) for open translation issues labeled `i18n` or `translation`.
+1. Check [GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues) for open translation issues labeled `i18n` or `translation`.
 2. Comment on the issue to claim a language so work isn't duplicated.
 3. Fork the repository, add or update the locale file, and open a pull request.
 4. Reference the issue number in your PR description.
@@ -395,4 +395,4 @@ Based on the target user base (African diaspora, unbanked communities), the foll
 | Arabic   | `ar` | North Africa, Middle East     |
 | Portuguese | `pt` | Brazil, Angola, Mozambique  |
 
-If you speak any of these languages and want to contribute, open an issue or reach out via [GitHub Discussions](https://github.com/Xoulomon/Stellar-Save/discussions).
+If you speak any of these languages and want to contribute, open an issue or reach out via [GitHub Discussions](https://github.com/Tekinvest/SorobanSave/discussions).

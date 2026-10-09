@@ -19,7 +19,7 @@ import type { PublicGroup } from '../types/group';
 import type { GroupFilters as GroupFiltersType } from '../types/group';
 import './BrowseGroupsPage.css';
 
-const SAVED_SEARCH_KEY = 'stellar-save:search-preferences';
+const SAVED_SEARCH_KEY = 'soroban-save:search-preferences';
 // Stable reference so useLocalStorage's internal effect (keyed on this
 // default value) doesn't re-run on every render — a fresh `{}` literal
 // here would change identity each render and re-trigger that effect.
@@ -205,7 +205,7 @@ export default function BrowseGroupsPage() {
       <AppLayout
         title="Browse Groups"
         subtitle="Discover recommended groups based on your preferences and activity"
-        footerText="Stellar Save - Built for transparent, on-chain savings"
+        footerText="SorobanSave - Built for transparent, on-chain savings"
         navItems={[
           { key: 'create', label: 'Create Group', onClick: () => navigate(ROUTES.GROUP_CREATE) },
         ]}

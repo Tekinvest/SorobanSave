@@ -1,7 +1,7 @@
 /**
  * Privacy Service — GDPR/CCPA compliance (Issue #1107)
  *
- * PII inventory for Stellar-Save:
+ * PII inventory for SorobanSave:
  *   - AnalyticsEvent: ipAddress, userAgent (potentially identifying)
  *   - AuditLog:       ipAddress, userAgent, walletAddress
  *   - NotificationPreference: userId (wallet address)

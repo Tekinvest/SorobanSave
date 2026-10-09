@@ -255,4 +255,4 @@ The hook can be tested by:
 
 ## License
 
-Part of the Stellar-Save project.
+Part of the SorobanSave project.

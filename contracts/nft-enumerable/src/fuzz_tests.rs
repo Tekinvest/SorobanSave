@@ -1,12 +1,12 @@
 //! Property-based fuzz tests for Non-Fungible Enumerable contract.
 //!
-//! Uses the shared `FuzzRunner` and `FuzzRng` from `stellar_save_common::fuzz`.
+//! Uses the shared `FuzzRunner` and `FuzzRng` from `soroban_save_common::fuzz`.
 
 #![cfg(test)]
 extern crate std;
 
 use crate::test_utils::{create_client, create_env, setup_accounts};
-use stellar_save_common::fuzz::FuzzRunner;
+use soroban_save_common::fuzz::FuzzRunner;
 
 /// Fuzz Target 1: Fuzz sequential minting and owner index mapping invariants.
 ///

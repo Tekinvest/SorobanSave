@@ -1,7 +1,7 @@
 /**
  * k6 load test — Contribution flow (highest-traffic, money-related endpoints)
  *
- * Contributions in Stellar-Save are executed on-chain via the Soroban smart
+ * Contributions in SorobanSave are executed on-chain via the Soroban smart
  * contract. The backend does NOT expose a dedicated REST POST endpoint for
  * on-chain transactions. Instead, the contribution user journey drives these
  * backend endpoints (ordered as a real client would call them):
@@ -31,7 +31,7 @@
  *   k6 run --env SCENARIO=smoke   tests/load/contribution.test.js
  *   k6 run --env SCENARIO=stress  tests/load/contribution.test.js
  *   k6 run --env SCENARIO=spike   tests/load/contribution.test.js
- *   k6 run --env BASE_URL=https://staging.stellar-save.app tests/load/contribution.test.js
+ *   k6 run --env BASE_URL=https://staging.soroban-save.app tests/load/contribution.test.js
  */
 import http from 'k6/http';
 import { check, sleep, group } from 'k6';

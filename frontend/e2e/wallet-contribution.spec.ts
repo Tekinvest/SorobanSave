@@ -264,7 +264,7 @@ test.describe.serial('Wallet connection & first contribution flow', () => {
     expect(ledgerSeq).toBeGreaterThan(0);
 
     // 6. Verify the contract is accessible on-chain.
-    const contractId = process.env['STELLAR_SAVE_CONTRACT_ID'] ?? '';
+    const contractId = process.env['SOROBAN_SAVE_CONTRACT_ID'] ?? '';
     if (contractId) {
       const accessible = await isContractAccessible(contractId);
       expect(

@@ -176,8 +176,8 @@ bash scripts/canary_smoke_test.sh
 CONTRACT_ID=<canary_contract_id> \
 STELLAR_NETWORK=testnet \
 STELLAR_RPC_URL=https://soroban-testnet.stellar.org \
-API_URL=https://api-canary.stellar-save.app \
-FRONTEND_URL=https://canary.stellar-save.app \
+API_URL=https://api-canary.soroban-save.app \
+FRONTEND_URL=https://canary.soroban-save.app \
 bash scripts/canary_smoke_test.sh
 
 # Disable automatic rollback (inspect only)

@@ -1,6 +1,6 @@
 {
-  "title": "Stellar-Save Distributed Tracing",
-  "uid": "stellar-save-tracing",
+  "title": "SorobanSave Distributed Tracing",
+  "uid": "soroban-save-tracing",
   "schemaVersion": 38,
   "refresh": "30s",
   "time": { "from": "now-1h", "to": "now" },
@@ -11,12 +11,12 @@
         "name": "service",
         "label": "Service",
         "type": "custom",
-        "current": { "text": "stellar-save-backend", "value": "stellar-save-backend" },
-        "query": "stellar-save-backend,stellar-save-frontend,stellar-save-indexer",
+        "current": { "text": "soroban-save-backend", "value": "soroban-save-backend" },
+        "query": "soroban-save-backend,soroban-save-frontend,soroban-save-indexer",
         "options": [
-          { "text": "stellar-save-backend", "value": "stellar-save-backend", "selected": true },
-          { "text": "stellar-save-frontend", "value": "stellar-save-frontend", "selected": false },
-          { "text": "stellar-save-indexer", "value": "stellar-save-indexer", "selected": false }
+          { "text": "soroban-save-backend", "value": "soroban-save-backend", "selected": true },
+          { "text": "soroban-save-frontend", "value": "soroban-save-frontend", "selected": false },
+          { "text": "soroban-save-indexer", "value": "soroban-save-indexer", "selected": false }
         ]
       },
       {

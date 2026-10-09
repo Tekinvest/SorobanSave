@@ -1,6 +1,6 @@
 # design/
 
-This directory holds design artifacts created during the UI/UX design phase of Stellar-Save.
+This directory holds design artifacts created during the UI/UX design phase of SorobanSave.
 It is **not part of any build pipeline** — no build tool (Vite, tsc, Vitest, Jest, Stryker)
 includes this directory. TypeScript files here are standalone reference implementations that are
 not imported by any frontend or backend source module.

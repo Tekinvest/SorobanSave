@@ -16,19 +16,19 @@
     <!-- Main domain -->
     <data 
         android:scheme="https"
-        android:host="stellarsave.app"
+        android:host="sorobansave.app"
         android:pathPrefix="/join" />
     
     <!-- Subdomain -->
     <data 
         android:scheme="https"
-        android:host="app.stellarsave.app"
+        android:host="app.sorobansave.app"
         android:pathPrefix="/join" />
         
     <!-- App download fallback -->
     <data 
         android:scheme="https"
-        android:host="stellarsave.app"
+        android:host="sorobansave.app"
         android:pathPrefix="/app" />
 </intent-filter>
 
@@ -37,5 +37,5 @@
     <action android:name="android.intent.action.VIEW" />
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="stellarsave" />
+    <data android:scheme="sorobansave" />
 </intent-filter>

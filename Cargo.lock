@@ -664,7 +664,7 @@ dependencies = [
  "soroban-sdk",
  "stellar-access",
  "stellar-macros",
- "stellar-save-common",
+ "soroban-save-common",
  "stellar-tokens",
 ]
 
@@ -733,7 +733,7 @@ version = "0.1.0"
 dependencies = [
  "soroban-sdk",
  "stellar-registry",
- "stellar-save-common",
+ "soroban-save-common",
 ]
 
 [[package]]
@@ -953,7 +953,7 @@ name = "nft-enumerable-example"
 version = "0.1.0"
 dependencies = [
  "soroban-sdk",
- "stellar-save-common",
+ "soroban-save-common",
  "stellar-tokens",
 ]
 
@@ -1651,15 +1651,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "stellar-save"
+name = "soroban-save"
 version = "0.1.0"
 dependencies = [
  "soroban-sdk",
- "stellar-save-common",
+ "soroban-save-common",
 ]
 
 [[package]]
-name = "stellar-save-common"
+name = "soroban-save-common"
 version = "0.1.0"
 dependencies = [
  "soroban-sdk",

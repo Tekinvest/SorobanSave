@@ -24,9 +24,9 @@ concurrency:
   cancel-in-progress: false   # never cancel an in-flight deploy
 
 env:
-  WASM_PATH: target/wasm32-unknown-unknown/release/stellar_save.wasm
+  WASM_PATH: target/wasm32-unknown-unknown/release/soroban_save.wasm
   WASM_SIZE_LIMIT_KB: 100
-  CONTRACT_NAME: stellar-save
+  CONTRACT_NAME: soroban-save
 
 # ─── Job 1: Pre-deployment validation ────────────────────────────────────────
 jobs:
@@ -41,12 +41,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build backend Docker image
-        run: docker build -t stellar-save-backend:latest backend/
+        run: docker build -t soroban-save-backend:latest backend/
 
       - name: Scan backend Docker image with Trivy
         uses: aquasecurity/trivy-action@v1
         with:
-          image-ref: stellar-save-backend:latest
+          image-ref: soroban-save-backend:latest
           format: table
           severity: CRITICAL,HIGH
           exit-code: 1
@@ -71,7 +71,7 @@ jobs:
       - name: Build optimised WASM
         run: |
           cargo build \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --target wasm32-unknown-unknown \
             --release
 
@@ -133,7 +133,7 @@ jobs:
         id: deploy
         run: |
           CONTRACT_ID=$(stellar contract deploy \
-            --wasm wasm-artifact/stellar_save.wasm \
+            --wasm wasm-artifact/soroban_save.wasm \
             --network testnet \
             --source-account deployer \
             --ignore-checks)
@@ -238,7 +238,7 @@ jobs:
         id: deploy
         run: |
           CONTRACT_ID=$(stellar contract deploy \
-            --wasm wasm-artifact/stellar_save.wasm \
+            --wasm wasm-artifact/soroban_save.wasm \
             --network mainnet \
             --source-account deployer \
             --ignore-checks)

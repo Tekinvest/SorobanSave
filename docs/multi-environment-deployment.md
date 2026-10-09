@@ -2,7 +2,7 @@
 
 ## Overview
 
-Stellar-Save uses a multi-environment deployment architecture to ensure stability, testing, and controlled rollouts. This document outlines the strategy for managing three distinct deployment environments:
+SorobanSave uses a multi-environment deployment architecture to ensure stability, testing, and controlled rollouts. This document outlines the strategy for managing three distinct deployment environments:
 - **Development (Dev)**: For experimental changes and rapid testing
 - **Staging**: For pre-production testing and validation
 - **Production**: For live user access
@@ -11,7 +11,7 @@ Stellar-Save uses a multi-environment deployment architecture to ensure stabilit
 
 ### Development (Dev)
 - **Network**: Testnet
-- **Frontend URL**: https://dev.stellar-save.app
+- **Frontend URL**: https://dev.soroban-save.app
 - **Purpose**: Rapid iteration and testing new features
 - **Deployment**: Continuous from feature branches
 - **Retention**: 7 days
@@ -19,7 +19,7 @@ Stellar-Save uses a multi-environment deployment architecture to ensure stabilit
 
 ### Staging
 - **Network**: Testnet
-- **Frontend URL**: https://staging.stellar-save.app
+- **Frontend URL**: https://staging.soroban-save.app
 - **Purpose**: Pre-production validation and QA
 - **Deployment**: Triggered from develop branch promotions
 - **Retention**: 30 days
@@ -27,7 +27,7 @@ Stellar-Save uses a multi-environment deployment architecture to ensure stabilit
 
 ### Production
 - **Network**: Mainnet
-- **Frontend URL**: https://stellar-save.app
+- **Frontend URL**: https://soroban-save.app
 - **Purpose**: Live user-facing application
 - **Deployment**: Manual approval from main branch
 - **Retention**: 90 days
@@ -91,22 +91,22 @@ Each environment defines specific configuration:
 dev:
   network: testnet
   rpc_url: https://soroban-testnet.stellar.org
-  frontend_url: https://dev.stellar-save.app
-  api_base: https://api-dev.stellar-save.app
+  frontend_url: https://dev.soroban-save.app
+  api_base: https://api-dev.soroban-save.app
   auto_deploy: true
 
 staging:
   network: testnet
   rpc_url: https://soroban-testnet.stellar.org
-  frontend_url: https://staging.stellar-save.app
-  api_base: https://api-staging.stellar-save.app
+  frontend_url: https://staging.soroban-save.app
+  api_base: https://api-staging.soroban-save.app
   auto_deploy: true
 
 production:
   network: mainnet
   rpc_url: https://soroban-rpc.mainnet.stellar.gateway.fm
-  frontend_url: https://stellar-save.app
-  api_base: https://api.stellar-save.app
+  frontend_url: https://soroban-save.app
+  api_base: https://api.soroban-save.app
   auto_deploy: false
 ```
 

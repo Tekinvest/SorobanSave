@@ -17,7 +17,7 @@ permissions:
   pull-requests: write
 
 env:
-  WASM_PATH: target/wasm32-unknown-unknown/release/stellar_save.wasm
+  WASM_PATH: target/wasm32-unknown-unknown/release/soroban_save.wasm
   WASM_SIZE_LIMIT_KB: 100
   WARN_THRESHOLD_PCT: 80
 
@@ -42,7 +42,7 @@ jobs:
       - name: Build WASM
         run: |
           cargo build \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --target wasm32-unknown-unknown \
             --release
 

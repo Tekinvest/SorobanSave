@@ -1,9 +1,9 @@
-# Admin-Gated Functions — Stellar-Save Contract
+# Admin-Gated Functions — SorobanSave Contract
 
 ## Overview
 
 This document enumerates every admin-gated (privileged) function in the
-`stellar-save` Soroban smart contract. For each function it records:
+`soroban-save` Soroban smart contract. For each function it records:
 
 - The **auth guard** pattern used
 - Whether a **dedicated authorization test** exists (testing that the

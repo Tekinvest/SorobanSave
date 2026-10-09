@@ -2,26 +2,26 @@
 
 **Alert:** `ServiceDown`  
 **Severity:** Critical  
-**Trigger:** `up{job="stellar-save-backend"} == 0` for > 1 minute
+**Trigger:** `up{job="soroban-save-backend"} == 0` for > 1 minute
 
 ## Immediate Steps
 
 1. Check if the process is running:
    ```bash
-   docker ps | grep stellar-save-backend
+   docker ps | grep soroban-save-backend
    # or
-   systemctl status stellar-save-backend
+   systemctl status soroban-save-backend
    ```
 
 2. Check recent logs for crash reason:
    ```bash
-   docker logs --tail 100 stellar-save-backend
-   # or Kibana: index=stellar-save-backend-* level=error
+   docker logs --tail 100 soroban-save-backend
+   # or Kibana: index=soroban-save-backend-* level=error
    ```
 
 3. Attempt restart:
    ```bash
-   docker restart stellar-save-backend
+   docker restart soroban-save-backend
    # Wait 30s, then verify readiness (checks DB, Cache, and Horizon connectivity):
    curl -f http://localhost:3001/api/v2/ready
    # (Note: /api/v2/health checks only process liveness. Use /ready to check dependencies)

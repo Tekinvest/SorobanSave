@@ -2,12 +2,12 @@
 
 ## Overview
 
-Add a `get_current_timestamp` public method to `StellarSaveContract` in `contracts/stellar-save/src/lib.rs`. The function wraps `env.ledger().timestamp()` and returns a `u64`. No new modules, storage keys, or data types are needed.
+Add a `get_current_timestamp` public method to `SorobanSaveContract` in `contracts/soroban-save/src/lib.rs`. The function wraps `env.ledger().timestamp()` and returns a `u64`. No new modules, storage keys, or data types are needed.
 
 ## Tasks
 
-- [x] 1. Add `get_current_timestamp` to `StellarSaveContract`
-  - Add the public method to the `#[contractimpl]` block in `contracts/stellar-save/src/lib.rs`
+- [x] 1. Add `get_current_timestamp` to `SorobanSaveContract`
+  - Add the public method to the `#[contractimpl]` block in `contracts/soroban-save/src/lib.rs`
   - Signature: `pub fn get_current_timestamp(env: Env) -> u64`
   - Body: `env.ledger().timestamp()`
   - No storage access, no auth check, no pause-state check
@@ -27,4 +27,4 @@ Add a `get_current_timestamp` public method to `StellarSaveContract` in `contrac
     - **Validates: Requirements 1.2, 1.4, 2.2, 2.3, 3.2, 3.3, 3.4**
 
 - [x] 2. Checkpoint — Ensure all tests pass
-  - Run `cargo test -p stellar-save` and confirm all existing tests plus the new tests pass. Ask the user if any questions arise.
+  - Run `cargo test -p soroban-save` and confirm all existing tests plus the new tests pass. Ask the user if any questions arise.

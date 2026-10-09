@@ -87,7 +87,7 @@ export function buildGroupReportPDFHtml(group: DetailedGroup): string {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Stellar Save — Group Financial Report: ${group.name}</title>
+<title>SorobanSave — Group Financial Report: ${group.name}</title>
 <style>
   body { font-family: sans-serif; font-size: 11px; margin: 20px; color: #111; }
   h1 { font-size: 18px; margin-bottom: 4px; }
@@ -108,7 +108,7 @@ export function buildGroupReportPDFHtml(group: DetailedGroup): string {
 </style>
 </head>
 <body>
-<h1>Stellar Save — Group Financial Report</h1>
+<h1>SorobanSave — Group Financial Report</h1>
 <div class="meta">
   <strong>${group.name}</strong> &nbsp;|&nbsp; ID: ${group.id} &nbsp;|&nbsp;
   Status: <span class="status-${group.status}">${group.status}</span> &nbsp;|&nbsp;
@@ -179,8 +179,8 @@ export function useGroupReportExport(group: DetailedGroup) {
     ({ format }: GroupReportExportOptions) => {
       // Derive a dated filename reusing the shared helper.
       const filename = buildFilename(format).replace(
-        'stellar-save-transactions',
-        `stellar-save-group-${group.id}-report`
+        'soroban-save-transactions',
+        `soroban-save-group-${group.id}-report`
       );
 
       if (format === 'csv') {

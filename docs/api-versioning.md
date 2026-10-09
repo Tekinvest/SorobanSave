@@ -2,7 +2,7 @@
 
 ## Strategy
 
-Stellar-Save uses **URL path versioning**: the version is embedded in the path prefix.
+SorobanSave uses **URL path versioning**: the version is embedded in the path prefix.
 
 ```
 /api/v1/<resource>

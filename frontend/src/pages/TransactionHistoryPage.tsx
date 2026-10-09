@@ -12,7 +12,7 @@ export default function TransactionHistoryPage() {
     <AppLayout
       title="Transaction History"
       subtitle="Your full contribution and payout history from the Stellar network"
-      footerText="Stellar Save - Built for transparent, on-chain savings"
+      footerText="SorobanSave - Built for transparent, on-chain savings"
     >
       <TransactionHistory pageSize={10} />
     </AppLayout>

@@ -18,7 +18,7 @@
 
 3. Restart to recover immediately:
    ```bash
-   docker restart stellar-save-backend
+   docker restart soroban-save-backend
    ```
 
 4. Common causes:

@@ -1,10 +1,10 @@
 # Localization and Translation Contributor Guide
 
-This guide helps non-developers contribute translations for Stellar-Save across the web app, mobile surfaces, and notification templates.
+This guide helps non-developers contribute translations for SorobanSave across the web app, mobile surfaces, and notification templates.
 
 ## Scope
 
-Stellar-Save currently uses a shared locale model for the web frontend and a separate notification i18n service for backend-generated emails and push copy. The main translation sources are:
+SorobanSave currently uses a shared locale model for the web frontend and a separate notification i18n service for backend-generated emails and push copy. The main translation sources are:
 
 - Frontend locale files in [frontend/src/i18n/locales](../frontend/src/i18n/locales)
 - Frontend language registration in [frontend/src/i18n/index.ts](../frontend/src/i18n/index.ts)

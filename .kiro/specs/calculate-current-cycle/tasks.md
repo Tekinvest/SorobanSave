@@ -2,15 +2,15 @@
 
 ## Overview
 
-Add a pure `calculate_current_cycle` helper function to `contracts/stellar-save/src/helpers.rs`. The function reads a `Group` from persistent storage and the current ledger timestamp, then returns the capped cycle index as `Result<u32, StellarSaveError>`.
+Add a pure `calculate_current_cycle` helper function to `contracts/soroban-save/src/helpers.rs`. The function reads a `Group` from persistent storage and the current ledger timestamp, then returns the capped cycle index as `Result<u32, SorobanSaveError>`.
 
 ## Tasks
 
 - [x] 1. Implement `calculate_current_cycle` in `helpers.rs`
-  - Add the function after `is_cycle_deadline_passed` in `contracts/stellar-save/src/helpers.rs`
-  - Import `StellarSaveError` and `StorageKeyBuilder` at the top of the file (they are already available via `crate::`)
+  - Add the function after `is_cycle_deadline_passed` in `contracts/soroban-save/src/helpers.rs`
+  - Import `SorobanSaveError` and `StorageKeyBuilder` at the top of the file (they are already available via `crate::`)
   - Implement the four-step logic: load group → early-return if not started or clock skew → integer division → cap and cast
-  - Signature: `pub fn calculate_current_cycle(env: &Env, group_id: u64) -> Result<u32, StellarSaveError>`
+  - Signature: `pub fn calculate_current_cycle(env: &Env, group_id: u64) -> Result<u32, SorobanSaveError>`
   - _Requirements: 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 3.1, 3.2, 3.3, 4.1, 4.2, 4.3, 5.1, 5.2, 5.3_
 
 - [x] 2. Write unit tests for `calculate_current_cycle`
@@ -33,7 +33,7 @@ Add a pure `calculate_current_cycle` helper function to `contracts/stellar-save/
 
 - [ ] 4. Write property-based tests using `proptest`
   - Add a `proptest!` block inside the `#[cfg(test)] mod tests` block in `helpers.rs`
-  - `proptest` is already listed in `[dev-dependencies]` in `contracts/stellar-save/Cargo.toml`
+  - `proptest` is already listed in `[dev-dependencies]` in `contracts/soroban-save/Cargo.toml`
   - [ ]* 4.1 Write property test for Property 1: GroupNotFound for unknown group_id
     - Generate random `u64` group_ids that have not been stored; assert `Err(GroupNotFound)`
     - **Property 1: GroupNotFound for unknown group_id**
@@ -63,4 +63,4 @@ Add a pure `calculate_current_cycle` helper function to `contracts/stellar-save/
 - Tasks marked with `*` are optional and can be skipped for a faster MVP
 - `proptest` is already in `[dev-dependencies]` — no Cargo.toml changes needed
 - All arithmetic stays in `u64`; the `u32` cast happens only after the cap is applied
-- The function is a free function (not a method on `StellarSaveContract`), consistent with `format_group_id` and `is_cycle_deadline_passed`
+- The function is a free function (not a method on `SorobanSaveContract`), consistent with `format_group_id` and `is_cycle_deadline_passed`

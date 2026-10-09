@@ -10,7 +10,7 @@
 #   - SNS notifications to the supplied ops-alerts topic
 
 locals {
-  name_prefix = "stellar-save-tls-${var.environment}"
+  name_prefix = "soroban-save-tls-${var.environment}"
 }
 
 # ── ACM Certificate ────────────────────────────────────────────────────────────
@@ -121,7 +121,7 @@ resource "aws_lambda_function" "cert_expiry_monitor" {
 
   environment {
     variables = {
-      CW_NAMESPACE = "StellarSave/TLS"
+      CW_NAMESPACE = "SorobanSave/TLS"
       DOMAIN_FILTER = var.domain_name
     }
   }
@@ -141,7 +141,7 @@ import boto3, datetime, os
 def handler(event, context):
     acm = boto3.client('acm')
     cw  = boto3.client('cloudwatch')
-    ns  = os.environ.get('CW_NAMESPACE', 'StellarSave/TLS')
+    ns  = os.environ.get('CW_NAMESPACE', 'SorobanSave/TLS')
     domain_filter = os.environ.get('DOMAIN_FILTER', '')
 
     paginator = acm.get_paginator('list_certificates')
@@ -199,7 +199,7 @@ resource "aws_lambda_permission" "allow_eventbridge" {
 resource "aws_cloudwatch_metric_alarm" "cert_expiry_30d" {
   alarm_name          = "${local.name_prefix}-cert-expiry-30d"
   alarm_description   = "TLS certificate for ${var.domain_name} expires in ≤ 30 days"
-  namespace           = "StellarSave/TLS"
+  namespace           = "SorobanSave/TLS"
   metric_name         = "CertificateDaysUntilExpiry"
   dimensions          = { Domain = var.domain_name }
   statistic           = "Minimum"
@@ -217,7 +217,7 @@ resource "aws_cloudwatch_metric_alarm" "cert_expiry_30d" {
 resource "aws_cloudwatch_metric_alarm" "cert_expiry_7d" {
   alarm_name          = "${local.name_prefix}-cert-expiry-7d-CRITICAL"
   alarm_description   = "CRITICAL: TLS certificate for ${var.domain_name} expires in ≤ 7 days"
-  namespace           = "StellarSave/TLS"
+  namespace           = "SorobanSave/TLS"
   metric_name         = "CertificateDaysUntilExpiry"
   dimensions          = { Domain = var.domain_name }
   statistic           = "Minimum"

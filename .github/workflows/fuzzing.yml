@@ -43,7 +43,7 @@ jobs:
       - name: Run fuzz tests
         run: |
           cargo test \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --lib fuzz_tests \
             -- --nocapture 2>&1 | tee fuzz-output.txt
         env:
@@ -68,7 +68,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: proptest-regressions-${{ github.sha }}
-          path: contracts/stellar-save/.proptest-regressions/
+          path: contracts/soroban-save/.proptest-regressions/
           if-no-files-found: ignore
           retention-days: 90
 

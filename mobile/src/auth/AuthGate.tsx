@@ -74,7 +74,7 @@ export function AuthGate({ children }: AuthGateProps) {
     if (!support.isAvailable || !support.isEnrolled) return false;
 
     const result = await authenticateWithBiometric(
-      promptMessage ?? 'Unlock Stellar Save',
+      promptMessage ?? 'Unlock SorobanSave',
     );
     return result.success;
   }, []);

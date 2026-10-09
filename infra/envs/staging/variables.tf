@@ -7,7 +7,7 @@ variable "aws_region" {
 }
 
 variable "acm_certificate_arn" {
-  description = "ACM certificate ARN for staging.stellar-save.app (us-east-1)"
+  description = "ACM certificate ARN for staging.soroban-save.app (us-east-1)"
   type        = string
   default     = ""
 }

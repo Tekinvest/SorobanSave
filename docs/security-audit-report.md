@@ -1,15 +1,15 @@
-# Stellar-Save Smart Contract Security Audit Report
+# SorobanSave Smart Contract Security Audit Report
 
 **Date:** 2026-05-29  
 **Auditor:** Kiro AI  
-**Scope:** `contracts/stellar-save/src/` — all contract modules  
+**Scope:** `contracts/soroban-save/src/` — all contract modules  
 **Commit:** HEAD at time of audit
 
 ---
 
 ## Executive Summary
 
-A comprehensive manual security audit was performed on the Stellar-Save ROSCA smart contract. The audit covered authorization bypass vulnerabilities and arithmetic overflow/underflow risks across all contract modules.
+A comprehensive manual security audit was performed on the SorobanSave ROSCA smart contract. The audit covered authorization bypass vulnerabilities and arithmetic overflow/underflow risks across all contract modules.
 
 **8 findings** were identified and fixed:
 
@@ -138,7 +138,7 @@ The pool amount was calculated as `contribution_amount * max_members as i128` us
 
 **Impact:** Overflow in a view function would cause the statistics query to return incorrect data, potentially misleading off-chain tooling about group health.
 
-**Fix:** Uses `group.checked_total_pool_amount()` and then `checked_mul` for the outer multiplication, returning `StellarSaveError::Overflow` on failure.
+**Fix:** Uses `group.checked_total_pool_amount()` and then `checked_mul` for the outer multiplication, returning `SorobanSaveError::Overflow` on failure.
 
 ---
 
@@ -180,7 +180,7 @@ let next_cycle_end_time = cycle_multiplier          // u32
     .checked_mul(group.cycle_duration as u32)       // u32 × u32 — overflows at ~4.3B
     .map(|duration| duration as u64)
     .and_then(|duration| group.started_at.checked_add(duration))
-    .ok_or(StellarSaveError::Overflow)?;
+    .ok_or(SorobanSaveError::Overflow)?;
 ```
 
 For a group with `cycle_duration = 2_592_000` (30 days) and `cycle_multiplier = 2000`, the product is `5.18 × 10^12`, which overflows `u32` but fits in `u64`.
@@ -195,7 +195,7 @@ For a group with `cycle_duration = 2_592_000` (30 days) and `cycle_multiplier = 
 
 The audit was performed by:
 
-1. **Manual code review** of all `.rs` files in `contracts/stellar-save/src/`
+1. **Manual code review** of all `.rs` files in `contracts/soroban-save/src/`
 2. **Authorization flow tracing** — every `pub fn` entry point was checked for `require_auth()` calls and correct identity verification
 3. **Arithmetic analysis** — all multiplication and addition operations on financial amounts were checked for overflow potential
 4. **Storage key analysis** — all `StorageKeyBuilder` methods were cross-referenced to detect collisions

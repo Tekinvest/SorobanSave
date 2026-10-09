@@ -1,6 +1,6 @@
 # Visual Regression Testing
 
-Stellar-Save uses two complementary Playwright visual suites:
+SorobanSave uses two complementary Playwright visual suites:
 
 | Suite                     | What it covers                                                          | Where baselines live       | Approval                                      |
 | ------------------------- | ----------------------------------------------------------------------- | -------------------------- | --------------------------------------------- |

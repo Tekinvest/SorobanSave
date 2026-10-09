@@ -1,5 +1,5 @@
 /**
- * sw.js — Stellar Save Service Worker
+ * sw.js — SorobanSave Service Worker
  *
  * Handles:
  *  1. PWA caching (cache-first for static assets, network-first for API)
@@ -10,10 +10,10 @@
  *  6. Background sync for offline actions
  */
 
-const CACHE_NAME = 'stellar-save-v2';
+const CACHE_NAME = 'soroban-save-v2';
 const STATIC_ASSETS = ['/', '/offline.html', '/manifest.json', '/vite.svg'];
 const APP_ORIGIN = self.location.origin;
-const API_CACHE = 'stellar-save-api-v2';
+const API_CACHE = 'soroban-save-api-v2';
 const API_CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 // Cap the runtime cache so it cannot grow without bound.

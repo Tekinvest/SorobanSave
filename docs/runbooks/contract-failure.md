@@ -34,7 +34,7 @@ stellar events \
   --start-ledger $(( $(stellar ledger current --network "$STELLAR_NETWORK") - 1000 ))
 
 # Reproduce locally
-cargo test --manifest-path contracts/stellar-save/Cargo.toml -- --nocapture 2>&1 | tail -50
+cargo test --manifest-path contracts/soroban-save/Cargo.toml -- --nocapture 2>&1 | tail -50
 ```
 
 ### 3. Rollback to last known-good WASM
@@ -45,7 +45,7 @@ STELLAR_NETWORK=mainnet \
 STELLAR_RPC_URL=https://soroban-rpc.mainnet.stellar.gateway.fm \
 DEPLOYER_SECRET="$DEPLOYER_SECRET" \
 GH_TOKEN="$GH_TOKEN" \
-REPO=Xoulomon/Stellar-Save \
+REPO=Xoulomon/SorobanSave \
 bash scripts/rollback.sh
 ```
 
@@ -80,5 +80,5 @@ bash scripts/verify_contract.sh
 ## Post-Incident
 
 - Root-cause the bug and add a regression test.
-- Update `contracts/stellar-save/OPTIMIZATION_SUMMARY.md` with the incident.
+- Update `contracts/soroban-save/OPTIMIZATION_SUMMARY.md` with the incident.
 - File incident report within 24 hours (see `docs/incident-response-plan.md`).

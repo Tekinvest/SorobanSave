@@ -1,7 +1,7 @@
 /**
  * tracing.ts
  *
- * OpenTelemetry distributed-tracing bootstrap for the Stellar-Save backend.
+ * OpenTelemetry distributed-tracing bootstrap for the SorobanSave backend.
  *
  * This module MUST be imported *before* any instrumented library (express, http,
  * pg, ioredis, …) so the auto-instrumentations can patch them. It is therefore

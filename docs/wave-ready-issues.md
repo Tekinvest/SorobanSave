@@ -1,6 +1,6 @@
 # Wave-Ready Issues Directory 🌊
 
-This directory lists all currently active and open **Wave-Ready Issues** for the Stellar-Save project. These issues are funded through the **Drips Wave** program. Contributors who successfully complete them will earn points that convert into USDC funding at the end of the Wave cycle.
+This directory lists all currently active and open **Wave-Ready Issues** for the SorobanSave project. These issues are funded through the **Drips Wave** program. Contributors who successfully complete them will earn points that convert into USDC funding at the end of the Wave cycle.
 
 For instructions on claiming issues and opening Pull Requests, please read the **[Wave Contributor Guide](wave-guide.md)**.
 
@@ -15,7 +15,7 @@ Below is the catalog of the 12 funded issues split across complexity tiers.
 #### 1. `get-current-timestamp` Unit Testing
 * **Complexity:** Trivial (100 Points)
 * **Status:** Open 🔓
-* **Description:** Add unit tests to verify the behavior of the newly implemented `get_current_timestamp` contract method in `contracts/stellar-save/src/lib.rs`.
+* **Description:** Add unit tests to verify the behavior of the newly implemented `get_current_timestamp` contract method in `contracts/soroban-save/src/lib.rs`.
 * **Tasks:**
   - Test basic invocation: set the ledger timestamp to a known value $T$ and verify the return value is exactly $T$.
   - Test idempotence: verify calling the function twice in the same ledger state returns identical values.
@@ -59,8 +59,8 @@ Below is the catalog of the 12 funded issues split across complexity tiers.
 * **Description:** Implement formal property-based tests for the `validate_max_members` helper to guarantee correctness under generated configs.
 * **Tasks:**
   - Write `proptest!` property tests for:
-    - **Property 1**: Values below the configured minimum are always rejected with `StellarSaveError::InvalidState`.
-    - **Property 2**: Values above the configured maximum are always rejected with `StellarSaveError::InvalidState`.
+    - **Property 1**: Values below the configured minimum are always rejected with `SorobanSaveError::InvalidState`.
+    - **Property 2**: Values above the configured maximum are always rejected with `SorobanSaveError::InvalidState`.
     - **Property 3**: All values in the inclusive range `[min_members, max_members]` are accepted.
     - **Property 4**: Validator is deterministic (identical inputs always yield identical results).
 
@@ -69,7 +69,7 @@ Below is the catalog of the 12 funded issues split across complexity tiers.
 * **Status:** Open 🔓
 * **Description:** Create `proptest` property-based tests to exhaustively verify the correctness of the elapsed cycle calculator function.
 * **Tasks:**
-  - Add property tests in `contracts/stellar-save/src/helpers.rs` for:
+  - Add property tests in `contracts/soroban-save/src/helpers.rs` for:
     - **Property 1**: Querying a non-existent group ID always returns `Err(GroupNotFound)`.
     - **Property 2**: An unstarted group always returns cycle `0`.
     - **Property 3**: The cycle count formula holds true for arbitrary valid started times and elapsed cycles: $C = \min(\lfloor(T_{\text{curr}} - T_{\text{start}}) / D\rfloor, N_{\text{max}} - 1)$.
@@ -81,7 +81,7 @@ Below is the catalog of the 12 funded issues split across complexity tiers.
 * **Description:** Modify error variants and storage layouts to support multi-token assets on Stellar.
 * **Tasks:**
   - Implement `TokenConfig` struct and related storage builder keys (`group_token_config(group_id)`, `allowed_tokens()`).
-  - Add new error variants `InvalidToken = 5001` and `TokenTransferFailed = 5002` to `StellarSaveError` in `error.rs` along with error category mapping.
+  - Add new error variants `InvalidToken = 5001` and `TokenTransferFailed = 5002` to `SorobanSaveError` in `error.rs` along with error category mapping.
   - Implement serialization round-trip property-based tests.
 
 #### 8. Multi-Token Configuration & Helper Validation
@@ -135,4 +135,4 @@ Below is the catalog of the 12 funded issues split across complexity tiers.
 
 ## 🛠️ Claiming an Issue
 
-If you find an issue in the catalog you'd like to work on, head over to the [GitHub Issues](https://github.com/Xoulomon/Stellar-Save/issues) tab, locate the issue number, and drop a comment so a maintainer can assign it to you. Happy coding! 🌊
+If you find an issue in the catalog you'd like to work on, head over to the [GitHub Issues](https://github.com/Tekinvest/SorobanSave/issues) tab, locate the issue number, and drop a comment so a maintainer can assign it to you. Happy coding! 🌊

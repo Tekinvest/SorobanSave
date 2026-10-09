@@ -20,7 +20,7 @@ const AppDownloadPage: React.FC = () => {
 
     const attemptDeepLink = () => {
       // Try to open the app with custom scheme
-      const deepLinkUrl = `stellarsave://join/${inviteCode}`;
+      const deepLinkUrl = `sorobansave://join/${inviteCode}`;
       // If still on this page after 2 seconds, app probably isn't installed
       setTimeout(() => {}, 2000);
 
@@ -79,7 +79,7 @@ const AppDownloadPage: React.FC = () => {
           </Box>
 
           <Typography variant="h4" fontWeight="bold" gutterBottom>
-            Open in Stellar Save
+            Open in SorobanSave
           </Typography>
 
           <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
@@ -100,7 +100,7 @@ const AppDownloadPage: React.FC = () => {
                 textTransform: 'none',
                 py: 1.5,
               }}
-              href="https://apps.apple.com/app/stellar-save/id123456789"
+              href="https://apps.apple.com/app/soroban-save/id123456789"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -118,7 +118,7 @@ const AppDownloadPage: React.FC = () => {
                 textTransform: 'none',
                 py: 1.5,
               }}
-              href="https://play.google.com/store/apps/details?id=com.stellarsave.app"
+              href="https://play.google.com/store/apps/details?id=com.sorobansave.app"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -144,7 +144,7 @@ const AppDownloadPage: React.FC = () => {
         color="rgba(255,255,255,0.7)"
         sx={{ mt: 4, textAlign: 'center' }}
       >
-        Stellar Save - Transparent, on-chain savings powered by Stellar
+        SorobanSave - Transparent, on-chain savings powered by Stellar
       </Typography>
     </Box>
   );

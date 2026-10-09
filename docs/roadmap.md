@@ -1,130 +1,180 @@
-# Stellar-Save Roadmap
+# StellarCircle — Product Roadmap
 
-This document outlines the planned development milestones for Stellar-Save. Timelines are estimates and subject to change based on community feedback and contributor availability.
+This roadmap outlines the planned development of StellarCircle across versioned milestones. Each version builds on the last, progressively unlocking all five pillars and expanding the ecosystem.
 
----
-
-## Table of Contents
-
-- [v1.0 — Core (Current)](#v10--core-current)
-- [v1.1 — Custom Token Support](#v11--custom-token-support)
-- [v2.0 — Flexible Payouts & Penalties](#v20--flexible-payouts--penalties)
-- [v3.0 — Enhanced Frontend UI](#v30--enhanced-frontend-ui)
-- [v4.0 — Mobile App & Fiat On/Off-Ramps](#v40--mobile-app--fiat-onoff-ramps)
-- [Milestone Summary](#milestone-summary)
+> Status indicators: ✅ Done · 🔄 In Progress · 📋 Planned · 🔮 Future
 
 ---
 
-## v1.0 — Core (Current)
+## v1.0 — Foundation (Pillar A: ROSCA) — Testnet
 
-**Status:** In Progress  
-**Scope:** XLM-only rotational savings on Stellar testnet and mainnet
+**Goal**: Prove the core rotating savings model works end-to-end on Stellar Testnet. Ship a minimal but fully functional protocol.
 
-### Features
-- Create savings groups with configurable contribution amount, cycle duration, and max members
-- Join groups via Group ID
-- Fixed XLM contributions per cycle
-- Automatic payout to the designated member when all contributions are received
-- Group lifecycle management: `Pending` → `Active` → `Completed`
-- On-chain event emission for group creation, contributions, and payouts
-- Basic frontend (React + Vite) with wallet connection via Freighter
-- Smart contract written in Rust using the Soroban SDK
-
-### Goals
-- Prove the core rotational savings model works reliably on-chain
-- Establish a clean, auditable contract codebase
-- Provide a minimal but functional UI for early adopters
-
----
-
-## v1.1 — Custom Token Support
-
-**Status:** Planned  
-**Scope:** Allow groups to use any Stellar asset (not just XLM)
-
-### Features
-- Accept any SEP-41 compliant token as the contribution currency
-- Token selection during group creation
-- Display token symbol and balance in the UI
-- Validate token balances before allowing contributions
-
-### Goals
-- Open Stellar-Save to stablecoin-based savings groups (e.g. USDC on Stellar)
-- Reduce volatility risk for members who prefer stable assets
+| Feature | Status |
+|---------|--------|
+| Soroban smart contract: group creation | ✅ Done |
+| Member join / leave | ✅ Done |
+| Fixed-amount contribution per cycle | ✅ Done |
+| Automatic payout rotation (fixed order) | ✅ Done |
+| Native XLM support | ✅ Done |
+| Contract event emission | ✅ Done |
+| Emergency pause / unpause (creator) | ✅ Done |
+| Backend event indexer (basic) | ✅ Done |
+| REST API: groups, members, contributions | ✅ Done |
+| React frontend: connect wallet, create, join, contribute | ✅ Done |
+| SEP-10 authentication | ✅ Done |
+| CI/CD pipeline (GitHub Actions) | ✅ Done |
+| Testnet deployment | ✅ Done |
+| Basic documentation | ✅ Done |
 
 ---
 
-## v2.0 — Flexible Payouts & Penalties
+## v1.1 — Stable ROSCA + Multi-Asset — Testnet → Mainnet
 
-**Status:** Planned  
-**Scope:** Improve fairness and resilience when members miss contributions
+**Goal**: Harden the ROSCA contract, add USDC/EURC support, and launch on Mainnet.
 
-### Features
-- Configurable penalty for missed contributions (e.g. small XLM fee)
-- Grace period before a missed contribution is penalised
-- Option for randomised or voted payout order (instead of join-order only)
-- Partial payout release if a member exits early (with creator approval)
-- On-chain dispute flag for unresolved contribution issues
+| Feature | Status |
+|---------|--------|
+| USDC and EURC token support (SEP-41) | 🔄 In Progress |
+| Custom SEP-41 token support | 🔄 In Progress |
+| Randomised payout order (VRF-based) | 📋 Planned |
+| Late contribution penalty enforcement | 📋 Planned |
+| Grace period configuration | 📋 Planned |
+| Group invite links and QR codes | 📋 Planned |
+| On-chain credit record initialization | 📋 Planned |
+| GraphQL API layer | 📋 Planned |
+| WebSocket real-time updates | 📋 Planned |
+| Frontend: contribution timeline UI | 📋 Planned |
+| Frontend: payout rotation visualiser | 📋 Planned |
+| Security audit (scope: Pillar A contract) | 📋 Planned |
+| Mainnet deployment | 📋 Planned |
+| Full API documentation | 📋 Planned |
 
-### Goals
-- Make groups more resilient to non-participating members
-- Give group creators more control over payout fairness
-- Reduce the risk of a single member stalling the entire group
-
----
-
-## v3.0 — Enhanced Frontend UI
-
-**Status:** Planned  
-**Scope:** Significant UX improvements based on user feedback from v1.x
-
-### Features
-- Full mobile-responsive design
-- Push notifications (browser) for upcoming contribution deadlines
-- Group activity feed showing recent contributions and payouts
-- Member profile pages with contribution history
-- Dark mode support
-- Improved onboarding flow for first-time users
-- Internationalisation (i18n) support — starting with English, French, and Yoruba
-
-### Goals
-- Lower the barrier to entry for non-technical users
-- Support communities in regions where Ajo/Esusu is culturally common
+**Target**: Q1 next year
 
 ---
 
-## v4.0 — Mobile App & Fiat On/Off-Ramps
+## v2.0 — Goal-Based Savings + Accountability Vault (Pillars B & C)
 
-**Status:** Future  
-**Scope:** Native mobile experience and fiat integration
+**Goal**: Expand the protocol to support collective goal saving and personal accountability vaults.
 
-### Features
-- React Native mobile app (iOS and Android)
-- In-app wallet creation and management
-- Fiat on-ramp: buy XLM or stablecoins directly within the app
-- Fiat off-ramp: withdraw payout to local bank account via SEP-24/31
-- Biometric authentication (Face ID / fingerprint)
-- SMS/WhatsApp contribution reminders
+| Feature | Status |
+|---------|--------|
+| Pillar B: Goal-based group savings contract | 📋 Planned |
+| Goal progress tracking (on-chain + indexed) | 📋 Planned |
+| Auto-release on goal reached | 📋 Planned |
+| Multi-sig release approval flow | 📋 Planned |
+| Deadline-triggered refund flow | 📋 Planned |
+| Pillar C: Personal accountability vault contract | 📋 Planned |
+| Witness nomination and on-chain visibility | 📋 Planned |
+| Breach penalty logic + witness reward split | 📋 Planned |
+| Contribution streak tracking | 📋 Planned |
+| On-chain completion badge / attestation record | 📋 Planned |
+| Frontend: goal progress bar + contributor feed | 📋 Planned |
+| Frontend: vault detail with streak ring | 📋 Planned |
+| Push notifications (web + mobile) | 📋 Planned |
+| Mobile app beta (Expo React Native) | 📋 Planned |
+| i18n: French, Spanish, Portuguese | 📋 Planned |
 
-### Goals
-- Reach users who don't have desktop access
-- Bridge the gap between crypto savings and traditional banking
-- Enable true financial inclusion for underbanked communities
-
----
-
-## Milestone Summary
-
-| Version | Scope | Status |
-|---------|-------|--------|
-| v1.0 | XLM-only core contract + basic UI | In Progress |
-| v1.1 | Custom token (SEP-41) support | Planned |
-| v2.0 | Flexible payouts, penalties, payout order options | Planned |
-| v3.0 | Enhanced UI, mobile-responsive, notifications, i18n | Planned |
-| v4.0 | Mobile app, fiat on/off-ramps | Future |
+**Target**: Q2 next year
 
 ---
 
-## Contributing to the Roadmap
+## v2.1 — Lending Circle + Milestone Vaults (Pillars D & E)
 
-Have a feature idea or want to reprioritise something? Open a [GitHub Discussion](https://github.com/Xoulomon/Stellar-Save/discussions) or comment on an existing [issue](https://github.com/Xoulomon/Stellar-Save/issues). Community input directly shapes what gets built next.
+**Goal**: Complete the five-pillar protocol with cooperative lending and milestone-gated fund release.
+
+| Feature | Status |
+|---------|--------|
+| Pillar D: Lending circle contract | 📋 Planned |
+| Loan issuance (rotation + governance-vote methods) | 📋 Planned |
+| On-chain repayment tracking | 📋 Planned |
+| Cross-group credit score (on-chain record) | 📋 Planned |
+| Missed repayment → governance trigger | 📋 Planned |
+| Pillar E: Milestone-unlocked savings contract | 📋 Planned |
+| Milestone definition + verifier assignment | 📋 Planned |
+| Verifier attestation flow | 📋 Planned |
+| Proportional fund release per milestone | 📋 Planned |
+| Oracle integration for automated verification | 📋 Planned |
+| Frontend: lending circle repayment UI | 📋 Planned |
+| Frontend: milestone tracker | 📋 Planned |
+| Credit score profile page | 📋 Planned |
+| Localization: Yoruba, Igbo, Swahili | 📋 Planned |
+| Security audit (scope: Pillars B–E) | 📋 Planned |
+
+**Target**: Q3 next year
+
+---
+
+## v3.0 — On-Chain Governance + Mobile GA
+
+**Goal**: Full decentralised governance over group decisions, and a production-ready mobile app.
+
+| Feature | Status |
+|---------|--------|
+| On-chain governance: proposals, voting, execution | 📋 Planned |
+| Governance-controlled config changes | 📋 Planned |
+| Governance-controlled fund release | 📋 Planned |
+| Supermajority emergency withdrawal | 📋 Planned |
+| Governance UI (proposals, vote tally, history) | 📋 Planned |
+| Mobile app v1.0 GA (iOS + Android) | 📋 Planned |
+| Biometric auth for mobile | 📋 Planned |
+| Offline-first sync (MMKV + queued txns) | 📋 Planned |
+| Deep linking for circle invites | 📋 Planned |
+| Group templates (preset configurations) | 📋 Planned |
+| Reputation / profile system | 📋 Planned |
+| Public API for third-party integrations | 📋 Planned |
+| Stellar Quest integration (tutorial quests) | 📋 Planned |
+| Community governance of protocol parameters | 🔮 Future |
+
+**Target**: Q4 next year
+
+---
+
+## v4.0 — Fiat On/Off-Ramps + Cross-Group Credit
+
+**Goal**: Bridge traditional finance to StellarCircle; make the credit record a portable financial identity.
+
+| Feature | Status |
+|---------|--------|
+| Fiat on-ramp integration (MoneyGram / Stripe / local providers) | 🔮 Future |
+| Fiat off-ramp (withdraw to mobile money, bank) | 🔮 Future |
+| KYC-lite flow (SEP-12 integration for regulated markets) | 🔮 Future |
+| Cross-group portable credit score | 🔮 Future |
+| Credit score export (DID / Verifiable Credential) | 🔮 Future |
+| Institutional lending partners using on-chain credit | 🔮 Future |
+| DAO treasury for protocol sustainability | 🔮 Future |
+| Multi-chain support (Stellar + EVM bridge) | 🔮 Future |
+| SDK for third-party app integration | 🔮 Future |
+| White-label circle solution for NGOs / cooperatives | 🔮 Future |
+| Compliance tooling for regulated jurisdictions | 🔮 Future |
+
+**Target**: Year 2
+
+---
+
+## Long-Term Vision
+
+StellarCircle aims to be the infrastructure layer for community finance on Stellar. Long-term goals:
+
+- **Universal credit record**: Every completed circle, repaid loan, and met milestone contributes to a portable on-chain financial identity that banks and DeFi protocols can reference
+- **Protocol governance**: A community DAO governs protocol upgrades, fee parameters, and treasury allocation
+- **Ecosystem integrations**: Anchor integrations via SEP-6/24 for seamless fiat; Stellar Quest quests for onboarding; Stellar Aid Assist for humanitarian use cases
+- **Financial inclusion at scale**: Partner with NGOs, cooperatives, and microfinance institutions to deploy StellarCircle for real communities across Africa, Latin America, and Southeast Asia
+
+---
+
+## Version Summary
+
+| Version | Pillars | Highlights | Target |
+|---------|---------|-----------|--------|
+| v1.0 | A | ROSCA on Testnet | Shipped |
+| v1.1 | A | Multi-asset, Mainnet | Q1 |
+| v2.0 | A + B + C | Goal savings, Accountability vault | Q2 |
+| v2.1 | A–E | Lending + Milestone vaults, Credit score | Q3 |
+| v3.0 | A–E | Governance, Mobile GA | Q4 |
+| v4.0 | A–E | Fiat ramps, Portable credit | Year 2 |
+
+---
+
+*This roadmap is a living document. Priorities may shift based on community feedback, security findings, and ecosystem developments. Propose changes via GitHub Discussions or through an on-chain governance proposal (v3.0+).*

@@ -2,7 +2,7 @@ name: Deploy to Testnet
 
 on:
   push:
-    branches: [main]
+    branches: [develop]
 
 jobs:
   deploy:
@@ -31,8 +31,7 @@ jobs:
       - name: Configure deployer identity
         env:
           STELLAR_SECRET_KEY: ${{ secrets.STELLAR_DEPLOYER_SECRET_KEY }}
-        run: |
-          stellar keys add default --secret-key "$STELLAR_SECRET_KEY"
+        run: stellar keys add default --secret-key "$STELLAR_SECRET_KEY"
 
       - name: Deploy contracts
         id: deploy
@@ -43,7 +42,6 @@ jobs:
           OUTPUT=$(./scripts/deploy_testnet.sh 2>&1)
           echo "$OUTPUT"
 
-          # Collect each "contract_name → contract_id" line
           SUMMARY=""
           while IFS= read -r line; do
             if [[ "$line" =~ ^Deploying\ (.+)\.\.\. ]]; then
@@ -53,12 +51,10 @@ jobs:
             fi
           done <<< "$OUTPUT"
 
-          # Fallback: surface the raw output if no IDs were parsed
           if [ -z "$SUMMARY" ]; then
             SUMMARY="\`\`\`\n${OUTPUT}\n\`\`\`"
           fi
 
-          # Write multi-line value to GITHUB_OUTPUT
           {
             echo "summary<<EOF"
             printf "%b" "$SUMMARY"

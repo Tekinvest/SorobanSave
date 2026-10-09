@@ -48,7 +48,7 @@ export function createPrivacyRouter(): Router {
       await completePrivacyRequest(requestId, 'completed');
 
       logger.info('Privacy export completed', { walletAddress });
-      res.setHeader('Content-Disposition', `attachment; filename="stellar-save-data-export.json"`);
+      res.setHeader('Content-Disposition', `attachment; filename="soroban-save-data-export.json"`);
       return res.status(200).json(data);
     } catch (error) {
       if (requestId) await completePrivacyRequest(requestId, 'failed').catch(() => {});

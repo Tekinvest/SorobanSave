@@ -1,4 +1,4 @@
-// Stryker mutation testing configuration for the Stellar-Save frontend.
+// Stryker mutation testing configuration for the SorobanSave frontend.
 // https://stryker-mutator.io/docs/stryker-js/configuration/
 
 /** @type {import('@stryker-mutator/api/core').PartialStrykerOptions} */

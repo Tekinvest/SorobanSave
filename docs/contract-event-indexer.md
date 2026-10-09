@@ -1,6 +1,6 @@
 # Contract Event Indexer
 
-The Contract Event Indexer is a service that indexes Stellar-Save contract events from the Horizon API for faster queries.
+The Contract Event Indexer is a service that indexes SorobanSave contract events from the Horizon API for faster queries.
 
 ## Overview
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # scripts/dr_recover.sh
-# Automated disaster recovery entry point for Stellar-Save.
+# Automated disaster recovery entry point for SorobanSave.
 #
 # Usage:
 #   dr_recover.sh <command> [options]
@@ -25,7 +25,7 @@ STELLAR_RPC_URL="${STELLAR_RPC_URL:-https://soroban-testnet.stellar.org}"
 CONTRACT_ID="${CONTRACT_ID:-}"
 ADMIN_SECRET="${ADMIN_SECRET:-}"
 BACKEND_URL="${BACKEND_URL:-http://localhost:3001}"
-REPO="${REPO:-Xoulomon/Stellar-Save}"
+REPO="${REPO:-Xoulomon/SorobanSave}"
 GH_TOKEN="${GH_TOKEN:-}"
 
 OK="\033[32m✓\033[0m"

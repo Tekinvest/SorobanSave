@@ -34,7 +34,7 @@ Closes #
 
 **Smart contract:**
 ```bash
-cargo test -p stellar-save
+cargo test -p soroban-save
 ```
 
 **Frontend:**

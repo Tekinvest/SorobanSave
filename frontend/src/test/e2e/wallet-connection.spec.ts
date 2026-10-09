@@ -25,8 +25,8 @@ test.describe('Wallet connection flow', () => {
   });
 
   test('landing page shows hero section with get started button', async ({ page }) => {
-    // Button aria-label is "Get started with Stellar Save"
-    const getStartedBtn = page.getByRole('button', { name: 'Get started with Stellar Save' });
+    // Button aria-label is "Get started with SorobanSave"
+    const getStartedBtn = page.getByRole('button', { name: 'Get started with SorobanSave' });
     await expect(getStartedBtn).toBeVisible();
   });
 

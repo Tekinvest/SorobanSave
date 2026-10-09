@@ -26,7 +26,7 @@ db_password                = "REPLACE_ME"
 enable_multi_region  = true
 secondary_aws_region = "eu-west-1"
 hosted_zone_id       = "ZXXXXXXXXXXXXX"
-routing_record_name  = "api.stellar-save.app"
+routing_record_name  = "api.soroban-save.app"
 routing_policy       = "latency" # or "geolocation"
 
 # Per-region application endpoints (ALB DNS name or CloudFront domain)

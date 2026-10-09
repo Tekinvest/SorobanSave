@@ -1,6 +1,6 @@
 # Mobile CI/CD Pipeline Setup Guide
 
-This guide explains how to set up and use the mobile CI/CD pipeline for Stellar Save's iOS and Android applications.
+This guide explains how to set up and use the mobile CI/CD pipeline for SorobanSave's iOS and Android applications.
 
 ## Overview
 
@@ -84,7 +84,7 @@ npm install @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android
 ### 2. Initialize Capacitor
 
 ```bash
-npx cap init "Stellar Save" "com.stellarsave.app" --web-dir=dist
+npx cap init "SorobanSave" "com.sorobansave.app" --web-dir=dist
 npx cap add ios
 npx cap add android
 ```
@@ -174,7 +174,7 @@ base64 -i certificate.p12 -o certificate.txt
 # 1. Generate keystore
 keytool -genkey -v \
   -keystore release.keystore \
-  -alias stellarsave \
+  -alias sorobansave \
   -keyalg RSA \
   -keysize 2048 \
   -validity 10000
@@ -185,7 +185,7 @@ base64 -i release.keystore -o keystore.txt
 
 # 3. Remember your passwords!
 # ANDROID_KEYSTORE_PASSWORD: password you entered for keystore
-# ANDROID_KEY_ALIAS: stellarsave (or what you used)
+# ANDROID_KEY_ALIAS: sorobansave (or what you used)
 # ANDROID_KEY_PASSWORD: password you entered for key
 ```
 
@@ -584,4 +584,4 @@ frontend/
 
 ## License
 
-This CI/CD setup is part of Stellar Save and follows the project's MIT License.
+This CI/CD setup is part of SorobanSave and follows the project's MIT License.

@@ -1,12 +1,12 @@
 # First-Time Contributor Guide
 
-Welcome to Stellar-Save! This guide walks you through making your first contribution from zero — no prior Stellar or Soroban experience required.
+Welcome to SorobanSave! This guide walks you through making your first contribution from zero — no prior Stellar or Soroban experience required.
 
 ---
 
-## What is Stellar-Save?
+## What is SorobanSave?
 
-Stellar-Save is a decentralized **ROSCA** (Rotating Savings and Credit Association) — a community savings system common in Nigeria and across Africa where members contribute a fixed amount each cycle and take turns receiving the full pool. We have built this on the Stellar blockchain using Soroban smart contracts, making it trustless, transparent, and accessible globally.
+SorobanSave is a decentralized **ROSCA** (Rotating Savings and Credit Association) — a community savings system common in Nigeria and across Africa where members contribute a fixed amount each cycle and take turns receiving the full pool. We have built this on the Stellar blockchain using Soroban smart contracts, making it trustless, transparent, and accessible globally.
 
 ---
 
@@ -72,14 +72,14 @@ nvm use 20
 2. Clone your fork:
 
 ```bash
-git clone https://github.com/<your-username>/Stellar-Save.git
-cd Stellar-Save
+git clone https://github.com/<your-username>/SorobanSave.git
+cd SorobanSave
 ```
 
 3. Add the upstream remote so you can pull future changes:
 
 ```bash
-git remote add upstream https://github.com/Xoulomon/Stellar-Save.git
+git remote add upstream https://github.com/Tekinvest/SorobanSave.git
 ```
 
 ### Install dependencies
@@ -99,7 +99,7 @@ cd frontend && npm install && cd ..
 cargo build --target wasm32-unknown-unknown --release
 
 # Run contract tests
-cargo test -p stellar-save
+cargo test -p soroban-save
 
 # Run frontend tests
 cd frontend && npm test run && cd ..
@@ -137,7 +137,7 @@ Keep changes focused. A PR that does one thing is much easier to review than one
 ```bash
 cargo fmt
 cargo clippy -- -D warnings
-cargo test -p stellar-save
+cargo test -p soroban-save
 ```
 
 **For frontend changes**, run:
@@ -172,7 +172,7 @@ A Husky hook will validate your commit message format automatically. If it rejec
 git push -u origin docs/improve-faq
 ```
 
-Then open a pull request on GitHub from your fork to `Xoulomon/Stellar-Save:main`. Fill in the PR template completely — the more context you provide, the faster the review.
+Then open a pull request on GitHub from your fork to `Xoulomon/SorobanSave:main`. Fill in the PR template completely — the more context you provide, the faster the review.
 
 ---
 
@@ -180,7 +180,7 @@ Then open a pull request on GitHub from your fork to `Xoulomon/Stellar-Save:main
 
 ### Smart contract structure
 
-The main contract lives in `contracts/stellar-save/src/`. Key files to read first:
+The main contract lives in `contracts/soroban-save/src/`. Key files to read first:
 
 | File | What it does |
 |---|---|
@@ -244,7 +244,7 @@ cargo build --target wasm32-unknown-unknown --release
 cargo test --workspace
 
 # Run contract tests with output
-cargo test -p stellar-save -- --nocapture
+cargo test -p soroban-save -- --nocapture
 
 # Format Rust code
 cargo fmt
@@ -272,7 +272,7 @@ cd frontend && npm run lint
 
 ## Still stuck?
 
-- Open a [GitHub Discussion](https://github.com/Xoulomon/Stellar-Save/discussions) — no question is too small
+- Open a [GitHub Discussion](https://github.com/Tekinvest/SorobanSave/discussions) — no question is too small
 - Comment on the issue you are working on
 - Reach out on Telegram: [@Xoulomon](https://t.me/Xoulomon)
 

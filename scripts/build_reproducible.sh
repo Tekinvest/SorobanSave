@@ -11,9 +11,9 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-CONTRACT_DIR="contracts/stellar-save"
-WASM_OUT="target/wasm32-unknown-unknown/release/stellar_save.wasm"
-CHECKSUM_FILE="$CONTRACT_DIR/stellar_save.wasm.sha256"
+CONTRACT_DIR="contracts/soroban-save"
+WASM_OUT="target/wasm32-unknown-unknown/release/soroban_save.wasm"
+CHECKSUM_FILE="$CONTRACT_DIR/soroban_save.wasm.sha256"
 
 # Pin the exact Rust toolchain from rust-toolchain.toml so the Docker build
 # uses the same version.  Map "stable" → "latest" for the Docker image tag
@@ -37,11 +37,11 @@ fi
 
 # Build inside a clean, pinned container.
 # The workspace root Cargo.toml includes sibling contracts that may have broken
-# dependencies, so we build stellar-save in isolation using a temporary workspace.
+# dependencies, so we build soroban-save in isolation using a temporary workspace.
 # SOURCE_DATE_EPOCH=0 and CARGO_INCREMENTAL=0 are the two main knobs for
 # reproducibility.
 docker run --rm \
-  -v "$REPO_ROOT/contracts/stellar-save:/stellar-save-src:ro" \
+  -v "$REPO_ROOT/contracts/soroban-save:/soroban-save-src:ro" \
   -v "$REPO_ROOT/target:/build-out" \
   -e SOURCE_DATE_EPOCH=0 \
   -e CARGO_INCREMENTAL=0 \
@@ -50,20 +50,20 @@ docker run --rm \
     set -euo pipefail
     rustup target add wasm32-unknown-unknown
 
-    # Build stellar-save in an isolated workspace to avoid broken sibling contracts
+    # Build soroban-save in an isolated workspace to avoid broken sibling contracts
     mkdir -p /build
-    cp -r /stellar-save-src/. /build/stellar-save/
+    cp -r /soroban-save-src/. /build/soroban-save/
 
     cat > /build/Cargo.toml << 'TOML'
 [workspace]
 resolver = \"2\"
-members = [\"stellar-save\"]
+members = [\"soroban-save\"]
 
 [workspace.package]
 version = \"0.1.0\"
 edition = \"2021\"
 license = \"MIT\"
-repository = \"https://github.com/Xoulomon/Stellar-Save\"
+repository = \"https://github.com/Tekinvest/SorobanSave\"
 
 [workspace.dependencies]
 soroban-sdk = \"23.0.3\"
@@ -85,8 +85,8 @@ TOML
       --release
 
     mkdir -p /build-out/wasm32-unknown-unknown/release
-    cp /build/target/wasm32-unknown-unknown/release/stellar_save.wasm \
-       /build-out/wasm32-unknown-unknown/release/stellar_save.wasm
+    cp /build/target/wasm32-unknown-unknown/release/soroban_save.wasm \
+       /build-out/wasm32-unknown-unknown/release/soroban_save.wasm
   "
 
 echo "==> Build complete: $WASM_OUT"

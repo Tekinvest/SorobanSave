@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, develop]
     paths:
-      - 'contracts/stellar-save/**'
+      - 'contracts/soroban-save/**'
       - 'Cargo.toml'
       - 'Cargo.lock'
       - 'rust-toolchain.toml'
@@ -12,7 +12,7 @@ on:
   pull_request:
     branches: [main, develop]
     paths:
-      - 'contracts/stellar-save/**'
+      - 'contracts/soroban-save/**'
       - 'Cargo.toml'
       - 'Cargo.lock'
       - 'rust-toolchain.toml'
@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   clippy:
-    name: Clippy — stellar-save
+    name: Clippy — soroban-save
     runs-on: ubuntu-latest
 
     steps:
@@ -44,7 +44,7 @@ jobs:
         run: |
           cargo clippy \
             --locked \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             --all-targets \
             -- -D warnings
 
@@ -52,5 +52,5 @@ jobs:
         run: |
           cargo test \
             --locked \
-            --manifest-path contracts/stellar-save/Cargo.toml \
+            --manifest-path contracts/soroban-save/Cargo.toml \
             -- --test-threads=1

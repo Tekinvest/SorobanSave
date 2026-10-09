@@ -173,7 +173,7 @@ export class OnChainMonitor {
             'Consider calling pause_group on the affected contract until the payout is manually verified.',
           metadata: { txHash: p.txHash, amountXlm: xlm, ledgerSeq: p.ledgerSeq },
           runbook:
-            'https://github.com/ComputerOracle/Stellar-Save/blob/main/docs/runbooks/on-chain-large-payout.md',
+            'https://github.com/Tekinvest/SorobanSave/blob/main/docs/runbooks/on-chain-large-payout.md',
         });
       }
     }
@@ -186,7 +186,7 @@ export class OnChainMonitor {
         message: `${payouts.length} payouts in the last ${this.cfg.rollingWindowMs / 60000} minutes`,
         metadata: { count: payouts.length, windowMinutes: this.cfg.rollingWindowMs / 60000 },
         runbook:
-          'https://github.com/ComputerOracle/Stellar-Save/blob/main/docs/runbooks/on-chain-payout-spike.md',
+          'https://github.com/Tekinvest/SorobanSave/blob/main/docs/runbooks/on-chain-payout-spike.md',
       });
     }
 
@@ -206,7 +206,7 @@ export class OnChainMonitor {
           : {}),
         metadata: { count: errors.length },
         runbook:
-          'https://github.com/ComputerOracle/Stellar-Save/blob/main/docs/runbooks/on-chain-error-spike.md',
+          'https://github.com/Tekinvest/SorobanSave/blob/main/docs/runbooks/on-chain-error-spike.md',
       });
     }
 
@@ -218,7 +218,7 @@ export class OnChainMonitor {
         message: `${reverts.length} transaction reverts in the last ${this.cfg.rollingWindowMs / 60000} minutes`,
         metadata: { count: reverts.length },
         runbook:
-          'https://github.com/ComputerOracle/Stellar-Save/blob/main/docs/runbooks/on-chain-reverts.md',
+          'https://github.com/Tekinvest/SorobanSave/blob/main/docs/runbooks/on-chain-reverts.md',
       });
     }
 
@@ -230,7 +230,7 @@ export class OnChainMonitor {
         message: `Admin action detected: ${a.eventType} (tx: ${a.txHash})`,
         metadata: { eventType: a.eventType, txHash: a.txHash, ledgerSeq: a.ledgerSeq },
         runbook:
-          'https://github.com/ComputerOracle/Stellar-Save/blob/main/docs/runbooks/on-chain-admin-action.md',
+          'https://github.com/Tekinvest/SorobanSave/blob/main/docs/runbooks/on-chain-admin-action.md',
       });
     }
 

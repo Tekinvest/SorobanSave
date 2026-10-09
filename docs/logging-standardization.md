@@ -23,5 +23,5 @@ Unstructured and unmetered logging creates noise, inflates log storage ingestion
 3. **ELK Sample & Ingestion Volume Impact**:
    - Evaluated against `monitoring/elk/filebeat.yml` pipeline:
      - Log lines per warming cycle reduced from periodic stdout floods to single debug-level entries.
-     - Production log stream contains only structured JSON logs with correlation IDs (`requestId`, `traceId`) and service metadata (`service: "stellar-save-backend"`).
+     - Production log stream contains only structured JSON logs with correlation IDs (`requestId`, `traceId`) and service metadata (`service: "soroban-save-backend"`).
      - Noise reduction: ~40% reduction in debug-level output volume on busy event loops.

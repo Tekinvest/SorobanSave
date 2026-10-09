@@ -1,5 +1,5 @@
 /**
- * Interest and yield calculation utilities for Stellar Save.
+ * Interest and yield calculation utilities for SorobanSave.
  *
  * These functions compute accrued interest / yield on a principal balance
  * over a time period using a simple-interest model (P × r × t), where

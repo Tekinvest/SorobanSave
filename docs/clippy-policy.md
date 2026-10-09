@@ -1,6 +1,6 @@
-# Clippy Policy — contracts/stellar-save
+# Clippy Policy — contracts/soroban-save
 
-This document describes the Clippy lint policy for the `stellar-save` Soroban
+This document describes the Clippy lint policy for the `soroban-save` Soroban
 smart contract, how to run the linter, the pre-push hook setup, and how to handle
 justified exceptions.
 
@@ -8,10 +8,10 @@ justified exceptions.
 
 ## Policy
 
-All code in `contracts/stellar-save` must pass:
+All code in `contracts/soroban-save` must pass:
 
 ```bash
-cargo clippy --locked --manifest-path contracts/stellar-save/Cargo.toml --all-targets -- -D warnings
+cargo clippy --locked --manifest-path contracts/soroban-save/Cargo.toml --all-targets -- -D warnings
 ```
 
 **Warnings are treated as errors** (via `-D warnings`). A PR cannot be merged if
@@ -25,7 +25,7 @@ Clippy reports any warning.
 # From the workspace root
 cargo +1.94.1 clippy \
   --locked \
-  --manifest-path contracts/stellar-save/Cargo.toml \
+  --manifest-path contracts/soroban-save/Cargo.toml \
   --all-targets \
   -- -D warnings
 ```
@@ -35,8 +35,8 @@ Auto-fix suggestions (safe fixes only):
 ```bash
 cargo +1.94.1 clippy --fix \
   --locked \
-  --manifest-path contracts/stellar-save/Cargo.toml \
-  --lib -p stellar-save
+  --manifest-path contracts/soroban-save/Cargo.toml \
+  --lib -p soroban-save
 ```
 
 > The project pins to **Rust 1.81** via `rust-toolchain.toml`. Clippy CI uses

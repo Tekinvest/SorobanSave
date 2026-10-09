@@ -62,7 +62,7 @@ const REMINDER_TEMPLATES = {
           Make Contribution
         </a>
         <p style="margin-top:24px; color:#888; font-size:12px;">
-          You're receiving this because you're a member of {{groupName}} on Stellar-Save.<br/>
+          You're receiving this because you're a member of {{groupName}} on SorobanSave.<br/>
           <a href="{{unsubscribeUrl}}">Unsubscribe from reminders</a>
         </p>
       </div>
@@ -86,7 +86,7 @@ const REMINDER_TEMPLATES = {
           Contribute Now
         </a>
         <p style="margin-top:24px; color:#888; font-size:12px;">
-          You're receiving this because you're a member of {{groupName}} on Stellar-Save.<br/>
+          You're receiving this because you're a member of {{groupName}} on SorobanSave.<br/>
           <a href="{{unsubscribeUrl}}">Unsubscribe from reminders</a>
         </p>
       </div>

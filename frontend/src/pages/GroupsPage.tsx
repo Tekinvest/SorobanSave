@@ -53,7 +53,7 @@ export default function GroupsPage() {
     <AppLayout
       title="Groups"
       subtitle="Browse and join savings groups"
-      footerText="Stellar Save - Built for transparent, on-chain savings"
+      footerText="SorobanSave - Built for transparent, on-chain savings"
       navItems={[
         { key: 'create', label: 'Create Group', onClick: () => navigate(ROUTES.GROUP_CREATE) },
       ]}

@@ -51,4 +51,4 @@ For the full audited function table see `docs/admin-actions.md`.
 | `extend_deadline` | `caller.require_auth()` + creator check | Extends cycle deadline |
 | `set_invitation_only` | `creator.require_auth()` | Toggles invite-only mode |
 
-Authorization tests for all functions above are in `contracts/stellar-save/src/admin_actions_tests.rs`.
+Authorization tests for all functions above are in `contracts/soroban-save/src/admin_actions_tests.rs`.

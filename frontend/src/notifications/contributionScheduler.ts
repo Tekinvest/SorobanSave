@@ -31,7 +31,7 @@ interface ScheduledReminder {
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const STORAGE_KEY = 'stellar_save_reminders';
+const STORAGE_KEY = 'soroban_save_reminders';
 const OFFSETS_MS: Array<{ label: string; ms: number }> = [
   { label: '24h', ms: 24 * 60 * 60 * 1000 },
   { label: '1h', ms: 60 * 60 * 1000 },

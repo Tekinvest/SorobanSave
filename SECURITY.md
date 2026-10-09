@@ -12,7 +12,7 @@
 
 **Do not open a public GitHub issue for security vulnerabilities.**
 
-Report vulnerabilities via [GitHub Private Security Advisories](https://github.com/Xoulomon/Stellar-Save/security/advisories/new).
+Report vulnerabilities via [GitHub Private Security Advisories](https://github.com/Tekinvest/SorobanSave/security/advisories/new).
 
 Include:
 

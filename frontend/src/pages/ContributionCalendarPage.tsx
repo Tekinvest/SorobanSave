@@ -20,7 +20,7 @@ export default function ContributionCalendarPage() {
     <AppLayout
       title="Contribution Calendar"
       subtitle="View deadlines and contribution history"
-      footerText="Stellar Save - Built for transparent, on-chain savings"
+      footerText="SorobanSave - Built for transparent, on-chain savings"
     >
       <AppCard>
         {isLoading && <LoadingState message="Loading contributions…" />}

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This feature adds a `get_current_timestamp` function to the `StellarSaveContract` in `contracts/stellar-save/src/lib.rs`. The function wraps `env.ledger().timestamp()` and exposes it both as a public contract method (callable by external clients) and as an internal helper (callable by other contract functions).
+This feature adds a `get_current_timestamp` function to the `SorobanSaveContract` in `contracts/soroban-save/src/lib.rs`. The function wraps `env.ledger().timestamp()` and exposes it both as a public contract method (callable by external clients) and as an internal helper (callable by other contract functions).
 
 The motivation is to establish a single, canonical source of time within the contract. Currently, several functions (`create_group`, `record_contribution`, `pause_contract`, etc.) each call `env.ledger().timestamp()` inline. Centralizing this behind a named function improves readability, makes the intent explicit, and simplifies future auditing of all time-dependent logic.
 
@@ -10,7 +10,7 @@ The implementation is intentionally minimal: no storage reads or writes, no auth
 
 ## Architecture
 
-The function lives on `StellarSaveContract` in `lib.rs`, consistent with all other public contract methods. No new modules or files are required.
+The function lives on `SorobanSaveContract` in `lib.rs`, consistent with all other public contract methods. No new modules or files are required.
 
 ```mermaid
 graph TD
@@ -43,7 +43,7 @@ pub fn get_current_timestamp(env: Env) -> u64 {
 }
 ```
 
-This method is added to the `#[contractimpl]` block on `StellarSaveContract`.
+This method is added to the `#[contractimpl]` block on `SorobanSaveContract`.
 
 ### Internal Helper Usage
 
@@ -98,7 +98,7 @@ This property subsumes several related criteria: it implies idempotence (two cal
 - It does not check pause state, so `ContractPaused` is never returned.
 - `env.ledger().timestamp()` is a host function that always succeeds within a valid Soroban execution context.
 
-The return type is `u64` (not `Result<u64, StellarSaveError>`), reflecting the infallibility of the operation.
+The return type is `u64` (not `Result<u64, SorobanSaveError>`), reflecting the infallibility of the operation.
 
 ## Testing Strategy
 
@@ -124,7 +124,7 @@ proptest! {
     fn prop_get_current_timestamp_returns_ledger_value(t in 1u64..=u64::MAX) {
         let env = Env::default();
         env.ledger().with_mut(|l| l.timestamp = t);
-        let result = StellarSaveContract::get_current_timestamp(env);
+        let result = SorobanSaveContract::get_current_timestamp(env);
         prop_assert_eq!(result, t);
     }
 }

@@ -1,6 +1,6 @@
 # API Rate Limiting & Quota Management Guide
 
-This guide explains how Stellar-Save enforces rate limits, how to read the
+This guide explains how SorobanSave enforces rate limits, how to read the
 response headers, and how to design clients that handle throttling gracefully.
 
 ---

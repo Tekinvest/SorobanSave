@@ -1,6 +1,6 @@
 /**
  * Retry behaviour of the IPFS client, now backed by the shared `withRetry`
- * utility from `@stellar-save/shared-utils` (issue #1699).
+ * utility from `@soroban-save/shared-utils` (issue #1699).
  *
  * The pre-existing `src/ipfs/client.test.ts` sits outside this directory, so
  * jest's `testMatch` (`src/tests/**`) never runs it, and it depends on

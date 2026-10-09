@@ -2,13 +2,13 @@
 
 ## Tool choice
 
-**proptest** (property-based testing) — already a dev-dependency in `contracts/stellar-save/Cargo.toml`. Runs under stable Rust with `cargo test`, no nightly or external toolchain required.
+**proptest** (property-based testing) — already a dev-dependency in `contracts/soroban-save/Cargo.toml`. Runs under stable Rust with `cargo test`, no nightly or external toolchain required.
 
 Echidna and Foundry are EVM-specific and do not apply to Soroban/Rust contracts. `cargo-fuzz` (libFuzzer) requires nightly and a separate build target; proptest provides equivalent coverage for invariant testing with simpler CI integration.
 
 ## Test file
 
-`contracts/stellar-save/src/fuzz_tests.rs` — registered as a `#[cfg(test)]` module in `lib.rs`.
+`contracts/soroban-save/src/fuzz_tests.rs` — registered as a `#[cfg(test)]` module in `lib.rs`.
 
 ## Properties tested
 
@@ -38,10 +38,10 @@ Echidna and Foundry are EVM-specific and do not apply to Soroban/Rust contracts.
 
 ```bash
 # Default (256 cases per test)
-cargo test --manifest-path contracts/stellar-save/Cargo.toml --lib fuzz_tests
+cargo test --manifest-path contracts/soroban-save/Cargo.toml --lib fuzz_tests
 
 # Extended run (10 000 cases)
-PROPTEST_CASES=10000 cargo test --manifest-path contracts/stellar-save/Cargo.toml --lib fuzz_tests
+PROPTEST_CASES=10000 cargo test --manifest-path contracts/soroban-save/Cargo.toml --lib fuzz_tests
 ```
 
 ## CI integration
@@ -59,7 +59,7 @@ PROPTEST_CASES=10000 cargo test --manifest-path contracts/stellar-save/Cargo.tom
 
 ## Regression corpus
 
-When proptest finds a failing input it writes a minimal reproduction to `contracts/stellar-save/.proptest-regressions/`. This directory is uploaded as a CI artifact and should be committed to the repo so failures are always replayed on future runs.
+When proptest finds a failing input it writes a minimal reproduction to `contracts/soroban-save/.proptest-regressions/`. This directory is uploaded as a CI artifact and should be committed to the repo so failures are always replayed on future runs.
 
 ## Extending the suite
 

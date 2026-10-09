@@ -3,7 +3,7 @@ import { Registry, Counter, Histogram, Gauge, collectDefaultMetrics } from 'prom
 import type { Request, Response, NextFunction } from 'express';
 
 export const registry = new Registry();
-registry.setDefaultLabels({ app: 'stellar-save-backend' });
+registry.setDefaultLabels({ app: 'soroban-save-backend' });
 collectDefaultMetrics({ register: registry });
 
 // ── Counters ──────────────────────────────────────────────────────────────────
@@ -37,7 +37,7 @@ export const backupRestoreDrillDuration = new Histogram({
 });
 
 export const backupRestoreLastSuccessfulTimestamp = new Gauge({
-  name: 'stellar_save_last_successful_backup_restore_timestamp',
+  name: 'soroban_save_last_successful_backup_restore_timestamp',
   help: 'Unix timestamp of the last successful restore drill',
   registers: [registry],
 });

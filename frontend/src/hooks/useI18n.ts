@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { SUPPORTED_LANGUAGES, type LanguageCode } from '../i18n';
 
-const STORAGE_KEY = 'stellar_save_language';
+const STORAGE_KEY = 'soroban_save_language';
 
 export function useI18n() {
   const { t, i18n } = useTranslation();

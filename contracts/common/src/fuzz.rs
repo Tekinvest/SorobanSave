@@ -1,4 +1,4 @@
-//! Shared fuzzing harness for Stellar-Save contracts.
+//! Shared fuzzing harness for SorobanSave contracts.
 //!
 //! Provides deterministic pseudo-random input generation and execution
 //! over a defined iteration budget without requiring external crates.

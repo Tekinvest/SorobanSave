@@ -3,7 +3,7 @@
 **Related to:** Issue #1557, Issue #5  
 **Last Updated:** 2026-08-31
 
-This document establishes conventions for creating, testing, and managing database migrations in the Stellar-Save project.
+This document establishes conventions for creating, testing, and managing database migrations in the SorobanSave project.
 
 ---
 
@@ -21,7 +21,7 @@ This document establishes conventions for creating, testing, and managing databa
 
 ## Overview
 
-Database migrations in Stellar-Save follow these principles:
+Database migrations in SorobanSave follow these principles:
 
 1. **Every migration MUST have a rollback** (down migration)
 2. **Migrations MUST be idempotent** (safe to run multiple times)
@@ -532,12 +532,12 @@ COMMIT;
 
 **Apply a specific migration:**
 ```bash
-psql -U postgres -d stellar_save -f database/migrations/001_create_events_table.sql
+psql -U postgres -d soroban_save -f database/migrations/001_create_events_table.sql
 ```
 
 **Rollback a specific migration:**
 ```bash
-psql -U postgres -d stellar_save -f database/migrations/001_create_events_table.down.sql
+psql -U postgres -d soroban_save -f database/migrations/001_create_events_table.down.sql
 ```
 
 **Test all migrations:**
@@ -558,8 +558,8 @@ npm test
 - [Database README](README.md) - Database structure overview
 - [Index Review](INDEX_REVIEW.md) - Index optimization rationale
 - [Backend README](../backend/README.md) - Prisma migrations
-- [Issue #1557](https://github.com/Xoulomon/Stellar-Save/issues/1557) - Migration rollback tests
-- [Issue #5](https://github.com/Xoulomon/Stellar-Save/issues/5) - Migration conventions
+- [Issue #1557](https://github.com/Tekinvest/SorobanSave/issues/1557) - Migration rollback tests
+- [Issue #5](https://github.com/Tekinvest/SorobanSave/issues/5) - Migration conventions
 
 ---
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Environment Configuration Manager
-# Manages environment-specific settings for Stellar-Save deployments
+# Manages environment-specific settings for SorobanSave deployments
 
 set -e
 
@@ -11,20 +11,20 @@ PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 declare -A ENV_CONFIG=(
   ["dev.network"]="testnet"
   ["dev.rpc_url"]="https://soroban-testnet.stellar.org"
-  ["dev.frontend_url"]="https://dev.stellar-save.app"
-  ["dev.api_base"]="https://api-dev.stellar-save.app"
+  ["dev.frontend_url"]="https://dev.soroban-save.app"
+  ["dev.api_base"]="https://api-dev.soroban-save.app"
   ["dev.auto_deploy"]="true"
   
   ["staging.network"]="testnet"
   ["staging.rpc_url"]="https://soroban-testnet.stellar.org"
-  ["staging.frontend_url"]="https://staging.stellar-save.app"
-  ["staging.api_base"]="https://api-staging.stellar-save.app"
+  ["staging.frontend_url"]="https://staging.soroban-save.app"
+  ["staging.api_base"]="https://api-staging.soroban-save.app"
   ["staging.auto_deploy"]="true"
   
   ["production.network"]="mainnet"
   ["production.rpc_url"]="https://soroban-rpc.mainnet.stellar.gateway.fm"
-  ["production.frontend_url"]="https://stellar-save.app"
-  ["production.api_base"]="https://api.stellar-save.app"
+  ["production.frontend_url"]="https://soroban-save.app"
+  ["production.api_base"]="https://api.soroban-save.app"
   ["production.auto_deploy"]="false"
 )
 

@@ -1,6 +1,6 @@
-# Stellar-Save Interactive Demo Script
+# SorobanSave Interactive Demo Script
 
-This guide provides a step-by-step walkthrough for demonstrating the Stellar-Save ROSCA platform.
+This guide provides a step-by-step walkthrough for demonstrating the SorobanSave ROSCA platform.
 
 ## Prerequisites
 
@@ -41,11 +41,11 @@ stellar keys fund diana --network testnet
 
 ```bash
 # Build the contract
-cargo build --manifest-path contracts/stellar-save/Cargo.toml --target wasm32-unknown-unknown --release
+cargo build --manifest-path contracts/soroban-save/Cargo.toml --target wasm32-unknown-unknown --release
 
 # Deploy to testnet
 stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/stellar_save.wasm \
+  --wasm target/wasm32-unknown-unknown/release/soroban_save.wasm \
   --source alice \
   --network testnet
 ```

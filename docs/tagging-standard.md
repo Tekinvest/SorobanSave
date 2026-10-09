@@ -6,7 +6,7 @@ All AWS resources provisioned by Terraform must carry the six cost-allocation ta
 
 | Tag key | Example values | Set by |
 |---------|---------------|--------|
-| `Project` | `stellar-save` | Provider `default_tags` |
+| `Project` | `soroban-save` | Provider `default_tags` |
 | `Environment` | `staging` \| `production` | Provider `default_tags` |
 | `ManagedBy` | `terraform` | Provider `default_tags` |
 | `CostCenter` | `engineering` | Provider `default_tags` |
@@ -23,7 +23,7 @@ Pass `Service` as part of the `tags` argument merged with the env's `local.commo
 # infra/envs/production/main.tf
 locals {
   common_tags = {
-    Project     = "stellar-save"
+    Project     = "soroban-save"
     Environment = "production"
     ManagedBy   = "terraform"
     CostCenter  = "engineering"
@@ -93,7 +93,7 @@ Once tags are propagated (up to 24 hours after `terraform apply`), navigate to [
 
 - **Tag: Environment** — compare staging vs. production total spend
 - **Tag: Service** — compare ECS / RDS / CloudFront / CodeDeploy costs
-- **Tag: Project** — isolate stellar-save costs from any shared account resources
+- **Tag: Project** — isolate soroban-save costs from any shared account resources
 
 ## Budget alerts
 
@@ -116,7 +116,7 @@ budget_alert_emails   = ["platform@example.com", "finance@example.com"]
 
 ## Cost dashboard
 
-A CloudWatch dashboard named `stellar-save-costs-<environment>` is provisioned by `infra/modules/cost-dashboard`. It shows:
+A CloudWatch dashboard named `soroban-save-costs-<environment>` is provisioned by `infra/modules/cost-dashboard`. It shows:
 
 - Live `AWS/Billing` EstimatedCharges gauge vs. the budget
 - Per-service billing gauges (ECS, RDS)
@@ -124,4 +124,4 @@ A CloudWatch dashboard named `stellar-save-costs-<environment>` is provisioned b
 - RDS CPU, free storage, and IOPS (storage/IOPS cost drivers)
 - CloudFront requests and data transfer (egress cost driver)
 
-Open it in the AWS Console: **CloudWatch → Dashboards → stellar-save-costs-production**.
+Open it in the AWS Console: **CloudWatch → Dashboards → soroban-save-costs-production**.

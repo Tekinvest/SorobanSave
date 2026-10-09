@@ -9,7 +9,7 @@
 #   ROLLBACK_ARTIFACT_RUN_ID — GitHub Actions run ID whose WASM to restore
 #   DEPLOYER_SECRET          — Stellar secret key for the deployer account
 #   GH_TOKEN                 — GitHub token with actions:read scope
-#   REPO                     — owner/repo  (e.g. Xoulomon/Stellar-Save)
+#   REPO                     — owner/repo  (e.g. Xoulomon/SorobanSave)
 set -euo pipefail
 
 : "${STELLAR_NETWORK:?}"

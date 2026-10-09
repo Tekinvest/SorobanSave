@@ -1,6 +1,6 @@
 # Disaster Recovery
 
-This document is the master reference for Stellar-Save disaster recovery. It covers failure scenarios, recovery procedures, tooling, and testing.
+This document is the master reference for SorobanSave disaster recovery. It covers failure scenarios, recovery procedures, tooling, and testing.
 
 ## RTO / RPO Targets
 

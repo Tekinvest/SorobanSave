@@ -6,7 +6,7 @@
 // Set default test database URL if not provided
 if (!process.env.TEST_DATABASE_URL) {
   process.env.TEST_DATABASE_URL = 
-    'postgresql://postgres:postgres@localhost:5433/stellar_save_test';
+    'postgresql://postgres:postgres@localhost:5433/soroban_save_test';
 }
 
 // Increase Jest timeout for database operations

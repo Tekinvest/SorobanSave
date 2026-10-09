@@ -4,7 +4,7 @@ import { prisma } from './prisma_client';
 
 /**
  * Notification Service
- * Handles sending email and push notifications for Stellar-Save
+ * Handles sending email and push notifications for SorobanSave
  * Integrates with SendGrid for email and Firebase/OneSignal for push notifications
  *
  * Refactored for dependency injection (Issue #1701):
@@ -277,7 +277,7 @@ export class NotificationService {
               notification.recipient,
               notification.templateKey,
               notification.templateData,
-              notification.templateData.title || 'Stellar Save',
+              notification.templateData.title || 'SorobanSave',
               notification.templateData.body || ''
             );
           }

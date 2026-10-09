@@ -160,7 +160,7 @@ All `.ptau` and `.zkey` files must have their hashes committed in `zk/checksums.
 
 ## On-Chain Verifier Test Coverage (Issue #1327)
 
-Dedicated unit tests for the on-chain ZK verifier are in `contracts/stellar-save/src/zk_tests.rs`.
+Dedicated unit tests for the on-chain ZK verifier are in `contracts/soroban-save/src/zk_tests.rs`.
 
 ### Test Cases
 

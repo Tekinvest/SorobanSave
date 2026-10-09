@@ -65,7 +65,7 @@ test.describe('Offline Contribution Queue', () => {
       try {
         const db = new (window.indexedDB as any);
         return new Promise((resolve) => {
-          const request = indexedDB.open('stellar-save');
+          const request = indexedDB.open('soroban-save');
           request.onsuccess = () => {
             const database = request.result;
             const tx = database.transaction(['syncQueue'], 'readonly');
@@ -115,7 +115,7 @@ test.describe('Offline Contribution Queue', () => {
     const remainingQueued = await page.evaluate(async () => {
       try {
         return new Promise((resolve) => {
-          const request = indexedDB.open('stellar-save');
+          const request = indexedDB.open('soroban-save');
           request.onsuccess = () => {
             const database = request.result;
             const tx = database.transaction(['syncQueue'], 'readonly');
@@ -155,7 +155,7 @@ test.describe('Offline Contribution Queue', () => {
     // Get initial queue count
     const initialCount = await page.evaluate(async () => {
       return new Promise((resolve) => {
-        const request = indexedDB.open('stellar-save');
+        const request = indexedDB.open('soroban-save');
         request.onsuccess = () => {
           const database = request.result;
           const tx = database.transaction(['syncQueue'], 'readonly');
@@ -175,7 +175,7 @@ test.describe('Offline Contribution Queue', () => {
     // Queue should persist
     const postReloadCount = await page.evaluate(async () => {
       return new Promise((resolve) => {
-        const request = indexedDB.open('stellar-save');
+        const request = indexedDB.open('soroban-save');
         request.onsuccess = () => {
           const database = request.result;
           const tx = database.transaction(['syncQueue'], 'readonly');
@@ -225,7 +225,7 @@ test.describe('Offline Contribution Queue', () => {
     // Verify multiple items are queued
     const queuedCount = await page.evaluate(async () => {
       return new Promise((resolve) => {
-        const request = indexedDB.open('stellar-save');
+        const request = indexedDB.open('soroban-save');
         request.onsuccess = () => {
           const database = request.result;
           const tx = database.transaction(['syncQueue'], 'readonly');

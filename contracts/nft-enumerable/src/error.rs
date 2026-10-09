@@ -2,10 +2,10 @@
 //!
 //! This contract carried no failure enum of its own and leaned entirely on the
 //! traps raised inside `stellar-tokens`. It now exposes the canonical enum from
-//! `stellar-save-common` so any guard added here traps with the same codes the
+//! `soroban-save-common` so any guard added here traps with the same codes the
 //! rest of the workspace uses, rather than growing a fifth private duplicate.
 
-pub use stellar_save_common::{CommonResult as Result, Error};
+pub use soroban_save_common::{CommonResult as Result, Error};
 
 // === Tests
 

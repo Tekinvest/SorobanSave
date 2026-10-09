@@ -1,5 +1,5 @@
 # Onboarding flow — covers app launch, welcome screen, and wallet connect prompt
-appId: com.stellarsave.app
+appId: com.sorobansave.app
 ---
 # Step 1: Launch the app fresh
 - launchApp:
@@ -9,7 +9,7 @@ appId: com.stellarsave.app
 - assertVisible:
     id: "welcome-screen"
 - assertVisible:
-    text: "Stellar Save"
+    text: "SorobanSave"
 
 # Step 3: Headline and subtitle present
 - assertVisible:

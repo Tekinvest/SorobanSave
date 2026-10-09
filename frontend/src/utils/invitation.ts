@@ -41,7 +41,7 @@ export function getInviteShareCount(groupId: string): number {
 
 /** Build social sharing URLs */
 export function buildShareUrls(inviteLink: string, groupName: string) {
-  const text = encodeURIComponent(`Join my savings group "${groupName}" on Stellar Save!`);
+  const text = encodeURIComponent(`Join my savings group "${groupName}" on SorobanSave!`);
   const url = encodeURIComponent(inviteLink);
   return {
     twitter: `https://twitter.com/intent/tweet?text=${text}&url=${url}`,

@@ -1,6 +1,6 @@
 # Infrastructure as Code (IaC)
 
-Stellar-Save infrastructure is defined with **Terraform** for reproducible, version-controlled deployments.
+SorobanSave infrastructure is defined with **Terraform** for reproducible, version-controlled deployments.
 
 ## Structure
 
@@ -10,8 +10,8 @@ infra/
 ├── modules/
 │   └── frontend/       # Reusable S3 + CloudFront module
 └── envs/
-    ├── staging/        # staging.stellar-save.app  (Stellar testnet)
-    └── production/     # stellar-save.app          (Stellar mainnet)
+    ├── staging/        # staging.soroban-save.app  (Stellar testnet)
+    └── production/     # soroban-save.app          (Stellar mainnet)
 ```
 
 ## Resources managed
@@ -26,8 +26,8 @@ Remote state is stored in S3 with DynamoDB locking to prevent concurrent applies
 
 | Resource | Name |
 |----------|------|
-| S3 bucket | `stellar-save-terraform-state` |
-| DynamoDB table | `stellar-save-terraform-locks` |
+| S3 bucket | `soroban-save-terraform-state` |
+| DynamoDB table | `soroban-save-terraform-locks` |
 | State key (staging) | `staging/terraform.tfstate` |
 | State key (production) | `production/terraform.tfstate` |
 
@@ -72,8 +72,8 @@ The `.github/workflows/infra.yml` workflow:
 |------|------|-------------|
 | `AWS_ACCESS_KEY_ID` | Secret | AWS credentials |
 | `AWS_SECRET_ACCESS_KEY` | Secret | AWS credentials |
-| `STAGING_ACM_CERT_ARN` | Variable | ACM cert for `staging.stellar-save.app` |
-| `PROD_ACM_CERT_ARN` | Secret | ACM cert for `stellar-save.app` |
+| `STAGING_ACM_CERT_ARN` | Variable | ACM cert for `staging.soroban-save.app` |
+| `PROD_ACM_CERT_ARN` | Secret | ACM cert for `soroban-save.app` |
 
 ## Running tests locally
 

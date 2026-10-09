@@ -19,7 +19,7 @@ import { rpcServer } from '../lib/rpcClient';
 const NETWORK_PASSPHRASE =
   env.VITE_STELLAR_NETWORK === 'mainnet' ? Networks.PUBLIC : Networks.TESTNET;
 
-const TEMPLATES_STORAGE_KEY = 'stellar-save:tx-templates';
+const TEMPLATES_STORAGE_KEY = 'soroban-save:tx-templates';
 const DUMMY_ADDRESS = 'GAAZI4TCR3TY5OJHCTJC2A4QSY6CJWJH5IAJTGKIN2ER7LBNVKOCCWN';
 
 function buildOperations(steps: TransactionBuilderStep[]) {

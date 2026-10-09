@@ -1,5 +1,5 @@
 # infra/modules/multi-region/main.tf
-# Reusable module: multi-region traffic routing for Stellar-Save.
+# Reusable module: multi-region traffic routing for SorobanSave.
 #
 # Provisions Route53 health checks per region endpoint and routing records that
 # send users to the nearest HEALTHY region (latency-based routing) or to the
@@ -13,7 +13,7 @@
 # regions are being routed across.
 
 locals {
-  name_prefix = "stellar-save-${var.environment}"
+  name_prefix = "soroban-save-${var.environment}"
 
   failover_record_name = var.failover_record_name != "" ? var.failover_record_name : "failover.${var.record_name}"
 

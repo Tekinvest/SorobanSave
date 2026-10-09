@@ -1,4 +1,4 @@
-# Smart Contract Audit Readiness Package — Stellar-Save v4.0
+# Smart Contract Audit Readiness Package — SorobanSave v4.0
 
 **Prepared for:** Third-party security auditors  
 **Scope version:** v4.0 (escrow, governance, insurance, recovery)  
@@ -10,7 +10,7 @@
 
 ### In Scope
 
-All Rust source files under `contracts/stellar-save/src/` plus the workspace `Cargo.toml`:
+All Rust source files under `contracts/soroban-save/src/` plus the workspace `Cargo.toml`:
 
 | Module | Description |
 |--------|-------------|
@@ -94,7 +94,7 @@ Run the following to regenerate coverage before the audit:
 ```bash
 cargo install cargo-tarpaulin --version 0.31.2
 cargo tarpaulin --out Html --output-dir coverage-report/ \
-  --manifest-path contracts/stellar-save/Cargo.toml
+  --manifest-path contracts/soroban-save/Cargo.toml
 ```
 
 Coverage targets:
@@ -165,5 +165,5 @@ When the auditor delivers the report:
 - Storage layout: `docs/storage-layout.md`
 - Contract API reference: `docs/contract-api-reference.md`
 - Previous audit (v3.0 scope): `docs/security-audit-report.md`
-- Gas optimization report: `contracts/stellar-save/GAS_OPTIMIZATION_REPORT.md`
+- Gas optimization report: `contracts/soroban-save/GAS_OPTIMIZATION_REPORT.md`
 - Soroban security best practices: https://developers.stellar.org/docs/smart-contracts/security

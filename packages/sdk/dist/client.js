@@ -1,5 +1,5 @@
 /**
- * Typed REST API client for the Stellar-Save backend.
+ * Typed REST API client for the SorobanSave backend.
  * Works in both browser (fetch) and Node.js environments.
  */
 export class ApiError extends Error {
@@ -10,7 +10,7 @@ export class ApiError extends Error {
         this.name = 'ApiError';
     }
 }
-export class StellarSaveApiClient {
+export class SorobanSaveApiClient {
     config;
     constructor(config) {
         this.config = config;
@@ -75,8 +75,8 @@ export class StellarSaveApiClient {
 }
 /** Create a client pre-configured from environment variables (Node.js). */
 export function createApiClient(overrides) {
-    return new StellarSaveApiClient({
-        baseUrl: process.env['STELLAR_SAVE_API_URL'] ?? 'http://localhost:3001',
+    return new SorobanSaveApiClient({
+        baseUrl: process.env['SOROBAN_SAVE_API_URL'] ?? 'http://localhost:3001',
         adminSecret: process.env['ADMIN_SECRET'],
         authToken: process.env['AUTH_TOKEN'],
         ...overrides,

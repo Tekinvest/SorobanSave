@@ -1,6 +1,6 @@
 # Local Development Setup Guide
 
-This guide walks you from a fresh clone to a fully running Stellar-Save stack — backend, frontend, Soroban smart contracts, and optional services — on your local machine.
+This guide walks you from a fresh clone to a fully running SorobanSave stack — backend, frontend, Soroban smart contracts, and optional services — on your local machine.
 
 > **Prerequisite checklist**  
 > - Node.js 20+ and npm/pnpm  
@@ -14,8 +14,8 @@ This guide walks you from a fresh clone to a fully running Stellar-Save stack �
 ## 1. Clone and install root dependencies
 
 ```bash
-git clone https://github.com/Xoulomon/Stellar-Save.git
-cd Stellar-Save
+git clone https://github.com/Tekinvest/SorobanSave.git
+cd SorobanSave
 npm install          # installs root deps and git hooks (Husky)
 ```
 
@@ -65,7 +65,7 @@ Edit `backend/.env` and fill in the required values:
 | `STELLAR_NETWORK` | `testnet` or `mainnet` | ✅ |
 | `STELLAR_NETWORK_PASSPHRASE` | Network passphrase | ✅ |
 | `HORIZON_URL` | Horizon API (testnet: `https://horizon-testnet.stellar.org`) | ✅ |
-| `CONTRACT_ID` | Deployed `stellar-save` contract ID | ✅ for indexer |
+| `CONTRACT_ID` | Deployed `soroban-save` contract ID | ✅ for indexer |
 | `REDIS_URL` | Redis connection URL | ✅ |
 | `ADMIN_SECRET` | Secret key for admin endpoints | ✅ |
 | `CORS_ALLOWED_ORIGINS` | Comma-separated list of allowed origins | ✅ |
@@ -81,7 +81,7 @@ A minimal `backend/.env` for local development:
 ```dotenv
 NODE_ENV=development
 PORT=3001
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/stellar_save
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/soroban_save
 JWT_SECRET=local-dev-secret-change-me-min-32-chars
 JWT_ACCESS_TOKEN_TTL=15m
 JWT_REFRESH_TOKEN_TTL_DAYS=30
@@ -173,11 +173,11 @@ stellar --version
 ```bash
 ./scripts/build.sh
 # equivalent to:
-cd contracts/stellar-save
+cd contracts/soroban-save
 cargo build --release --target wasm32-unknown-unknown
 ```
 
-The compiled WASM is written to `target/wasm32-unknown-unknown/release/stellar_save.wasm`.
+The compiled WASM is written to `target/wasm32-unknown-unknown/release/soroban_save.wasm`.
 
 ### Deploy to testnet
 
@@ -280,7 +280,7 @@ cd backend && npm run test:coverage
 
 - Make sure the Docker containers are running: `docker compose ps`
 - Check the database name and credentials match what is in `docker-compose.yml`
-- Try connecting manually: `psql postgresql://postgres:postgres@localhost:5432/stellar_save`
+- Try connecting manually: `psql postgresql://postgres:postgres@localhost:5432/soroban_save`
 
 ### Prisma migration error: `Can't reach database server`
 

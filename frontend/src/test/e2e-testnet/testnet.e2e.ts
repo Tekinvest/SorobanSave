@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Testnet E2E tests for Stellar-Save smart contract.
+ * Testnet E2E tests for SorobanSave smart contract.
  *
  * These tests run against a REAL deployed contract on Stellar testnet.
  * No mocking — real transactions are submitted and confirmed on-chain.
@@ -8,7 +8,7 @@
  * Prerequisites:
  *   1. Copy .env.testnet.example → .env.testnet and fill in values
  *   2. Fund both test accounts via Friendbot (done automatically if unfunded)
- *   3. Set STELLAR_SAVE_CONTRACT_ID to a deployed contract address
+ *   3. Set SOROBAN_SAVE_CONTRACT_ID to a deployed contract address
  *
  * Run: npm run test:e2e:testnet
  */
@@ -50,13 +50,13 @@ try {
 // ── Config ────────────────────────────────────────────────────────────────────
 
 const RPC_URL = process.env['TESTNET_RPC_URL'] ?? 'https://soroban-testnet.stellar.org';
-const CONTRACT_ID = process.env['STELLAR_SAVE_CONTRACT_ID'] ?? '';
+const CONTRACT_ID = process.env['SOROBAN_SAVE_CONTRACT_ID'] ?? '';
 const WALLET_A_SECRET = process.env['TEST_WALLET_A_SECRET'] ?? '';
 const WALLET_B_SECRET = process.env['TEST_WALLET_B_SECRET'] ?? '';
 const FRIENDBOT_URL = 'https://friendbot.stellar.org';
 
 if (!CONTRACT_ID) {
-  console.error('❌  STELLAR_SAVE_CONTRACT_ID is not set in .env.testnet');
+  console.error('❌  SOROBAN_SAVE_CONTRACT_ID is not set in .env.testnet');
   process.exit(1);
 }
 if (!WALLET_A_SECRET || !WALLET_B_SECRET) {
@@ -195,7 +195,7 @@ function assert(condition: boolean, message: string): void {
 // ── Tests ─────────────────────────────────────────────────────────────────────
 
 async function main(): Promise<void> {
-  console.log('\n🌐 Stellar-Save Testnet E2E Tests');
+  console.log('\n🌐 SorobanSave Testnet E2E Tests');
   console.log(`   RPC:      ${RPC_URL}`);
   console.log(`   Contract: ${CONTRACT_ID}`);
   console.log(`   Wallet A: ${keypairA.publicKey().slice(0, 12)}...`);

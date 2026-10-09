@@ -1,7 +1,7 @@
 /**
  * AWS Cost Explorer + Compute Optimizer integration.
  * Fetches cost breakdown by service, surfacing right-sizing and reservation
- * recommendations for the Stellar-Save infrastructure.
+ * recommendations for the SorobanSave infrastructure.
  */
 
 import {

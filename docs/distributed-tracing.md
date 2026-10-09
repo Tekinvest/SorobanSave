@@ -1,6 +1,6 @@
 # Distributed Tracing
 
-Stellar-Save is instrumented with [OpenTelemetry](https://opentelemetry.io/)
+SorobanSave is instrumented with [OpenTelemetry](https://opentelemetry.io/)
 distributed tracing so a single user request can be followed **end-to-end**
 across every service — browser → backend API → indexer → Soroban contract
 execution — and its latency broken down per service and per endpoint.
@@ -80,7 +80,7 @@ Endpoints:
 | OTLP/gRPC (collector)    | http://localhost:4317     | gRPC span ingestion              |
 | Grafana                  | http://localhost:3000     | Latency dashboards (Jaeger DS)   |
 
-The Grafana **Jaeger** datasource and the **Stellar-Save Distributed Tracing**
+The Grafana **Jaeger** datasource and the **SorobanSave Distributed Tracing**
 dashboard are auto-provisioned
 (`monitoring/grafana/provisioning/`, `monitoring/grafana/dashboards/distributed-tracing.json`).
 
@@ -94,7 +94,7 @@ Set in `backend/.env` (see `backend/.env.example`):
 
 ```bash
 OTEL_TRACES_ENABLED=true
-OTEL_SERVICE_NAME=stellar-save-backend
+OTEL_SERVICE_NAME=soroban-save-backend
 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318   # /v1/traces appended automatically
 OTEL_TRACES_SAMPLER_ARG=0.1                          # 10% root sampling
 ```
@@ -115,7 +115,7 @@ Set in `.env` (Vite, see `.env.example`):
 ```bash
 VITE_OTEL_ENABLED=true
 VITE_OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
-VITE_OTEL_SERVICE_NAME=stellar-save-frontend
+VITE_OTEL_SERVICE_NAME=soroban-save-frontend
 VITE_OTEL_TRACES_SAMPLER_ARG=0.1
 VITE_OTEL_PROPAGATE_URLS=/api,http://localhost:3001  # where to attach traceparent
 ```

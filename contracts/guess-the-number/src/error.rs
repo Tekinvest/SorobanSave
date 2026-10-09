@@ -2,7 +2,7 @@
 //!
 //! The three variants this contract used to declare were restatements of
 //! failures every other contract also has, so they now resolve to the canonical
-//! enum in `stellar-save-common` instead of a local duplicate.
+//! enum in `soroban-save-common` instead of a local duplicate.
 //!
 //! Mapping from the retired local enum:
 //!
@@ -16,7 +16,7 @@
 //! recoverable from the trapped call frame, which is where a caller debugging a
 //! failed transfer looks anyway.
 
-pub use stellar_save_common::{CommonResult as Result, Error};
+pub use soroban_save_common::{CommonResult as Result, Error};
 
 // === Tests
 

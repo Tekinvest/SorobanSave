@@ -256,9 +256,9 @@ router.get('/admin/secrets/rotation-status', async (req: Request, res: Response)
   try {
     // In production, add admin authentication
     const secretNames = [
-      'stellar-save/jwt-secret',
-      'stellar-save/admin-secret',
-      'stellar-save/db-password',
+      'soroban-save/jwt-secret',
+      'soroban-save/admin-secret',
+      'soroban-save/db-password',
     ];
 
     const status = await secretsManager.checkRotationStatus(secretNames);
@@ -315,7 +315,7 @@ router.get('/security/health', async (req: Request, res: Response) => {
 
   try {
     // Test secrets manager connectivity
-    await secretsManager.getSecretMetadata('stellar-save/jwt-secret');
+    await secretsManager.getSecretMetadata('soroban-save/jwt-secret');
     health.secretsManager = 'ok';
   } catch (error) {
     health.secretsManager = 'error';

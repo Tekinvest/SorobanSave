@@ -4,8 +4,8 @@
 #
 # The S3 bucket and DynamoDB table are created by infra/bootstrap/main.tf.
 
-bucket         = "stellar-save-terraform-state"
+bucket         = "soroban-save-terraform-state"
 key            = "staging/terraform.tfstate"
 region         = "us-east-1"
-dynamodb_table = "stellar-save-terraform-locks"
+dynamodb_table = "soroban-save-terraform-locks"
 encrypt        = true

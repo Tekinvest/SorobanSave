@@ -13,7 +13,7 @@ terraform {
 }
 
 locals {
-  dashboard_name  = "stellar-save-costs-${var.environment}"
+  dashboard_name  = "soroban-save-costs-${var.environment}"
   budget_80pct    = var.monthly_budget_usd * 0.8
   budget_50pct    = var.monthly_budget_usd * 0.5
 }
@@ -28,7 +28,7 @@ resource "aws_cloudwatch_dashboard" "costs" {
         type   = "text"
         x      = 0; y = 0; width = 24; height = 1
         properties = {
-          markdown = "## Stellar-Save Cost Dashboard — ${upper(var.environment)}  |  Budget: $${var.monthly_budget_usd}/month  |  Region: ${var.aws_region}"
+          markdown = "## SorobanSave Cost Dashboard — ${upper(var.environment)}  |  Budget: $${var.monthly_budget_usd}/month  |  Region: ${var.aws_region}"
         }
       },
 

@@ -1,4 +1,4 @@
-# Stellar-Save Contract API Reference
+# SorobanSave Contract API Reference
 
 **Version:** 1.0.0
 **Focus:** `group.rs`, `contribution.rs`, `payout.rs`
@@ -112,7 +112,7 @@ pub struct PayoutRecord {
 
 ## Error Codes
 
-The contract uses `ContractError` codes from `contracts/stellar-save/src/errors.rs`.
+The contract uses `ContractError` codes from `contracts/soroban-save/src/errors.rs`.
 
 | Code | Error | Description |
 |------|-------|-------------|
@@ -566,7 +566,7 @@ Returns the next scheduled payout recipient for a group.
 
 **Signature:**
 ```rust
-pub fn get_next_recipient(env: &Env, group_id: u64) -> Result<Address, StellarSaveError>
+pub fn get_next_recipient(env: &Env, group_id: u64) -> Result<Address, SorobanSaveError>
 ```
 
 **Parameters:**
@@ -575,8 +575,8 @@ pub fn get_next_recipient(env: &Env, group_id: u64) -> Result<Address, StellarSa
 
 **Returns:**
 - `Ok(Address)`: Next payout recipient.
-- `Err(StellarSaveError::GroupNotFound)`: Group does not exist.
-- `Err(StellarSaveError::InvalidState)`: Group is not active or recipient lookup failed.
+- `Err(SorobanSaveError::GroupNotFound)`: Group does not exist.
+- `Err(SorobanSaveError::InvalidState)`: Group is not active or recipient lookup failed.
 
 ---
 

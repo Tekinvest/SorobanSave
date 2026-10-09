@@ -2,14 +2,14 @@
 
 ## Introduction
 
-This feature adds a `get_current_timestamp` helper function to the Stellar-Save Soroban smart contract. The function queries the current ledger timestamp via the Soroban environment and returns it as a `u64` value (Unix epoch seconds). It will be exposed as a public contract method and as an internal helper used by other contract logic (e.g., cycle deadline checks, rate limiting, contribution recording). Tests will cover normal operation, consistency with the ledger, and integration with existing helpers.
+This feature adds a `get_current_timestamp` helper function to the SorobanSave Soroban smart contract. The function queries the current ledger timestamp via the Soroban environment and returns it as a `u64` value (Unix epoch seconds). It will be exposed as a public contract method and as an internal helper used by other contract logic (e.g., cycle deadline checks, rate limiting, contribution recording). Tests will cover normal operation, consistency with the ledger, and integration with existing helpers.
 
 ## Glossary
 
-- **Contract**: The `StellarSaveContract` Soroban smart contract defined in `lib.rs`.
+- **Contract**: The `SorobanSaveContract` Soroban smart contract defined in `lib.rs`.
 - **Env**: The Soroban `Env` object that provides access to ledger data, storage, and other host functions.
 - **Ledger_Timestamp**: The Unix epoch timestamp (seconds) of the current ledger, accessed via `env.ledger().timestamp()`.
-- **Helper_Function**: A utility function in `helpers.rs` or on `StellarSaveContract` that encapsulates reusable logic.
+- **Helper_Function**: A utility function in `helpers.rs` or on `SorobanSaveContract` that encapsulates reusable logic.
 - **Caller**: Any external account or contract invoking a public contract method.
 
 ---
